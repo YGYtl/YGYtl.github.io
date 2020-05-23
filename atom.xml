@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-05-23T16:55:11.716Z</updated>
+    <updated>2020-05-23T17:21:57.034Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,40 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[windows系统生成ssh key]]></title>
+        <id>https://ygytl.github.io/post/windows-xi-tong-sheng-cheng-ssh-key/</id>
+        <link href="https://ygytl.github.io/post/windows-xi-tong-sheng-cheng-ssh-key/">
+        </link>
+        <updated>2020-05-23T17:12:48.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="1-首先安装git工具运行git-bash输入指令进入ssh文件夹位置在桌面">1、首先安装Git工具，运行Git Bash，输入指令进入.ssh文件夹(位置在桌面)</h3>
+<pre><code>cd ~/.ssh/
+</code></pre>
+<h3 id="2-如果提示-no-such-file-or-directory你可以手动的创建一个-ssh文件夹即可">2、 如果提示 “ No such file or directory”，你可以手动的创建一个 .ssh文件夹即可</h3>
+<pre><code> mkdir ~/.ssh 
+</code></pre>
+<h3 id="3-配置全局的name和emailgithub的name和email">3、 配置全局的name和email，github的name和email</h3>
+<pre><code> git config --global user.name &quot;yourname&quot;  
+
+ git config --global user.email &quot;youremail@outlook.com&quot; 
+</code></pre>
+<h3 id="4-生成key">4、生成key</h3>
+<pre><code> ssh-keygen -t rsa -C &quot;youremail@outlook.com&quot; 
+</code></pre>
+<p>连续按三次回车，这里设置的密码就为空了，并且创建了key。</p>
+<p>最后得到了两个文件：id_rsa和id_rsa.pub</p>
+<h3 id="5-打开id_rsapub复制里面的内容添加到你github就行了">5、 打开id_rsa.pub，复制里面的内容添加到你github就行了</h3>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Flask Vue.js全栈开发 第一章：创建第一个Flask RESTful API]]></title>
+        <id>https://ygytl.github.io/post/flask-vuejs-quan-zhan-kai-fa-di-yi-zhang-chuang-jian-di-yi-ge-flask-restful-api/</id>
+        <link href="https://ygytl.github.io/post/flask-vuejs-quan-zhan-kai-fa-di-yi-zhang-chuang-jian-di-yi-ge-flask-restful-api/">
+        </link>
+        <updated>2020-05-23T17:05:23.000Z</updated>
+        <content type="html"><![CDATA[<h1 id=""></h1>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Markdown常用快捷键]]></title>
         <id>https://ygytl.github.io/post/markdown-chang-yong-kuai-jie-jian/</id>
