@@ -1,0 +1,433 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Grace</title>
+<meta name="description" content="Grace's blog" />
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1590252840944">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+<link rel="stylesheet" href="https://ygytl.github.io//styles/main.css">
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
+      <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
+  <div class="lg:sticky top-0">
+    <div class="sidebar-content">
+      <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
+        <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
+        <a href="https://ygytl.github.io/">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1590252840944" alt="">
+        </a>
+        <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
+      </div>
+      
+        <div class="animated fadeInLeft" style="animation-delay: 0.4s">
+          <p class="my-4 text-gray-600 font-light hidden lg:block">
+            文章目录
+          </p>
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE">常用快捷键：</a><br>
+*
+<ul>
+<li><a href="#%E6%8F%92%E5%85%A5%E4%BB%A3%E7%A0%81~%E9%94%AE3%E6%AC%A1-%E4%B9%9F%E5%B0%B1%E6%98%AF%E4%B8%89%E4%B8%AA">插入代码：(~键3次---也就是三个'`')</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5%E9%93%BE%E6%8E%A5">插入链接</a></li>
+<li><a href="#%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81">行内代码</a></li>
+<li><a href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8">无序列表</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87">插入图片</a></li>
+<li><a href="#%E6%92%A4%E9%94%80">撤销</a></li>
+<li><a href="#n%E9%98%B6%E6%A0%87%E9%A2%98">n阶标题</a></li>
+<li><a href="#%E8%BF%94%E5%9B%9Etypora%E9%A1%B6%E9%83%A8">返回Typora顶部</a></li>
+<li><a href="#%E8%BF%94%E5%9B%9Etypora%E5%BA%95%E9%83%A8">返回Typora底部</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E8%A1%A8%E6%A0%BC">创建表格</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E8%B6%85%E9%93%BE%E6%8E%A5">创建超链接</a></li>
+<li><a href="#%E6%90%9C%E7%B4%A2">搜索</a></li>
+<li><a href="#%E9%80%89%E4%B8%AD%E6%9F%90%E5%8F%A5%E8%AF%9D">选中某句话</a></li>
+<li><a href="#%E9%80%89%E4%B8%AD%E6%9F%90%E4%B8%AA%E5%8D%95%E8%AF%8D">选中某个单词</a></li>
+<li><a href="#%E9%80%89%E4%B8%AD%E7%9B%B8%E5%90%8C%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%96%87%E5%AD%97">选中相同格式的文字</a></li>
+<li><a href="#%E6%90%9C%E7%B4%A2%E5%B9%B6%E6%9B%BF%E6%8D%A2">搜索并替换</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E7%BA%BF">删除线</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87-2">插入图片</a></li>
+<li><a href="#%E5%85%AC%E5%BC%8F%E5%9D%97">公式块</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8">引用</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9D%97%E5%85%83%E7%B4%A0">块元素：</a><br>
+*
+<ul>
+<li><a href="#%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6">转义字符'/'</a></li>
+<li><a href="#%E6%A0%87%E9%A2%98%E7%BA%A7%E5%88%AB">标题级别：#.......</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8%E6%96%87%E5%AD%97-%E7%A9%BA%E6%A0%BC-%E5%BC%95%E7%94%A8%E6%96%87%E5%AD%97">引用文字：&gt; + 空格 + 引用文字</a></li>
+<li><a href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8%E4%BD%BF%E7%94%A8-%E9%83%BD%E5%8F%AF%E4%BB%A5%E5%90%8E%E9%9D%A2%E8%A6%81%E5%8A%A0%E4%B8%AA%E7%A9%BA%E6%A0%BC%E5%93%A6">无序列表：使用‘*‘、’+‘、’-’ 都可以(后面要加个空格哦)</a></li>
+<li><a href="#%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A81-2%E7%AD%89%E7%AD%89%E5%90%8E%E9%9D%A2%E5%8A%A0%E4%B8%AA%E7%A9%BA%E6%A0%BC%E5%B0%B1%E8%A1%8C">有序列表：‘1.’、'2.'等等，后面加个空格就行</a></li>
+<li><a href="#%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8">任务列表</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5%E8%A1%A8%E6%A0%BC%E5%BC%B9%E5%87%BA%E8%A1%A8%E6%A0%BC%E8%AE%BE%E7%BD%AE">插入表格(弹出表格设置)</a></li>
+<li><a href="#%E5%88%86%E5%89%B2%E7%BA%BF%E6%88%96-%E6%8C%89%E5%9B%9E%E8%BD%A6%E5%8D%B3%E5%BE%97%E5%88%86%E5%89%B2%E7%BA%BF">分割线：***或---按回车即得分割线</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E7%9B%AE%E5%BD%95">设置目录</a></li>
+<li><a href="#%E5%86%85%E9%83%A8%E9%93%BE%E6%8E%A5">内部链接</a></li>
+<li><a href="#%E5%9B%BE%E7%89%87">图片</a></li>
+<li><a href="#%E6%96%9C%E4%BD%93">斜体</a></li>
+<li><a href="#%E5%8A%A0%E7%B2%97">加粗</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E7%BA%BF-2">删除线</a></li>
+<li><a href="#%E4%B8%8B%E5%88%92%E7%BA%BF">下划线</a></li>
+<li><a href="#%E8%A1%A8%E6%83%85%E7%AC%A6%E5%8F%B7">表情符号</a></li>
+<li><a href="#%E4%B8%8B%E6%A0%87">下标</a></li>
+<li><a href="#%E4%B8%8A%E6%A0%87">上标</a></li>
+<li><a href="#%E9%AB%98%E4%BA%AE">高亮</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC%E5%B1%85%E4%B8%AD">文本居中</a></li>
+<li><a href="#%E6%8D%A2%E8%A1%8C%E7%AC%A6">换行符</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">参考链接</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="menu-container">
+  <i class="ri-arrow-left-line text-2xl cursor-pointer animated fadeIn close-menu-btn" onclick="closeMenu()"></i>
+  <div>
+    
+      
+        <a href="/" class="menu" style="animation-delay: 0s">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu" style="animation-delay: 0.2s">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu" style="animation-delay: 0.4s">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu" style="animation-delay: 0.6000000000000001s">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="site-footer">
+    <div class="py-4 text-gray-700">Powered by <a href="https://github.com/YGYtl" target="_blank">Grace</a></div>
+    <a class="rss" href="https://ygytl.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+<div class="mask" onclick="closeMenu()">
+</div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">Markdown常用快捷键</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-05-24 / 2 min read
+        </div>
+        
+          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://ygytl.github.io//post-images/markdown-chang-yong-kuai-jie-jian.jpg" alt="">
+        
+        <div class="post-content yue">
+          <h2 id="常用快捷键">常用快捷键：</h2>
+<h4 id="插入代码~键3次-也就是三个">插入代码：(~键3次---也就是三个'`')</h4>
+<pre><code>Ctrl + Shift + C
+</code></pre>
+<h4 id="插入链接">插入链接</h4>
+<pre><code>Ctrl + K
+</code></pre>
+<h4 id="行内代码">行内代码</h4>
+<pre><code>Ctrl + Shift + K
+</code></pre>
+<h4 id="无序列表">无序列表</h4>
+<pre><code>Ctrl + Shift + L
+</code></pre>
+<h4 id="插入图片">插入图片</h4>
+<pre><code>Ctrl + Shift + I
+</code></pre>
+<h4 id="撤销">撤销</h4>
+<pre><code>Ctrl + Z
+</code></pre>
+<h4 id="n阶标题">n阶标题</h4>
+<pre><code>Ctrl + N
+</code></pre>
+<h4 id="返回typora顶部">返回Typora顶部</h4>
+<pre><code>Ctrl + Home
+</code></pre>
+<h4 id="返回typora底部">返回Typora底部</h4>
+<pre><code>Ctrl + End
+</code></pre>
+<h4 id="创建表格">创建表格</h4>
+<pre><code>Ctrl + T
+</code></pre>
+<h4 id="创建超链接">创建超链接</h4>
+<pre><code>Ctrl + K
+</code></pre>
+<h4 id="搜索">搜索</h4>
+<pre><code>Ctrl + F
+</code></pre>
+<h4 id="选中某句话">选中某句话</h4>
+<pre><code>Ctrl + L
+</code></pre>
+<h4 id="选中某个单词">选中某个单词</h4>
+<pre><code>Ctrl + D
+</code></pre>
+<h4 id="选中相同格式的文字">选中相同格式的文字</h4>
+<pre><code>Ctrl + E
+</code></pre>
+<h4 id="搜索并替换">搜索并替换</h4>
+<pre><code>Ctrl + H
+</code></pre>
+<h4 id="删除线">删除线</h4>
+<pre><code>Alt + Shift + 5
+</code></pre>
+<h4 id="插入图片-2">插入图片</h4>
+<pre><code>Ctrl + Shift + I
+</code></pre>
+<h4 id="公式块">公式块</h4>
+<pre><code>Ctrl + Shift + M
+</code></pre>
+<h4 id="引用">引用</h4>
+<pre><code>Ctrl + Shift + Q
+</code></pre>
+<h2 id="块元素">块元素：</h2>
+<h4 id="转义字符">转义字符'/'</h4>
+<pre><code>\   反斜线
+`   反引号
+*   星号
+_   下划线
+{}  花括号
+[]  方括号
+()  小括号
+#   井字号
++   加号
+-   减号
+.   英文句点
+!   感叹号
+</code></pre>
+<h4 id="标题级别">标题级别：#.......</h4>
+<h4 id="引用文字-空格-引用文字">引用文字：&gt; + 空格 + 引用文字</h4>
+<h4 id="无序列表使用-都可以后面要加个空格哦">无序列表：使用‘*‘、’+‘、’-’ 都可以(后面要加个空格哦)</h4>
+<h4 id="有序列表1-2等等后面加个空格就行">有序列表：‘1.’、'2.'等等，后面加个空格就行</h4>
+<h4 id="任务列表">任务列表</h4>
+<pre><code>\-[]不勾选
+\-[x]勾选
+</code></pre>
+<h4 id="插入表格弹出表格设置">插入表格(弹出表格设置)</h4>
+<h4 id="分割线或-按回车即得分割线">分割线：***或---按回车即得分割线</h4>
+<h4 id="设置目录">设置目录</h4>
+<pre><code>[toc]回车即可
+</code></pre>
+<h4 id="内部链接">内部链接</h4>
+<pre><code>[链接](http://example.com/ &quot;标题&quot;)
+[链接](http://example.net/)
+</code></pre>
+<h4 id="图片">图片</h4>
+<pre><code>![显示文字](C:\images\cat.png &quot;图片标题&quot;)
+![显示文字](C:\images\cat.png)
+还可以直接拖入
+</code></pre>
+<h4 id="斜体">斜体</h4>
+<pre><code>*单个星号*  或者  _单个下划线_
+</code></pre>
+<h4 id="加粗">加粗</h4>
+<pre><code>**两个星号** 或者  __两个下划线__
+</code></pre>
+<h4 id="删除线-2">删除线</h4>
+<pre><code>~~删除线~~
+</code></pre>
+<h4 id="下划线">下划线</h4>
+<pre><code>&lt;u&gt;下划线内容&lt;/u&gt; 或者 Ctrl + U
+</code></pre>
+<h4 id="表情符号">表情符号</h4>
+<pre><code>:smile
+</code></pre>
+<h4 id="下标">下标</h4>
+<pre><code>&lt;sub&gt;内容&lt;/sub&gt;
+H&lt;sub&gt;2&lt;/sub&gt;O
+</code></pre>
+<h4 id="上标">上标</h4>
+<pre><code>&lt;sup&gt;内容&lt;/sup&gt;
+X&lt;sup&gt;2&lt;/sup&gt;
+</code></pre>
+<h4 id="高亮">高亮</h4>
+<pre><code>==高亮==
+</code></pre>
+<h4 id="文本居中">文本居中</h4>
+<pre><code>&lt;center&gt;重要的内容哦&lt;/center&gt;
+</code></pre>
+<h4 id="换行符">换行符</h4>
+<pre><code>&lt;/br&gt; 或 空格+空格+Enter
+</code></pre>
+<h3 id="参考链接"><a href="https://www.cnblogs.com/hider/p/11614688.html">参考链接</a></h3>
+
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/Z3sbcb8qE/">
+            <span class="flex-auto">Markdown</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://ygytl.github.io/post/hello-gridea/">
+                <h3 class="post-title">
+                  Hello Gridea
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '651ee788996886a0c8a2',
+    clientSecret: '53231792a985805dbea714f6d780b970e1d3c139',
+    repo: 'ygytl.github.io',
+    owner: 'YGYtl',
+    admin: ['YGYtl'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+      </div>
+    </div>
+
+    <script src="https://ygytl.github.io//media/prism.js"></script>  
+<script>
+
+Prism.highlightAll()
+let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+// This should probably be throttled.
+// Especially because it triggers during smooth scrolling.
+// https://lodash.com/docs/4.17.10#throttle
+// You could do like...
+// window.addEventListener("scroll", () => {
+//    _.throttle(doThatStuff, 100);
+// });
+// Only not doing it here to keep this Pen dependency-free.
+
+window.addEventListener("scroll", event => {
+  let fromTop = window.scrollY;
+
+  mainNavLinks.forEach((link, index) => {
+    let section = document.getElementById(decodeURI(link.hash).substring(1));
+    let nextSection = null
+    if (mainNavLinks[index + 1]) {
+      nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+    }
+    if (section.offsetTop <= fromTop) {
+      if (nextSection) {
+        if (nextSection.offsetTop > fromTop) {
+          link.classList.add("current");
+        } else {
+          link.classList.remove("current");    
+        }
+      } else {
+        link.classList.add("current");
+      }
+    } else {
+      link.classList.remove("current");
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyImages = [].slice.call(document.querySelectorAll(".post-feature-image.lazy"));
+
+  if ("IntersectionObserver" in window) {
+    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          let lazyImage = entry.target
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.bg})`
+          lazyImage.classList.remove("lazy")
+          lazyImageObserver.unobserve(lazyImage)
+        }
+      });
+    });
+
+    lazyImages.forEach(function(lazyImage) {
+      lazyImageObserver.observe(lazyImage)
+    })
+  } else {
+    // Possibly fall back to a more compatible method here
+  }
+});
+
+const menuContainer = document.querySelector('.menu-container')
+const menus = document.querySelectorAll('.menu-container .menu')
+const mask = document.querySelector('.mask')
+const contentWrapper = document.querySelector('.content-wrapper')
+const latestArticle = document.querySelector('.latest-article')
+const readMore = document.querySelector('.read-more')
+const indexPage = document.querySelector('.index-page')
+
+const isHome = location.pathname === '/'
+if (latestArticle) {
+  latestArticle.style.display = isHome ? 'block' : 'none'
+  readMore.style.display = isHome ? 'block' : 'none'
+  indexPage.style.display = isHome ? 'none' : 'block'
+}
+
+const openMenu = () => {
+  menuContainer.classList.add('open')
+  menus.forEach(menu => {
+    menu.classList.add('animated', 'fadeInLeft')
+  })
+  mask.classList.add('open')
+  contentWrapper.classList.add('is-second')
+}
+
+const closeMenu = () => {
+  menuContainer.classList.remove('open')
+  menus.forEach(menu => {
+    menu.classList.remove('animated', 'fadeInLeft')
+  })
+  mask.classList.remove('open')
+  contentWrapper.classList.remove('is-second')
+}
+</script>
+  
+  </body>
+</html>
