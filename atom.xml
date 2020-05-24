@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-05-24T16:45:08.640Z</updated>
+    <updated>2020-05-24T16:48:22.768Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -95,7 +95,7 @@ yourblog.log*
 <h3 id="2-2-应用工厂">2-2. 应用工厂</h3>
 <ul>
 <li>
-<p>先在back-end文件夹下创建app文件夹，之后在app文件夹下创建_<em>init</em>_.py，创建Flask应用，代码如下：</p>
+<p>先在back-end文件夹下创建app文件夹，之后在app文件夹下创建__init__.py，创建Flask应用，代码如下：</p>
 <pre><code class="language-python">from flask import Flask
 from config import Config
 def create_app(config_class=Config):
@@ -111,7 +111,7 @@ def create_app(config_class=Config):
 </ul>
 <h3 id="2-3-api蓝图">2-3. API蓝图</h3>
 <ul>
-<li>在app文件夹下创建api文件夹，新建_<em>init</em>_.py</li>
+<li>在app文件夹下创建api文件夹，新建__init__.py</li>
 </ul>
 <pre><code class="language-python">from flask import Blueprint
 bp = Blueprint('api', __name__)
