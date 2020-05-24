@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-05-23T17:21:57.034Z</updated>
+    <updated>2020-05-24T15:01:27.030Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -41,7 +41,21 @@
         <link href="https://ygytl.github.io/post/flask-vuejs-quan-zhan-kai-fa-di-yi-zhang-chuang-jian-di-yi-ge-flask-restful-api/">
         </link>
         <updated>2020-05-23T17:05:23.000Z</updated>
-        <content type="html"><![CDATA[<h1 id=""></h1>
+        <content type="html"><![CDATA[<h2 id="创建github库">创建github库</h2>
+<ul>
+<li>
+<p>添加ssh keys</p>
+<p>在Github <code>Settings</code>中找到<code>SSH and GPG keys</code>，单击<code>New SSH key</code>，复制公钥文件<code>id_rsa.pub</code>中的内容</p>
+</li>
+<li>
+<p>测试ssh连接</p>
+<p>在<code>Git Bash</code>中执行</p>
+<pre><code>$ ssh -T git@github.com
+</code></pre>
+<p><code>Hi username! You've successfully authenticated, but GitHub does not provide shell access.</code>表示连接成功。</p>
+</li>
+</ul>
+<h2 id="git-clone">git clone</h2>
 ]]></content>
     </entry>
     <entry>
