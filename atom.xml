@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-05-24T16:42:09.751Z</updated>
+    <updated>2020-05-24T16:43:51.619Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -119,19 +119,15 @@ bp = Blueprint('api', __name__)
 from app.api import ping
 </code></pre>
 <ul>
-<li>
-<p>定义路由函数，在api文件夹下新建ping.py(客户端请求访问/ping时，响应并返回Pong!)</p>
-</li>
-<li>
-<pre><code class="language-python">from flask import jsonify
-from app.api import bp
-@bp.route('/ping', methods=['GET'])
-def ping():
-    '''前端Vue.js用来测试与后端Flask API的连通性'''
-    return jsonify('Pong!')
-</code></pre>
-</li>
+<li>定义路由函数，在api文件夹下新建ping.py(客户端请求访问/ping时，响应并返回Pong!)</li>
 </ul>
+<pre><code class="language-python"> from flask import jsonify
+ from app.api import bp
+ @bp.route('/ping', methods=['GET'])
+ def ping():
+     '''前端Vue.js用来测试与后端Flask API的连通性'''
+     return jsonify('Pong!')
+</code></pre>
 <h3 id="2-4-应用启动文件">2-4. 应用启动文件</h3>
 <p>在back-end文件夹下新建Graceblog.py</p>
 <pre><code class="language-python">from app import create_app

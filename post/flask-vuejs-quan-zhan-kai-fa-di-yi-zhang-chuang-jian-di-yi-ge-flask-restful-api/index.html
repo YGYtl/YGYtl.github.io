@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1590338515435">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1590338628300">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1590338515435" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1590338628300" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -186,19 +186,15 @@ bp = Blueprint('api', __name__)
 from app.api import ping
 </code></pre>
 <ul>
-<li>
-<p>定义路由函数，在api文件夹下新建ping.py(客户端请求访问/ping时，响应并返回Pong!)</p>
-</li>
-<li>
-<pre><code class="language-python">from flask import jsonify
-from app.api import bp
-@bp.route('/ping', methods=['GET'])
-def ping():
-    '''前端Vue.js用来测试与后端Flask API的连通性'''
-    return jsonify('Pong!')
-</code></pre>
-</li>
+<li>定义路由函数，在api文件夹下新建ping.py(客户端请求访问/ping时，响应并返回Pong!)</li>
 </ul>
+<pre><code class="language-python"> from flask import jsonify
+ from app.api import bp
+ @bp.route('/ping', methods=['GET'])
+ def ping():
+     '''前端Vue.js用来测试与后端Flask API的连通性'''
+     return jsonify('Pong!')
+</code></pre>
 <h3 id="2-4-应用启动文件">2-4. 应用启动文件</h3>
 <p>在back-end文件夹下新建Graceblog.py</p>
 <pre><code class="language-python">from app import create_app
