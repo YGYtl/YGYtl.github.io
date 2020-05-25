@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-05-25T15:57:06.730Z</updated>
+    <updated>2020-05-25T16:00:50.804Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -27,27 +27,31 @@
 <!-- more -->
 <p>stripe could be very long, and Eva would like to have the remaining favorite stripe with the maximum length. So she needs your help to find her the best result.</p>
 <p>Note that the solution might not be unique, but you only have to tell her the maximum length. For example, given a stripe of colors {2 2 4 1 5 5 6 3 1 1 5 6}. If Eva's favorite colors are given in her favorite order as {2 3 1 5 6}, then she has 4 possible best solutions {2 2 1 1 1 5 6}, {2 2 1 5 5 5 6}, {2 2 1 5 5 6 6}, and {2 2 3 1 1 5 6}.</p>
-<p>### <strong>Input Specification:</strong></p>
+<h3 id="input-specification"><strong>Input Specification:</strong></h3>
 <p>Each input file contains one test case. For each case, the first line contains a positive integer <strong>N</strong> (≤200) which is the total number of colors involved (and hence the colors are numbered from 1 to <strong>N</strong>). Then the next line starts with a positive integer <strong>M</strong> (≤200) followed by <strong>M</strong> Eva's favorite color numbers given in her favorite order. Finally the third line starts with a positive integer <strong>L</strong> (≤10<sup>4</sup>) which is the length of the given stripe, followed by <strong>L</strong> colors on the stripe. All the numbers in a line a separated by a space.</p>
-<p>### <strong>Output Specification:</strong></p>
+<h3 id="output-specification"><strong>Output Specification:</strong></h3>
 <p>For each test case, simply print in a line the maximum length of Eva's favorite stripe.</p>
-<p>### <strong>Sample Input:</strong></p>
-<p>```in</p>
-<p>6</p>
-<p>5 2 3 1 5 6</p>
-<p>12 2 2 4 1 5 5 6 3 1 1 5 6</p>
-<p>```</p>
-<p>### <strong>Sample Output:</strong></p>
-<p>```out</p>
-<p>7</p>
-<p>```</p>
-<p>---</p>
+<h3 id="sample-input"><strong>Sample Input:</strong></h3>
+<pre><code class="language-in">
+6
+
+5 2 3 1 5 6
+
+12 2 2 4 1 5 5 6 3 1 1 5 6
+
+</code></pre>
+<h3 id="sample-output"><strong>Sample Output:</strong></h3>
+<pre><code class="language-out">
+7
+
+</code></pre>
+<hr>
 <p>题目描述：N为颜色求得色号吧(1~N)，给出M个数，表示用户最喜欢的摆放序列，从L个数中自主挑选排序，求出符合用户摆放序列要求的最长序列。</p>
 <p>解题思路：动态规划</p>
 <p>（1）将M个数用编号存放到数组</p>
 <p>（2）从L个数中挑选用户喜欢的颜色序号放入容器</p>
 <p>（3）动态规划的思想。。</p>
-<p>---</p>
+<hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 vector&lt;int&gt; v;
