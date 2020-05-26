@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1590508670503">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1590509116880">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1590508670503" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1590509116880" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -34,7 +34,18 @@
           </p>
           <div class="toc-container hidden lg:block">
             <ul class="markdownIt-TOC">
-<li></li>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#input-specification">Input Specification:</a></li>
+<li><a href="#output-specification">Output Specification:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
           </div>
@@ -81,16 +92,108 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1062 Talent and Virtue (25分)</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1062 Talent and Virtue (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-05-26 / 0 min read
+          2020-05-26 / 6 min read
         </div>
         
         <div class="post-content yue">
-          <h1 id=""></h1>
+          <p>1062 Talent and Virtue (25分)</p>
+<p>About 900 years ago, a Chinese philosopher Sima Guang wrote a history book in which he talked about people's talent and virtue. According to his theory, a man being outstanding in both talent and virtue must be a &quot;sage（圣人）&quot;; being less excellent but with one's virtue outweighs talent can be called a &quot;nobleman（君子）&quot;; being good in neither is a &quot;fool man（愚人）&quot;; yet a fool man is better than a &quot;small man（小人）&quot; who prefers talent than virtue.</p>
+<p>Now given the grades of talent and virtue of a group of people, you are supposed to rank them according to Sima Guang's theory.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. Each case first gives 3 positive integers in a line: <em>N</em> (≤105), the total number of people to be ranked; <em>L</em> (≥60), the lower bound of the qualified grades -- that is, only the ones whose grades of talent and virtue are both not below this line will be ranked; and <em>H</em> (&lt;100), the higher line of qualification -- that is, those with both grades not below this line are considered as the &quot;sages&quot;, and will be ranked in non-increasing order according to their total grades. Those with talent grades below <em>H</em> but virtue grades not are cosidered as the &quot;noblemen&quot;, and are also ranked in non-increasing order according to their total grades, but they are listed after the &quot;sages&quot;. Those with both grades below <em>H</em>, but with virtue not lower than talent are considered as the &quot;fool men&quot;. They are ranked in the same way but after the &quot;noblemen&quot;. The rest of people whose grades both pass the <em>L</em> line are ranked after the &quot;fool men&quot;.</p>
+<p>Then <em>N</em> lines follow, each gives the information of a person in the format:</p>
+<pre><code>ID_Number Virtue_Grade Talent_Grade
+</code></pre>
+<p>where <code>ID_Number</code> is an 8-digit number, and both grades are integers in [0, 100]. All the numbers are separated by a space.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>The first line of output must give <em>M</em> (≤<em>N</em>), the total number of people that are actually ranked. Then <em>M</em> lines follow, each gives the information of a person in the same format as the input, according to the ranking rules. If there is a tie of the total grade, they must be ranked with respect to their virtue grades in non-increasing order. If there is still a tie, then output in increasing order of their ID's.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">14 60 80
+10000001 64 90
+10000002 90 60
+10000011 85 80
+10000003 85 80
+10000004 80 85
+10000005 82 77
+10000006 83 76
+10000007 90 78
+10000008 75 79
+10000009 59 90
+10000010 88 45
+10000012 80 100
+10000013 90 99
+10000014 66 60
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">12
+10000013 90 99
+10000012 80 100
+10000003 85 80
+10000011 85 80
+10000004 80 85
+10000007 90 78
+10000006 83 76
+10000005 82 77
+10000002 90 60
+10000014 66 60
+10000008 75 79
+10000001 64 90
+</code></pre>
+<hr>
+<p>题目描述：排序。。。</p>
+<p>解题思路：</p>
+<p>A--talent &gt;= H, virtue &gt;= H --总分高优先；<br>
+B--talent &lt;H , virtue &gt;= H --总分高优先；<br>
+C--talent &lt; H, virtue &lt; H &amp;&amp; virtue &gt;= talent --总分高优先；<br>
+D--talent &lt; H, virtue &lt;H &amp;&amp; virtue &lt; talent --总分高优先；</p>
+<p>提示：当总分相同时，按照virtue递减排序；当总分和virtue相同时，按照ID递增排序。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, l, h;
+struct node{
+	int id;
+	int virtue, talent;
+	int cid;
+};
+vector&lt;node&gt; v;
+bool cmp(node a, node b){
+	if(a.cid!=b.cid) return a.cid &lt; b.cid;
+	else if(a.virtue+a.talent != b.virtue+b.talent) return a.virtue+a.talent &gt; b.virtue+b.talent;
+	else if(a.virtue!=b.virtue) return a.virtue &gt; b.virtue;
+	else if(a.id!=b.id) return a.id &lt; b.id;
+}
+int main()
+{
+	scanf(&quot;%d %d %d&quot;, &amp;n, &amp;l, &amp;h);
+	for(int i=0; i&lt;n; i++){
+		node t;
+		scanf(&quot;%d %d %d&quot;, &amp;t.id, &amp;t.virtue, &amp;t.talent);
+		if(t.talent&lt;l||t.virtue&lt;l) continue;
+		if(t.talent&gt;=h&amp;&amp;t.virtue&gt;=h) t.cid = 1;
+		else if(t.talent&lt;h&amp;&amp;t.virtue&gt;=h) t.cid = 2;
+		else if(t.talent&lt;h&amp;&amp;t.virtue&lt;h&amp;&amp;t.virtue&gt;=t.talent) t.cid = 3;
+		else t.cid = 4;
+		v.push_back(t);
+	}
+	sort(v.begin(),v.end(),cmp);
+	printf(&quot;%d\n&quot;, v.size());
+	for(int i=0; i&lt;v.size(); i++){
+		node t = v[i];
+		printf(&quot;%d %d %d\n&quot;, t.id, t.virtue, t.talent);
+	}
+	return 0;
+}
+</code></pre>
 
         </div>
 
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
+            <span class="flex-auto">PAT (Advanced Level) Practice</span>
+          </a>
         
 
 
