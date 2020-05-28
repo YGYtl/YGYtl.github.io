@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-05-26T16:07:01.203Z</updated>
+    <updated>2020-05-28T04:19:07.476Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -400,22 +400,48 @@ FLASK_DEBUG=1
 尝试访问http://127.0.0.1:5000/api/ping
 </code></pre>
 <h3 id="2-7-git的一些操作">2-7. git的一些操作</h3>
-<pre><code>git checkout -b dev  //新建dev分支
+<pre><code>举个栗子：
+1、git branch显示*master，目前在master下
 
-git checkout dev  //切换到dev分支上
+2、git checkout -b dev //新建并切换到dev分支下
 
-git branch  //查看在那个分支
+3、git branch显示*dev，表示当前分支为dev
+
+4、在dev分支下，加入要上传的文件为test.py
+git add test.py
+git commit -m &quot;dev分支的提交&quot;
+
+5、git log --pretty=online //会显示dev分支的提交
+
+6、dev分支完成，切换到master分支下
+git checkout master
+
+7、将master分支与dev分支合并
+git merge dev
+
+8、删除dev分支
+git branch -D dev
+
+9、将本地master分支上传到github仓库的master分支上
+git push or git push -u origin master
 
 
-提交代码
-git add .  //添加所有文件
-git commit -m 'soso'  //定义soso
-git checkout master  //切换到master主分支上
-git merge dev  //将dev分支融入master
-git checkout -d dev  //删除dev分支
-git push -u origin master  //将本地master分支代码上传到github的master分支
 
-
+git branch 分支名 // 新建分支
+git branch // 查看当前所有分支
+git checkout 分支名 // 检出分支
+git checkout -b 分支名 // 创建并切换分支
+git checkout commitId 文件名（文件路径下的文件名） 还原这个文件到对应的commitId的版本
+git branch -v // 查看分支以及提交hash值和commit信息
+git merge 分支名 // 把该分支的内容合并到现有分支上
+git branch -d 分支名 // 删除分支
+git branch -D 分支名 // 强制删除 若没有其他分支合并就删除 d会提示 D不会
+git branch -m 旧分支名 新分支名 // 修改分支名
+git branch -M 旧分支名 新分支名 // 修改分支名 M强制修改 若与其他分支有冲突也会创建(慎用)
+git branch -r // 列出远程分支(远程所有分支名)
+git branch -a // 查看远程分支(列出远程分支以及本地分支名)
+git fetch // 更新remote索引
+git push -u origin 分支名
 </code></pre>
 ]]></content>
     </entry>
