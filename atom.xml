@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-05-28T04:19:07.476Z</updated>
+    <updated>2020-05-29T02:43:21.488Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,88 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1065 A+B and C (64bit) (20分)题解]]></title>
+        <id>https://ygytl.github.io/post/1065-ab-and-c-64bit-20-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1065-ab-and-c-64bit-20-fen-ti-jie/">
+        </link>
+        <updated>2020-05-29T02:42:07.000Z</updated>
+        <content type="html"><![CDATA[<p>1065 A+B and C (64bit) (20分)</p>
+<p>Given three integers <em>A</em>, <em>B</em> and <em>C</em> in [−2<sup>63</sup>,2<sup>63</sup>], you are supposed to tell whether <em>A</em>+<em>B</em>&gt;<em>C</em>.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>The first line of the input gives the positive number of test cases, <em>T</em> (≤10). Then <em>T</em> test cases follow, each consists of a single line containing three integers <em>A</em>, <em>B</em> and <em>C</em>, separated by single spaces.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, output in one line <code>Case #X: true</code> if <em>A</em>+<em>B</em>&gt;<em>C</em>, or <code>Case #X: false</code> otherwise, where <em>X</em> is the case number (starting from 1).</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">3
+1 2 3
+2 3 4
+9223372036854775807 -9223372036854775808 0
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">Case #1: false
+Case #2: true
+Case #3: false
+</code></pre>
+<hr>
+<p>题目描述：A+B&gt;C，真返回true，假返回false</p>
+<p>解题思路：一看就是大数据处理，long double类型杠，或者对数据处理一下</p>
+<p>注：a&gt;&gt;1 与 a/2有区别，(a&amp;1) 与 a%2有区别，a+b<mark>c 与 (g=a+b),g</mark>c有区别</p>
+<hr>
+<p>方法一：</p>
+<pre><code class="language-C++">#include&lt;bits/stdc++.h&gt;
+using namespace std ;
+int main()
+{
+    int n;
+    scanf(&quot;%d&quot;, &amp;n);
+    for( int i=1; i&lt;=n; i++){
+        long double a, b, c;
+        scanf(&quot;%Lf %Lf %Lf&quot;, &amp;a, &amp;b, &amp;c);
+        printf(&quot;Case #%d: &quot;, i);
+        if(a+b&gt;c) printf(&quot;yes\n&quot;);
+        else printf(&quot;false\n&quot;);
+    }
+    return 0 ;
+}
+</code></pre>
+<p>方法二：</p>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int main()
+{
+	long long a, b, c;
+	int n;
+	scanf(&quot;%d&quot;, &amp;n);
+	for(int i=1; i&lt;=n; i++){
+		scanf(&quot;%lld %lld %lld&quot;, &amp;a, &amp;b, &amp;c);
+		long long ta, tb, tc;
+		ta = a&gt;&gt;1;
+		tb = b&gt;&gt;1;
+		tc = c&gt;&gt;1;
+		printf(&quot;Case #%d: &quot;, i);
+		if(ta+tb&gt;tc){
+			printf(&quot;true\n&quot;);
+		}
+		else if(ta+tb==tc&amp;&amp;((a&amp;1)+(b&amp;1)&gt;(c&amp;1))){
+			printf(&quot;true\n&quot;);
+		}
+		else printf(&quot;false\n&quot;);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[linux常用命令]]></title>
+        <id>https://ygytl.github.io/post/linux-chang-yong-ming-ling/</id>
+        <link href="https://ygytl.github.io/post/linux-chang-yong-ming-ling/">
+        </link>
+        <updated>2020-05-28T13:18:52.000Z</updated>
+        <content type="html"><![CDATA[<p>1、复制文件或文件夹</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1062 Talent and Virtue (25分)题解]]></title>
         <id>https://ygytl.github.io/post/1062-talent-and-virtue-25-fen/</id>

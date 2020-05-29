@@ -92,65 +92,73 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1063 Set Similarity (25分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1065 A+B and C (64bit) (20分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-05-25 / 3 min read
+          2020-05-29 / 3 min read
         </div>
         
         <div class="post-content yue">
-          <p>1063 Set Similarity (25分)</p>
-<p>Given two sets of integers, the similarity of the sets is defined to be N<sub>c</sub>/N<sub>t</sub>×100%, where N<sub>c</sub> is the number of distinct common numbers shared by the two sets, and N<sub>t</sub> is the total number of distinct numbers in the two sets. Your job is to calculate the similarity of any given pair of sets.</p>
+          <p>1065 A+B and C (64bit) (20分)</p>
+<p>Given three integers <em>A</em>, <em>B</em> and <em>C</em> in [−2<sup>63</sup>,2<sup>63</sup>], you are supposed to tell whether <em>A</em>+<em>B</em>&gt;<em>C</em>.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. Each case first gives a positive integer <em>N</em> (≤50) which is the total number of sets. Then <em>N</em> lines follow, each gives a set with a positive <em>M</em> (≤104) and followed by <em>M</em> integers in the range [0,109]. After the input of sets, a positive integer <em>K</em> (≤2000) is given, followed by <em>K</em> lines of queries. Each query gives a pair of set numbers (the sets are numbered from 1 to <em>N</em>). All the numbers in a line are separated by a space.</p>
+<p>The first line of the input gives the positive number of test cases, <em>T</em> (≤10). Then <em>T</em> test cases follow, each consists of a single line containing three integers <em>A</em>, <em>B</em> and <em>C</em>, separated by single spaces.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each query, print in one line the similarity of the sets, in the percentage form accurate up to 1 decimal place.</p>
+<p>For each test case, output in one line <code>Case #X: true</code> if <em>A</em>+<em>B</em>&gt;<em>C</em>, or <code>Case #X: false</code> otherwise, where <em>X</em> is the case number (starting from 1).</p>
 <h3 id="sample-input">Sample Input:</h3>
 <pre><code class="language-in">3
-3 99 87 101
-4 87 101 5 87
-7 99 101 18 5 135 18 99
-2
-1 2
-1 3
+1 2 3
+2 3 4
+9223372036854775807 -9223372036854775808 0
 </code></pre>
 <h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">50.0%
-33.3%
+<pre><code class="language-out">Case #1: false
+Case #2: true
+Case #3: false
 </code></pre>
 <hr>
-<p>题目描述：求两个集合中，相同元素在两个集合中占比为多少。</p>
-<p>输入数据：给n组集合，每组集合有m个元素，题目给出k组查询，每组询问两集合中相同元素的占比。</p>
-<p>分析输入样例</p>
-<p>查询1、2集合：相同数2（87 101）/总数4（87 101 99 87 5）=0.5<br>
-查询1、3集合：相同数2（99 101）/总数6（99 87 101 18 5 135）=0.3</p>
-<p>注意最后一个测试点容易超时，使用set的find()。</p>
+<p>题目描述：A+B&gt;C，真返回true，假返回false</p>
+<p>解题思路：一看就是大数据处理，long double类型杠，或者对数据处理一下</p>
+<p>注：a&gt;&gt;1 与 a/2有区别，(a&amp;1) 与 a%2有区别，a+b<mark>c 与 (g=a+b),g</mark>c有区别</p>
 <hr>
+<p>方法一：</p>
 <pre><code class="language-C++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-vector&lt; set&lt;int&gt; &gt; v;
+using namespace std ;
 int main()
 {
-	int n, m, k, g;
+    int n;
+    scanf(&quot;%d&quot;, &amp;n);
+    for( int i=1; i&lt;=n; i++){
+        long double a, b, c;
+        scanf(&quot;%Lf %Lf %Lf&quot;, &amp;a, &amp;b, &amp;c);
+        printf(&quot;Case #%d: &quot;, i);
+        if(a+b&gt;c) printf(&quot;yes\n&quot;);
+        else printf(&quot;false\n&quot;);
+    }
+    return 0 ;
+}
+</code></pre>
+<p>方法二：</p>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int main()
+{
+	long long a, b, c;
+	int n;
 	scanf(&quot;%d&quot;, &amp;n);
-	v.resize(n+1);
 	for(int i=1; i&lt;=n; i++){
-		scanf(&quot;%d&quot;, &amp;m);
-		for(int j=0; j&lt;m; j++){
-			scanf(&quot;%d&quot;, &amp;g);
-			v[i].insert(g);
+		scanf(&quot;%lld %lld %lld&quot;, &amp;a, &amp;b, &amp;c);
+		long long ta, tb, tc;
+		ta = a&gt;&gt;1;
+		tb = b&gt;&gt;1;
+		tc = c&gt;&gt;1;
+		printf(&quot;Case #%d: &quot;, i);
+		if(ta+tb&gt;tc){
+			printf(&quot;true\n&quot;);
 		}
-	}
-	int count=0, all_num=0, a, b;
-	scanf(&quot;%d&quot;, &amp;k);
-	set&lt;int&gt;::iterator it;
-	for(int i=0; i&lt;k; i++){
-		scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
-		all_num = v[a].size()+v[b].size();
-		count = 0;
-		for(it=v[a].begin(); it!=v[a].end(); it++){
-			if(v[b].find(*it)!=v[b].end()) count++;//在集合b中可以找到 
+		else if(ta+tb==tc&amp;&amp;((a&amp;1)+(b&amp;1)&gt;(c&amp;1))){
+			printf(&quot;true\n&quot;);
 		}
-		printf(&quot;%.1f%\n&quot;, count*100.0/(all_num-count));//共同的元素出现了两次 
+		else printf(&quot;false\n&quot;);
 	}
 	return 0;
 }
@@ -159,29 +167,16 @@ int main()
         </div>
 
         
-          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
-            <span class="flex-auto">PAT (Advanced Level) Practice</span>
-          </a>
-        
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1045-favorite-color-stripe-30-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1045 Favorite Color Stripe (30分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/windows-xi-tong-sheng-cheng-ssh-key/">
+              <a href="https://ygytl.github.io/post/linux-chang-yong-ming-ling/">
                 <h3 class="post-title">
-                  windows系统生成ssh key
+                  linux常用命令
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
