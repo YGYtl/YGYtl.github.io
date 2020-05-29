@@ -30,34 +30,24 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            Grace's blog
+            文章目录
           </p>
-          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
-            
-              
-                <a href="https://github.com/YGYtl" target="_blank" class="mr-4 text-xl text-gray-400 font-light hover:text-gray-900">
-                  <i class="ri-github-line"></i>
-                </a>
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#input-specification">Input Specification:</a></li>
+<li><a href="#output-specification">Output Specification:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
           </div>
         </div>
       
@@ -101,83 +91,112 @@
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
-        <h2 class="text-lg text-gray-700 mb-8">
-          <i class="ri-bookmark-line"></i> PAT (Advanced Level) Practice
-        </h2>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">1067 Sort with Swap(0, i) (25分)</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-05-29 / 2 min read
+        </div>
         
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/1067-sort-with-swap0-i-25-fen/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">1067 Sort with Swap(0, i) (25分)</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
+        <div class="post-content yue">
+          <p>1067 Sort with Swap(0, i) (25分)</p>
+<p>Given any permutation of the numbers {0, 1, 2,..., <em>N</em>−1}, it is easy to sort them in increasing order. But what if <code>Swap(0, *)</code> is the ONLY operation that is allowed to use? For example, to sort {4, 0, 2, 1, 3} we may apply the swap operations in the following way:</p>
+<pre><code>Swap(0, 1) =&gt; {4, 1, 2, 0, 3}
+Swap(0, 3) =&gt; {4, 1, 2, 3, 0}
+Swap(0, 4) =&gt; {0, 1, 2, 3, 4}
+</code></pre>
+<p>Now you are asked to find the minimum number of swaps need to sort the given permutation of the first <em>N</em> nonnegative integers.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case, which gives a positive <em>N</em> (≤105) followed by a permutation sequence of {0, 1, ..., <em>N</em>−1}. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each case, simply print in a line the minimum number of swaps need to sort the given permutation.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">10
+3 5 7 2 6 4 9 0 8 1
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">9
+</code></pre>
+<hr>
+<p>题目描述：只能与0交换，求得到正确序列所需最少交换次数。</p>
+<p>解题思路：</p>
+<p>找到序列中值与位置不匹配的元素，进行循环交换，将他们放回正确的位置，当该元素不为0时，交换次数要另外加2。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int main()
+{
+	int n;
+	vector&lt;int&gt; v;
+	scanf(&quot;%d&quot;, &amp;n);
+	v.resize(n);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d&quot;, &amp;v[i]);
+	}
+	int ans = 0;
+	for(int i=0; i&lt;n; i++){
+		if(v[i]==i) continue;
+		while(v[i]!=i){
+			swap(v[i],v[v[i]]);
+			ans++;
+		}
+		if(i!=0) ans+=2;
+	}
+	printf(&quot;%d\n&quot;, ans);
+	return 0;
+}
+</code></pre>
+
+        </div>
+
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-29 / 2 min read</div>
-    </div>
-  </section>
-
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${1 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/1065-ab-and-c-64bit-20-fen-ti-jie/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">1065 A+B and C (64bit) (20分)题解</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
+            <span class="flex-auto">PAT (Advanced Level) Practice</span>
+          </a>
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-29 / 3 min read</div>
-    </div>
-  </section>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${2 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/1062-talent-and-virtue-25-fen/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">1062 Talent and Virtue (25分)题解</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://ygytl.github.io/post/1065-ab-and-c-64bit-20-fen-ti-jie/">
+                <h3 class="post-title">
+                  1065 A+B and C (64bit) (20分)题解
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-26 / 6 min read</div>
-    </div>
-  </section>
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${3 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/1045-favorite-color-stripe-30-fen-ti-jie/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">1045 Favorite Color Stripe (30分)题解</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        <p>1045 Favorite Color Stripe (30分)</p>
-<p>Eva is trying to make her own color stripe out of a given one. She would like to keep only her favorite colors in her favorite order by cutting off those unwanted pieces and sewing the remaining parts together to form her favorite color stripe.</p>
-<p>It is said that a normal human eye can distinguish about less than 200 different colors, so Eva's favorite colors are limited. However the original</p>
+<div id="gitalk-container"></div>
 
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-25 / 4 min read</div>
-    </div>
-  </section>
+<script>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${4 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/1063-set-similarity-25-fen-ti-jie/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">1063 Set Similarity (25分)题解</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
+  var gitalk = new Gitalk({
+    clientID: '651ee788996886a0c8a2',
+    clientSecret: '53231792a985805dbea714f6d780b970e1d3c139',
+    repo: 'ygytl.github.io',
+    owner: 'YGYtl',
+    admin: ['YGYtl'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-25 / 3 min read</div>
-    </div>
-  </section>
-
-        <div class="pagination-container animated fadeIn">
-  
-  
-</div>
 
       </div>
     </div>
