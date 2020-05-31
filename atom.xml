@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-05-31T03:22:03.774Z</updated>
+    <updated>2020-05-31T03:26:31.766Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -36,7 +36,7 @@ enabled=1
 # systemctl enable nginx
 </code></pre>
 <h3 id="同步阻塞">同步阻塞</h3>
-<h5 id="11-在windows下创建文件夹test在文件夹下创建日志模块loggerpy后续windows文件都放入同一个文件夹下">1.1 在windows下创建文件夹test，在文件夹下创建日志模块logger.py(后续windows文件都放入同一个文件夹下)</h5>
+<h4 id="11-在windows下创建文件夹test在文件夹下创建日志模块loggerpy后续windows文件都放入同一个文件夹下">1.1 在windows下创建文件夹test，在文件夹下创建日志模块logger.py(后续windows文件都放入同一个文件夹下)</h4>
 <pre><code class="language-python">import os
 import time
 import logging
@@ -62,13 +62,13 @@ stream_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 logger.addHandler(stream_handler)
 </code></pre>
-<h5 id="12-在centos中放入文件flagstargz">1.2 在centos中放入文件flags.tar.gz</h5>
+<h4 id="12-在centos中放入文件flagstargz">1.2 在centos中放入文件flags.tar.gz</h4>
 <pre><code>将flags.tar.gz文件导入到/usr/share/nginx/html中，并解压tar xf flags.tar.gz
 #cd /usr/share/nginx/html
 #ls flags &gt; flags.txt
 将flags文件夹下的文件名写入flags.txt中，以便后续使用
 </code></pre>
-<h5 id="13-在windows下创建commonpy">1.3 在windows下创建common.py</h5>
+<h4 id="13-在windows下创建commonpy">1.3 在windows下创建common.py</h4>
 <pre><code class="language-python">import os
 import time
 import requests
@@ -106,7 +106,7 @@ def download_one(image):  #后续多线程时concurrent.futures.ThreadPoolExecut
     t1 = time.time()
     logger.info('Task No.{} [{}] runs {} seconds.'.format(image['linkno'], image['link'], t1 - t0))
 </code></pre>
-<h5 id="14-在windows下创建sequentialpy">1.4  在windows下创建sequential.py</h5>
+<h4 id="14-在windows下创建sequentialpy">1.4  在windows下创建sequential.py</h4>
 <pre><code class="language-python">import time
 from common import setup_down_path, get_links, download_one
 from logger import logger
