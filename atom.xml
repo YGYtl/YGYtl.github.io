@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-05-31T03:20:09.367Z</updated>
+    <updated>2020-05-31T03:22:03.774Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -280,7 +280,20 @@ for i in range(1,n+1):
         <link href="https://ygytl.github.io/post/linux-chang-yong-ming-ling/">
         </link>
         <updated>2020-05-28T13:18:52.000Z</updated>
-        <content type="html"><![CDATA[<p>1、复制文件或文件夹</p>
+        <content type="html"><![CDATA[<h5 id="复制文件或文件夹">复制文件或文件夹</h5>
+<pre><code>cp dir1/a.doc dir2 //将dir1下的a.doc文件复制到dir2目录下
+cp -r dir1 dir2 //将dir1及dir1下的文件复制到dir2
+cp -r dir1/. dir2 //将dir1下的文件复制到dir2
+</code></pre>
+<h5 id="解压缩">解压缩</h5>
+<pre><code>tar xf flag.tar.gz
+</code></pre>
+<h5 id="centos查看ip">CentOS查看ip</h5>
+<pre><code>ip addr
+</code></pre>
+<h5 id="将flags文件夹里的文件名输出到txt文本">将flags文件夹里的文件名输出到txt文本</h5>
+<pre><code>#ls flags &gt; flags.txt
+</code></pre>
 ]]></content>
     </entry>
     <entry>
