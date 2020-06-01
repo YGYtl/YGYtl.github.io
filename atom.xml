@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-01T05:16:21.307Z</updated>
+    <updated>2020-06-01T05:29:11.898Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -684,12 +684,13 @@ int main()
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Flask Vue.js全栈开发 第一章：创建github库与配置Flask]]></title>
+        <title type="html"><![CDATA[Flask+Vue.js开发个人博客 第一章：创建github库与配置Flask]]></title>
         <id>https://ygytl.github.io/post/flask-vuejs-quan-zhan-kai-fa-di-yi-zhang-chuang-jian-di-yi-ge-flask-restful-api/</id>
         <link href="https://ygytl.github.io/post/flask-vuejs-quan-zhan-kai-fa-di-yi-zhang-chuang-jian-di-yi-ge-flask-restful-api/">
         </link>
         <updated>2020-05-23T17:05:23.000Z</updated>
         <content type="html"><![CDATA[<h2 id="1-1-创建github库">1-1. 创建github库</h2>
+<p>创建github库能够上传自己写的源代码哩</p>
 <ul>
 <li>
 <p>添加ssh keys</p>
@@ -704,14 +705,17 @@ int main()
 </li>
 </ul>
 <h3 id="1-2-git-clone">1-2. git clone</h3>
+<p>将刚才创建的github项目克隆到本地</p>
 <pre><code>cd /G/Python/flask/
 git clone https://github.com/YGYtl/flask-vuejs-Graceblog.git
 </code></pre>
 <h3 id="1-3-分支管理">1-3. 分支管理</h3>
+<p>创建分支管理是为了将修改记录的整体流程分叉保存。分叉后的分支不受其他分支的影响，所以在同一个数据库里可以同时进行多个修改。</p>
 <pre><code>git checkout -b dev  //创建dev分支
 git branch  //查看分支
 </code></pre>
 <h2 id="2-1-配置-flask">2-1. 配置 Flask</h2>
+<p>这个web项目的后端是基于flask的，所以需要在back-end后端目录中安装flask。</p>
 <ul>
 <li>
 <p>装python3</p>
