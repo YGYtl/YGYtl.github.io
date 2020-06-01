@@ -30,34 +30,24 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            Grace's blog
+            文章目录
           </p>
-          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
-            
-              
-                <a href="https://github.com/YGYtl" target="_blank" class="mr-4 text-xl text-gray-400 font-light hover:text-gray-900">
-                  <i class="ri-github-line"></i>
-                </a>
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#input-specification">Input Specification:</a></li>
+<li><a href="#output-specification">Output Specification:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
           </div>
         </div>
       
@@ -101,41 +91,123 @@
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
-        <h2 class="text-lg text-gray-700 mb-8">
-          <i class="ri-bookmark-line"></i> Python3 web爬虫
-        </h2>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">1071 Speech Patterns (25分)题解</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-06-01 / 4 min read
+        </div>
         
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/p2-bing-fa-yu-bing-xing-de-qu-bie-tong-bu-yu-yi-bu-de-jie-xi/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">P2 并发与并行的区别、同步与异步的解析</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-06-01 / 3 min read</div>
-    </div>
-  </section>
+        <div class="post-content yue">
+          <p>1071 Speech Patterns (25分)</p>
+<p>People often have a preference among synonyms of the same word. For example, some may prefer &quot;the police&quot;, while others may prefer &quot;the cops&quot;. Analyzing such patterns can help to narrow down a speaker's identity, which is useful when validating, for example, whether it's still the same person behind an online avatar.</p>
+<p>Now given a paragraph of text sampled from someone's speech, can you find the person's most commonly used word?</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, there is one line of text no more than 1048576 characters in length, terminated by a carriage return <code>\n</code>. The input contains at least one alphanumerical character, i.e., one character from the set [<code>0-9 A-Z a-z</code>].</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print in one line the most commonly occurring word in the input text, followed by a space and the number of times it has occurred in the input. If there are more than one such words, print the lexicographically smallest one. The word should be printed in all lower case. Here a &quot;word&quot; is defined as a continuous sequence of alphanumerical characters separated by non-alphanumerical characters or the line beginning/end.</p>
+<p>Note that words are case <strong>insensitive</strong>.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">Can1: &quot;Can a can can a can?  It can!&quot;
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">can 5
+</code></pre>
+<hr>
+<p>题目描述：求给定的字符串中，出现次数最多的单词，这些单词由数字、大小写字母组成。</p>
+<p>输入：一串字符串</p>
+<p>输出：出现最多的单词及出现次数</p>
+<p>解题思路：getline函数读取所有字符，要在读入所有字符后加一个字符'.'，当读入的最后一个字符是数字或者大小写字母时，比较容易将最后一个单词切分出来。接着，根据特殊字符来切分单词，并用map&lt;string,int&gt;来记录每个单词出现的次数。在记录的同时，我们也可以把答案顺便找出来。用ans和count两个量简单比较就行了。</p>
+<p>注意：最后一个测试点就是卡在最后一个单词有没有正确切分并计数。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+map&lt;string,int&gt; p;
+int main()
+{
+	string s, t=&quot;&quot;;
+	getline(cin,s);
+	s += '.';//不加最后一个测试点会错 
+	int l = s.length();
+	string ans=&quot;&quot;;
+	int count = 0;
+	for(int i=0; i&lt;l; i++){
+		if(s[i]&gt;='0'&amp;&amp;s[i]&lt;='9'){
+			t += s[i];
+		}
+		else if(s[i]&gt;='A'&amp;&amp;s[i]&lt;='Z'){
+			t += s[i]-'A'+'a';
+		}
+		else if(s[i]&gt;='a'&amp;&amp;s[i]&lt;='z'){
+			t += s[i];
+		}
+		else{
+			if(t.length()!=0) p[t]++;
+			if(p[t]==count){
+				ans = t &lt; ans ? t : ans;
+			}
+			else if(p[t]&gt;count){
+				count = p[t];
+				ans = t;
+			}
+			t = &quot;&quot;;
+		}
+	}
+	cout &lt;&lt; ans &lt;&lt; &quot; &quot; &lt;&lt; count &lt;&lt; endl;
+	return 0;
+}
+</code></pre>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${1 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/p3-tong-bu-zu-sai-xia-zai/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">P3 同步阻塞下载</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-31 / 4 min read</div>
-    </div>
-  </section>
+        </div>
 
-        <div class="pagination-container animated fadeIn">
-  
-  
-</div>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
+            <span class="flex-auto">PAT (Advanced Level) Practice</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://ygytl.github.io/post/p2-bing-fa-yu-bing-xing-de-qu-bie-tong-bu-yu-yi-bu-de-jie-xi/">
+                <h3 class="post-title">
+                  P2 并发与并行的区别、同步与异步的解析
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '651ee788996886a0c8a2',
+    clientSecret: '53231792a985805dbea714f6d780b970e1d3c139',
+    repo: 'ygytl.github.io',
+    owner: 'YGYtl',
+    admin: ['YGYtl'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
 
       </div>
     </div>
