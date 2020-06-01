@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-01T06:29:41.725Z</updated>
+    <updated>2020-06-01T06:30:43.172Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -45,11 +45,11 @@
 <p>异步对弈 Asychronous<br>
 异步对弈指：A与B<sub>1</sub>对弈时，A先下花了5s与B<sub>1</sub>下第一回合，B<sub>1</sub>需要花55s的时间思考，A不等待B<sub>1</sub>，直接与B<sub>2</sub>对弈，一直到与B<sub>12</sub>对弈了后，才返回跟B<sub>1</sub>对弈。而这时，A走完每个棋局的第一步需要花费12*5=60s，60s过去B<sub>1</sub>已经走完第一步，A与B<sub>1</sub>进行第二回合的对弈。A走完30个回合的总时间是60*30=1800s</p>
 <p>21600/1800 = 12，异步对弈效率提高了12倍</p>
-<h4 id="异步编程">异步编程：</h4>
+<h3 id="异步编程">异步编程：</h3>
 <p>指在 单线程 中 并发 执行多个任务，当一个任务在等待数据时，它会释放 CPU 资源，</p>
 <p>转而执行其它任务，通过程序员自己主动切换任务来最小化空闲时间。<br>
 异步实现：异步函数在等待数据时被暂停执行，当数据到达时，又能够在被暂停的位置处恢复执行。</p>
-<h4 id="异步-io-操作">异步 I/O 操作</h4>
+<h3 id="异步-io-操作">异步 I/O 操作</h3>
 <p>指当你发起一个 I/O 操作（比如，等待网络图片数据的到来），却不用等它结束，<br>
 你可以继续去做其它的事情，当它结束时，你会得到通知，然后再回来接着处理这个 I/O 后续的操作。<br>
 而 同步 I/O 操作 则会被阻塞在 I/O 操作上直到它完成，这期间 CPU 做了很多事，只是没有运行你的程序。</p>

@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1590992975601">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1590993039903">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1590992975601" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1590993039903" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -42,8 +42,7 @@
 <li><a href="#%E5%B9%B6%E8%A1%8C">并行</a></li>
 </ul>
 </li>
-<li><a href="#%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5">同步与异步</a><br>
-*
+<li><a href="#%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5">同步与异步</a>
 <ul>
 <li><a href="#%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B">异步编程：</a></li>
 <li><a href="#%E5%BC%82%E6%AD%A5-io-%E6%93%8D%E4%BD%9C">异步 I/O 操作</a></li>
@@ -132,11 +131,11 @@
 <p>异步对弈 Asychronous<br>
 异步对弈指：A与B<sub>1</sub>对弈时，A先下花了5s与B<sub>1</sub>下第一回合，B<sub>1</sub>需要花55s的时间思考，A不等待B<sub>1</sub>，直接与B<sub>2</sub>对弈，一直到与B<sub>12</sub>对弈了后，才返回跟B<sub>1</sub>对弈。而这时，A走完每个棋局的第一步需要花费12*5=60s，60s过去B<sub>1</sub>已经走完第一步，A与B<sub>1</sub>进行第二回合的对弈。A走完30个回合的总时间是60*30=1800s</p>
 <p>21600/1800 = 12，异步对弈效率提高了12倍</p>
-<h4 id="异步编程">异步编程：</h4>
+<h3 id="异步编程">异步编程：</h3>
 <p>指在 单线程 中 并发 执行多个任务，当一个任务在等待数据时，它会释放 CPU 资源，</p>
 <p>转而执行其它任务，通过程序员自己主动切换任务来最小化空闲时间。<br>
 异步实现：异步函数在等待数据时被暂停执行，当数据到达时，又能够在被暂停的位置处恢复执行。</p>
-<h4 id="异步-io-操作">异步 I/O 操作</h4>
+<h3 id="异步-io-操作">异步 I/O 操作</h3>
 <p>指当你发起一个 I/O 操作（比如，等待网络图片数据的到来），却不用等它结束，<br>
 你可以继续去做其它的事情，当它结束时，你会得到通知，然后再回来接着处理这个 I/O 后续的操作。<br>
 而 同步 I/O 操作 则会被阻塞在 I/O 操作上直到它完成，这期间 CPU 做了很多事，只是没有运行你的程序。</p>
