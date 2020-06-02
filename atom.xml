@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-02T03:00:33.226Z</updated>
+    <updated>2020-06-02T03:02:22.492Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -52,7 +52,7 @@
 <p>输入：小于10000的数</p>
 <p>输出：输出max - min的计算结果为6174或0000的过程</p>
 </br>
-<p>解题思路：利用sscanf和sprintf两个函数进行模拟，使用字符的形式进行排序。注意以数字形式输出是，不满4 digits要前面要补0。</p>
+<p>解题思路：利用sscanf和sprintf两个函数进行模拟，使用字符的形式进行排序。注意以数字形式输出是，不满4 digits在前面要补0。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
