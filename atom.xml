@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-02T03:03:09.126Z</updated>
+    <updated>2020-06-02T04:29:38.552Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,176 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1053 Path of Equal Weight (30分)题解]]></title>
+        <id>https://ygytl.github.io/post/1053-path-of-equal-weight-30-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1053-path-of-equal-weight-30-fen-ti-jie/">
+        </link>
+        <updated>2020-06-02T04:29:04.000Z</updated>
+        <content type="html"><![CDATA[<p>1053 Path of Equal Weight (30分)</p>
+<p>Given a non-empty tree with root <em>R</em>, and with weight <em>W**i</em> assigned to each tree node <em>T**i</em>. The <strong>weight of a path from *R* to *L*</strong> is defined to be the sum of the weights of all the nodes along the path from <em>R</em> to any leaf node <em>L</em>.</p>
+<p>Now given any weighted tree, you are supposed to find all the paths with their weights equal to a given number. For example, let's consider the tree showed in the following figure: for each node, the upper number is the node ID which is a two-digit number, and the lower number is the weight of that node. Suppose that the given number is 24, then there exists 4 different paths which have the same given weight: {10 5 2 7}, {10 4 10}, {10 3 3 6 2} and {10 3 3 6 2}, which correspond to the red edges in the figure.</p>
+<figure data-type="image" tabindex="1"><img src="https://images.ptausercontent.com/212" alt="img" loading="lazy"></figure>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. Each case starts with a line containing 0&lt;<em>N</em>≤100, the number of nodes in a tree, <em>M</em> (&lt;<em>N</em>), the number of non-leaf nodes, and 0&lt;<em>S</em>&lt;230, the given weight number. The next line contains <em>N</em> positive numbers where <em>W**i</em> (&lt;1000) corresponds to the tree node <em>T**i</em>. Then <em>M</em> lines follow, each in the format:</p>
+<pre><code>ID K ID[1] ID[2] ... ID[K]
+</code></pre>
+<p>where <code>ID</code> is a two-digit number representing a given non-leaf node, <code>K</code> is the number of its children, followed by a sequence of two-digit <code>ID</code>'s of its children. For the sake of simplicity, let us fix the root ID to be <code>00</code>.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print all the paths with weight S in <strong>non-increasing</strong> order. Each path occupies a line with printed weights from the root to the leaf in order. All the numbers must be separated by a space with no extra space at the end of the line.</p>
+<p>Note: sequence {<em>A</em>1,<em>A</em>2,⋯,<em>A**n</em>} is said to be <strong>greater than</strong> sequence {<em>B</em>1,<em>B</em>2,⋯,<em>B**m</em>} if there exists 1≤<em>k</em>&lt;<em>m<strong>i</strong>n</em>{<em>n</em>,<em>m</em>} such that <em>A**i</em>=<em>B**i</em> for <em>i</em>=1,⋯,<em>k</em>, and <em>A**k</em>+1&gt;<em>B**k</em>+1.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">20 9 24
+10 2 4 3 5 10 2 18 9 7 2 2 1 3 12 1 8 6 2 2
+00 4 01 02 03 04
+02 1 05
+04 2 06 07
+03 3 11 12 13
+06 1 09
+07 2 08 10
+16 1 15
+13 3 14 16 17
+17 2 18 19
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">10 5 2 7
+10 4 10
+10 3 3 6 2
+10 3 3 6 2
+</code></pre>
+<hr>
+<p>题目描述：现在有一棵树，让你找到根结点到叶子结点总权值为给定值的路径。</p>
+</br>
+<p>输入：n：节点总数，m：非叶子结点个数；s：假定要求的根节点到叶子节点总权值；接下来m行，包括id：结点编号，k：子结点个数，接下来k个子结点编号。</p>
+<p>输出：根结点到叶子结点的过程中经过的总权值等于s，输出所经过结点的权值。</p>
+</br>
+<p>解题思路：这道题不用建树，用有向图保存这棵树就行。可以用BFS算法或DFS算法。</p>
+<p>这里列举BFS算法详解：每个结点的权值保存在weight数组中，边的关系保存在G邻接表中。从root结点层层遍历，很简单的就可以得到根节点到各个叶子结点的总权值了。最重要的还是输出顺序的问题，我先将符合条件的路径权值数组存入ans二维数组容器中，最后将二维数组进行排序。排序规则是每个数组中同一位置的权值最大的序列排在前面输出。</p>
+<hr>
+<pre><code class="language-c++">//BFS 广度优先
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+struct node{
+	int id;
+	long long ss;
+	vector&lt;int&gt; list;
+	node(){
+		ss = 0;
+	}
+};
+int n, m;
+long long s;
+const int maxn = 220;
+int weight[maxn];
+vector&lt;int&gt; G[maxn];
+vector&lt; vector&lt;int&gt; &gt; ans;
+bool cmp(vector&lt;int&gt; a, vector&lt;int&gt; b){
+	int l=0;
+	l = min(a.size(),b.size());
+	for(int i=0; i&lt;l; i++){
+		if(a[i]==b[i]) continue;
+		else return a[i] &gt; b[i];
+	}
+	return false; //如果没有，最后一个测试点段错误! 
+}
+void bfs(int root){
+	node t, tt;
+	queue&lt;node&gt; q;
+	t.id = root; t.ss = weight[root];
+	t.list.push_back(weight[root]);
+	q.push(t);
+	
+	int u, v;
+	while(!q.empty()){
+		t = q.front();
+		u = t.id;
+		q.pop();
+		if(t.ss==s&amp;&amp;G[u].size()==0){
+			ans.push_back(t.list);
+			continue;
+		}
+		else if(t.ss &gt; s) continue;
+		for(int i=0; i&lt;G[u].size(); i++){
+			v = G[u][i];
+			tt.id = v; tt.ss = t.ss + weight[v]; tt.list = t.list;
+			tt.list.push_back(weight[v]);
+			q.push(tt);
+		}
+	}
+	sort(ans.begin(),ans.end(),cmp);
+	
+	for(int i=0; i&lt;ans.size(); i++){
+		for(int j=0; j&lt;ans[i].size(); j++){
+			if(j) printf(&quot; &quot;);
+			printf(&quot;%d&quot;, ans[i][j]);
+		}
+		printf(&quot;\n&quot;);
+	}
+}
+int main()
+{
+	scanf(&quot;%d %d %lld&quot;, &amp;n, &amp;m, &amp;s);
+	int id, k, g;
+	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;, &amp;weight[i]);
+	for(int i=0; i&lt;m; i++){
+		scanf(&quot;%d %d&quot;, &amp;id, &amp;k);
+		for(int j=0; j&lt;k; j++){
+			scanf(&quot;%d&quot;, &amp;g);
+			G[id].push_back(g);
+		}
+	}
+	bfs(0);
+	return 0;
+}
+</code></pre>
+<pre><code class="language-c++">//DFS 深度优先
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+struct node{
+	int w;
+	vector&lt;int&gt; child;
+};
+vector&lt;node&gt; v;
+vector&lt;int&gt; path;
+int target;
+void dfs(int index, int nodenum, int sum){
+	if(sum&gt;target) return ;
+	if(sum==target){
+		if(v[index].child.size()!=0) return;
+		for(int i=0; i&lt;nodenum; i++){
+			printf(&quot;%d%c&quot;, v[path[i]].w, i!=nodenum-1?' ':'\n');
+		}
+		return;
+	}
+	for(int i=0; i&lt;v[index].child.size(); i++){
+		int nd = v[index].child[i];
+		path[nodenum] = nd;
+		dfs(nd,nodenum+1,sum+v[nd].w);
+	}
+}
+int cmp(int a, int b){
+	return v[a].w &gt; v[b].w;
+}
+int main()
+{
+	int n, m, node, k;
+	scanf(&quot;%d %d %d&quot;, &amp;n, &amp;m, &amp;target);
+	v.resize(n), path.resize(n);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d&quot;, &amp;v[i].w);
+	}
+	for(int i=0; i&lt;m; i++){
+		scanf(&quot;%d %d&quot;, &amp;node, &amp;k);
+		v[node].child.resize(k);
+		for(int j=0; j&lt;k; j++) scanf(&quot;%d&quot;, &amp;v[node].child[j]);
+		sort(v[node].child.begin(),v[node].child.end(),cmp);
+	}
+	dfs(0,1,v[0].w);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1069 The Black Hole of Numbers (20分)题解]]></title>
         <id>https://ygytl.github.io/post/1069-the-black-hole-of-numbers-20-fen-ti-jie/</id>
@@ -693,86 +863,6 @@ int main()
 		node t = v[i];
 		printf(&quot;%d %d %d\n&quot;, t.id, t.virtue, t.talent);
 	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1045 Favorite Color Stripe (30分)题解]]></title>
-        <id>https://ygytl.github.io/post/1045-favorite-color-stripe-30-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1045-favorite-color-stripe-30-fen-ti-jie/">
-        </link>
-        <updated>2020-05-25T15:39:27.000Z</updated>
-        <summary type="html"><![CDATA[<p>1045 Favorite Color Stripe (30分)</p>
-<p>Eva is trying to make her own color stripe out of a given one. She would like to keep only her favorite colors in her favorite order by cutting off those unwanted pieces and sewing the remaining parts together to form her favorite color stripe.</p>
-<p>It is said that a normal human eye can distinguish about less than 200 different colors, so Eva's favorite colors are limited. However the original</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>1045 Favorite Color Stripe (30分)</p>
-<p>Eva is trying to make her own color stripe out of a given one. She would like to keep only her favorite colors in her favorite order by cutting off those unwanted pieces and sewing the remaining parts together to form her favorite color stripe.</p>
-<p>It is said that a normal human eye can distinguish about less than 200 different colors, so Eva's favorite colors are limited. However the original</p>
-<!-- more -->
-<!-- more -->
-<p>stripe could be very long, and Eva would like to have the remaining favorite stripe with the maximum length. So she needs your help to find her the best result.</p>
-<p>Note that the solution might not be unique, but you only have to tell her the maximum length. For example, given a stripe of colors {2 2 4 1 5 5 6 3 1 1 5 6}. If Eva's favorite colors are given in her favorite order as {2 3 1 5 6}, then she has 4 possible best solutions {2 2 1 1 1 5 6}, {2 2 1 5 5 5 6}, {2 2 1 5 5 6 6}, and {2 2 3 1 1 5 6}.</p>
-<h3 id="input-specification"><strong>Input Specification:</strong></h3>
-<p>Each input file contains one test case. For each case, the first line contains a positive integer <strong>N</strong> (≤200) which is the total number of colors involved (and hence the colors are numbered from 1 to <strong>N</strong>). Then the next line starts with a positive integer <strong>M</strong> (≤200) followed by <strong>M</strong> Eva's favorite color numbers given in her favorite order. Finally the third line starts with a positive integer <strong>L</strong> (≤10<sup>4</sup>) which is the length of the given stripe, followed by <strong>L</strong> colors on the stripe. All the numbers in a line a separated by a space.</p>
-<h3 id="output-specification"><strong>Output Specification:</strong></h3>
-<p>For each test case, simply print in a line the maximum length of Eva's favorite stripe.</p>
-<h3 id="sample-input"><strong>Sample Input:</strong></h3>
-<pre><code class="language-in">
-6
-
-5 2 3 1 5 6
-
-12 2 2 4 1 5 5 6 3 1 1 5 6
-
-</code></pre>
-<h3 id="sample-output"><strong>Sample Output:</strong></h3>
-<pre><code class="language-out">
-7
-
-</code></pre>
-<hr>
-<p>题目描述：N为颜色求得色号吧(1~N)，给出M个数，表示用户最喜欢的摆放序列，从L个数中自主挑选排序，求出符合用户摆放序列要求的最长序列。</p>
-<p>解题思路：动态规划</p>
-<p>（1）将M个数用编号存放到数组</p>
-<p>（2）从L个数中挑选用户喜欢的颜色序号放入容器</p>
-<p>（3）动态规划的思想。。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-vector&lt;int&gt; v;
-map&lt;int,int&gt; G;
-const int maxn = 100050;
-int dp[maxn];
-int main()
-{
-	int n, m, k;
-	int g;
-	scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
-	for(int i=1; i&lt;=m; i++){
-		scanf(&quot;%d&quot;, &amp;g);
-		G[g] = i;
-	}
-	scanf(&quot;%d&quot;, &amp;k);
-	for(int i=0; i&lt;k; i++){
-		scanf(&quot;%d&quot;, &amp;g);
-		if(G[g]!=0){
-			v.push_back(G[g]);
-		}
-	}
-	int l = v.size(), ans = 0;
-	for(int i=0; i&lt;l; i++){
-		dp[i] = 1;
-		for(int j=0; j&lt;i; j++){
-			if(v[j]&lt;=v[i]&amp;&amp;dp[i]&lt;dp[j]+1){
-				dp[i] = dp[j]+1;
-			}
-		}
-		ans = max(ans,dp[i]);
-	}
-	printf(&quot;%d\n&quot;, ans);
 	return 0;
 }
 </code></pre>
