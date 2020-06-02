@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591066555058">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591066705511">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591066555058" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591066705511" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -114,8 +114,10 @@
 </code></pre>
 <hr>
 <p>题目描述：求给定的字符串中，出现次数最多的单词，这些单词由数字、大小写字母组成。</p>
+</br>
 <p>输入：一串字符串</p>
-<p>输出：出现最多的单词及出现次数</p>
+<p>输出：出现最多的单词及出现次数<br>
+</br></p>
 <p>解题思路：getline函数读取所有字符，要在读入所有字符后加一个字符'.'，当读入的最后一个字符是数字或者大小写字母时，比较容易将最后一个单词切分出来。接着，根据特殊字符来切分单词，并用map&lt;string,int&gt;来记录每个单词出现的次数。在记录的同时，我们也可以把答案顺便找出来。用ans和count两个量简单比较就行了。</p>
 <p>注意：最后一个测试点就是卡在最后一个单词有没有正确切分并计数。</p>
 <hr>

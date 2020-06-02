@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591066555058">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591066705511">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591066555058" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591066705511" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -142,9 +142,11 @@
 10000001 64 90
 </code></pre>
 <hr>
-<p>题目描述：有个人制定了规则，给定了天赋美德的评分界限，大于<em>等于</em>H的为优秀，小于H的为一般。他将人分为了四类，称天赋(talent)和美德(virtue)都优秀的人“圣人”；virtue优秀但talent一般的人为“君子”；virtue和talent都一般，但virtue分数高于<em>等于</em>talent分数的人为“愚人”；virtue和talent都一般，而且virtue分数低于talent分数的人为“小人”。</p>
+<p>题目描述：有个人制定了规则，给定了天赋美德的评分界限，大于<em>等于</em>H的为优秀，小于H的为一般。他将人分为了四类，称天赋(talent)和美德(virtue)都优秀的人“圣人”；virtue优秀但talent一般的人为“君子”；virtue和talent都一般，但virtue分数高于<em>等于</em>talent分数的人为“愚人”；virtue和talent都一般，而且virtue分数低于talent分数的人为“小人”。<br>
+</br></p>
 <p>输入：第一行三个输入数据，N(&lt;=10<sup>5</sup>)需要排序的总人数，L分等级时的最低分数，H分等级时的优秀界限。接下来的n行，每行输入3个数，分别为ID_Number、Virtue_Grade、Talent_Grade。</p>
 <p>输出：第一行输出一个参与排序的总人数，接着依照指定的排序规则，依序输出“圣人”、“君子”、“愚人”、“小人”。排序规则：先按照virtue+talent的总得分递减排序；当总分相同，则按照virtue得分递减排序；当总分相同、virtue得分相同，则按照ID递增排序。</p>
+</br>
 <p>解题思路：先过滤不符合排序的人，就是talent或virtue分数小于最低分数界限L的人。将四类人分为A、B、C、D四组；组分好后，进行排序，最后输出。</p>
 <p>A--talent &gt;= H, virtue &gt;= H；<br>
 B--talent &lt;H , virtue &gt;= H；<br>

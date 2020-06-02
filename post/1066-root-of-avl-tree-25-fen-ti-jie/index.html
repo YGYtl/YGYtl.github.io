@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591066555058">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591066705511">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591066555058" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591066705511" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -129,8 +129,10 @@
 2、树的每个左子树和右子树都是AVL树<br>
 3、每一个节点都有一个平衡因子（balance factor），任一节点的平衡因子是-1、0、1（每一个节点的平衡因子 = 右子树高度 - 左子树高度）</p>
 <p>现在就是要构建一棵AVL树。</p>
+</br>
 <p>输入：第一行n为节点数；第二行n个数，为要插入的元素。</p>
 <p>输出：将构建的AVL数的根节点输出。</p>
+</br>
 <p>解题思路：构建一棵树，用结构体记录每个节点的信息，包括节点的值、左右子树的指针；一开始很难理解怎么转，仔细分析下，也就四种旋转（左旋转，右旋转，左右旋转、右左旋转），有点蒙？画个图就清晰了。灵魂画手上线：</p>
 <p>1、右旋转：插入的是数据C，C&lt;B&lt;A</p>
 <figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1590988367275.jpg" alt="img" loading="lazy"></figure>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-02T02:55:58.949Z</updated>
+    <updated>2020-06-02T02:58:42.030Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -100,8 +100,10 @@ int main()
 </code></pre>
 <hr>
 <p>题目描述：求给定的字符串中，出现次数最多的单词，这些单词由数字、大小写字母组成。</p>
+</br>
 <p>输入：一串字符串</p>
-<p>输出：出现最多的单词及出现次数</p>
+<p>输出：出现最多的单词及出现次数<br>
+</br></p>
 <p>解题思路：getline函数读取所有字符，要在读入所有字符后加一个字符'.'，当读入的最后一个字符是数字或者大小写字母时，比较容易将最后一个单词切分出来。接着，根据特殊字符来切分单词，并用map&lt;string,int&gt;来记录每个单词出现的次数。在记录的同时，我们也可以把答案顺便找出来。用ans和count两个量简单比较就行了。</p>
 <p>注意：最后一个测试点就是卡在最后一个单词有没有正确切分并计数。</p>
 <hr>
@@ -224,8 +226,10 @@ int main()
 2、树的每个左子树和右子树都是AVL树<br>
 3、每一个节点都有一个平衡因子（balance factor），任一节点的平衡因子是-1、0、1（每一个节点的平衡因子 = 右子树高度 - 左子树高度）</p>
 <p>现在就是要构建一棵AVL树。</p>
+</br>
 <p>输入：第一行n为节点数；第二行n个数，为要插入的元素。</p>
 <p>输出：将构建的AVL数的根节点输出。</p>
+</br>
 <p>解题思路：构建一棵树，用结构体记录每个节点的信息，包括节点的值、左右子树的指针；一开始很难理解怎么转，仔细分析下，也就四种旋转（左旋转，右旋转，左右旋转、右左旋转），有点蒙？画个图就清晰了。灵魂画手上线：</p>
 <p>1、右旋转：插入的是数据C，C&lt;B&lt;A</p>
 <figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1590988367275.jpg" alt="img" loading="lazy"></figure>
@@ -644,9 +648,11 @@ cp -r dir1/. dir2 //将dir1下的文件复制到dir2
 10000001 64 90
 </code></pre>
 <hr>
-<p>题目描述：有个人制定了规则，给定了天赋美德的评分界限，大于<em>等于</em>H的为优秀，小于H的为一般。他将人分为了四类，称天赋(talent)和美德(virtue)都优秀的人“圣人”；virtue优秀但talent一般的人为“君子”；virtue和talent都一般，但virtue分数高于<em>等于</em>talent分数的人为“愚人”；virtue和talent都一般，而且virtue分数低于talent分数的人为“小人”。</p>
+<p>题目描述：有个人制定了规则，给定了天赋美德的评分界限，大于<em>等于</em>H的为优秀，小于H的为一般。他将人分为了四类，称天赋(talent)和美德(virtue)都优秀的人“圣人”；virtue优秀但talent一般的人为“君子”；virtue和talent都一般，但virtue分数高于<em>等于</em>talent分数的人为“愚人”；virtue和talent都一般，而且virtue分数低于talent分数的人为“小人”。<br>
+</br></p>
 <p>输入：第一行三个输入数据，N(&lt;=10<sup>5</sup>)需要排序的总人数，L分等级时的最低分数，H分等级时的优秀界限。接下来的n行，每行输入3个数，分别为ID_Number、Virtue_Grade、Talent_Grade。</p>
 <p>输出：第一行输出一个参与排序的总人数，接着依照指定的排序规则，依序输出“圣人”、“君子”、“愚人”、“小人”。排序规则：先按照virtue+talent的总得分递减排序；当总分相同，则按照virtue得分递减排序；当总分相同、virtue得分相同，则按照ID递增排序。</p>
+</br>
 <p>解题思路：先过滤不符合排序的人，就是talent或virtue分数小于最低分数界限L的人。将四类人分为A、B、C、D四组；组分好后，进行排序，最后输出。</p>
 <p>A--talent &gt;= H, virtue &gt;= H；<br>
 B--talent &lt;H , virtue &gt;= H；<br>
