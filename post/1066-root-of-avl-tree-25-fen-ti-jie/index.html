@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591114762137">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591114963208">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591114762137" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591114963208" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -102,8 +102,8 @@
         <div class="post-content yue">
           <p>1066 Root of AVL Tree (25分)</p>
 <p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.</p>
-<p><img src="https://images.ptausercontent.com/31" alt="img" loading="lazy">  <img src="https://images.ptausercontent.com/32" alt="img" loading="lazy"></p>
-<p><img src="https://images.ptausercontent.com/33" alt="img" loading="lazy"> <img src="https://images.ptausercontent.com/34" alt="img" loading="lazy"></p>
+<p><img src="https://images.ptausercontent.com/31" alt="img" width="200" height="300" loading="lazy">  <img src="https://images.ptausercontent.com/32" alt="img" width="200" height="300" loading="lazy"></p>
+<p><img src="https://images.ptausercontent.com/33" alt="img" width="200" height="300" loading="lazy"> <img src="https://images.ptausercontent.com/34" alt="img" width="200" height="300" loading="lazy"></p>
 <p>Now given a sequence of insertions, you are supposed to tell the root of the resulting AVL tree.</p>
 <h3 id="input-specification">Input Specification:</h3>
 <p>Each input file contains one test case. For each case, the first line contains a positive integer <em>N</em> (≤20) which is the total number of keys to be inserted. Then <em>N</em> distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
@@ -135,13 +135,13 @@
 </br>
 <p>解题思路：构建一棵树，用结构体记录每个节点的信息，包括节点的值、左右子树的指针；一开始很难理解怎么转，仔细分析下，也就四种旋转（左旋转，右旋转，左右旋转、右左旋转），有点蒙？画个图就清晰了。灵魂画手上线：</p>
 <p>1、右旋转：插入的是数据C，C&lt;B&lt;A</p>
-<figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1590988367275.jpg" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1590988367275.jpg" alt="img" width="600" height="1100" loading="lazy"></figure>
 <p>2、左右旋转：插入的是数据C，B&lt;C&lt;A</p>
-<figure data-type="image" tabindex="2"><img src="https://ygytl.github.io//post-images/1590988395061.jpg" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://ygytl.github.io//post-images/1590988395061.jpg" alt="img" width="600" height="1100" loading="lazy"></figure>
 <p>3、左旋转：插入数据是C，C&gt;B&gt;A</p>
-<p><img src="https://ygytl.github.io//post-images/1590988401828.jpg" alt="img" loading="lazy"><br>
+<p><img src="https://ygytl.github.io//post-images/1590988401828.jpg" alt="img" width="600" height="1100" loading="lazy"><br>
 4、右左旋转：插入数据是C，B&gt;C&gt;A</p>
-<figure data-type="image" tabindex="3"><img src="https://ygytl.github.io//post-images/1590988409815.jpg" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://ygytl.github.io//post-images/1590988409815.jpg" alt="img" width="600" height="1100" loading="lazy"></figure>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
