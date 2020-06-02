@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-02T16:15:47.715Z</updated>
+    <updated>2020-06-02T16:19:40.456Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -48,7 +48,7 @@
 </br>
 <p>解题思路：不需要建树。先将各个结点的权值保存到数组中，接着将数组从小到大排序，以便放入正确的层序遍历数组中。通常将树放入数组中时，都会牺牲0号索引，从索引1开始存储。用递归算法就能获得层序遍历的结果，接下来利用题目给出的例子分析下这个递归算法。</p>
 <p>样例构建出来的树长这样：<br>
-<img src="file://G:/YGYtl.github.io/Gridea/post-images/1591114410643.jpg" width = "300" height = "200" alt="图片名称" align=center /></p>
+<img src="https://ygytl.github.io//post-images/1591114718233.jpg" alt="" width="300" height="400" loading="lazy"></p>
 <p>根据上图，可得到层序遍历数组：</p>
 <table>
 <thead>
