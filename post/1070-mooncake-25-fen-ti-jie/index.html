@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591171121689">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591171378983">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591171121689" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591171378983" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -120,6 +120,7 @@
 <p>输出：商家可赚的最大总利润。</p>
 </br>
 <p>解题思路：每种月饼的参数都存放到结构体中，还要求出每种月饼的单品价格。将结构体数组根据单价进行排序，单品价格高，那商家所得利润也比较高是不。排好序，根据市场需求量进行购买计算。很简单的就能得到商家获得的最高总利润啦。</p>
+<p>注意点：测试点2，月饼的库存量要用浮点数来存啊！！！</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;

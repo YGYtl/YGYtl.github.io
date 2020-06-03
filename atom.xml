@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-03T07:58:47.132Z</updated>
+    <updated>2020-06-03T08:03:02.613Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -38,6 +38,7 @@
 <p>输出：商家可赚的最大总利润。</p>
 </br>
 <p>解题思路：每种月饼的参数都存放到结构体中，还要求出每种月饼的单品价格。将结构体数组根据单价进行排序，单品价格高，那商家所得利润也比较高是不。排好序，根据市场需求量进行购买计算。很简单的就能得到商家获得的最高总利润啦。</p>
+<p>注意点：测试点2，月饼的库存量要用浮点数来存啊！！！</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
