@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-02T16:24:03.398Z</updated>
+    <updated>2020-06-03T05:06:40.733Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,111 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1073 Scientific Notation (20分)题解]]></title>
+        <id>https://ygytl.github.io/post/1073-scientific-notation-20-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1073-scientific-notation-20-fen-ti-jie/">
+        </link>
+        <updated>2020-06-03T04:29:47.000Z</updated>
+        <content type="html"><![CDATA[<p>1073 Scientific Notation (20分)</p>
+<p>Scientific notation is the way that scientists easily handle very large numbers or very small numbers. The notation matches the regular expression [+-][1-9]<code>.</code>[0-9]+E[+-][0-9]+ which means that the integer portion has exactly one digit, there is at least one digit in the fractional portion, and the number and its exponent's signs are always provided even when they are positive.</p>
+<p>Now given a real number <em>A</em> in scientific notation, you are supposed to print <em>A</em> in the conventional notation while keeping all the significant figures.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input contains one test case. For each case, there is one line containing the real number <em>A</em> in scientific notation. The number is no more than 9999 bytes in length and the exponent's absolute value is no more than 9999.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print in one line the input number <em>A</em> in the conventional notation, with all the significant figures kept, including trailing zeros.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">+1.23400E-03
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">0.00123400
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">-1.2E+10
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">-12000000000
+</code></pre>
+<hr>
+<p>题目描述：给定一串表达式，其正则表达式可写为 [+-] [1-9] .[0-9]+E[+-][0-9]+，这里提示一下+ 这个符号，在正则表达式中，表示前一个字符的出现次数为&gt;=1。现在要你将这个表达式以它规定的规则输出。</p>
+<p>输出规则：</p>
+<p>1)表达式的第一个字符判断该数为正数或负数，若为负数，则输出'-'号</p>
+<p>2)字母E后接的是正符号 或 负符号，正号表示将这个数扩大，负号表示将这个数缩小</p>
+</br>
+<p>输入：字符串</p>
+<p>输出：按规则输出</p>
+</br>
+<p>解题思路：</p>
+<p>​    表达式中'.'和'E'是固定给出的，可以根据这两个字符将字符串切分。将数字部分提取出来，稍后进行字符串拼接。例如将小数点前的数字记为s1，小数点到字母E之间的数字记为s2，字母E后面的数字记为s3，且将s3转化为整数k，以便将数字放大或缩小。</p>
+<p>​    可以将放大和缩小分开来求。1、若k=0，就表示不需要将数据放大或缩小，直接将s1和s2进行拼接，注意s1和s2之间还需加上个小数点；2、将数据缩小其实就是考虑怎么在数据前补0的问题，讨论要不要补0，或要补多少。直接用k减去s1的长度就能求出该在0.后追加几个0了；3、将数据放大则考虑在s2后补多少个0，这要分两部分讨论，1)当扩大倍数小于s2字符串长度(数据本身的小数点位数)时，这种情况下不用补0，需要把小数点放到正确的位置，再将字符串进行拼接就行。2)当扩大倍数大于s2字符串长度时，需要补0，补多少个0，直接k减去s2字符串长度即可。</p>
+<p>注意：测试点4，就是讨论当扩大倍数小于s2字符串长度(数据本身的小数点位数)时的情况。</p>
+<p>附加测试点4测试数据：</p>
+<p>输入：-1.123456E+03，输出-1123.456</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int get_num(string s){
+	int ans = 0;
+	for(int i=0; i&lt;s.size(); i++){
+		ans = ans*10 + s[i]-'0';
+	}
+	return ans;
+}
+int main()
+{
+	string s, str;
+	cin &gt;&gt; s;
+	if(s[0]=='-') cout &lt;&lt; '-';
+	
+	str = s.substr(1);
+	string s1=&quot;&quot;, s2=&quot;&quot;, s3=&quot;&quot;;
+	int g1=0, g2=0;
+	g1 = str.find('.');
+	g2 = str.find('E');
+	
+	s1 = str.substr(0,g1);
+	s2 = str.substr(g1+1,g2-g1-1);
+	s3 = str.substr(g2+2);
+	
+	int k = get_num(s3);
+	if(k==0){
+		cout &lt;&lt; s1 + '.' + s2 &lt;&lt; endl;
+		return 0;
+	}
+	
+	string ans = &quot;&quot;;
+	if(str[g2+1]=='-'){//前面追加 
+		ans = &quot;0.&quot;;
+		k-=s1.size();
+		while(k){
+			ans += '0';
+			k--;
+		}
+		ans = ans + s1 + s2; 
+	}
+	else{//后面追加 
+		int l = s2.size();
+		if(k-l&lt;0){
+			ans += s1;
+			ans += s2.substr(0,k);
+			ans += '.';
+			ans += s2.substr(k);
+		}
+		else{
+			k-=s2.size();
+			ans = ans + s1 + s2;
+			while(k){
+				ans += '0';
+				k--;
+			}
+		}
+	}
+	cout &lt;&lt; ans &lt;&lt; endl;
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1064 Complete Binary Search Tree (30分)题解]]></title>
         <id>https://ygytl.github.io/post/1064-complete-binary-search-tree-30-fen-ti-jie/</id>
@@ -900,28 +1005,6 @@ for i in range(1,n+1):
     else:
         print('Case #{}: false'.format(i))
 
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[linux常用命令]]></title>
-        <id>https://ygytl.github.io/post/linux-chang-yong-ming-ling/</id>
-        <link href="https://ygytl.github.io/post/linux-chang-yong-ming-ling/">
-        </link>
-        <updated>2020-05-28T13:18:52.000Z</updated>
-        <content type="html"><![CDATA[<h5 id="复制文件或文件夹">复制文件或文件夹</h5>
-<pre><code>cp dir1/a.doc dir2 //将dir1下的a.doc文件复制到dir2目录下
-cp -r dir1 dir2 //将dir1及dir1下的文件复制到dir2
-cp -r dir1/. dir2 //将dir1下的文件复制到dir2
-</code></pre>
-<h5 id="解压缩">解压缩</h5>
-<pre><code>tar xf flag.tar.gz
-</code></pre>
-<h5 id="centos查看ip">CentOS查看ip</h5>
-<pre><code>ip addr
-</code></pre>
-<h5 id="将flags文件夹里的文件名输出到txt文本">将flags文件夹里的文件名输出到txt文本</h5>
-<pre><code>#ls flags &gt; flags.txt
 </code></pre>
 ]]></content>
     </entry>
