@@ -38,10 +38,10 @@
 <ul>
 <li>
 <ul>
-<li><a href="#input-specification"><strong>Input Specification:</strong></a></li>
-<li><a href="#output-specification"><strong>Output Specification:</strong></a></li>
-<li><a href="#sample-input"><strong>Sample Input:</strong></a></li>
-<li><a href="#sample-output"><strong>Sample Output:</strong></a></li>
+<li><a href="#input-specification">Input Specification:</a></li>
+<li><a href="#output-specification">Output Specification:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
 </ul>
 </li>
 </ul>
@@ -92,77 +92,157 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1045 Favorite Color Stripe (30分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1075 PAT Judge (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-05-25 / 4 min read
+          2020-06-03 / 7 min read
         </div>
         
         <div class="post-content yue">
-          <p>1045 Favorite Color Stripe (30分)</p>
-<p>Eva is trying to make her own color stripe out of a given one. She would like to keep only her favorite colors in her favorite order by cutting off those unwanted pieces and sewing the remaining parts together to form her favorite color stripe.</p>
-<p>It is said that a normal human eye can distinguish about less than 200 different colors, so Eva's favorite colors are limited. However the original</p>
-<!-- more -->
-<!-- more -->
-<p>stripe could be very long, and Eva would like to have the remaining favorite stripe with the maximum length. So she needs your help to find her the best result.</p>
-<p>Note that the solution might not be unique, but you only have to tell her the maximum length. For example, given a stripe of colors {2 2 4 1 5 5 6 3 1 1 5 6}. If Eva's favorite colors are given in her favorite order as {2 3 1 5 6}, then she has 4 possible best solutions {2 2 1 1 1 5 6}, {2 2 1 5 5 5 6}, {2 2 1 5 5 6 6}, and {2 2 3 1 1 5 6}.</p>
-<h3 id="input-specification"><strong>Input Specification:</strong></h3>
-<p>Each input file contains one test case. For each case, the first line contains a positive integer <strong>N</strong> (≤200) which is the total number of colors involved (and hence the colors are numbered from 1 to <strong>N</strong>). Then the next line starts with a positive integer <strong>M</strong> (≤200) followed by <strong>M</strong> Eva's favorite color numbers given in her favorite order. Finally the third line starts with a positive integer <strong>L</strong> (≤10<sup>4</sup>) which is the length of the given stripe, followed by <strong>L</strong> colors on the stripe. All the numbers in a line a separated by a space.</p>
-<h3 id="output-specification"><strong>Output Specification:</strong></h3>
-<p>For each test case, simply print in a line the maximum length of Eva's favorite stripe.</p>
-<h3 id="sample-input"><strong>Sample Input:</strong></h3>
-<pre><code class="language-in">
-6
-
-5 2 3 1 5 6
-
-12 2 2 4 1 5 5 6 3 1 1 5 6
-
+          <p>1075 PAT Judge (25分)</p>
+<p>The ranklist of PAT is generated from the status list, which shows the scores of the submissions. This time you are supposed to generate the ranklist for PAT.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line contains 3 positive integers, <em>N</em> (≤10<sup>4</sup>), the total number of users, <em>K</em> (≤5), the total number of problems, and <em>M</em> (≤10<sup>5</sup>), the total number of submissions. It is then assumed that the user id's are 5-digit numbers from 00001 to <em>N</em>, and the problem id's are from 1 to <em>K</em>. The next line contains <em>K</em> positive integers <code>p[i]</code> (<code>i</code>=1, ..., <em>K</em>), where <code>p[i]</code> corresponds to the full mark of the i-th problem. Then <em>M</em> lines follow, each gives the information of a submission in the following format:</p>
+<pre><code>user_id problem_id partial_score_obtained
 </code></pre>
-<h3 id="sample-output"><strong>Sample Output:</strong></h3>
-<pre><code class="language-out">
-7
-
+<p>where <code>partial_score_obtained</code> is either −1 if the submission cannot even pass the compiler, or is an integer in the range [0, <code>p[problem_id]</code>]. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, you are supposed to output the ranklist in the following format:</p>
+<pre><code>rank user_id total_score s[1] ... s[K]
+</code></pre>
+<p>where <code>rank</code> is calculated according to the <code>total_score</code>, and all the users with the same <code>total_score</code> obtain the same <code>rank</code>; and <code>s[i]</code> is the partial score obtained for the <code>i</code>-th problem. If a user has never submitted a solution for a problem, then &quot;-&quot; must be printed at the corresponding position. If a user has submitted several solutions to solve one problem, then the highest score will be counted.</p>
+<p>The ranklist must be printed in non-decreasing order of the ranks. For those who have the same rank, users must be sorted in nonincreasing order according to the number of perfectly solved problems. And if there is still a tie, then they must be printed in increasing order of their id's. For those who has never submitted any solution that can pass the compiler, or has never submitted any solution, they must NOT be shown on the ranklist. It is guaranteed that at least one user can be shown on the ranklist.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">7 4 20
+20 25 25 30
+00002 2 12
+00007 4 17
+00005 1 19
+00007 2 25
+00005 1 20
+00002 2 2
+00005 1 15
+00001 1 18
+00004 3 25
+00002 2 25
+00005 3 22
+00006 4 -1
+00001 2 18
+00002 1 20
+00004 1 15
+00002 4 18
+00001 3 4
+00001 4 2
+00005 2 -1
+00004 2 0
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">1 00002 63 20 25 - 18
+2 00005 42 20 0 22 -
+2 00007 42 - 25 - 17
+2 00001 42 18 18 4 2
+5 00004 40 15 0 25 -
 </code></pre>
 <hr>
-<p>题目描述：N为颜色求得色号吧(1~N)，给出M个数，表示用户最喜欢的摆放序列，从L个数中自主挑选排序，求出符合用户摆放序列要求的最长序列。</p>
-<p>解题思路：动态规划</p>
-<p>（1）将M个数用编号存放到数组</p>
-<p>（2）从L个数中挑选用户喜欢的颜色序号放入容器</p>
-<p>（3）动态规划的思想。。</p>
+<p>题目描述：PAT的成绩排序，排序规则（总分递增排序；总分相同，完美解答题目数多者优先；前两者都相同时，id递增排序）</p>
+</br>
+<p>输入：第一行三个参数。n为参赛人数，k为总题数，M为参赛者答题情况数。下列m行，每行三个参数，分别为参赛者id，题号，答题所得分数</p>
+<p>输出：输出有分数的参赛者参赛的排名、id、总分、各题得分。</p>
+</br>
+<p>解题思路：emmmm后续再长篇大论解释，现在先写一些注意事项</p>
+<p>注意：</p>
+<p>测试点2：编译未通过者得分为-1，不计入得分，编译通过者，但是得分为0，成绩记为0。有一参赛者1，他所有题目都编译未通过，他得分岁为0，但不将他计入排名。有一参赛者2，他只编译通过了1道题，但这道题成绩为0，而且他的其他题都编译未通过，那他与参赛者1是不同的，他是可以计入排名的。</p>
+<p>测试点4：有些人，某道题已经提交过并且为满分了，他又去提交了一次，那么，他这第二次提交的满分记录，不计入完美答题数中。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-vector&lt;int&gt; v;
-map&lt;int,int&gt; G;
-const int maxn = 100050;
-int dp[maxn];
+int n, k, m;
+const int maxn = 1e5+1;
+int score[maxn];
+struct node{
+	int id;
+	int b[6];//记录每道题的分数 
+	int all_score;
+	int TG;
+	int perfit_count;//记录完美答题个数 
+	node(){
+		TG = all_score = 0;
+		perfit_count = 0;
+		memset(b,-1,sizeof(b));
+	}
+};
+map&lt;int,node&gt; p;
+map&lt;int,int&gt; vis;
+vector&lt;node&gt; v;
+bool cmp(node a, node b){
+	if(a.all_score!=b.all_score) return a.all_score &gt; b.all_score;
+	else if(a.perfit_count!=b.perfit_count) return a.perfit_count &gt; b.perfit_count;
+	else return a.id &lt; b.id;
+}
 int main()
 {
-	int n, m, k;
-	int g;
-	scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
-	for(int i=1; i&lt;=m; i++){
-		scanf(&quot;%d&quot;, &amp;g);
-		G[g] = i;
-	}
-	scanf(&quot;%d&quot;, &amp;k);
-	for(int i=0; i&lt;k; i++){
-		scanf(&quot;%d&quot;, &amp;g);
-		if(G[g]!=0){
-			v.push_back(G[g]);
-		}
-	}
-	int l = v.size(), ans = 0;
-	for(int i=0; i&lt;l; i++){
-		dp[i] = 1;
-		for(int j=0; j&lt;i; j++){
-			if(v[j]&lt;=v[i]&amp;&amp;dp[i]&lt;dp[j]+1){
-				dp[i] = dp[j]+1;
+	int A, B, C;
+	scanf(&quot;%d %d %d&quot;, &amp;n, &amp;k, &amp;m);
+	for(int i=1; i&lt;=k; i++) scanf(&quot;%d&quot;, &amp;score[i]);
+	for(int i=0; i&lt;m; i++){
+		scanf(&quot;%d %d %d&quot;, &amp;A, &amp;B, &amp;C);
+		if(vis[A]==0){//没有记录过，把他添加到map中 
+			node t;
+			if(C==-1) C=0;
+			else t.TG = 1;
+			t.id = A;
+			t.all_score = C;
+			t.b[B] = C;
+			if(C==score[B]){//标记B题已经满分 
+				t.perfit_count++;
 			}
+			vis[A] = 1;
+			p[A] = t;
 		}
-		ans = max(ans,dp[i]);
+		else{//该学生之前已经答过题了 
+			node t;
+			t = p[A];
+			if(C==-1) C=0;
+			else t.TG = 1;
+			if(t.b[B]==-1){//第B道题没有回答过 
+				t.b[B] = C;
+				t.all_score += C;
+				if(C==score[B]){//标记B题已经满分 
+					t.perfit_count++;
+				}
+			}
+			else if(C&gt;t.b[B]){
+				t.all_score -= t.b[B];
+				t.all_score += C;
+				t.b[B] = C;
+				if(C==score[B]){//标记B题已经满分 
+					t.perfit_count++;
+				}
+			}
+			p[A] = t;
+		}
 	}
-	printf(&quot;%d\n&quot;, ans);
+	map&lt;int,node&gt;::iterator it;
+	node t;
+	for(it=p.begin(); it!=p.end(); it++){
+		t = it-&gt;second;
+		if(t.TG) v.push_back(t);
+	}
+	sort(v.begin(),v.end(),cmp);
+	int rank = 1, tscore=0;
+	for(int i=0; i&lt;v.size(); i++){
+		t = v[i];
+		if(i==0) tscore = t.all_score;
+		if(t.all_score!=tscore){
+			rank = i+1;
+			tscore = t.all_score;
+		}
+		printf(&quot;%d %05d %d&quot;, rank, t.id, t.all_score);
+		for(int j=1; j&lt;=k; j++){
+			if(t.b[j]==-1) printf(&quot; -&quot;);
+			else printf(&quot; %d&quot;, t.b[j]);
+		}
+		printf(&quot;\n&quot;);
+	}
 	return 0;
 }
 </code></pre>
@@ -178,21 +258,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1062-talent-and-virtue-25-fen/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1062 Talent and Virtue (25分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1063-set-similarity-25-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1070-mooncake-25-fen-ti-jie/">
                 <h3 class="post-title">
-                  1063 Set Similarity (25分)题解
+                  1070 Mooncake (25分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
