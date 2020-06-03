@@ -16,7 +16,7 @@
 
   </head>
   <body>
-    <div class="main px-4 flex flex-col lg:flex-row">
+    <div id="app" class="main px-4 flex flex-col lg:flex-row">
       <div id="sidebar" class="sidebar-wrapper lg:static lg:w-1/4">
   <div class="lg:sticky top-0">
     <div class="sidebar-content">
@@ -102,54 +102,11 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
-        <h2 class="latest-article text-lg text-gray-700 mb-8">
-          <i class="ri-article-line"></i>
-          最新文章
+        <h2 class="text-lg text-gray-700 mb-8">
+          <i class="ri-bookmark-line"></i> PAT (Advanced Level) Practice
         </h2>
         
   <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/linux-chang-yong-ming-ling/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">linux常用命令</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-28 / 1 min read</div>
-    </div>
-  </section>
-
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${1 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/1062-talent-and-virtue-25-fen/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">1062 Talent and Virtue (25分)题解</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-26 / 7 min read</div>
-    </div>
-  </section>
-
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${2 * 0.2}s` }">
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/1045-favorite-color-stripe-30-fen-ti-jie/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">1045 Favorite Color Stripe (30分)题解</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        <p>1045 Favorite Color Stripe (30分)</p>
-<p>Eva is trying to make her own color stripe out of a given one. She would like to keep only her favorite colors in her favorite order by cutting off those unwanted pieces and sewing the remaining parts together to form her favorite color stripe.</p>
-<p>It is said that a normal human eye can distinguish about less than 200 different colors, so Eva's favorite colors are limited. However the original</p>
-
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-25 / 4 min read</div>
-    </div>
-  </section>
-
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${3 * 0.2}s` }">
     
     <div class="content">
       <a href="https://ygytl.github.io/post/1063-set-similarity-25-fen-ti-jie/">
@@ -162,92 +119,13 @@
     </div>
   </section>
 
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${4 * 0.2}s` }">
-    
-      <a href="https://ygytl.github.io/post/windows-xi-tong-sheng-cheng-ssh-key/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://ygytl.github.io//post-images/windows-xi-tong-sheng-cheng-ssh-key.jpg'">
-        </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/windows-xi-tong-sheng-cheng-ssh-key/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">windows系统生成ssh key</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-24 / 1 min read</div>
-    </div>
-  </section>
-
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${5 * 0.2}s` }">
-    
-      <a href="https://ygytl.github.io/post/flask-vuejs-quan-zhan-kai-fa-di-yi-zhang-chuang-jian-di-yi-ge-flask-restful-api/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://ygytl.github.io//post-images/flask-vuejs-quan-zhan-kai-fa-di-yi-zhang-chuang-jian-di-yi-ge-flask-restful-api.png'">
-        </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/flask-vuejs-quan-zhan-kai-fa-di-yi-zhang-chuang-jian-di-yi-ge-flask-restful-api/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">Flask+Vue.js开发个人博客 第一章：创建github库与配置Flask</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-24 / 6 min read</div>
-    </div>
-  </section>
-
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${6 * 0.2}s` }">
-    
-      <a href="https://ygytl.github.io/post/markdown-chang-yong-kuai-jie-jian/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://ygytl.github.io//post-images/markdown-chang-yong-kuai-jie-jian.jpg'">
-        </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/markdown-chang-yong-kuai-jie-jian/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">Markdown常用快捷键</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-24 / 2 min read</div>
-    </div>
-  </section>
-
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${7 * 0.2}s` }">
-    
-      <a href="https://ygytl.github.io/post/hello-gridea/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://ygytl.github.io//post-images/hello-gridea.png'">
-        </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/hello-gridea/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">Hello Gridea</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-
-      </div>
-      <div class="text-gray-400 text-sm font-light">2018-12-12 / 2 min read</div>
-    </div>
-  </section>
-
-        <div class="read-more">
-          
-        </div>
-        <div class="index-page">
-          <div class="pagination-container animated fadeIn">
+        <div class="pagination-container animated fadeIn">
   
-    <a href="https://ygytl.github.io/" class="page-btn"><i class="ri-arrow-left-line"></i> 上一页</a>
+    <a href="https://ygytl.github.io/tag/ZvpCdL_9C" class="page-btn"><i class="ri-arrow-left-line"></i> 上一页</a>
   
   
 </div>
 
-        </div>
       </div>
     </div>
 

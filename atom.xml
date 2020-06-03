@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-03T05:06:40.733Z</updated>
+    <updated>2020-06-03T05:12:49.216Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -40,6 +40,7 @@
 <p>输出规则：</p>
 <p>1)表达式的第一个字符判断该数为正数或负数，若为负数，则输出'-'号</p>
 <p>2)字母E后接的是正符号 或 负符号，正号表示将这个数扩大，负号表示将这个数缩小</p>
+<p>3)字母E后面接的数字表示扩大或缩小多少，小数点往前移多少位，往后移多少位。</p>
 </br>
 <p>输入：字符串</p>
 <p>输出：按规则输出</p>
