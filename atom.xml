@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-03T05:12:49.216Z</updated>
+    <updated>2020-06-03T06:59:44.409Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,96 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1074 Reversing Linked List (25分)题解]]></title>
+        <id>https://ygytl.github.io/post/1074-reversing-linked-list-25-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1074-reversing-linked-list-25-fen-ti-jie/">
+        </link>
+        <updated>2020-06-03T06:59:10.000Z</updated>
+        <content type="html"><![CDATA[<p>1074 Reversing Linked List (25分)</p>
+<p>Given a constant <em>K</em> and a singly linked list <em>L</em>, you are supposed to reverse the links of every <em>K</em> elements on <em>L</em>. For example, given <em>L</em> being 1→2→3→4→5→6, if <em>K</em>=3, then you must output 3→2→1→6→5→4; if <em>K</em>=4, you must output 4→3→2→1→5→6.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line contains the address of the first node, a positive <em>N</em> (≤105) which is the total number of nodes, and a positive <em>K</em> (≤<em>N</em>) which is the length of the sublist to be reversed. The address of a node is a 5-digit nonnegative integer, and NULL is represented by -1.</p>
+<p>Then <em>N</em> lines follow, each describes a node in the format:</p>
+<pre><code>Address Data Next
+</code></pre>
+<p>where <code>Address</code> is the position of the node, <code>Data</code> is an integer, and <code>Next</code> is the position of the next node.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each case, output the resulting ordered linked list. Each node occupies a line, and is printed in the same format as in the input.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">00100 6 4
+00000 4 99999
+00100 1 12309
+68237 6 -1
+33218 3 00000
+99999 5 68237
+12309 2 33218
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">00000 4 33218
+33218 3 12309
+12309 2 00100
+00100 1 99999
+99999 5 68237
+68237 6 -1
+</code></pre>
+<hr>
+<p>题目描述：有一条链表L，假设链表为1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6，现在要求你将链表分组为每k个数一组，每组的链表反转后串连在一起，最后输出。若k=3，则反转后的链表为3-&gt;2-&gt;1-&gt;6-&gt;5-&gt;4，若k=4，4-&gt;3-&gt;2-&gt;1-&gt;5-&gt;6，可以看到1、2、3、4这四个数可以分为1组，然后将其反序输出了，而5、6不足一组，则按顺序输出。</p>
+</br>
+<p>输入：第一行包括三个数，链表头节点Head，n表示链表节点数，k表示k个算组分为一组。接下来n行，包括每个结点的head结点、num、next结点</p>
+<p>输出：将反转后链表的每个结点按顺序输出。</p>
+</br>
+<p>解题思路：题目输入的结点顺序不是正确，需要通过题目给定的head头节点先将链表串起来。在输入的时候，就可以将每个结点放入结构体数组中，使用每个结点的head作为索引，存放好后，可以通过给定的链表头节点Head，将链表串起来，放入l2结构体容器中。后面只需要将容器分组。为每组个数都小于等于k，然后进行反转，再存放到l3结构体容器中，最后输出。这就大功告成啦。</p>
+<p>使用结构体数组来模拟链表，实现起来比较简单。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+struct node{
+	int head, num, next;
+};
+const int maxn = 100005;
+node l1[maxn];
+vector&lt;node&gt; l2, l3;
+int main()
+{
+	node t;
+	int head, n, k;
+	scanf(&quot;%d %d %d&quot;, &amp;head, &amp;n, &amp;k);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d %d %d&quot;, &amp;t.head, &amp;t.num, &amp;t.next);
+		l1[t.head] = t;
+	}
+	while(head!=-1){
+		t = l1[head];
+		l2.push_back(t);
+		head = t.next;
+	}
+	for(int i=0, j; i&lt;l2.size(); i+=k){
+		if(i+k&lt;=l2.size()){
+			j = i+k-1;
+			while(j&gt;=i){
+				l3.push_back(l2[j]);
+				j--;
+			}
+		}
+		else{
+			j = i;
+			while(j&lt;l2.size()){
+				l3.push_back(l2[j]);
+				j++;
+			}
+			break;
+		}
+	}
+	for(int i=0; i&lt;l3.size()-1; i++){
+		printf(&quot;%05d %d %05d\n&quot;, l3[i].head, l3[i].num, l3[i+1].head);
+	}
+	printf(&quot;%05d %d -1\n&quot;, l3[l3.size()-1].head, l3[l3.size()-1].num);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1073 Scientific Notation (20分)题解]]></title>
         <id>https://ygytl.github.io/post/1073-scientific-notation-20-fen-ti-jie/</id>
@@ -920,92 +1010,6 @@ int main()
 	printf(&quot;%d\n&quot;, ans);
 	return 0;
 }
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1065 A+B and C (64bit) (20分)题解]]></title>
-        <id>https://ygytl.github.io/post/1065-ab-and-c-64bit-20-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1065-ab-and-c-64bit-20-fen-ti-jie/">
-        </link>
-        <updated>2020-05-29T02:42:07.000Z</updated>
-        <content type="html"><![CDATA[<p>1065 A+B and C (64bit) (20分)</p>
-<p>Given three integers <em>A</em>, <em>B</em> and <em>C</em> in [−2<sup>63</sup>,2<sup>63</sup>], you are supposed to tell whether <em>A</em>+<em>B</em>&gt;<em>C</em>.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>The first line of the input gives the positive number of test cases, <em>T</em> (≤10). Then <em>T</em> test cases follow, each consists of a single line containing three integers <em>A</em>, <em>B</em> and <em>C</em>, separated by single spaces.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, output in one line <code>Case #X: true</code> if <em>A</em>+<em>B</em>&gt;<em>C</em>, or <code>Case #X: false</code> otherwise, where <em>X</em> is the case number (starting from 1).</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">3
-1 2 3
-2 3 4
-9223372036854775807 -9223372036854775808 0
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">Case #1: false
-Case #2: true
-Case #3: false
-</code></pre>
-<hr>
-<p>题目描述：A+B&gt;C，真返回true，假返回false</p>
-<p>解题思路：一看就是大数据处理，long double类型杠，或者对数据处理一下</p>
-<p>注：a&gt;&gt;1 与 a/2有区别，(a&amp;1) 与 a%2有区别，a+b==c 与 (g=a+b),g==c有区别</p>
-<hr>
-<p>方法一：</p>
-<pre><code class="language-C++">#include&lt;bits/stdc++.h&gt;
-using namespace std ;
-int main()
-{
-    int n;
-    scanf(&quot;%d&quot;, &amp;n);
-    for( int i=1; i&lt;=n; i++){
-        long double a, b, c;
-        scanf(&quot;%Lf %Lf %Lf&quot;, &amp;a, &amp;b, &amp;c);
-        printf(&quot;Case #%d: &quot;, i);
-        if(a+b&gt;c) printf(&quot;yes\n&quot;);
-        else printf(&quot;false\n&quot;);
-    }
-    return 0 ;
-}
-</code></pre>
-<p>方法二：</p>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int main()
-{
-	long long a, b, c;
-	int n;
-	scanf(&quot;%d&quot;, &amp;n);
-	for(int i=1; i&lt;=n; i++){
-		scanf(&quot;%lld %lld %lld&quot;, &amp;a, &amp;b, &amp;c);
-		long long ta, tb, tc;
-		ta = a&gt;&gt;1;
-		tb = b&gt;&gt;1;
-		tc = c&gt;&gt;1;
-		printf(&quot;Case #%d: &quot;, i);
-		if(ta+tb&gt;tc){
-			printf(&quot;true\n&quot;);
-		}
-		else if(ta+tb==tc&amp;&amp;((a&amp;1)+(b&amp;1)&gt;(c&amp;1))){
-			printf(&quot;true\n&quot;);
-		}
-		else printf(&quot;false\n&quot;);
-	}
-	return 0;
-}
-</code></pre>
-<p>方法三：</p>
-<pre><code class="language-python">n = int(input())
-for i in range(1,n+1):
-    g = input().split()
-    a = int(g[0])
-    b = int(g[1])
-    c = int(g[2])
-    if a+b &gt; c:
-        print('Case #{}: true'.format(i))
-    else:
-        print('Case #{}: false'.format(i))
-
 </code></pre>
 ]]></content>
     </entry>

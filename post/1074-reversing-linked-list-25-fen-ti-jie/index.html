@@ -92,158 +92,91 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1064 Complete Binary Search Tree (30分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1074 Reversing Linked List (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-03 / 6 min read
+          2020-06-03 / 5 min read
         </div>
         
         <div class="post-content yue">
-          <p>1064 Complete Binary Search Tree (30分)</p>
-<p>A Binary Search Tree (BST) is recursively defined as a binary tree which has the following properties:</p>
-<ul>
-<li>The left subtree of a node contains only nodes with keys less than the node's key.</li>
-<li>The right subtree of a node contains only nodes with keys greater than or equal to the node's key.</li>
-<li>Both the left and right subtrees must also be binary search trees.</li>
-</ul>
-<p>A Complete Binary Tree (CBT) is a tree that is completely filled, with the possible exception of the bottom level, which is filled from left to right.</p>
-<p>Now given a sequence of distinct non-negative integer keys, a unique BST can be constructed if it is required that the tree must also be a CBT. You are supposed to output the level order traversal sequence of this BST.</p>
+          <p>1074 Reversing Linked List (25分)</p>
+<p>Given a constant <em>K</em> and a singly linked list <em>L</em>, you are supposed to reverse the links of every <em>K</em> elements on <em>L</em>. For example, given <em>L</em> being 1→2→3→4→5→6, if <em>K</em>=3, then you must output 3→2→1→6→5→4; if <em>K</em>=4, you must output 4→3→2→1→5→6.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains a positive integer <em>N</em> (≤1000). Then <em>N</em> distinct non-negative integer keys are given in the next line. All the numbers in a line are separated by a space and are no greater than 2000.</p>
+<p>Each input file contains one test case. For each case, the first line contains the address of the first node, a positive <em>N</em> (≤105) which is the total number of nodes, and a positive <em>K</em> (≤<em>N</em>) which is the length of the sublist to be reversed. The address of a node is a 5-digit nonnegative integer, and NULL is represented by -1.</p>
+<p>Then <em>N</em> lines follow, each describes a node in the format:</p>
+<pre><code>Address Data Next
+</code></pre>
+<p>where <code>Address</code> is the position of the node, <code>Data</code> is an integer, and <code>Next</code> is the position of the next node.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the level order traversal sequence of the corresponding complete binary search tree. All the numbers in a line must be separated by a space, and there must be no extra space at the end of the line.</p>
+<p>For each case, output the resulting ordered linked list. Each node occupies a line, and is printed in the same format as in the input.</p>
 <h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">10
-1 2 3 4 5 6 7 8 9 0
+<pre><code class="language-in">00100 6 4
+00000 4 99999
+00100 1 12309
+68237 6 -1
+33218 3 00000
+99999 5 68237
+12309 2 33218
 </code></pre>
 <h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">6 3 8 1 5 7 9 0 2 4
+<pre><code class="language-out">00000 4 33218
+33218 3 12309
+12309 2 00100
+00100 1 99999
+99999 5 68237
+68237 6 -1
 </code></pre>
 <hr>
-<p>题目描述：给一棵完全二叉搜索树（满二叉搜索树），求输出它的层序遍历。</p>
-<p>二叉搜索树的性质：</p>
-<p>1、左子结点权值小于其父结点的权值</p>
-<p>2、右子结点权值大于其父结点的权值</p>
-<p>3、每个左右子结点都是二叉搜索树</p>
+<p>题目描述：有一条链表L，假设链表为1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6，现在要求你将链表分组为每k个数一组，每组的链表反转后串连在一起，最后输出。若k=3，则反转后的链表为3-&gt;2-&gt;1-&gt;6-&gt;5-&gt;4，若k=4，4-&gt;3-&gt;2-&gt;1-&gt;5-&gt;6，可以看到1、2、3、4这四个数可以分为1组，然后将其反序输出了，而5、6不足一组，则按顺序输出。</p>
 </br>
-<p>输入：第一行n表示结点个数，第二行表示结点的权值。</p>
-<p>输出：输出其层序遍历的结果</p>
+<p>输入：第一行包括三个数，链表头节点Head，n表示链表节点数，k表示k个算组分为一组。接下来n行，包括每个结点的head结点、num、next结点</p>
+<p>输出：将反转后链表的每个结点按顺序输出。</p>
 </br>
-<p>解题思路：不需要建树。先将各个结点的权值保存到数组中，接着将数组从小到大排序，以便放入正确的层序遍历数组中。通常将树放入数组中时，都会牺牲0号索引，从索引1开始存储。用递归算法就能获得层序遍历的结果，接下来利用题目给出的例子分析下这个递归算法。</p>
-<p>样例构建出来的树长这样：<br>
-<img src="https://ygytl.github.io//post-images/1591114718233.jpg" alt="" width="300" height="400" loading="lazy"></p>
-<p>根据上图，可得到层序遍历数组：</p>
-<table>
-<thead>
-<tr>
-<th>index</th>
-<th style="text-align:center">1</th>
-<th style="text-align:center">2</th>
-<th style="text-align:center">3</th>
-<th style="text-align:center">4</th>
-<th style="text-align:center">5</th>
-<th style="text-align:center">6</th>
-<th style="text-align:center">7</th>
-<th style="text-align:center">8</th>
-<th style="text-align:center">9</th>
-<th style="text-align:center">10</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>num</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">9</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">4</td>
-</tr>
-</tbody>
-</table>
-<p>现在模拟递归算法的过程：</p>
-<p>n = 10</p>
-<ol>
-<li>
-<p>root = 1，root&lt;=n为true，进入if语句中---后续还未完成</p>
-</li>
-<li>
-<p>执行get_level(root*2)，即get_level(1*2)，root=2，root&lt;=n为true，进入if语句中---后续还未完成</p>
-</li>
-<li>
-<p>执行get_level(root*2)，即get_level(2*2)，root=4，root&lt;=n为true，进入if语句中---后续还未完成</p>
-</li>
-<li>
-<p>执行get_level(root*2)，即get_level(4*2)，root=8，root&lt;=n为true，进入if语句中---后续还未完成</p>
-</li>
-<li>
-<p>执行get_level(roo*2)，即get_level(8*2)，root=16，root&lt;=n为false！<em>步骤 5)执行完毕</em>。返回上一条语句，即步骤 4)，执行未完成的部分。</p>
-</li>
-</ol>
-<p>这时，步骤5) 返回到 步骤 4) 的后续执行步骤，root=8且c=0，level[root]=v[c++]即level[8]=v[0]，且c=1。</p>
-<ol start="6">
-<li>
-<p>接着往下执行，root = 8， get_level(root*2+1)，即get_level(8*2+1)---步骤6)只是个过渡，已完成。</p>
-</li>
-<li>
-<p>get_level(17)，root = 17，root&lt;=n为false！<em>步骤7) 执行完毕</em>。至此，<em>步骤4才真正执行完毕</em>。返回上一条语句，即步骤 3)，执行未完成的部分。</p>
-</li>
-</ol>
-<p>这时，步骤7) 返回到 步骤3) 的后续执行步骤，root=4且c=1，level[root]=v[c++]即level[4]=v[1]，且c=2。</p>
-<ol start="8">
-<li>
-<p>接着往下执行，root = 4，get_level(root*2+1)，即get_level(4*2+1)---步骤8)只是个过渡，已完成。</p>
-</li>
-<li>
-<p>get_level(9)，root = 9，root&lt;=n为true，进入if语句中---后续还未完成</p>
-</li>
-<li>
-<p>执行get_level(root*2)，即get_level(9*2)，root=18，root&lt;=n为false！<em>步骤10) 执行完毕</em>。返回到上一条语句，即步骤9)，执行未完成部分</p>
-</li>
-</ol>
-<p>这时，步骤10) 返回到 步骤 9)的后续执行步骤，root=9且c=2，level[root]=v[c++]即level[9]=v[2]，且c=3。</p>
-<ol start="11">
-<li>
-<p>接着往下执行，root = 9，get_level(root*2+1)，即get_level(9*2+1)---步骤11)只是个过渡，已完成。</p>
-</li>
-<li>
-<p>get_level(19)，root = 19，root&lt;=n为false！至此，<em>步骤 9)执行完毕</em>，<em>步骤3)也执行完毕</em>。---步骤12)只是个过渡，已完成。</p>
-</li>
-<li>
-<p>步骤12) 执行完比后，会返回上一个为执行完成的步骤，即步骤2)，往后以此类推。。。</p>
-</li>
-</ol>
-</br>
-<p>上述过程写的看似复杂，但是自己动手把数据带入进去，模拟一下就也就那么回事，不难不难。</p>
+<p>解题思路：题目输入的结点顺序不是正确，需要通过题目给定的head头节点先将链表串起来。在输入的时候，就可以将每个结点放入结构体数组中，使用每个结点的head作为索引，存放好后，可以通过给定的链表头节点Head，将链表串起来，放入l2结构体容器中。后面只需要将容器分组。为每组个数都小于等于k，然后进行反转，再存放到l3结构体容器中，最后输出。这就大功告成啦。</p>
+<p>使用结构体数组来模拟链表，实现起来比较简单。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-int n, c=0;
-vector&lt;int&gt; level, v;
-void get_level(int root){
-	if(root&lt;=n){
-		get_level(root*2);
-		level[root] = v[c++];
-		get_level(root*2+1);
-	}
-}
+struct node{
+	int head, num, next;
+};
+const int maxn = 100005;
+node l1[maxn];
+vector&lt;node&gt; l2, l3;
 int main()
 {
-	scanf(&quot;%d&quot;, &amp;n);
-	v.resize(n);
-	level.resize(n+1);
+	node t;
+	int head, n, k;
+	scanf(&quot;%d %d %d&quot;, &amp;head, &amp;n, &amp;k);
 	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;v[i]);
+		scanf(&quot;%d %d %d&quot;, &amp;t.head, &amp;t.num, &amp;t.next);
+		l1[t.head] = t;
 	}
-	sort(v.begin() ,v.end());
-	get_level(1);
-	for(int i=1; i&lt;=n; i++){
-		if(i!=1) printf(&quot; &quot;);
-		printf(&quot;%d&quot;, level[i]);
+	while(head!=-1){
+		t = l1[head];
+		l2.push_back(t);
+		head = t.next;
 	}
+	for(int i=0, j; i&lt;l2.size(); i+=k){
+		if(i+k&lt;=l2.size()){
+			j = i+k-1;
+			while(j&gt;=i){
+				l3.push_back(l2[j]);
+				j--;
+			}
+		}
+		else{
+			j = i;
+			while(j&lt;l2.size()){
+				l3.push_back(l2[j]);
+				j++;
+			}
+			break;
+		}
+	}
+	for(int i=0; i&lt;l3.size()-1; i++){
+		printf(&quot;%05d %d %05d\n&quot;, l3[i].head, l3[i].num, l3[i+1].head);
+	}
+	printf(&quot;%05d %d -1\n&quot;, l3[l3.size()-1].head, l3[l3.size()-1].num);
 	return 0;
 }
 </code></pre>
@@ -259,21 +192,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1073-scientific-notation-20-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1073 Scientific Notation (20分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1053-path-of-equal-weight-30-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1073-scientific-notation-20-fen-ti-jie/">
                 <h3 class="post-title">
-                  1053 Path of Equal Weight (30分)题解
+                  1073 Scientific Notation (20分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
