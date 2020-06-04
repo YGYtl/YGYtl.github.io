@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-04T08:13:37.277Z</updated>
+    <updated>2020-06-04T08:44:22.277Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -45,7 +45,8 @@
 <p>因为题目要求递增输出，需要先给wet排个序。</p>
 </br>
 <p>解题思路：01背包问题。这道题中可以假设weight=value，dp可以用一维数组来维护。</p>
-<p>01背包(思想)：dp[ i ][ j ] 表示 在面对第 i 件物品，且背包容量为 j 时所能获得的最大价值</p>
+<p>01背包(思想)：有n种物品，每种物品只有一件，给出物品重量weight和价值value。</p>
+<p>dp[ i ][ j ] 表示 在面对第 i 件物品，且背包容量为 j 时所能获得的最大价值</p>
 <ol>
 <li>
 <p>j &lt; weight[ i ]，背包容纳不了第 i 件物品，dp[ i ][ j ] = dp[ i-1 ][ j ]</p>
@@ -54,6 +55,23 @@
 <p>j &gt;= weight[ i ]，背包可容纳第 i 件物品，可选放或不放，如果放入则dp[ i ][ j ] = dp[ i-1 ][ j - weight[ i ] ] + value[ i ]，如果不放入则与1)相同</p>
 </li>
 </ol>
+<p>转移方程：dp[ i ][ j ]=max{ dp [ i-1 ][ j ],dp[ i-1 ][ j-v[ i ]]+w[ i ]}</p>
+<pre><code>for i=1~N:
+	for j=N~0:
+		dp[j] = max{dp[j],dp[j-v[i]]+w[i]}
+</code></pre>
+</br>
+<p>补充：</p>
+<p>完全背包：有n种物品，每种物品有无数件，给出物品重量weight和价值value。</p>
+<p>转移方程：dp[ i ][ v ] = max{ f [ i-1 ][ v - k*v[ i ]]+k*w[ i ] |0&lt;=k*v[ i ]&lt;=j}</p>
+<pre><code>for i=1~N:
+	for j=0~N:
+		dp[j] = max{dp[j],dp[j-v[i]]+w[i]}
+</code></pre>
+<p>提示：每种背包都是无限的。当我们把i从1到N循环时，dp[j]表示容量为j在前i种背包时所得的价值，这里我们要添加的不是前一个背包，而是当前背包。所以我们要考虑的是当前状态。</p>
+</br>
+<p>多重背包：有n种物品，每种物品给定了数量count，商品重量weight和价值value。</p>
+<p>f[ i ][ j ] = max{ f[ i-1 ][ j-  k* v[ i ]]+k*w[ i ] |0&lt;=k&lt;=n[ i ]}</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;

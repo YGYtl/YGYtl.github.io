@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591258412180">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591260258673">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591258412180" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591260258673" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -96,7 +96,7 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">1068 Find More Coins (30分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-04 / 5 min read
+          2020-06-04 / 6 min read
         </div>
         
         <div class="post-content yue">
@@ -129,7 +129,8 @@
 <p>因为题目要求递增输出，需要先给wet排个序。</p>
 </br>
 <p>解题思路：01背包问题。这道题中可以假设weight=value，dp可以用一维数组来维护。</p>
-<p>01背包(思想)：dp[ i ][ j ] 表示 在面对第 i 件物品，且背包容量为 j 时所能获得的最大价值</p>
+<p>01背包(思想)：有n种物品，每种物品只有一件，给出物品重量weight和价值value。</p>
+<p>dp[ i ][ j ] 表示 在面对第 i 件物品，且背包容量为 j 时所能获得的最大价值</p>
 <ol>
 <li>
 <p>j &lt; weight[ i ]，背包容纳不了第 i 件物品，dp[ i ][ j ] = dp[ i-1 ][ j ]</p>
@@ -138,6 +139,23 @@
 <p>j &gt;= weight[ i ]，背包可容纳第 i 件物品，可选放或不放，如果放入则dp[ i ][ j ] = dp[ i-1 ][ j - weight[ i ] ] + value[ i ]，如果不放入则与1)相同</p>
 </li>
 </ol>
+<p>转移方程：dp[ i ][ j ]=max{ dp [ i-1 ][ j ],dp[ i-1 ][ j-v[ i ]]+w[ i ]}</p>
+<pre><code>for i=1~N:
+	for j=N~0:
+		dp[j] = max{dp[j],dp[j-v[i]]+w[i]}
+</code></pre>
+</br>
+<p>补充：</p>
+<p>完全背包：有n种物品，每种物品有无数件，给出物品重量weight和价值value。</p>
+<p>转移方程：dp[ i ][ v ] = max{ f [ i-1 ][ v - k*v[ i ]]+k*w[ i ] |0&lt;=k*v[ i ]&lt;=j}</p>
+<pre><code>for i=1~N:
+	for j=0~N:
+		dp[j] = max{dp[j],dp[j-v[i]]+w[i]}
+</code></pre>
+<p>提示：每种背包都是无限的。当我们把i从1到N循环时，dp[j]表示容量为j在前i种背包时所得的价值，这里我们要添加的不是前一个背包，而是当前背包。所以我们要考虑的是当前状态。</p>
+</br>
+<p>多重背包：有n种物品，每种物品给定了数量count，商品重量weight和价值value。</p>
+<p>f[ i ][ j ] = max{ f[ i-1 ][ j-  k* v[ i ]]+k*w[ i ] |0&lt;=k&lt;=n[ i ]}</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
