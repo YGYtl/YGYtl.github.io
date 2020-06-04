@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-03T10:17:21.517Z</updated>
+    <updated>2020-06-04T08:13:37.277Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,97 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1068 Find More Coins (30分)题解]]></title>
+        <id>https://ygytl.github.io/post/1068-find-more-coins-30-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1068-find-more-coins-30-fen-ti-jie/">
+        </link>
+        <updated>2020-06-04T08:13:06.000Z</updated>
+        <content type="html"><![CDATA[<p>1068 Find More Coins (30分)</p>
+<p>Eva loves to collect coins from all over the universe, including some other planets like Mars. One day she visited a universal shopping mall which could accept all kinds of coins as payments. However, there was a special requirement of the payment: for each bill, she must pay the exact amount. Since she has as many as 104 coins with her, she definitely needs your help. You are supposed to tell her, for any given amount of money, whether or not she can find some coins to pay for it.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line contains 2 positive numbers: <code>N</code> (≤104, the total number of coins) and <code>M</code> (≤102, the amount of money Eva has to pay). The second line contains <code>N</code> face values of the coins, which are all positive numbers. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print in one line the face values <em>V</em>1≤<em>V</em>2≤⋯≤<em>V**k</em> such that <em>V</em>1+<em>V</em>2+⋯+<em>V**k</em>=<code>M</code>. All the numbers must be separated by a space, and there must be no extra space at the end of the line. If such a solution is not unique, output the smallest sequence. If there is no solution, output &quot;No Solution&quot; instead.</p>
+<p>Note: sequence {A[1], A[2], ...} is said to be &quot;smaller&quot; than sequence {B[1], B[2], ...} if there exists <em>k</em>≥1 such that A[<em>i</em>]=B[<em>i</em>] for all <em>i</em>&lt;<em>k</em>, and A[<em>k</em>] &lt; B[<em>k</em>].</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">8 9
+5 9 8 7 2 3 4 1
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">1 3 5
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code>4 8
+7 2 4 3
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code>No Solution
+</code></pre>
+<hr>
+<p>题目描述：商店有多种商品，给出多种商品的重量，而你的购物车有规定的称重量，不能超过规定的重量，现在要你求出在购物车刚好能够装满其重量时，能够装的最多件物品数。</p>
+</br>
+<p>输入：第一行n表示商品数，m表示购物车能够称的总重量。第二行为n个物品的重量。</p>
+<p>输出：输出购物车总重量刚好等于m的商品的重量，递增输出。如果没有则输出No Solution。</p>
+<p>因为题目要求递增输出，需要先给wet排个序。</p>
+</br>
+<p>解题思路：01背包问题。这道题中可以假设weight=value，dp可以用一维数组来维护。</p>
+<p>01背包(思想)：dp[ i ][ j ] 表示 在面对第 i 件物品，且背包容量为 j 时所能获得的最大价值</p>
+<ol>
+<li>
+<p>j &lt; weight[ i ]，背包容纳不了第 i 件物品，dp[ i ][ j ] = dp[ i-1 ][ j ]</p>
+</li>
+<li>
+<p>j &gt;= weight[ i ]，背包可容纳第 i 件物品，可选放或不放，如果放入则dp[ i ][ j ] = dp[ i-1 ][ j - weight[ i ] ] + value[ i ]，如果不放入则与1)相同</p>
+</li>
+</ol>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 10086;
+int wet[maxn];
+int dp[maxn];
+int vis[maxn][110];
+int n, m;
+bool cmp(int a, int b){
+	return a &gt; b;
+}
+int main()
+{
+	scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+	memset(dp,0,sizeof(dp));
+	memset(vis,false,sizeof(vis));
+	for(int i=1; i&lt;=n; i++) scanf(&quot;%d&quot;, &amp;wet[i]);
+	sort(wet+1,wet+n+1,cmp);
+	for(int i=1; i&lt;=n; i++){
+		for(int j=m; j&gt;=wet[i]; j--){//确保一定可放入第i件物品 
+			if(dp[j-wet[i]]+wet[i]&gt;=dp[j]){
+				dp[j] = dp[j-wet[i]]+wet[i];
+				vis[i][j] = true;
+			}
+		}
+	}
+	vector&lt;int&gt; ans;
+	if(dp[m]!=m) printf(&quot;No Solution&quot;);
+	else{
+		int x = n, y = m;
+		while(y&gt;0){
+			if(vis[x][y]){
+				ans.push_back(wet[x]);
+				y -= wet[x];
+			}
+			x--;
+		}
+		for(int i=0; i&lt;ans.size(); i++){
+			if(i) printf(&quot; &quot;);
+			printf(&quot;%d&quot;, ans[i]);
+		}
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1075 PAT Judge (25分)题解]]></title>
         <id>https://ygytl.github.io/post/1075-pat-judge-25-fen-ti-jie/</id>
@@ -937,127 +1028,6 @@ int main()
 <p>指当你发起一个 I/O 操作（比如，等待网络图片数据的到来），却不用等它结束，<br>
 你可以继续去做其它的事情，当它结束时，你会得到通知，然后再回来接着处理这个 I/O 后续的操作。<br>
 而 同步 I/O 操作 则会被阻塞在 I/O 操作上直到它完成，这期间 CPU 做了很多事，只是没有运行你的程序。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1066 Root of AVL Tree (25分)题解]]></title>
-        <id>https://ygytl.github.io/post/1066-root-of-avl-tree-25-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1066-root-of-avl-tree-25-fen-ti-jie/">
-        </link>
-        <updated>2020-06-01T05:10:53.000Z</updated>
-        <content type="html"><![CDATA[<p>1066 Root of AVL Tree (25分)</p>
-<p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.</p>
-<p><img src="https://images.ptausercontent.com/31" alt="img" width="200" height="300" loading="lazy">  <img src="https://images.ptausercontent.com/32" alt="img" width="200" height="300" loading="lazy"></p>
-<p><img src="https://images.ptausercontent.com/33" alt="img" width="200" height="300" loading="lazy"> <img src="https://images.ptausercontent.com/34" alt="img" width="200" height="300" loading="lazy"></p>
-<p>Now given a sequence of insertions, you are supposed to tell the root of the resulting AVL tree.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains a positive integer <em>N</em> (≤20) which is the total number of keys to be inserted. Then <em>N</em> distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print the root of the resulting AVL tree in one line.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">5
-88 70 61 96 120
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">70
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code>7
-88 70 61 96 120 90 65
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code>88
-</code></pre>
-<hr>
-<p>题目描述：平衡二叉搜索树(AVL Tree)是能够自我调整到平衡的一棵树；何为平衡二叉搜索树？</p>
-<p>1、左子树与右子树高度之差的绝对值不超过1<br>
-2、树的每个左子树和右子树都是AVL树<br>
-3、每一个节点都有一个平衡因子（balance factor），任一节点的平衡因子是-1、0、1（每一个节点的平衡因子 = 右子树高度 - 左子树高度）</p>
-<p>现在就是要构建一棵AVL树。</p>
-</br>
-<p>输入：第一行n为节点数；第二行n个数，为要插入的元素。</p>
-<p>输出：将构建的AVL数的根节点输出。</p>
-</br>
-<p>解题思路：构建一棵树，用结构体记录每个节点的信息，包括节点的值、左右子树的指针；一开始很难理解怎么转，仔细分析下，也就四种旋转（左旋转，右旋转，左右旋转、右左旋转），有点蒙？画个图就清晰了。灵魂画手上线：</p>
-<p>1、右旋转：插入的是数据C，C&lt;B&lt;A</p>
-<figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1590988367275.jpg" alt="img" width="600" height="1100" loading="lazy"></figure>
-<p>2、左右旋转：插入的是数据C，B&lt;C&lt;A</p>
-<figure data-type="image" tabindex="2"><img src="https://ygytl.github.io//post-images/1590988395061.jpg" alt="img" width="600" height="1100" loading="lazy"></figure>
-<p>3、左旋转：插入数据是C，C&gt;B&gt;A</p>
-<p><img src="https://ygytl.github.io//post-images/1590988401828.jpg" alt="img" width="600" height="1100" loading="lazy"><br>
-4、右左旋转：插入数据是C，B&gt;C&gt;A</p>
-<figure data-type="image" tabindex="3"><img src="https://ygytl.github.io//post-images/1590988409815.jpg" alt="img" width="600" height="1100" loading="lazy"></figure>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-struct node{
-	int val;
-	node *left, *right;
-};
-
-node *routerRight(node *root){
-	node *t = NULL;
-	t = root-&gt;left;
-	root-&gt;left = t-&gt;right;
-	t-&gt;right = root;
-	return t;
-}
-node *routerLeft(node *root){
-	node *t = NULL;
-	t = root-&gt;right;
-	root-&gt;right = t-&gt;left;
-	t-&gt;left = root;
-	return t;
-}
-
-node *routerLeftRight(node *root){
-	root-&gt;left = routerLeft(root-&gt;left);
-	return routerRight(root);
-}
-
-node *routerRightLeft(node *root){
-	root-&gt;right = routerRight(root-&gt;right);
-	return routerLeft(root);
-}
-
-int height(node *root){
-	if(root==NULL) return 0;
-	return max(height(root-&gt;left),height(root-&gt;right))+1;
-}
-node *insert(node *root, int val){
-	if(root==NULL){
-		root = new node();
-		root-&gt;val = val;
-		root-&gt;left = root-&gt;right = NULL;
-	}
-	else if(val &lt; root-&gt;val){
-		root-&gt;left = insert(root-&gt;left,val);
-		if(height(root-&gt;left)-height(root-&gt;right)==2){
-			root = val &lt; root-&gt;left-&gt;val ? routerRight(root):routerLeftRight(root);
-		}
-	}
-	else{
-		root-&gt;right = insert(root-&gt;right,val);
-		if(height(root-&gt;right)-height(root-&gt;left)==2){
-			root = val &gt; root-&gt;right-&gt;val ? routerLeft(root):routerRightLeft(root); 
-		}
-	}
-	return root;
-}
-int n;
-int main()
-{
-	int m;
-	scanf(&quot;%d&quot;, &amp;n);
-	node *root = NULL;
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;m);
-		root = insert(root,m);
-	}
-	printf(&quot;%d&quot;, root-&gt;val);
-	return 0;
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>
