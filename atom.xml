@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-04T08:44:22.277Z</updated>
+    <updated>2020-06-04T08:45:30.922Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -71,7 +71,7 @@
 <p>提示：每种背包都是无限的。当我们把i从1到N循环时，dp[j]表示容量为j在前i种背包时所得的价值，这里我们要添加的不是前一个背包，而是当前背包。所以我们要考虑的是当前状态。</p>
 </br>
 <p>多重背包：有n种物品，每种物品给定了数量count，商品重量weight和价值value。</p>
-<p>f[ i ][ j ] = max{ f[ i-1 ][ j-  k* v[ i ]]+k*w[ i ] |0&lt;=k&lt;=n[ i ]}</p>
+<p>dp[ i ][ j ] = max{ dp[ i-1 ][ j-  k* v[ i ]]+k*w[ i ] |0&lt;=k&lt;=n[ i ]}</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
