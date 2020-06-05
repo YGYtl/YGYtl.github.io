@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-04T08:45:30.922Z</updated>
+    <updated>2020-06-05T14:54:34.059Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,90 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1077 Kuchiguse (20分)题解]]></title>
+        <id>https://ygytl.github.io/post/1077-kuchiguse-20-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1077-kuchiguse-20-fen-ti-jie/">
+        </link>
+        <updated>2020-06-05T14:43:46.000Z</updated>
+        <content type="html"><![CDATA[<p>1077 Kuchiguse (20分)</p>
+<p>The Japanese language is notorious for its sentence ending particles. Personal preference of such particles can be considered as a reflection of the speaker's personality. Such a preference is called &quot;Kuchiguse&quot; and is often exaggerated artistically in Anime and Manga. For example, the artificial sentence ending particle &quot;nyan~&quot; is often used as a stereotype for characters with a cat-like personality:</p>
+<ul>
+<li>Itai nyan~ (It hurts, nyan~)</li>
+<li>Ninjin wa iyada nyan~ (I hate carrots, nyan~)</li>
+</ul>
+<p>Now given a few lines spoken by the same character, can you find her Kuchiguse?</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line is an integer <em>N</em> (2≤<em>N</em>≤100). Following are <em>N</em> file lines of 0~256 (inclusive) characters in length, each representing a character's spoken line. The spoken lines are case sensitive.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print in one line the kuchiguse of the character, i.e., the longest common suffix of all <em>N</em> lines. If there is no such suffix, write <code>nai</code>.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">3
+Itai nyan~
+Ninjin wa iyadanyan~
+uhhh nyan~
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">nyan~
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">3
+Itai!
+Ninjinnwaiyada T_T
+T_T
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">nai
+</code></pre>
+<hr>
+<p>题目描述：找到一个人平时说话最常用的结尾语。</p>
+</br>
+<p>输入：第一行n，接下来n行字符串。</p>
+<p>输出：每行共同的后缀字符串。若没有公共字符串后缀，则输出nai。</p>
+</br>
+<p>解题思路：先读入n，然后保存第一串字符串，与之后的n-1串字符串相比较，找到每行中相同的后缀。怎么找呢？比较两个字符串长度，取字符串长度较小的进行for循环，保证字符数组不会越界，两个字符串同时从末尾开始比较。这样就可以得到他们的公共后缀长度啦，当有一组公共后缀长度为0，用flag标记一下，最后输出结果就行。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int main()
+{
+	int n, l, l1, l2, common;
+	bool flag = true;
+	scanf(&quot;%d&quot;, &amp;n);
+	getchar();
+	string s, tmp;
+	for(int i=0; i&lt;n; i++){
+		getline(cin,tmp);
+		if(i==0){
+			s = tmp;
+			l1 = s.length();
+			common = l1;
+			continue;
+		}
+		l2 = tmp.length();
+		l = min(l1,l2);
+		int count = 0;
+		for(int j=1; j&lt;=l; j++){
+			if(tmp[l2-j]==s[l1-j]){
+				count++;
+			}
+			else break;
+		}
+		if(count==0){
+			flag = false;
+		}
+		common = min(common,count);
+	}
+	if(flag){
+		string ans = s.substr(l1-common);
+		cout &lt;&lt; ans &lt;&lt; endl;
+	}
+	else printf(&quot;nai\n&quot;);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1068 Find More Coins (30分)题解]]></title>
         <id>https://ygytl.github.io/post/1068-find-more-coins-30-fen-ti-jie/</id>
@@ -1001,51 +1085,6 @@ int main()
 	return 0;
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[P2 并发与并行的区别、同步与异步的解析]]></title>
-        <id>https://ygytl.github.io/post/p2-bing-fa-yu-bing-xing-de-qu-bie-tong-bu-yu-yi-bu-de-jie-xi/</id>
-        <link href="https://ygytl.github.io/post/p2-bing-fa-yu-bing-xing-de-qu-bie-tong-bu-yu-yi-bu-de-jie-xi/">
-        </link>
-        <updated>2020-06-01T06:23:42.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="并发与并行的区别">并发与并行的区别</h2>
-<h3 id="并发">并发</h3>
-<p>并发：每个时间段只允许处理一个进程<br>
-多个进程看似在同步运行，但并非正正的在同一时刻同时运行<br>
-例如：一个人一边在煮菜，一边在看书，他不可能在煮菜时同时看书，<br>
-只能先把菜放入锅里煮时，抽空走出厨房，回到房里看书，当菜煮好了，<br>
-又要放下书，回去把菜翻炒翻炒。炒菜和看书看似同时进行，但实际上，<br>
-炒菜和看书，一个时间段只能处理其一。</p>
-<h3 id="并行">并行</h3>
-<p>并行：多个进程在同一时刻同时运行<br>
-例如：类似有多核CPU处理程序，还是炒菜和看书的例子，<br>
-就就好像有两个人在处理，一个人在炒菜，同时，另一个人在看书，<br>
-这两件事是同一时刻同时进行的。</p>
-<p>Python中如何实现并发进程？？？<br>
-利用 多进程、多线程、异步编程即可</p>
-<p>Multiple Processes<br>
-抢占式多任务，操作系统调度，可使用多核CPU</p>
-<p>Multiple Threads<br>
-抢占式多任务，操作系统调度，不能使用多核CPU</p>
-<p>Asynchronous Programming<br>
-协作式多任务，单进程、单线程</p>
-<h2 id="同步与异步">同步与异步</h2>
-<p>先看同步对弈和异步对弈</p>
-<p>前提条件：假设A要与B<sub>1</sub> ~ B<sub>12</sub> 对弈，A思考需要5s，B<sub>1</sub> ~ B<sub>12</sub> 中，每个人要思考55s，对局需要30个回合才能分输赢，下棋时常忽略不计。</p>
-<p>同步对弈 Synchronous<br>
-同步对弈指：A与B<sub>1</sub>对弈完成后，才开始与B<sub>2</sub>对弈，以此类推，所以A走完30个回合的总时间是(5+55)*30*12=21600s</p>
-<p>异步对弈 Asychronous<br>
-异步对弈指：A与B<sub>1</sub>对弈时，A先下花了5s与B<sub>1</sub>下第一回合，B<sub>1</sub>需要花55s的时间思考，A不等待B<sub>1</sub>，直接与B<sub>2</sub>对弈，一直到与B<sub>12</sub>对弈了后，才返回跟B<sub>1</sub>对弈。而这时，A走完每个棋局的第一步需要花费12*5=60s，60s过去B<sub>1</sub>已经走完第一步，A与B<sub>1</sub>进行第二回合的对弈。A走完30个回合的总时间是60*30=1800s</p>
-<p>21600/1800 = 12，异步对弈效率提高了12倍</p>
-<h3 id="异步编程">异步编程：</h3>
-<p>指在 单线程 中 并发 执行多个任务，当一个任务在等待数据时，它会释放 CPU 资源，</p>
-<p>转而执行其它任务，通过程序员自己主动切换任务来最小化空闲时间。<br>
-异步实现：异步函数在等待数据时被暂停执行，当数据到达时，又能够在被暂停的位置处恢复执行。</p>
-<h3 id="异步-io-操作">异步 I/O 操作</h3>
-<p>指当你发起一个 I/O 操作（比如，等待网络图片数据的到来），却不用等它结束，<br>
-你可以继续去做其它的事情，当它结束时，你会得到通知，然后再回来接着处理这个 I/O 后续的操作。<br>
-而 同步 I/O 操作 则会被阻塞在 I/O 操作上直到它完成，这期间 CPU 做了很多事，只是没有运行你的程序。</p>
 ]]></content>
     </entry>
 </feed>

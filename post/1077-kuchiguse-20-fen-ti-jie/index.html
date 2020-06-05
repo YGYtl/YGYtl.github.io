@@ -40,8 +40,10 @@
 <ul>
 <li><a href="#input-specification">Input Specification:</a></li>
 <li><a href="#output-specification">Output Specification:</a></li>
-<li><a href="#sample-input">Sample Input:</a></li>
-<li><a href="#sample-output">Sample Output:</a></li>
+<li><a href="#sample-input-1">Sample Input 1:</a></li>
+<li><a href="#sample-output-1">Sample Output 1:</a></li>
+<li><a href="#sample-input-2">Sample Input 2:</a></li>
+<li><a href="#sample-output-2">Sample Output 2:</a></li>
 </ul>
 </li>
 </ul>
@@ -92,91 +94,85 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1074 Reversing Linked List (25分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1077 Kuchiguse (20分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-03 / 5 min read
+          2020-06-05 / 3 min read
         </div>
         
         <div class="post-content yue">
-          <p>1074 Reversing Linked List (25分)</p>
-<p>Given a constant <em>K</em> and a singly linked list <em>L</em>, you are supposed to reverse the links of every <em>K</em> elements on <em>L</em>. For example, given <em>L</em> being 1→2→3→4→5→6, if <em>K</em>=3, then you must output 3→2→1→6→5→4; if <em>K</em>=4, you must output 4→3→2→1→5→6.</p>
+          <p>1077 Kuchiguse (20分)</p>
+<p>The Japanese language is notorious for its sentence ending particles. Personal preference of such particles can be considered as a reflection of the speaker's personality. Such a preference is called &quot;Kuchiguse&quot; and is often exaggerated artistically in Anime and Manga. For example, the artificial sentence ending particle &quot;nyan~&quot; is often used as a stereotype for characters with a cat-like personality:</p>
+<ul>
+<li>Itai nyan~ (It hurts, nyan~)</li>
+<li>Ninjin wa iyada nyan~ (I hate carrots, nyan~)</li>
+</ul>
+<p>Now given a few lines spoken by the same character, can you find her Kuchiguse?</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains the address of the first node, a positive <em>N</em> (≤105) which is the total number of nodes, and a positive <em>K</em> (≤<em>N</em>) which is the length of the sublist to be reversed. The address of a node is a 5-digit nonnegative integer, and NULL is represented by -1.</p>
-<p>Then <em>N</em> lines follow, each describes a node in the format:</p>
-<pre><code>Address Data Next
-</code></pre>
-<p>where <code>Address</code> is the position of the node, <code>Data</code> is an integer, and <code>Next</code> is the position of the next node.</p>
+<p>Each input file contains one test case. For each case, the first line is an integer <em>N</em> (2≤<em>N</em>≤100). Following are <em>N</em> file lines of 0~256 (inclusive) characters in length, each representing a character's spoken line. The spoken lines are case sensitive.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each case, output the resulting ordered linked list. Each node occupies a line, and is printed in the same format as in the input.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">00100 6 4
-00000 4 99999
-00100 1 12309
-68237 6 -1
-33218 3 00000
-99999 5 68237
-12309 2 33218
+<p>For each test case, print in one line the kuchiguse of the character, i.e., the longest common suffix of all <em>N</em> lines. If there is no such suffix, write <code>nai</code>.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">3
+Itai nyan~
+Ninjin wa iyadanyan~
+uhhh nyan~
 </code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">00000 4 33218
-33218 3 12309
-12309 2 00100
-00100 1 99999
-99999 5 68237
-68237 6 -1
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">nyan~
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">3
+Itai!
+Ninjinnwaiyada T_T
+T_T
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">nai
 </code></pre>
 <hr>
-<p>题目描述：有一条链表L，假设链表为1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6，现在要求你将链表分组为每k个数一组，每组的链表反转后串连在一起，最后输出。若k=3，则反转后的链表为3-&gt;2-&gt;1-&gt;6-&gt;5-&gt;4，若k=4，4-&gt;3-&gt;2-&gt;1-&gt;5-&gt;6，可以看到1、2、3、4这四个数可以分为1组，然后将其反序输出了，而5、6不足一组，则按顺序输出。</p>
+<p>题目描述：找到一个人平时说话最常用的结尾语。</p>
 </br>
-<p>输入：第一行包括三个数，链表头节点Head，n表示链表节点数，k表示k个算组分为一组。接下来n行，包括每个结点的head结点、num、next结点</p>
-<p>输出：将反转后链表的每个结点按顺序输出。</p>
+<p>输入：第一行n，接下来n行字符串。</p>
+<p>输出：每行共同的后缀字符串。若没有公共字符串后缀，则输出nai。</p>
 </br>
-<p>解题思路：题目输入的结点顺序不是正确，需要通过题目给定的head头节点先将链表串起来。在输入的时候，就可以将每个结点放入结构体数组中，使用每个结点的head作为索引，存放好后，可以通过给定的链表头节点Head，将链表串起来，放入l2结构体容器中。后面只需要将容器分组。为每组个数都小于等于k，然后进行反转，再存放到l3结构体容器中，最后输出。这就大功告成啦。</p>
-<p>使用结构体数组来模拟链表，实现起来比较简单。</p>
+<p>解题思路：先读入n，然后保存第一串字符串，与之后的n-1串字符串相比较，找到每行中相同的后缀。怎么找呢？比较两个字符串长度，取字符串长度较小的进行for循环，保证字符数组不会越界，两个字符串同时从末尾开始比较。这样就可以得到他们的公共后缀长度啦，当有一组公共后缀长度为0，用flag标记一下，最后输出结果就行。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-struct node{
-	int head, num, next;
-};
-const int maxn = 100005;
-node l1[maxn];
-vector&lt;node&gt; l2, l3;
 int main()
 {
-	node t;
-	int head, n, k;
-	scanf(&quot;%d %d %d&quot;, &amp;head, &amp;n, &amp;k);
+	int n, l, l1, l2, common;
+	bool flag = true;
+	scanf(&quot;%d&quot;, &amp;n);
+	getchar();
+	string s, tmp;
 	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d %d %d&quot;, &amp;t.head, &amp;t.num, &amp;t.next);
-		l1[t.head] = t;
-	}
-	while(head!=-1){
-		t = l1[head];
-		l2.push_back(t);
-		head = t.next;
-	}
-	for(int i=0, j; i&lt;l2.size(); i+=k){
-		if(i+k&lt;=l2.size()){
-			j = i+k-1;
-			while(j&gt;=i){
-				l3.push_back(l2[j]);
-				j--;
-			}
+		getline(cin,tmp);
+		if(i==0){
+			s = tmp;
+			l1 = s.length();
+			common = l1;
+			continue;
 		}
-		else{
-			j = i;
-			while(j&lt;l2.size()){
-				l3.push_back(l2[j]);
-				j++;
+		l2 = tmp.length();
+		l = min(l1,l2);
+		int count = 0;
+		for(int j=1; j&lt;=l; j++){
+			if(tmp[l2-j]==s[l1-j]){
+				count++;
 			}
-			break;
+			else break;
 		}
+		if(count==0){
+			flag = false;
+		}
+		common = min(common,count);
 	}
-	for(int i=0; i&lt;l3.size()-1; i++){
-		printf(&quot;%05d %d %05d\n&quot;, l3[i].head, l3[i].num, l3[i+1].head);
+	if(flag){
+		string ans = s.substr(l1-common);
+		cout &lt;&lt; ans &lt;&lt; endl;
 	}
-	printf(&quot;%05d %d -1\n&quot;, l3[l3.size()-1].head, l3[l3.size()-1].num);
+	else printf(&quot;nai\n&quot;);
 	return 0;
 }
 </code></pre>
@@ -192,21 +188,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1070-mooncake-25-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1070 Mooncake (25分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1073-scientific-notation-20-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1068-find-more-coins-30-fen-ti-jie/">
                 <h3 class="post-title">
-                  1073 Scientific Notation (20分)题解
+                  1068 Find More Coins (30分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
