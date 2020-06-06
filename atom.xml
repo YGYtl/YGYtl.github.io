@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-06T09:16:32.502Z</updated>
+    <updated>2020-06-06T10:15:16.146Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,103 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1076 Forwards on Weibo (30分)题解]]></title>
+        <id>https://ygytl.github.io/post/1076-forwards-on-weibo-30-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1076-forwards-on-weibo-30-fen-ti-jie/">
+        </link>
+        <updated>2020-06-06T10:01:02.000Z</updated>
+        <content type="html"><![CDATA[<p>1076 Forwards on Weibo (30分)</p>
+<p>Weibo is known as the Chinese version of Twitter. One user on Weibo may have many followers, and may follow many other users as well. Hence a social network is formed with followers relations. When a user makes a post on Weibo, all his/her followers can view and forward his/her post, which can then be forwarded again by their followers. Now given a social network, you are supposed to calculate the maximum potential amount of forwards for any specific user, assuming that only <em>L</em> levels of indirect followers are counted.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line contains 2 positive integers: <em>N</em> (≤1000), the number of users; and <em>L</em> (≤6), the number of levels of indirect followers that are counted. Hence it is assumed that all the users are numbered from 1 to <em>N</em>. Then <em>N</em> lines follow, each in the format:</p>
+<pre><code>M[i] user_list[i]
+</code></pre>
+<p>where <code>M[i]</code> (≤100) is the total number of people that <code>user[i]</code> follows; and <code>user_list[i]</code> is a list of the <code>M[i]</code> users that followed by <code>user[i]</code>. It is guaranteed that no one can follow oneself. All the numbers are separated by a space.</p>
+<p>Then finally a positive <em>K</em> is given, followed by <em>K</em> <code>UserID</code>'s for query.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each <code>UserID</code>, you are supposed to print in one line the maximum potential amount of forwards this user can trigger, assuming that everyone who can view the initial post will forward it once, and that only <em>L</em> levels of indirect followers are counted.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">7 3
+3 2 3 4
+0
+2 5 6
+2 3 1
+2 3 4
+1 4
+1 5
+2 2 6
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">4
+5
+</code></pre>
+<hr>
+<p>题目描述：微博吧啦吧啦。。现在！给你一个社会网图，你需要求出最大潜在的转发数时多少，假设只能传到L层关系。</p>
+</br>
+<p>输入：第一行两个正整数N(&lt;=1000)用户数，L(&lt;=6)转发层。接下来有N行，每行代表第i个用户关注的人(i=1~N)，每行格式为M[i] user_list[i]，user_list时用户的编号。最后一行，第一个数K是带查询个数，接下来就是K个值啦。比如样例中最后一行K=2，带查询的第一个值是2。分析下样例，先把图画出来，当2发出一篇微博时，他最大能被转发的次数是多少？显然是4，他能被(1、4、5、6)转发。</p>
+<p>输出：转发的次数</p>
+</br>
+<p>解题思路：要查询那个点，就从哪个点开始广搜遍历就行了。</p>
+<p>注意：很简单的一道BFS题，不知道为什么会出现在30分这里。难道是因为最后一个测试点卡着了？最后一个测试点容易超时。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, l;
+const int maxn = 1000+5;
+vector&lt;int&gt; G[maxn];
+bool vis[maxn];
+struct node{
+	int index, level;
+	node(){
+		index = level = 0;
+	}
+};
+void query(int start){
+	fill(vis,vis+maxn,false);
+	node t, tt;
+	t.index = start;
+	t.level = 0;
+	queue&lt;node&gt; q;
+	q.push(t);
+	vis[start] = true;
+	int ans = 0;
+	while(!q.empty()){
+		t = q.front(); q.pop();
+		for(int i=0; i&lt;G[t.index].size(); ++i){
+			int u = G[t.index][i];
+			if(!vis[u]&amp;&amp;t.level&lt;l){
+				ans++;
+				vis[u] = true;
+				tt.index = u;
+				tt.level = t.level+1;
+				q.push(tt);
+			}
+		}
+	}
+	printf(&quot;%d\n&quot;, ans);
+}
+int main()
+{
+	int k, g;
+	scanf(&quot;%d %d&quot;, &amp;n, &amp;l);
+	for(int i=1; i&lt;=n; ++i){
+		scanf(&quot;%d&quot;, &amp;k);
+		for(int j=0; j&lt;k; ++j){
+			scanf(&quot;%d&quot;, &amp;g);
+			G[g].push_back(i);
+		}
+	}
+	scanf(&quot;%d&quot;, &amp;k);
+	for(int i=0; i&lt;k; ++i){
+		scanf(&quot;%d&quot;, &amp;g);
+		query(g);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1081 Rational Sum (20分)题解]]></title>
         <id>https://ygytl.github.io/post/1081-rational-sum-20-fen-ti-jie/</id>
@@ -872,163 +969,6 @@ int main()
 		}
 	}
 	cout &lt;&lt; ans &lt;&lt; endl;
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1064 Complete Binary Search Tree (30分)题解]]></title>
-        <id>https://ygytl.github.io/post/1064-complete-binary-search-tree-30-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1064-complete-binary-search-tree-30-fen-ti-jie/">
-        </link>
-        <updated>2020-06-02T16:06:30.000Z</updated>
-        <content type="html"><![CDATA[<p>1064 Complete Binary Search Tree (30分)</p>
-<p>A Binary Search Tree (BST) is recursively defined as a binary tree which has the following properties:</p>
-<ul>
-<li>The left subtree of a node contains only nodes with keys less than the node's key.</li>
-<li>The right subtree of a node contains only nodes with keys greater than or equal to the node's key.</li>
-<li>Both the left and right subtrees must also be binary search trees.</li>
-</ul>
-<p>A Complete Binary Tree (CBT) is a tree that is completely filled, with the possible exception of the bottom level, which is filled from left to right.</p>
-<p>Now given a sequence of distinct non-negative integer keys, a unique BST can be constructed if it is required that the tree must also be a CBT. You are supposed to output the level order traversal sequence of this BST.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains a positive integer <em>N</em> (≤1000). Then <em>N</em> distinct non-negative integer keys are given in the next line. All the numbers in a line are separated by a space and are no greater than 2000.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the level order traversal sequence of the corresponding complete binary search tree. All the numbers in a line must be separated by a space, and there must be no extra space at the end of the line.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">10
-1 2 3 4 5 6 7 8 9 0
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">6 3 8 1 5 7 9 0 2 4
-</code></pre>
-<hr>
-<p>题目描述：给一棵完全二叉搜索树（满二叉搜索树），求输出它的层序遍历。</p>
-<p>二叉搜索树的性质：</p>
-<p>1、左子结点权值小于其父结点的权值</p>
-<p>2、右子结点权值大于其父结点的权值</p>
-<p>3、每个左右子结点都是二叉搜索树</p>
-</br>
-<p>输入：第一行n表示结点个数，第二行表示结点的权值。</p>
-<p>输出：输出其层序遍历的结果</p>
-</br>
-<p>解题思路：不需要建树。先将各个结点的权值保存到数组中，接着将数组从小到大排序，以便放入正确的层序遍历数组中。通常将树放入数组中时，都会牺牲0号索引，从索引1开始存储。用递归算法就能获得层序遍历的结果，接下来利用题目给出的例子分析下这个递归算法。</p>
-<p>样例构建出来的树长这样：<br>
-<img src="https://ygytl.github.io//post-images/1591114718233.jpg" alt="" width="300" height="400" loading="lazy"></p>
-<p>根据上图，可得到层序遍历数组：</p>
-<table>
-<thead>
-<tr>
-<th>index</th>
-<th style="text-align:center">1</th>
-<th style="text-align:center">2</th>
-<th style="text-align:center">3</th>
-<th style="text-align:center">4</th>
-<th style="text-align:center">5</th>
-<th style="text-align:center">6</th>
-<th style="text-align:center">7</th>
-<th style="text-align:center">8</th>
-<th style="text-align:center">9</th>
-<th style="text-align:center">10</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>num</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">9</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">4</td>
-</tr>
-</tbody>
-</table>
-<p>现在模拟递归算法的过程：</p>
-<p>n = 10</p>
-<ol>
-<li>
-<p>root = 1，root&lt;=n为true，进入if语句中---后续还未完成</p>
-</li>
-<li>
-<p>执行get_level(root*2)，即get_level(1*2)，root=2，root&lt;=n为true，进入if语句中---后续还未完成</p>
-</li>
-<li>
-<p>执行get_level(root*2)，即get_level(2*2)，root=4，root&lt;=n为true，进入if语句中---后续还未完成</p>
-</li>
-<li>
-<p>执行get_level(root*2)，即get_level(4*2)，root=8，root&lt;=n为true，进入if语句中---后续还未完成</p>
-</li>
-<li>
-<p>执行get_level(roo*2)，即get_level(8*2)，root=16，root&lt;=n为false！<em>步骤 5)执行完毕</em>。返回上一条语句，即步骤 4)，执行未完成的部分。</p>
-</li>
-</ol>
-<p>这时，步骤5) 返回到 步骤 4) 的后续执行步骤，root=8且c=0，level[root]=v[c++]即level[8]=v[0]，且c=1。</p>
-<ol start="6">
-<li>
-<p>接着往下执行，root = 8， get_level(root*2+1)，即get_level(8*2+1)---步骤6)只是个过渡，已完成。</p>
-</li>
-<li>
-<p>get_level(17)，root = 17，root&lt;=n为false！<em>步骤7) 执行完毕</em>。至此，<em>步骤4才真正执行完毕</em>。返回上一条语句，即步骤 3)，执行未完成的部分。</p>
-</li>
-</ol>
-<p>这时，步骤7) 返回到 步骤3) 的后续执行步骤，root=4且c=1，level[root]=v[c++]即level[4]=v[1]，且c=2。</p>
-<ol start="8">
-<li>
-<p>接着往下执行，root = 4，get_level(root*2+1)，即get_level(4*2+1)---步骤8)只是个过渡，已完成。</p>
-</li>
-<li>
-<p>get_level(9)，root = 9，root&lt;=n为true，进入if语句中---后续还未完成</p>
-</li>
-<li>
-<p>执行get_level(root*2)，即get_level(9*2)，root=18，root&lt;=n为false！<em>步骤10) 执行完毕</em>。返回到上一条语句，即步骤9)，执行未完成部分</p>
-</li>
-</ol>
-<p>这时，步骤10) 返回到 步骤 9)的后续执行步骤，root=9且c=2，level[root]=v[c++]即level[9]=v[2]，且c=3。</p>
-<ol start="11">
-<li>
-<p>接着往下执行，root = 9，get_level(root*2+1)，即get_level(9*2+1)---步骤11)只是个过渡，已完成。</p>
-</li>
-<li>
-<p>get_level(19)，root = 19，root&lt;=n为false！至此，<em>步骤 9)执行完毕</em>，<em>步骤3)也执行完毕</em>。---步骤12)只是个过渡，已完成。</p>
-</li>
-<li>
-<p>步骤12) 执行完比后，会返回上一个为执行完成的步骤，即步骤2)，往后以此类推。。。</p>
-</li>
-</ol>
-</br>
-<p>上述过程写的看似复杂，但是自己动手把数据带入进去，模拟一下就也就那么回事，不难不难。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n, c=0;
-vector&lt;int&gt; level, v;
-void get_level(int root){
-	if(root&lt;=n){
-		get_level(root*2);
-		level[root] = v[c++];
-		get_level(root*2+1);
-	}
-}
-int main()
-{
-	scanf(&quot;%d&quot;, &amp;n);
-	v.resize(n);
-	level.resize(n+1);
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;v[i]);
-	}
-	sort(v.begin() ,v.end());
-	get_level(1);
-	for(int i=1; i&lt;=n; i++){
-		if(i!=1) printf(&quot; &quot;);
-		printf(&quot;%d&quot;, level[i]);
-	}
 	return 0;
 }
 </code></pre>
