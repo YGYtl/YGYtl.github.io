@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-06T09:14:03.924Z</updated>
+    <updated>2020-06-06T09:16:32.502Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -50,7 +50,7 @@
 <p>输出：分数之和。输出格式 1）4/3输出1 2/3；2）4 /4 输出 1；3）2/3输出2/3</p>
 </br>
 <p>解题思路：我习惯将程序分块写，这样程序看起来比较直观清晰；将所有分数加起来，可以先记录第一个分数，分子为a1、分母为b1，接着读第二个分数，第二个分数分子为a2，分母为b2，接着就可以将两个分数进行计算了，然后将计算结果分别再存入a1和b1；后面读入的分数都存在a2和b2中，重复上述过程。得到的结果a1和b1按照题目规定输出格式输出。</p>
-<p>两个分数相加的过程：例如2/5和4/15相加，想求出两个分母的最大公因数为5，两个分母同时除于5，分别得到b1=1，b2=3，将分子a1乘与b2，a2乘与b1，则a1=6，a2=4，此时，分数分别为6/1和4/3，让a1=a1+a2=10，b1 = b1*b2*gcd(b1,b2)=15（分母进行同分的过程），这样就能将两分数相加的结果放入a1和b1了，即2/5 + 4 / 15 = 10 / 15。</p>
+<p>两个分数相加的过程：例如2/5和4/15相加，想求出两个分母的最大公因数为5，两个分母同时除于5，分别得到b1=1，b2=3，将分子a1乘与b2，a2乘与b1，则a1=6，a2=4，此时，分数分别为6/1和4/3，让a1=a1+a2=10，b1 = b1*b2*gcd(b1,b2)=15（分母进行通分的过程），这样就能将两分数相加的结果放入a1和b1了，即2/5 + 4 / 15 = 10 / 15。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
