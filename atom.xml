@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-06T03:48:58.093Z</updated>
+    <updated>2020-06-06T09:12:40.901Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,80 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1081 Rational Sum (20分)题解]]></title>
+        <id>https://ygytl.github.io/post/1081-rational-sum-20-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1081-rational-sum-20-fen-ti-jie/">
+        </link>
+        <updated>2020-06-06T09:12:16.000Z</updated>
+        <content type="html"><![CDATA[<p>1081 Rational Sum (20分)</p>
+<p>Given <em>N</em> rational numbers in the form <code>numerator/denominator</code>, you are supposed to calculate their sum.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. Each case starts with a positive integer <em>N</em> (≤100), followed in the next line <em>N</em> rational numbers <code>a1/b1 a2/b2 ...</code> where all the numerators and denominators are in the range of <strong>long int</strong>. If there is a negative number, then the sign must appear in front of the numerator.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, output the sum in the simplest form <code>integer numerator/denominator</code> where <code>integer</code> is the integer part of the sum, <code>numerator</code> &lt; <code>denominator</code>, and the numerator and the denominator have no common factor. You must output only the fractional part if the integer part is 0.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">5
+2/5 4/15 1/30 -2/60 8/3
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">3 1/3
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">2
+4/3 2/3
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">2
+</code></pre>
+<h3 id="sample-input-3">Sample Input 3:</h3>
+<pre><code class="language-in">3
+1/3 -1/6 1/8
+</code></pre>
+<h3 id="sample-output-3">Sample Output 3:</h3>
+<pre><code class="language-out">7/24
+</code></pre>
+<hr>
+<p>题目描述：分数求和。</p>
+</br>
+<p>输入：第一行n表示分数的个数，第二行n个分数。</p>
+<p>输出：分数之和。输出格式 1）4/3输出1 2/3；2）4 /4 输出 1；3）2/3输出2/3</p>
+</br>
+<p>解题思路：我习惯将程序分块写，这样程序看起来比较直观清晰；将所有分数加起来，可以先记录第一个分数，分子为a1、分母为b1，接着读第二个分数，第二个分数分子为a2，分母为b2，接着就可以将两个分数进行计算了，然后将计算结果分别再存入a1和b1；后面读入的分数都存在a2和b2中，重复上述过程。得到的结果a1和b1按照题目规定输出格式输出。</p>
+<p>两个分数相加的过程：例如2/5和4/15相加，想求出两个分母的最大公因数为5，两个分母同时除于5，分别得到b1=1，b2=3，将分子a1乘与b2，a2乘与b1，则a1=6，a2=4，此时，分数分别为6/1和4/3，让a1=a1+a2=10，b1 = b1*b2*gcd(b1,b2)=15（分母进行同分的过程），这样就能将两分数相加的结果放入a1和b1了，即2/5 + 4 / 15 = 10 / 15。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, a1, b1, a2, b2;
+int gcd(int a, int b){ return a == 0 ? b : gcd(b % a, a); } 
+void sum(){
+	int g = gcd(b1,b2);
+	b1 /= g;
+	b2 /= g;
+	a1*=b2; a2 *= b1;
+	a1 += a2;
+	b1 *= b2*g;
+}
+int main()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	for(int i=0; i&lt;n; i++){
+		if(i==0) scanf(&quot;%d/%d&quot;, &amp;a1, &amp;b1);
+		else{
+			scanf(&quot;%d/%d&quot;, &amp;a2, &amp;b2);
+			sum();
+		}
+	}
+	int g = gcd(a1,b1);
+	a1 /= g; b1 /= g;
+	if(a1%b1==0) printf(&quot;%d\n&quot;, a1/b1);
+	else if(a1&gt;b1) printf(&quot;%d %d/%d\n&quot;, a1/b1, a1%b1, b1);
+	else printf(&quot;%d/%d&quot;, a1%b1, b1);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1079 Total Sales of Supply Chain (25分)题解]]></title>
         <id>https://ygytl.github.io/post/1079-total-sales-of-supply-chain-25-fen-ti-jie/</id>
@@ -955,176 +1029,6 @@ int main()
 		if(i!=1) printf(&quot; &quot;);
 		printf(&quot;%d&quot;, level[i]);
 	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1053 Path of Equal Weight (30分)题解]]></title>
-        <id>https://ygytl.github.io/post/1053-path-of-equal-weight-30-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1053-path-of-equal-weight-30-fen-ti-jie/">
-        </link>
-        <updated>2020-06-02T04:29:04.000Z</updated>
-        <content type="html"><![CDATA[<p>1053 Path of Equal Weight (30分)</p>
-<p>Given a non-empty tree with root <em>R</em>, and with weight <em>W**i</em> assigned to each tree node <em>T**i</em>. The <strong>weight of a path from *R* to *L*</strong> is defined to be the sum of the weights of all the nodes along the path from <em>R</em> to any leaf node <em>L</em>.</p>
-<p>Now given any weighted tree, you are supposed to find all the paths with their weights equal to a given number. For example, let's consider the tree showed in the following figure: for each node, the upper number is the node ID which is a two-digit number, and the lower number is the weight of that node. Suppose that the given number is 24, then there exists 4 different paths which have the same given weight: {10 5 2 7}, {10 4 10}, {10 3 3 6 2} and {10 3 3 6 2}, which correspond to the red edges in the figure.</p>
-<figure data-type="image" tabindex="1"><img src="https://images.ptausercontent.com/212" alt="img" loading="lazy"></figure>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. Each case starts with a line containing 0&lt;<em>N</em>≤100, the number of nodes in a tree, <em>M</em> (&lt;<em>N</em>), the number of non-leaf nodes, and 0&lt;<em>S</em>&lt;230, the given weight number. The next line contains <em>N</em> positive numbers where <em>W**i</em> (&lt;1000) corresponds to the tree node <em>T**i</em>. Then <em>M</em> lines follow, each in the format:</p>
-<pre><code>ID K ID[1] ID[2] ... ID[K]
-</code></pre>
-<p>where <code>ID</code> is a two-digit number representing a given non-leaf node, <code>K</code> is the number of its children, followed by a sequence of two-digit <code>ID</code>'s of its children. For the sake of simplicity, let us fix the root ID to be <code>00</code>.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print all the paths with weight S in <strong>non-increasing</strong> order. Each path occupies a line with printed weights from the root to the leaf in order. All the numbers must be separated by a space with no extra space at the end of the line.</p>
-<p>Note: sequence {<em>A</em>1,<em>A</em>2,⋯,<em>A**n</em>} is said to be <strong>greater than</strong> sequence {<em>B</em>1,<em>B</em>2,⋯,<em>B**m</em>} if there exists 1≤<em>k</em>&lt;<em>m<strong>i</strong>n</em>{<em>n</em>,<em>m</em>} such that <em>A**i</em>=<em>B**i</em> for <em>i</em>=1,⋯,<em>k</em>, and <em>A**k</em>+1&gt;<em>B**k</em>+1.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">20 9 24
-10 2 4 3 5 10 2 18 9 7 2 2 1 3 12 1 8 6 2 2
-00 4 01 02 03 04
-02 1 05
-04 2 06 07
-03 3 11 12 13
-06 1 09
-07 2 08 10
-16 1 15
-13 3 14 16 17
-17 2 18 19
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">10 5 2 7
-10 4 10
-10 3 3 6 2
-10 3 3 6 2
-</code></pre>
-<hr>
-<p>题目描述：现在有一棵树，让你找到根结点到叶子结点总权值为给定值的路径。</p>
-</br>
-<p>输入：n：节点总数，m：非叶子结点个数；s：假定要求的根节点到叶子节点总权值；接下来m行，包括id：结点编号，k：子结点个数，接下来k个子结点编号。</p>
-<p>输出：根结点到叶子结点的过程中经过的总权值等于s，输出所经过结点的权值。</p>
-</br>
-<p>解题思路：这道题不用建树，用有向图保存这棵树就行。可以用BFS算法或DFS算法。</p>
-<p>这里列举BFS算法详解：每个结点的权值保存在weight数组中，边的关系保存在G邻接表中。从root结点层层遍历，很简单的就可以得到根节点到各个叶子结点的总权值了。最重要的还是输出顺序的问题，我先将符合条件的路径权值数组存入ans二维数组容器中，最后将二维数组进行排序。排序规则是每个数组中同一位置的权值最大的序列排在前面输出。</p>
-<hr>
-<pre><code class="language-c++">//BFS 广度优先
-#include&lt;bits/stdc++.h&gt;
-using namespace std;
-struct node{
-	int id;
-	long long ss;
-	vector&lt;int&gt; list;
-	node(){
-		ss = 0;
-	}
-};
-int n, m;
-long long s;
-const int maxn = 220;
-int weight[maxn];
-vector&lt;int&gt; G[maxn];
-vector&lt; vector&lt;int&gt; &gt; ans;
-bool cmp(vector&lt;int&gt; a, vector&lt;int&gt; b){
-	int l=0;
-	l = min(a.size(),b.size());
-	for(int i=0; i&lt;l; i++){
-		if(a[i]==b[i]) continue;
-		else return a[i] &gt; b[i];
-	}
-	return false; //如果没有，最后一个测试点段错误! 
-}
-void bfs(int root){
-	node t, tt;
-	queue&lt;node&gt; q;
-	t.id = root; t.ss = weight[root];
-	t.list.push_back(weight[root]);
-	q.push(t);
-	
-	int u, v;
-	while(!q.empty()){
-		t = q.front();
-		u = t.id;
-		q.pop();
-		if(t.ss==s&amp;&amp;G[u].size()==0){
-			ans.push_back(t.list);
-			continue;
-		}
-		else if(t.ss &gt; s) continue;
-		for(int i=0; i&lt;G[u].size(); i++){
-			v = G[u][i];
-			tt.id = v; tt.ss = t.ss + weight[v]; tt.list = t.list;
-			tt.list.push_back(weight[v]);
-			q.push(tt);
-		}
-	}
-	sort(ans.begin(),ans.end(),cmp);
-	
-	for(int i=0; i&lt;ans.size(); i++){
-		for(int j=0; j&lt;ans[i].size(); j++){
-			if(j) printf(&quot; &quot;);
-			printf(&quot;%d&quot;, ans[i][j]);
-		}
-		printf(&quot;\n&quot;);
-	}
-}
-int main()
-{
-	scanf(&quot;%d %d %lld&quot;, &amp;n, &amp;m, &amp;s);
-	int id, k, g;
-	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;, &amp;weight[i]);
-	for(int i=0; i&lt;m; i++){
-		scanf(&quot;%d %d&quot;, &amp;id, &amp;k);
-		for(int j=0; j&lt;k; j++){
-			scanf(&quot;%d&quot;, &amp;g);
-			G[id].push_back(g);
-		}
-	}
-	bfs(0);
-	return 0;
-}
-</code></pre>
-<pre><code class="language-c++">//DFS 深度优先
-#include&lt;bits/stdc++.h&gt;
-using namespace std;
-struct node{
-	int w;
-	vector&lt;int&gt; child;
-};
-vector&lt;node&gt; v;
-vector&lt;int&gt; path;
-int target;
-void dfs(int index, int nodenum, int sum){
-	if(sum&gt;target) return ;
-	if(sum==target){
-		if(v[index].child.size()!=0) return;
-		for(int i=0; i&lt;nodenum; i++){
-			printf(&quot;%d%c&quot;, v[path[i]].w, i!=nodenum-1?' ':'\n');
-		}
-		return;
-	}
-	for(int i=0; i&lt;v[index].child.size(); i++){
-		int nd = v[index].child[i];
-		path[nodenum] = nd;
-		dfs(nd,nodenum+1,sum+v[nd].w);
-	}
-}
-int cmp(int a, int b){
-	return v[a].w &gt; v[b].w;
-}
-int main()
-{
-	int n, m, node, k;
-	scanf(&quot;%d %d %d&quot;, &amp;n, &amp;m, &amp;target);
-	v.resize(n), path.resize(n);
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;v[i].w);
-	}
-	for(int i=0; i&lt;m; i++){
-		scanf(&quot;%d %d&quot;, &amp;node, &amp;k);
-		v[node].child.resize(k);
-		for(int j=0; j&lt;k; j++) scanf(&quot;%d&quot;, &amp;v[node].child[j]);
-		sort(v[node].child.begin(),v[node].child.end(),cmp);
-	}
-	dfs(0,1,v[0].w);
 	return 0;
 }
 </code></pre>

@@ -40,8 +40,12 @@
 <ul>
 <li><a href="#input-specification">Input Specification:</a></li>
 <li><a href="#output-specification">Output Specification:</a></li>
-<li><a href="#sample-input">Sample Input:</a></li>
-<li><a href="#sample-output">Sample Output:</a></li>
+<li><a href="#sample-input-1">Sample Input 1:</a></li>
+<li><a href="#sample-output-1">Sample Output 1:</a></li>
+<li><a href="#sample-input-2">Sample Input 2:</a></li>
+<li><a href="#sample-output-2">Sample Output 2:</a></li>
+<li><a href="#sample-input-3">Sample Input 3:</a></li>
+<li><a href="#sample-output-3">Sample Output 3:</a></li>
 </ul>
 </li>
 </ul>
@@ -92,100 +96,75 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1079 Total Sales of Supply Chain (25分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1081 Rational Sum (20分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-06 / 5 min read
+          2020-06-06 / 4 min read
         </div>
         
         <div class="post-content yue">
-          <p>1079 Total Sales of Supply Chain (25分)</p>
-<p>A supply chain is a network of retailers（零售商）, distributors（经销商）, and suppliers（供应商）-- everyone involved in moving a product from supplier to customer.</p>
-<p>Starting from one root supplier, everyone on the chain buys products from one's supplier in a price <em>P</em> and sell or distribute them in a price that is <em>r</em>% higher than <em>P</em>. Only the retailers will face the customers. It is assumed that each member in the supply chain has exactly one supplier except the root supplier, and there is no supply cycle.</p>
-<p>Now given a supply chain, you are supposed to tell the total sales from all the retailers.</p>
+          <p>1081 Rational Sum (20分)</p>
+<p>Given <em>N</em> rational numbers in the form <code>numerator/denominator</code>, you are supposed to calculate their sum.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains three positive numbers: <em>N</em> (≤105), the total number of the members in the supply chain (and hence their ID's are numbered from 0 to <em>N</em>−1, and the root supplier's ID is 0); <em>P</em>, the unit price given by the root supplier; and <em>r</em>, the percentage rate of price increment for each distributor or retailer. Then <em>N</em> lines follow, each describes a distributor or retailer in the following format:</p>
-<p><em>K**i</em> ID[1] ID[2] ... ID[<em>K**i</em>]</p>
-<p>where in the <em>i</em>-th line, <em>K**i</em> is the total number of distributors or retailers who receive products from supplier <em>i</em>, and is then followed by the ID's of these distributors or retailers. <em>K**j</em> being 0 means that the <em>j</em>-th member is a retailer, then instead the total amount of the product will be given after <em>K**j</em>. All the numbers in a line are separated by a space.</p>
+<p>Each input file contains one test case. Each case starts with a positive integer <em>N</em> (≤100), followed in the next line <em>N</em> rational numbers <code>a1/b1 a2/b2 ...</code> where all the numerators and denominators are in the range of <strong>long int</strong>. If there is a negative number, then the sign must appear in front of the numerator.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the total sales we can expect from all the retailers, accurate up to 1 decimal place. It is guaranteed that the number will not exceed 1010.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">10 1.80 1.00
-3 2 3 5
-1 9
-1 4
-1 7
-0 7
-2 6 1
-1 8
-0 9
-0 4
-0 3
+<p>For each test case, output the sum in the simplest form <code>integer numerator/denominator</code> where <code>integer</code> is the integer part of the sum, <code>numerator</code> &lt; <code>denominator</code>, and the numerator and the denominator have no common factor. You must output only the fractional part if the integer part is 0.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">5
+2/5 4/15 1/30 -2/60 8/3
 </code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">42.4
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">3 1/3
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">2
+4/3 2/3
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">2
+</code></pre>
+<h3 id="sample-input-3">Sample Input 3:</h3>
+<pre><code class="language-in">3
+1/3 -1/6 1/8
+</code></pre>
+<h3 id="sample-output-3">Sample Output 3:</h3>
+<pre><code class="language-out">7/24
 </code></pre>
 <hr>
-<p>题目描述：有一条销售链，供应商、经销商、零售商，供应商提供货物给经销商，经销商提供货物给零售商，题目要求出零售商售出的总额是多少。0号索引表示供应商。供应商的售价p，经销商的售价p1 = r%*p，零售商售价p2 = r%*p1。</p>
+<p>题目描述：分数求和。</p>
 </br>
-<p>输入：第一行三个数，n为节点数，p为商品原价，即供应商的出价，r为售价的增幅。接下来n行（表示0~n-1个结点的情况），分两种情况</p>
-<p>1)第一个值为0，第二个值就表示零售商需要销售商品的数量</p>
-<p>2)第一个值不为0，则第一个值表示第i个结点的子结点个数m，后面接着m个子结点的编号。</p>
-<p>输出：零售商售出的总额，保留一位小数</p>
+<p>输入：第一行n表示分数的个数，第二行n个分数。</p>
+<p>输出：分数之和。输出格式 1）4/3输出1 2/3；2）4 /4 输出 1；3）2/3输出2/3</p>
 </br>
-<p>解题思路：典型的bfs题，使用邻接表存树，节约空间。</p>
-<p>注意，题目给的是r，我们计算时要计算r%，所以r*1.0/100。</p>
+<p>解题思路：我习惯将程序分块写，这样程序看起来比较直观清晰；将所有分数加起来，可以先记录第一个分数，分子为a1、分母为b1，接着读第二个分数，第二个分数分子为a2，分母为b2，接着就可以将两个分数进行计算了，然后将计算结果分别再存入a1和b1；后面读入的分数都存在a2和b2中，重复上述过程。得到的结果a1和b1按照题目规定输出格式输出。</p>
+<p>两个分数相加的过程：例如2/5和4/15相加，想求出两个分母的最大公因数为5，两个分母同时除于5，分别得到b1=1，b2=3，将分子a1乘与b2，a2乘与b1，则a1=6，a2=4，此时，分数分别为6/1和4/3，让a1=a1+a2=10，b1 = b1*b2*gcd(b1,b2)=15（分母进行同分的过程），这样就能将两分数相加的结果放入a1和b1了，即2/5 + 4 / 15 = 10 / 15。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-int n;
-double p, r;
-const int maxn = 200005;
-vector&lt;int&gt; G[maxn];
-map&lt;int,int&gt; lvs_sell;
-struct node{
-	int index;
-	double price;
-};
-void bfs(){
-	node t, tt;
-	t.index = 0; t.price = p;
-	queue&lt;node&gt; q;
-	q.push(t);
-	double ans = 0;
-	while(!q.empty()){
-		t = q.front();
-		q.pop();
-		if(G[t.index].size()==0){
-			ans += lvs_sell[t.index]*t.price;
-		}
-		else{
-			for(int i=0; i&lt;G[t.index].size(); i++){
-				int v = G[t.index][i];
-				tt.index = v;
-				tt.price = r*t.price;
-				q.push(tt);
-			}
-		}
-	}
-	printf(&quot;%.1f&quot;, ans);
+int n, a1, b1, a2, b2;
+int gcd(int a, int b){ return a == 0 ? b : gcd(b % a, a); } 
+void sum(){
+	int g = gcd(b1,b2);
+	b1 /= g;
+	b2 /= g;
+	a1*=b2; a2 *= b1;
+	a1 += a2;
+	b1 *= b2*g;
 }
 int main()
 {
-	scanf(&quot;%d %lf %lf&quot;, &amp;n, &amp;p, &amp;r);
-	r = r*1.0/100 + 1;
-	int a, b;
+	scanf(&quot;%d&quot;, &amp;n);
 	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
-		if(a==0) lvs_sell[i] = b;
+		if(i==0) scanf(&quot;%d/%d&quot;, &amp;a1, &amp;b1);
 		else{
-			G[i].push_back(b);
-			for(int j=1; j&lt;a; j++){
-				scanf(&quot;%d&quot;, &amp;b);
-				G[i].push_back(b);
-			}
+			scanf(&quot;%d/%d&quot;, &amp;a2, &amp;b2);
+			sum();
 		}
 	}
-	bfs();
+	int g = gcd(a1,b1);
+	a1 /= g; b1 /= g;
+	if(a1%b1==0) printf(&quot;%d\n&quot;, a1/b1);
+	else if(a1&gt;b1) printf(&quot;%d %d/%d\n&quot;, a1/b1, a1%b1, b1);
+	else printf(&quot;%d/%d&quot;, a1%b1, b1);
 	return 0;
 }
 </code></pre>
@@ -201,21 +180,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1081-rational-sum-20-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1081 Rational Sum (20分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1078-hashing-25-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1079-total-sales-of-supply-chain-25-fen-ti-jie/">
                 <h3 class="post-title">
-                  1078 Hashing (25分)题解
+                  1079 Total Sales of Supply Chain (25分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
