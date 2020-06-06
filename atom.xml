@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-05T14:54:34.059Z</updated>
+    <updated>2020-06-06T02:30:22.613Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,86 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1078 Hashing (25分)题解]]></title>
+        <id>https://ygytl.github.io/post/1078-hashing-25-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1078-hashing-25-fen-ti-jie/">
+        </link>
+        <updated>2020-06-06T02:29:52.000Z</updated>
+        <content type="html"><![CDATA[<p>1078 Hashing (25分)</p>
+<p>The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the input numbers. The hash function is defined to be <em>H</em>(<em>k<strong>e</strong>y</em>)=<em>k<strong>e</strong>y</em>%<em>T<strong>S</strong>i<strong>z</strong>e</em> where <em>T<strong>S</strong>i<strong>z</strong>e</em> is the maximum size of the hash table. Quadratic probing (with positive increments only) is used to solve the collisions.</p>
+<p>Note that the table size is better to be prime. If the maximum size given by the user is not prime, you must re-define the table size to be the smallest prime number which is larger than the size given by the user.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line contains two positive numbers: <em>M<strong>S</strong>i<strong>z</strong>e</em> (≤104) and <em>N</em> (≤<em>M<strong>S</strong>i<strong>z</strong>e</em>) which are the user-defined table size and the number of input numbers, respectively. Then <em>N</em> distinct positive integers are given in the next line. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print the corresponding positions (index starts from 0) of the input numbers in one line. All the numbers in a line are separated by a space, and there must be no extra space at the end of the line. In case it is impossible to insert the number, print &quot;-&quot; instead.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">4 4
+10 6 4 15
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">0 1 4 -
+</code></pre>
+<hr>
+<p>题目描述：把哈希表实现出来。</p>
+</br>
+<p>输入：Msize数组长度，n插入值得个数</p>
+<p>输出：插入每个值得位置</p>
+</br>
+<p>解题思路：Quadratic probing (with positive increments only) is used to solve the collisions.</p>
+<p>这句话是重点，必须理解，Quadratic二次方，probe探测，collision冲突；遇到冲突使用二次探测存放！</p>
+<p>二次探测公式：H(Key) = (Key + i*i)  (i=0....n-1)</p>
+<p>解这道题，因为哈希表得的长度规定选为素数，所以，当Msize不为素数，需要将大于Msize的最小素数求出，可以用一个数组先将素数表存好，方便查询。然后把二次探测公式实现就行了。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 20005;
+vector&lt;int&gt; prime;
+int p[maxn];
+bool is_prime(int k){
+	if(k==0||k==1) return false;
+	for(int i=2; i&lt;=sqrt(k); i++){
+		if(k%i==0) return false;
+	}
+	return true;
+}
+int find_prime(int k){
+	for(int i=0; i&lt;prime.size(); i++){
+		if(prime[i]&gt;k) return prime[i];
+	}
+	return 0;
+}
+int main()
+{
+	memset(p,-1,sizeof(p));
+	prime.push_back(2);
+	for(int i=3; i&lt;=maxn; i+=2){
+		if(is_prime(i)) prime.push_back(i);
+	}
+	int n, m;
+	long long k;
+	scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+	if(!is_prime(n)) n = find_prime(n);
+	
+	for(int i=0; i&lt;m; i++){
+		scanf(&quot;%lld&quot;, &amp;k);
+		if(i) printf(&quot; &quot;);
+		int g = k%n, c=0;
+		while(p[g]!=-1&amp;&amp;c&lt;n){
+			c++;
+			g = (k+c*c)%n;
+		}
+		if(p[g]!=-1) printf(&quot;-&quot;);
+		else{
+			p[g%n] = g%n;
+			printf(&quot;%d&quot;, g%n);
+		}
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1077 Kuchiguse (20分)题解]]></title>
         <id>https://ygytl.github.io/post/1077-kuchiguse-20-fen-ti-jie/</id>
@@ -1014,74 +1094,6 @@ int main()
 		if(g==0 || g==6174) break;
 		n = g;
 	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1071 Speech Patterns (25分)题解]]></title>
-        <id>https://ygytl.github.io/post/1071-speech-patterns-25-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1071-speech-patterns-25-fen-ti-jie/">
-        </link>
-        <updated>2020-06-01T14:54:10.000Z</updated>
-        <content type="html"><![CDATA[<p>1071 Speech Patterns (25分)</p>
-<p>People often have a preference among synonyms of the same word. For example, some may prefer &quot;the police&quot;, while others may prefer &quot;the cops&quot;. Analyzing such patterns can help to narrow down a speaker's identity, which is useful when validating, for example, whether it's still the same person behind an online avatar.</p>
-<p>Now given a paragraph of text sampled from someone's speech, can you find the person's most commonly used word?</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, there is one line of text no more than 1048576 characters in length, terminated by a carriage return <code>\n</code>. The input contains at least one alphanumerical character, i.e., one character from the set [<code>0-9 A-Z a-z</code>].</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the most commonly occurring word in the input text, followed by a space and the number of times it has occurred in the input. If there are more than one such words, print the lexicographically smallest one. The word should be printed in all lower case. Here a &quot;word&quot; is defined as a continuous sequence of alphanumerical characters separated by non-alphanumerical characters or the line beginning/end.</p>
-<p>Note that words are case <strong>insensitive</strong>.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">Can1: &quot;Can a can can a can?  It can!&quot;
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">can 5
-</code></pre>
-<hr>
-<p>题目描述：求给定的字符串中，出现次数最多的单词，这些单词由数字、大小写字母组成。</p>
-</br>
-<p>输入：一串字符串</p>
-<p>输出：出现最多的单词及出现次数<br>
-</br></p>
-<p>解题思路：getline函数读取所有字符，要在读入所有字符后加一个字符'.'，当读入的最后一个字符是数字或者大小写字母时，比较容易将最后一个单词切分出来。接着，根据特殊字符来切分单词，并用map&lt;string,int&gt;来记录每个单词出现的次数。在记录的同时，我们也可以把答案顺便找出来。用ans和count两个量简单比较就行了。</p>
-<p>注意：最后一个测试点就是卡在最后一个单词有没有正确切分并计数。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-map&lt;string,int&gt; p;
-int main()
-{
-	string s, t=&quot;&quot;;
-	getline(cin,s);
-	s += '.';//不加最后一个测试点会错 
-	int l = s.length();
-	string ans=&quot;&quot;;
-	int count = 0;
-	for(int i=0; i&lt;l; i++){
-		if(s[i]&gt;='0'&amp;&amp;s[i]&lt;='9'){
-			t += s[i];
-		}
-		else if(s[i]&gt;='A'&amp;&amp;s[i]&lt;='Z'){
-			t += s[i]-'A'+'a';
-		}
-		else if(s[i]&gt;='a'&amp;&amp;s[i]&lt;='z'){
-			t += s[i];
-		}
-		else{
-			if(t.length()!=0) p[t]++;
-			if(p[t]==count){
-				ans = t &lt; ans ? t : ans;
-			}
-			else if(p[t]&gt;count){
-				count = p[t];
-				ans = t;
-			}
-			t = &quot;&quot;;
-		}
-	}
-	cout &lt;&lt; ans &lt;&lt; &quot; &quot; &lt;&lt; count &lt;&lt; endl;
 	return 0;
 }
 </code></pre>
