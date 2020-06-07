@@ -92,81 +92,62 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1078 Hashing (25分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1085 Perfect Sequence (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-06 / 4 min read
+          2020-06-08 / 3 min read
         </div>
         
         <div class="post-content yue">
-          <p>1078 Hashing (25分)</p>
-<p>The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the input numbers. The hash function is defined to be <em>H</em>(<em>k<strong>e</strong>y</em>)=<em>k<strong>e</strong>y</em>%<em>T<strong>S</strong>i<strong>z</strong>e</em> where <em>T<strong>S</strong>i<strong>z</strong>e</em> is the maximum size of the hash table. Quadratic probing (with positive increments only) is used to solve the collisions.</p>
-<p>Note that the table size is better to be prime. If the maximum size given by the user is not prime, you must re-define the table size to be the smallest prime number which is larger than the size given by the user.</p>
+          <p>1085 Perfect Sequence (25分)</p>
+<p>Given a sequence of positive integers and another positive integer <em>p</em>. The sequence is said to be a <strong>perfect sequence</strong> if <em>M</em>≤<em>m</em>×<em>p</em> where <em>M</em> and <em>m</em> are the maximum and minimum numbers in the sequence, respectively.</p>
+<p>Now given a sequence and a parameter <em>p</em>, you are supposed to find from the sequence as many numbers as possible to form a perfect subsequence.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains two positive numbers: <em>M<strong>S</strong>i<strong>z</strong>e</em> (≤104) and <em>N</em> (≤<em>M<strong>S</strong>i<strong>z</strong>e</em>) which are the user-defined table size and the number of input numbers, respectively. Then <em>N</em> distinct positive integers are given in the next line. All the numbers in a line are separated by a space.</p>
+<p>Each input file contains one test case. For each case, the first line contains two positive integers <em>N</em> and <em>p</em>, where <em>N</em> (≤105) is the number of integers in the sequence, and <em>p</em> (≤109) is the parameter. In the second line there are <em>N</em> positive integers, each is no greater than 109.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print the corresponding positions (index starts from 0) of the input numbers in one line. All the numbers in a line are separated by a space, and there must be no extra space at the end of the line. In case it is impossible to insert the number, print &quot;-&quot; instead.</p>
+<p>For each test case, print in one line the maximum number of integers that can be chosen to form a perfect subsequence.</p>
 <h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">4 4
-10 6 4 15
+<pre><code class="language-in">10 8
+2 3 20 4 5 1 6 7 8 9
 </code></pre>
 <h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">0 1 4 -
+<pre><code class="language-out">8
 </code></pre>
 <hr>
-<p>题目描述：把哈希表实现出来。</p>
+<p>题目描述：求完美数列，要求数列元素尽可能多。完美数列公式：M&lt;=m*p，M为数列中最大值，m为数列中最小值，p是给定的值。</p>
 </br>
-<p>输入：Msize数组长度，n插入值得个数</p>
-<p>输出：插入每个值得位置</p>
+<p>输入：第一行两个值n，p，分别为数列元素个数，p是给定的值；第二行n个值给出无序的数列。</p>
+<p>输出：完美数列元素的个数。</p>
 </br>
-<p>解题思路：Quadratic probing (with positive increments only) is used to solve the collisions.</p>
-<p>这句话是重点，必须理解，Quadratic二次方，probe探测，collision冲突；遇到冲突使用二次探测存放！</p>
-<p>二次探测公式：H(Key) = (Key + i*i)  (i=0....n-1)</p>
-<p>解这道题，因为哈希表得的长度规定选为素数，所以，当Msize不为素数，需要将大于Msize的最小素数求出，可以用一个数组先将素数表存好，方便查询。然后把二次探测公式实现就行了。</p>
+<p>解题思路：要用long long类型存值，不然测试点5报错。将给定的数列从小到大排序，接着从索引0开始遍历，用二分查找找到每个元素能组成的最大完美子序列长度，进行比较后得出结果。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-const int maxn = 20005;
-vector&lt;int&gt; prime;
-int p[maxn];
-bool is_prime(int k){
-	if(k==0||k==1) return false;
-	for(int i=2; i&lt;=sqrt(k); i++){
-		if(k%i==0) return false;
+const int maxn = 200000+5;
+long long v[maxn];
+int n, p;
+int search(int g){
+	int l=g, r=n-1, mid;
+	int tx = 0;
+	while(l&lt;=r){
+		mid = (l+r)/2;
+		if(v[mid]&lt;=v[g]*p){
+			tx = max(tx,mid-g+1);
+			l = mid + 1;
+		}
+		else r = mid-1;
 	}
-	return true;
-}
-int find_prime(int k){
-	for(int i=0; i&lt;prime.size(); i++){
-		if(prime[i]&gt;k) return prime[i];
-	}
-	return 0;
+	return tx;
 }
 int main()
 {
-	memset(p,-1,sizeof(p));
-	prime.push_back(2);
-	for(int i=3; i&lt;=maxn; i+=2){
-		if(is_prime(i)) prime.push_back(i);
+	int ans=0;
+	scanf(&quot;%d %d&quot;, &amp;n, &amp;p);
+	for(int i=0; i&lt;n; i++) scanf(&quot;%lld&quot;, &amp;v[i]);
+	sort(v,v+n);//小到大 
+	for(int i=0; i&lt;n; i++){
+		ans = max(ans,search(i));
 	}
-	int n, m;
-	long long k;
-	scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
-	if(!is_prime(n)) n = find_prime(n);
-	
-	for(int i=0; i&lt;m; i++){
-		scanf(&quot;%lld&quot;, &amp;k);
-		if(i) printf(&quot; &quot;);
-		int g = k%n, c=0;
-		while(p[g]!=-1&amp;&amp;c&lt;n){
-			c++;
-			g = (k+c*c)%n;
-		}
-		if(p[g]!=-1) printf(&quot;-&quot;);
-		else{
-			p[g%n] = g%n;
-			printf(&quot;%d&quot;, g%n);
-		}
-	}
+	printf(&quot;%d&quot;, ans);
 	return 0;
 }
 </code></pre>
@@ -182,21 +163,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1079-total-sales-of-supply-chain-25-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1079 Total Sales of Supply Chain (25分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1077-kuchiguse-20-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1084-broken-keyboard-20-fen-ti-jie/">
                 <h3 class="post-title">
-                  1077 Kuchiguse (20分)题解
+                  1084 Broken Keyboard (20分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
