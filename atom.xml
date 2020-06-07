@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-07T09:14:19.717Z</updated>
+    <updated>2020-06-07T13:30:09.946Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,143 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1082 Read Number in Chinese (25分)题解]]></title>
+        <id>https://ygytl.github.io/post/1082-read-number-in-chinese-25-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1082-read-number-in-chinese-25-fen-ti-jie/">
+        </link>
+        <updated>2020-06-07T13:17:11.000Z</updated>
+        <content type="html"><![CDATA[<p>1082 Read Number in Chinese (25分)</p>
+<p>Given an integer with no more than 9 digits, you are supposed to read it in the traditional Chinese way. Output <code>Fu</code> first if it is negative. For example, -123456789 is read as <code>Fu yi Yi er Qian san Bai si Shi wu Wan liu Qian qi Bai ba Shi jiu</code>. Note: zero (<code>ling</code>) must be handled correctly according to the Chinese tradition. For example, 100800 is <code>yi Shi Wan ling ba Bai</code>.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case, which gives an integer with no more than 9 digits.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print in a line the Chinese way of reading the number. The characters are separated by a space and there must be no extra space at the end of the line.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">-123456789
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">Fu yi Yi er Qian san Bai si Shi wu Wan liu Qian qi Bai ba Shi jiu
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">100800
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">yi Shi Wan ling ba Bai
+</code></pre>
+<hr>
+<p>题目描述：将数字转化为字母拼音的格式</p>
+</br>
+<p>输入：不超过9 digits的数</p>
+<p>输出：汉字拼音格式</p>
+</br>
+<p>解题思路：把几个坑说下，测试点3是输入0的时候是否输出'ling'。难点是对零的处理，给几个测试数据吧，测试通过基本就行了；这里提供两个写法，细节处理有些许不同。</p>
+<pre><code>9090909
+jiu Bai ling jiu Wan ling jiu Bai ling jiu
+
+100000009
+yi Yi Wan ling jiu
+
+0
+ling
+
+10086
+yi Wan ling ba Shi liu
+
+110110
+yi Shi yi Wan ling yi Bai yi Shi
+</code></pre>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+//方法一
+int main()
+{
+	string s;
+	cin &gt;&gt; s;
+	map&lt;int,string&gt; p;
+	p[0]=&quot;ling&quot;; p[1]=&quot;yi&quot;; p[2]=&quot;er&quot;; p[3]=&quot;san&quot;; p[4]=&quot;si&quot;; p[5]=&quot;wu&quot;;
+	p[6]=&quot;liu&quot;; p[7]=&quot;qi&quot;; p[8]=&quot;ba&quot;; p[9]=&quot;jiu&quot;;
+	if(s[0]=='-'){
+		printf(&quot;Fu &quot;);
+	}
+	else s = &quot;+&quot;+s;
+	string ans=&quot;&quot;;
+	bool flag = false;
+	int l = s.size();
+	for(int i=1; i&lt;l; i++){
+		if(s[i]=='0'){
+			if(l-i==5) ans += &quot; Wan&quot;; 
+			flag = true;
+			continue;
+		}
+		else{
+			if(i!=1) ans += &quot; &quot;;
+			if(flag){
+				ans+= p[0] + &quot; &quot;;
+			}
+			flag = false;
+			if(l-i==1) ans += p[s[i]-'0'];
+			if(l-i==2||l-i==6) ans += p[s[i]-'0'] + &quot; Shi&quot;;
+			if(l-i==3||l-i==7) ans += p[s[i]-'0'] + &quot; Bai&quot;;
+			if(l-i==4||l-i==8) ans += p[s[i]-'0'] + &quot; Qian&quot;;
+			if(l-i==5) ans += p[s[i]-'0'] + &quot; Wan&quot;;
+			if(l-i==9) ans += p[s[i]-'0'] + &quot; Yi&quot;;
+		}
+	}
+	if(s==&quot;+0&quot;||s==&quot;-0&quot;) ans = &quot;ling&quot;;
+	cout &lt;&lt; ans &lt;&lt; endl;
+	return 0;
+}
+</code></pre>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+//方法二
+int main()
+{
+	map&lt;int,string&gt; p;
+	p[0] = &quot;ling&quot;; p[1] = &quot;yi&quot;; p[2] = &quot;er&quot;; p[3] = &quot;san&quot;;
+	p[4] = &quot;si&quot;; p[5] = &quot;wu&quot;; p[6] = &quot;liu&quot;; p[7] = &quot;qi&quot;;
+	p[8] = &quot;ba&quot;; p[9] = &quot;jiu&quot;;
+	string str, ans=&quot;&quot;;
+	cin &gt;&gt; str;
+	int l, s=0;
+	bool flag = false;
+	l = str.length();
+	if(str[0]=='-'){
+		ans += &quot;Fu&quot;;
+		s++; l--; flag = true;
+	}
+	bool f1=false, f2=false, f3=false;
+	for(int i=s; i&lt;str.length(); i++,l--){
+		f1 = false;
+		if(l&gt;=5&amp;&amp;l&lt;=8) f2 = true;
+		if(str[i]=='0') f3 = true;
+		else{
+			f1 = true;
+			if(flag) ans += &quot; &quot;;
+			if(f3) ans += &quot;ling &quot;;
+			ans += p[str[i]-'0'];
+			flag = true;
+			f3 = false;
+		}
+		if(f1){
+			if(l==2||l==6) ans += &quot; Shi&quot;;
+			if(l==3||l==7) ans += &quot; Bai&quot;;
+			if(l==4||l==8) ans += &quot; Qian&quot;;
+			if(l==9) ans += &quot; Yi&quot;;
+		}
+		if(f2&amp;&amp;l==5){
+			ans += &quot; Wan&quot;; f2 = false;
+		}
+	}
+	if(str==&quot;0&quot;) ans = &quot;ling&quot;;
+	cout &lt;&lt; ans &lt;&lt; endl;
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1080 Graduate Admission (30分)题解]]></title>
         <id>https://ygytl.github.io/post/1080-graduate-admission-30-fen-ti-jie/</id>
@@ -896,96 +1033,6 @@ int main()
 		}
 	}
 	printf(&quot;%.2f\n&quot;, ans);
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1074 Reversing Linked List (25分)题解]]></title>
-        <id>https://ygytl.github.io/post/1074-reversing-linked-list-25-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1074-reversing-linked-list-25-fen-ti-jie/">
-        </link>
-        <updated>2020-06-03T06:59:10.000Z</updated>
-        <content type="html"><![CDATA[<p>1074 Reversing Linked List (25分)</p>
-<p>Given a constant <em>K</em> and a singly linked list <em>L</em>, you are supposed to reverse the links of every <em>K</em> elements on <em>L</em>. For example, given <em>L</em> being 1→2→3→4→5→6, if <em>K</em>=3, then you must output 3→2→1→6→5→4; if <em>K</em>=4, you must output 4→3→2→1→5→6.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains the address of the first node, a positive <em>N</em> (≤105) which is the total number of nodes, and a positive <em>K</em> (≤<em>N</em>) which is the length of the sublist to be reversed. The address of a node is a 5-digit nonnegative integer, and NULL is represented by -1.</p>
-<p>Then <em>N</em> lines follow, each describes a node in the format:</p>
-<pre><code>Address Data Next
-</code></pre>
-<p>where <code>Address</code> is the position of the node, <code>Data</code> is an integer, and <code>Next</code> is the position of the next node.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each case, output the resulting ordered linked list. Each node occupies a line, and is printed in the same format as in the input.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">00100 6 4
-00000 4 99999
-00100 1 12309
-68237 6 -1
-33218 3 00000
-99999 5 68237
-12309 2 33218
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">00000 4 33218
-33218 3 12309
-12309 2 00100
-00100 1 99999
-99999 5 68237
-68237 6 -1
-</code></pre>
-<hr>
-<p>题目描述：有一条链表L，假设链表为1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6，现在要求你将链表分组为每k个数一组，每组的链表反转后串连在一起，最后输出。若k=3，则反转后的链表为3-&gt;2-&gt;1-&gt;6-&gt;5-&gt;4，若k=4，4-&gt;3-&gt;2-&gt;1-&gt;5-&gt;6，可以看到1、2、3、4这四个数可以分为1组，然后将其反序输出了，而5、6不足一组，则按顺序输出。</p>
-</br>
-<p>输入：第一行包括三个数，链表头节点Head，n表示链表节点数，k表示k个算组分为一组。接下来n行，包括每个结点的head结点、num、next结点</p>
-<p>输出：将反转后链表的每个结点按顺序输出。</p>
-</br>
-<p>解题思路：题目输入的结点顺序不是正确，需要通过题目给定的head头节点先将链表串起来。在输入的时候，就可以将每个结点放入结构体数组中，使用每个结点的head作为索引，存放好后，可以通过给定的链表头节点Head，将链表串起来，放入l2结构体容器中。后面只需要将容器分组。为每组个数都小于等于k，然后进行反转，再存放到l3结构体容器中，最后输出。这就大功告成啦。</p>
-<p>使用结构体数组来模拟链表，实现起来比较简单。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-struct node{
-	int head, num, next;
-};
-const int maxn = 100005;
-node l1[maxn];
-vector&lt;node&gt; l2, l3;
-int main()
-{
-	node t;
-	int head, n, k;
-	scanf(&quot;%d %d %d&quot;, &amp;head, &amp;n, &amp;k);
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d %d %d&quot;, &amp;t.head, &amp;t.num, &amp;t.next);
-		l1[t.head] = t;
-	}
-	while(head!=-1){
-		t = l1[head];
-		l2.push_back(t);
-		head = t.next;
-	}
-	for(int i=0, j; i&lt;l2.size(); i+=k){
-		if(i+k&lt;=l2.size()){
-			j = i+k-1;
-			while(j&gt;=i){
-				l3.push_back(l2[j]);
-				j--;
-			}
-		}
-		else{
-			j = i;
-			while(j&lt;l2.size()){
-				l3.push_back(l2[j]);
-				j++;
-			}
-			break;
-		}
-	}
-	for(int i=0; i&lt;l3.size()-1; i++){
-		printf(&quot;%05d %d %05d\n&quot;, l3[i].head, l3[i].num, l3[i+1].head);
-	}
-	printf(&quot;%05d %d -1\n&quot;, l3[l3.size()-1].head, l3[l3.size()-1].num);
 	return 0;
 }
 </code></pre>

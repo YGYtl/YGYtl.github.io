@@ -36,16 +36,14 @@
             <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C%E7%9A%84%E5%8C%BA%E5%88%AB">并发与并行的区别</a>
+<li>
 <ul>
-<li><a href="#%E5%B9%B6%E5%8F%91">并发</a></li>
-<li><a href="#%E5%B9%B6%E8%A1%8C">并行</a></li>
-</ul>
-</li>
-<li><a href="#%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5">同步与异步</a>
-<ul>
-<li><a href="#%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B">异步编程：</a></li>
-<li><a href="#%E5%BC%82%E6%AD%A5-io-%E6%93%8D%E4%BD%9C">异步 I/O 操作</a></li>
+<li><a href="#input-specification">Input Specification:</a></li>
+<li><a href="#output-specification">Output Specification:</a></li>
+<li><a href="#sample-input-1">Sample Input 1:</a></li>
+<li><a href="#sample-output-1">Sample Output 1:</a></li>
+<li><a href="#sample-input-2">Sample Input 2:</a></li>
+<li><a href="#sample-output-2">Sample Output 2:</a></li>
 </ul>
 </li>
 </ul>
@@ -96,76 +94,159 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">P2 并发与并行的区别、同步与异步的解析</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1082 Read Number in Chinese (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-01 / 3 min read
+          2020-06-07 / 5 min read
         </div>
         
         <div class="post-content yue">
-          <h2 id="并发与并行的区别">并发与并行的区别</h2>
-<h3 id="并发">并发</h3>
-<p>并发：每个时间段只允许处理一个进程<br>
-多个进程看似在同步运行，但并非正正的在同一时刻同时运行<br>
-例如：一个人一边在煮菜，一边在看书，他不可能在煮菜时同时看书，<br>
-只能先把菜放入锅里煮时，抽空走出厨房，回到房里看书，当菜煮好了，<br>
-又要放下书，回去把菜翻炒翻炒。炒菜和看书看似同时进行，但实际上，<br>
-炒菜和看书，一个时间段只能处理其一。</p>
-<h3 id="并行">并行</h3>
-<p>并行：多个进程在同一时刻同时运行<br>
-例如：类似有多核CPU处理程序，还是炒菜和看书的例子，<br>
-就就好像有两个人在处理，一个人在炒菜，同时，另一个人在看书，<br>
-这两件事是同一时刻同时进行的。</p>
-<p>Python中如何实现并发进程？？？<br>
-利用 多进程、多线程、异步编程即可</p>
-<p>Multiple Processes<br>
-抢占式多任务，操作系统调度，可使用多核CPU</p>
-<p>Multiple Threads<br>
-抢占式多任务，操作系统调度，不能使用多核CPU</p>
-<p>Asynchronous Programming<br>
-协作式多任务，单进程、单线程</p>
-<h2 id="同步与异步">同步与异步</h2>
-<p>先看同步对弈和异步对弈</p>
-<p>前提条件：假设A要与B<sub>1</sub> ~ B<sub>12</sub> 对弈，A思考需要5s，B<sub>1</sub> ~ B<sub>12</sub> 中，每个人要思考55s，对局需要30个回合才能分输赢，下棋时常忽略不计。</p>
-<p>同步对弈 Synchronous<br>
-同步对弈指：A与B<sub>1</sub>对弈完成后，才开始与B<sub>2</sub>对弈，以此类推，所以A走完30个回合的总时间是(5+55)*30*12=21600s</p>
-<p>异步对弈 Asychronous<br>
-异步对弈指：A与B<sub>1</sub>对弈时，A先下花了5s与B<sub>1</sub>下第一回合，B<sub>1</sub>需要花55s的时间思考，A不等待B<sub>1</sub>，直接与B<sub>2</sub>对弈，一直到与B<sub>12</sub>对弈了后，才返回跟B<sub>1</sub>对弈。而这时，A走完每个棋局的第一步需要花费12*5=60s，60s过去B<sub>1</sub>已经走完第一步，A与B<sub>1</sub>进行第二回合的对弈。A走完30个回合的总时间是60*30=1800s</p>
-<p>21600/1800 = 12，异步对弈效率提高了12倍</p>
-<h3 id="异步编程">异步编程：</h3>
-<p>指在 单线程 中 并发 执行多个任务，当一个任务在等待数据时，它会释放 CPU 资源，</p>
-<p>转而执行其它任务，通过程序员自己主动切换任务来最小化空闲时间。<br>
-异步实现：异步函数在等待数据时被暂停执行，当数据到达时，又能够在被暂停的位置处恢复执行。</p>
-<h3 id="异步-io-操作">异步 I/O 操作</h3>
-<p>指当你发起一个 I/O 操作（比如，等待网络图片数据的到来），却不用等它结束，<br>
-你可以继续去做其它的事情，当它结束时，你会得到通知，然后再回来接着处理这个 I/O 后续的操作。<br>
-而 同步 I/O 操作 则会被阻塞在 I/O 操作上直到它完成，这期间 CPU 做了很多事，只是没有运行你的程序。</p>
+          <p>1082 Read Number in Chinese (25分)</p>
+<p>Given an integer with no more than 9 digits, you are supposed to read it in the traditional Chinese way. Output <code>Fu</code> first if it is negative. For example, -123456789 is read as <code>Fu yi Yi er Qian san Bai si Shi wu Wan liu Qian qi Bai ba Shi jiu</code>. Note: zero (<code>ling</code>) must be handled correctly according to the Chinese tradition. For example, 100800 is <code>yi Shi Wan ling ba Bai</code>.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case, which gives an integer with no more than 9 digits.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print in a line the Chinese way of reading the number. The characters are separated by a space and there must be no extra space at the end of the line.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">-123456789
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">Fu yi Yi er Qian san Bai si Shi wu Wan liu Qian qi Bai ba Shi jiu
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">100800
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">yi Shi Wan ling ba Bai
+</code></pre>
+<hr>
+<p>题目描述：将数字转化为字母拼音的格式</p>
+</br>
+<p>输入：不超过9 digits的数</p>
+<p>输出：汉字拼音格式</p>
+</br>
+<p>解题思路：把几个坑说下，测试点3是输入0的时候是否输出'ling'。难点是对零的处理，给几个测试数据吧，测试通过基本就行了；这里提供两个写法，细节处理有些许不同。</p>
+<pre><code>9090909
+jiu Bai ling jiu Wan ling jiu Bai ling jiu
+
+100000009
+yi Yi Wan ling jiu
+
+0
+ling
+
+10086
+yi Wan ling ba Shi liu
+
+110110
+yi Shi yi Wan ling yi Bai yi Shi
+</code></pre>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+//方法一
+int main()
+{
+	string s;
+	cin &gt;&gt; s;
+	map&lt;int,string&gt; p;
+	p[0]=&quot;ling&quot;; p[1]=&quot;yi&quot;; p[2]=&quot;er&quot;; p[3]=&quot;san&quot;; p[4]=&quot;si&quot;; p[5]=&quot;wu&quot;;
+	p[6]=&quot;liu&quot;; p[7]=&quot;qi&quot;; p[8]=&quot;ba&quot;; p[9]=&quot;jiu&quot;;
+	if(s[0]=='-'){
+		printf(&quot;Fu &quot;);
+	}
+	else s = &quot;+&quot;+s;
+	string ans=&quot;&quot;;
+	bool flag = false;
+	int l = s.size();
+	for(int i=1; i&lt;l; i++){
+		if(s[i]=='0'){
+			if(l-i==5) ans += &quot; Wan&quot;; 
+			flag = true;
+			continue;
+		}
+		else{
+			if(i!=1) ans += &quot; &quot;;
+			if(flag){
+				ans+= p[0] + &quot; &quot;;
+			}
+			flag = false;
+			if(l-i==1) ans += p[s[i]-'0'];
+			if(l-i==2||l-i==6) ans += p[s[i]-'0'] + &quot; Shi&quot;;
+			if(l-i==3||l-i==7) ans += p[s[i]-'0'] + &quot; Bai&quot;;
+			if(l-i==4||l-i==8) ans += p[s[i]-'0'] + &quot; Qian&quot;;
+			if(l-i==5) ans += p[s[i]-'0'] + &quot; Wan&quot;;
+			if(l-i==9) ans += p[s[i]-'0'] + &quot; Yi&quot;;
+		}
+	}
+	if(s==&quot;+0&quot;||s==&quot;-0&quot;) ans = &quot;ling&quot;;
+	cout &lt;&lt; ans &lt;&lt; endl;
+	return 0;
+}
+</code></pre>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+//方法二
+int main()
+{
+	map&lt;int,string&gt; p;
+	p[0] = &quot;ling&quot;; p[1] = &quot;yi&quot;; p[2] = &quot;er&quot;; p[3] = &quot;san&quot;;
+	p[4] = &quot;si&quot;; p[5] = &quot;wu&quot;; p[6] = &quot;liu&quot;; p[7] = &quot;qi&quot;;
+	p[8] = &quot;ba&quot;; p[9] = &quot;jiu&quot;;
+	string str, ans=&quot;&quot;;
+	cin &gt;&gt; str;
+	int l, s=0;
+	bool flag = false;
+	l = str.length();
+	if(str[0]=='-'){
+		ans += &quot;Fu&quot;;
+		s++; l--; flag = true;
+	}
+	bool f1=false, f2=false, f3=false;
+	for(int i=s; i&lt;str.length(); i++,l--){
+		f1 = false;
+		if(l&gt;=5&amp;&amp;l&lt;=8) f2 = true;
+		if(str[i]=='0') f3 = true;
+		else{
+			f1 = true;
+			if(flag) ans += &quot; &quot;;
+			if(f3) ans += &quot;ling &quot;;
+			ans += p[str[i]-'0'];
+			flag = true;
+			f3 = false;
+		}
+		if(f1){
+			if(l==2||l==6) ans += &quot; Shi&quot;;
+			if(l==3||l==7) ans += &quot; Bai&quot;;
+			if(l==4||l==8) ans += &quot; Qian&quot;;
+			if(l==9) ans += &quot; Yi&quot;;
+		}
+		if(f2&amp;&amp;l==5){
+			ans += &quot; Wan&quot;; f2 = false;
+		}
+	}
+	if(str==&quot;0&quot;) ans = &quot;ling&quot;;
+	cout &lt;&lt; ans &lt;&lt; endl;
+	return 0;
+}
+</code></pre>
 
         </div>
 
         
-          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/c9qYaqYN9/">
-            <span class="flex-auto">Python3 web爬虫</span>
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
+            <span class="flex-auto">PAT (Advanced Level) Practice</span>
           </a>
         
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1071-speech-patterns-25-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1071 Speech Patterns (25分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1066-root-of-avl-tree-25-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1080-graduate-admission-30-fen-ti-jie/">
                 <h3 class="post-title">
-                  1066 Root of AVL Tree (25分)题解
+                  1080 Graduate Admission (30分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
