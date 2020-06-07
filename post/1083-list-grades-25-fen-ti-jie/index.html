@@ -94,68 +94,86 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1069 The Black Hole of Numbers (20分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1083 List Grades (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-02 / 3 min read
+          2020-06-07 / 3 min read
         </div>
         
         <div class="post-content yue">
-          <p>1069 The Black Hole of Numbers (20分)</p>
-<p>For any 4-digit integer except the ones with all the digits being the same, if we sort the digits in non-increasing order first, and then in non-decreasing order, a new number can be obtained by taking the second number from the first one. Repeat in this manner we will soon end up at the number <code>6174</code> -- the <strong>black hole</strong> of 4-digit numbers. This number is named Kaprekar Constant.</p>
-<p>For example, start from <code>6767</code>, we'll get:</p>
-<pre><code>7766 - 6677 = 1089
-9810 - 0189 = 9621
-9621 - 1269 = 8352
-8532 - 2358 = 6174
-7641 - 1467 = 6174
-... ...
-</code></pre>
-<p>Given any 4-digit number, you are supposed to illustrate the way it gets into the black hole.</p>
+          <p>1083 List Grades (25分)</p>
+<p>Given a list of <em>N</em> student records with name, ID and grade. You are supposed to sort the records with respect to the grade in non-increasing order, and output those student records of which the grades are in a given interval.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case which gives a positive integer <em>N</em> in the range (0,10<sup>4</sup>).</p>
+<p>Each input file contains one test case. Each case is given in the following format:</p>
+<pre><code>N
+name[1] ID[1] grade[1]
+name[2] ID[2] grade[2]
+... ...
+name[N] ID[N] grade[N]
+grade1 grade2
+</code></pre>
+<p>where <code>name[i]</code> and <code>ID[i]</code> are strings of no more than 10 characters with no space, <code>grade[i]</code> is an integer in [0, 100], <code>grade1</code> and <code>grade2</code> are the boundaries of the grade's interval. It is guaranteed that all the grades are <strong>distinct</strong>.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>If all the 4 digits of <em>N</em> are the same, print in one line the equation <code>N - N = 0000</code>. Else print each step of calculation in a line until <code>6174</code> comes out as the difference. All the numbers must be printed as 4-digit numbers.</p>
+<p>For each test case you should output the student records of which the grades are in the given interval [<code>grade1</code>, <code>grade2</code>] and are in non-increasing order. Each student record occupies a line with the student's name and ID, separated by one space. If there is no student's grade in that interval, output <code>NONE</code> instead.</p>
 <h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">6767
+<pre><code class="language-in">4
+Tom CS000001 59
+Joe Math990112 89
+Mike CS991301 100
+Mary EE990830 95
+60 100
 </code></pre>
 <h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">7766 - 6677 = 1089
-9810 - 0189 = 9621
-9621 - 1269 = 8352
-8532 - 2358 = 6174
+<pre><code class="language-out">Mike CS991301
+Mary EE990830
+Joe Math990112
 </code></pre>
 <h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">2222
+<pre><code class="language-in">2
+Jean AA980920 60
+Ann CS01 80
+90 95
 </code></pre>
 <h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">2222 - 2222 = 0000
+<pre><code class="language-out">NONE
 </code></pre>
 <hr>
-<p>题目描述：有一个小于10000的数n，n中的每一个数字重新排序，可以组成最大数和最小数，例如1001，可以重新排序得到max=1100，min=0011，用max - min得到的值进行循环，最终会得到6174或0000。现在就是要将求得6174或0000的过程模拟出来。</p>
+<p>题目描述：题目给定某些学生的信息，包括姓名、课程号、课程得分，现在给定一个区间的分数，若有学生分数在给定区间内，则输出该学生的姓名及性别。没有则输出NONE。</p>
 </br>
-<p>输入：小于10000的数</p>
-<p>输出：输出max - min的计算结果为6174或0000的过程</p>
+<p>输入：第一行n表示学生信息个数。接下来n行提供学生信息。</p>
+<p>输出：输出分数在给定区间分数的学生信息，输出时按成绩递减输出，若没有符合的学生，输出NONE。</p>
 </br>
-<p>解题思路：利用sscanf和sprintf两个函数进行模拟，使用字符的形式进行排序。注意以数字形式输出是，不满4 digits在前面要补0。</p>
+<p>解题思路：写个cmp函数比较排序一下就行了。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
+struct node{
+	string name, class_name;
+	int score;
+};
+vector&lt;node&gt; v, List;
+bool cmp(node a, node b){
+	return a.score &gt; b.score;
+}
 int main()
 {
-	int val1, val2;
-	int n;
+	int n, l, r;
+	node t;
 	scanf(&quot;%d&quot;, &amp;n);
-	char s[10];
-	while(n){
-		sprintf(s, &quot;%04d&quot;, n);// 发送格式化输出到 s
-		sort(s,s+4);
-		sscanf(s, &quot;%d&quot;, &amp;val2);//从字符串读取格式化输入 s -&gt; val2
-		reverse(s,s+4);
-		sscanf(s, &quot;%d&quot;, &amp;val1);//s -&gt;val1
-		int g = val1 - val2;
-		printf(&quot;%04d - %04d = %04d\n&quot;, val1, val2, g);
-		if(g==0 || g==6174) break;
-		n = g;
+	for(int i=0; i&lt;n; i++){
+		cin &gt;&gt; t.name &gt;&gt; t.class_name &gt;&gt; t.score;
+		v.push_back(t);
+	}
+	scanf(&quot;%d %d&quot;, &amp;l, &amp;r);
+	for(int i=0; i&lt;n; i++){
+		t = v[i];
+		if(t.score &gt;= l &amp;&amp; t.score &lt;= r){
+			List.push_back(t);
+		}
+	}
+	sort(List.begin(),List.end(),cmp);
+	if(List.size()==0) printf(&quot;NONE&quot;);
+	for(int i=0; i&lt;List.size(); i++){
+		cout &lt;&lt; List[i].name &lt;&lt; &quot; &quot; &lt;&lt; List[i].class_name &lt;&lt; endl;
 	}
 	return 0;
 }
@@ -172,21 +190,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1053-path-of-equal-weight-30-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1053 Path of Equal Weight (30分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1071-speech-patterns-25-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1082-read-number-in-chinese-25-fen-ti-jie/">
                 <h3 class="post-title">
-                  1071 Speech Patterns (25分)题解
+                  1082 Read Number in Chinese (25分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
