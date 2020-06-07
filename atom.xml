@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-06T10:15:16.146Z</updated>
+    <updated>2020-06-07T09:14:19.717Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,129 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1080 Graduate Admission (30分)题解]]></title>
+        <id>https://ygytl.github.io/post/1080-graduate-admission-30-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1080-graduate-admission-30-fen-ti-jie/">
+        </link>
+        <updated>2020-06-07T09:14:00.000Z</updated>
+        <content type="html"><![CDATA[<p>1080 Graduate Admission (30分)</p>
+<p>It is said that in 2011, there are about 100 graduate schools ready to proceed over 40,000 applications in Zhejiang Province. It would help a lot if you could write a program to automate the admission procedure.</p>
+<p>Each applicant will have to provide two grades: the national entrance exam grade <em>G**E</em>, and the interview grade <em>G**I</em>. The final grade of an applicant is (<em>G**E</em>+<em>G**I</em>)/2. The admission rules are:</p>
+<ul>
+<li>The applicants are ranked according to their final grades, and will be admitted one by one from the top of the rank list.</li>
+<li>If there is a tied final grade, the applicants will be ranked according to their national entrance exam grade <em>G**E</em>. If still tied, their ranks must be the same.</li>
+<li>Each applicant may have <em>K</em> choices and the admission will be done according to his/her choices: if according to the rank list, it is one's turn to be admitted; and if the quota of one's most preferred shcool is not exceeded, then one will be admitted to this school, or one's other choices will be considered one by one in order. If one gets rejected by all of preferred schools, then this unfortunate applicant will be rejected.</li>
+<li>If there is a tied rank, and if the corresponding applicants are applying to the same school, then that school must admit all the applicants with the same rank, <strong>even if its quota will be exceeded</strong>.</li>
+</ul>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case.</p>
+<p>Each case starts with a line containing three positive integers: <em>N</em> (≤40,000), the total number of applicants; <em>M</em> (≤100), the total number of graduate schools; and <em>K</em> (≤5), the number of choices an applicant may have.</p>
+<p>In the next line, separated by a space, there are <em>M</em> positive integers. The <em>i</em>-th integer is the quota of the <em>i</em>-th graduate school respectively.</p>
+<p>Then <em>N</em> lines follow, each contains 2+<em>K</em> integers separated by a space. The first 2 integers are the applicant's <em>G**E</em> and <em>G**I</em>, respectively. The next <em>K</em> integers represent the preferred schools. For the sake of simplicity, we assume that the schools are numbered from 0 to <em>M</em>−1, and the applicants are numbered from 0 to <em>N</em>−1.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case you should output the admission results for all the graduate schools. The results of each school must occupy a line, which contains the applicants' numbers that school admits. The numbers must be in increasing order and be separated by a space. There must be no extra space at the end of each line. If no applicant is admitted by a school, you must output an empty line correspondingly.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">11 6 3
+2 1 2 2 2 3
+100 100 0 1 2
+60 60 2 3 5
+100 90 0 3 4
+90 100 1 2 0
+90 90 5 1 3
+80 90 1 0 2
+80 80 0 1 2
+80 80 0 1 2
+80 70 1 3 2
+70 80 1 2 3
+100 100 0 2 4
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">0 10
+3
+5 6 7
+2 8
+
+1 4
+</code></pre>
+<hr>
+<p>题目描述：学校录取学生的模拟过程</p>
+</br>
+<p>输入：第一行n，m，k。分别为学生人数，学校数，学生可填报志愿数。第二行m个值，分别表示学校录取的人数。接下来n行，为学生的考试成绩GE，GI，以及填报的k个学校。</p>
+<p>输出：每个学校录取的学生编号，从小到大输出。</p>
+<p>录取规则：成绩排序，总分=（GE+GI）/2，总分高排在前面；当总分相同时，GE成绩高排在前面；当总分和GE都相同时，排名并列。如果学校最后录取的学生有多名排名是一样的，超额也要将他们都录取了。</p>
+</br>
+<p>解题思路：模拟题，很容易就把简单的问题复杂化了。先将学生按照成绩排序，分高的选择权。可以从第一名开始按其意愿选择学校，当他选择的学校没有录取满人时，他就会直接被学校录取，当学校录取满人了，其他成绩比较低的就无法再进入这满了人的学校，只能看其他志愿。</p>
+<p>注意：在学校最后录取的学生成绩/排名不唯一时，怎么把排名相同的全部录取？这需要将学校最后录取的人的分数记录下来，就两个数组记录一下就行了。</p>
+<p>模拟题得多做几道，找找感觉！</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 40000+5;
+int n, m, k, snum[200], ltsum[200], ltge[200];
+bool vis[maxn];
+struct node{
+	int ge, gi, id, sum;
+	vector&lt;int&gt; sc;
+	bool operator &lt;( const node &amp;x )const{
+        if( sum!=x.sum ) return sum &gt; x.sum;
+        return ge &gt; x.ge;
+    }
+};
+vector&lt;int&gt; ans[200];
+vector&lt;node&gt; v;
+//bool cmp(node a, node b){
+//	if(a.sum!=b.sum) return a.sum &gt; b.sum;
+//	else return a.ge &gt; b.ge;
+//}
+int main()
+{
+	int g;
+	memset(vis,true,sizeof(vis));
+	scanf(&quot;%d %d %d&quot;, &amp;n, &amp;m, &amp;k);
+	for(int i=0; i&lt;m; i++) scanf(&quot;%d&quot;, &amp;snum[i]);
+	for(int i=0; i&lt;n; i++){//学生 
+		node t;
+		scanf(&quot;%d %d&quot;, &amp;t.ge, &amp;t.gi);
+		t.id = i; t.sum = t.ge+t.gi;
+		for(int j=0; j&lt;k; j++){
+			scanf(&quot;%d&quot;, &amp;g);
+			t.sc.push_back(g);//学生报志愿 
+		}
+		v.push_back(t);
+	}
+//	sort(v.begin(),v.end(),cmp);
+	sort(v.begin(), v.end());
+	for(int i=0; i&lt;n; i++){
+		node t = v[i];
+		for(int j=0; j&lt;k; j++){
+			int cid = t.sc[j];
+			if(!vis[t.id]) continue;
+			if(ans[cid].size()&lt;snum[cid]){
+				ltsum[cid] = t.sum;
+				ltge[cid] = t.ge;
+				ans[cid].push_back(t.id);
+				vis[t.id] = false;
+			}
+			else if(t.sum==ltsum[cid]&amp;&amp;t.ge==ltge[cid]){
+				ans[cid].push_back(t.id);
+				vis[t.id] = false;
+			}
+		}
+	}
+	for(int i=0; i&lt;m; i++){
+		sort(ans[i].begin(),ans[i].end());
+		for(int j=0; j&lt;ans[i].size(); j++){
+			if(j) printf(&quot; &quot;);
+			printf(&quot;%d&quot;, ans[i][j]);
+		}
+		printf(&quot;\n&quot;);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1076 Forwards on Weibo (30分)题解]]></title>
         <id>https://ygytl.github.io/post/1076-forwards-on-weibo-30-fen-ti-jie/</id>
@@ -863,112 +986,6 @@ int main()
 		printf(&quot;%05d %d %05d\n&quot;, l3[i].head, l3[i].num, l3[i+1].head);
 	}
 	printf(&quot;%05d %d -1\n&quot;, l3[l3.size()-1].head, l3[l3.size()-1].num);
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1073 Scientific Notation (20分)题解]]></title>
-        <id>https://ygytl.github.io/post/1073-scientific-notation-20-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1073-scientific-notation-20-fen-ti-jie/">
-        </link>
-        <updated>2020-06-03T04:29:47.000Z</updated>
-        <content type="html"><![CDATA[<p>1073 Scientific Notation (20分)</p>
-<p>Scientific notation is the way that scientists easily handle very large numbers or very small numbers. The notation matches the regular expression [+-][1-9]<code>.</code>[0-9]+E[+-][0-9]+ which means that the integer portion has exactly one digit, there is at least one digit in the fractional portion, and the number and its exponent's signs are always provided even when they are positive.</p>
-<p>Now given a real number <em>A</em> in scientific notation, you are supposed to print <em>A</em> in the conventional notation while keeping all the significant figures.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input contains one test case. For each case, there is one line containing the real number <em>A</em> in scientific notation. The number is no more than 9999 bytes in length and the exponent's absolute value is no more than 9999.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the input number <em>A</em> in the conventional notation, with all the significant figures kept, including trailing zeros.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">+1.23400E-03
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">0.00123400
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">-1.2E+10
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">-12000000000
-</code></pre>
-<hr>
-<p>题目描述：给定一串表达式，其正则表达式可写为 [+-] [1-9] .[0-9]+E[+-][0-9]+，这里提示一下+ 这个符号，在正则表达式中，表示前一个字符的出现次数为&gt;=1。现在要你将这个表达式以它规定的规则输出。</p>
-<p>输出规则：</p>
-<p>1)表达式的第一个字符判断该数为正数或负数，若为负数，则输出'-'号</p>
-<p>2)字母E后接的是正符号 或 负符号，正号表示将这个数扩大，负号表示将这个数缩小</p>
-<p>3)字母E后面接的数字表示扩大或缩小多少，小数点往前移多少位，往后移多少位。</p>
-</br>
-<p>输入：字符串</p>
-<p>输出：按规则输出</p>
-</br>
-<p>解题思路：</p>
-<p>​    表达式中'.'和'E'是固定给出的，可以根据这两个字符将字符串切分。将数字部分提取出来，稍后进行字符串拼接。例如将小数点前的数字记为s1，小数点到字母E之间的数字记为s2，字母E后面的数字记为s3，且将s3转化为整数k，以便将数字放大或缩小。</p>
-<p>​    可以将放大和缩小分开来求。1、若k=0，就表示不需要将数据放大或缩小，直接将s1和s2进行拼接，注意s1和s2之间还需加上个小数点；2、将数据缩小其实就是考虑怎么在数据前补0的问题，讨论要不要补0，或要补多少。直接用k减去s1的长度就能求出该在0.后追加几个0了；3、将数据放大则考虑在s2后补多少个0，这要分两部分讨论，1)当扩大倍数小于s2字符串长度(数据本身的小数点位数)时，这种情况下不用补0，需要把小数点放到正确的位置，再将字符串进行拼接就行。2)当扩大倍数大于s2字符串长度时，需要补0，补多少个0，直接k减去s2字符串长度即可。</p>
-<p>注意：测试点4，就是讨论当扩大倍数小于s2字符串长度(数据本身的小数点位数)时的情况。</p>
-<p>附加测试点4测试数据：</p>
-<p>输入：-1.123456E+03，输出-1123.456</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int get_num(string s){
-	int ans = 0;
-	for(int i=0; i&lt;s.size(); i++){
-		ans = ans*10 + s[i]-'0';
-	}
-	return ans;
-}
-int main()
-{
-	string s, str;
-	cin &gt;&gt; s;
-	if(s[0]=='-') cout &lt;&lt; '-';
-	
-	str = s.substr(1);
-	string s1=&quot;&quot;, s2=&quot;&quot;, s3=&quot;&quot;;
-	int g1=0, g2=0;
-	g1 = str.find('.');
-	g2 = str.find('E');
-	
-	s1 = str.substr(0,g1);
-	s2 = str.substr(g1+1,g2-g1-1);
-	s3 = str.substr(g2+2);
-	
-	int k = get_num(s3);
-	if(k==0){
-		cout &lt;&lt; s1 + '.' + s2 &lt;&lt; endl;
-		return 0;
-	}
-	
-	string ans = &quot;&quot;;
-	if(str[g2+1]=='-'){//前面追加 
-		ans = &quot;0.&quot;;
-		k-=s1.size();
-		while(k){
-			ans += '0';
-			k--;
-		}
-		ans = ans + s1 + s2; 
-	}
-	else{//后面追加 
-		int l = s2.size();
-		if(k-l&lt;0){
-			ans += s1;
-			ans += s2.substr(0,k);
-			ans += '.';
-			ans += s2.substr(k);
-		}
-		else{
-			k-=s2.size();
-			ans = ans + s1 + s2;
-			while(k){
-				ans += '0';
-				k--;
-			}
-		}
-	}
-	cout &lt;&lt; ans &lt;&lt; endl;
 	return 0;
 }
 </code></pre>

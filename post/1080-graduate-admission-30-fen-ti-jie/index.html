@@ -36,7 +36,14 @@
             <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性👇</a></li>
+<li>
+<ul>
+<li><a href="#input-specification">Input Specification:</a></li>
+<li><a href="#output-specification">Output Specification:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -85,57 +92,145 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">Hello Gridea</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1080 Graduate Admission (30分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2018-12-12 / 2 min read
+          2020-06-07 / 7 min read
         </div>
-        
-          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://ygytl.github.io//post-images/hello-gridea.png" alt="">
         
         <div class="post-content yue">
-          <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+          <p>1080 Graduate Admission (30分)</p>
+<p>It is said that in 2011, there are about 100 graduate schools ready to proceed over 40,000 applications in Zhejiang Province. It would help a lot if you could write a program to automate the admission procedure.</p>
+<p>Each applicant will have to provide two grades: the national entrance exam grade <em>G**E</em>, and the interview grade <em>G**I</em>. The final grade of an applicant is (<em>G**E</em>+<em>G**I</em>)/2. The admission rules are:</p>
+<ul>
+<li>The applicants are ranked according to their final grades, and will be admitted one by one from the top of the rank list.</li>
+<li>If there is a tied final grade, the applicants will be ranked according to their national entrance exam grade <em>G**E</em>. If still tied, their ranks must be the same.</li>
+<li>Each applicant may have <em>K</em> choices and the admission will be done according to his/her choices: if according to the rank list, it is one's turn to be admitted; and if the quota of one's most preferred shcool is not exceeded, then one will be admitted to this school, or one's other choices will be considered one by one in order. If one gets rejected by all of preferred schools, then this unfortunate applicant will be rejected.</li>
+<li>If there is a tied rank, and if the corresponding applicants are applying to the same school, then that school must admit all the applicants with the same rank, <strong>even if its quota will be exceeded</strong>.</li>
+</ul>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case.</p>
+<p>Each case starts with a line containing three positive integers: <em>N</em> (≤40,000), the total number of applicants; <em>M</em> (≤100), the total number of graduate schools; and <em>K</em> (≤5), the number of choices an applicant may have.</p>
+<p>In the next line, separated by a space, there are <em>M</em> positive integers. The <em>i</em>-th integer is the quota of the <em>i</em>-th graduate school respectively.</p>
+<p>Then <em>N</em> lines follow, each contains 2+<em>K</em> integers separated by a space. The first 2 integers are the applicant's <em>G**E</em> and <em>G**I</em>, respectively. The next <em>K</em> integers represent the preferred schools. For the sake of simplicity, we assume that the schools are numbered from 0 to <em>M</em>−1, and the applicants are numbered from 0 to <em>N</em>−1.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case you should output the admission results for all the graduate schools. The results of each school must occupy a line, which contains the applicants' numbers that school admits. The numbers must be in increasing order and be separated by a space. There must be no extra space at the end of each line. If no applicant is admitted by a school, you must output an empty line correspondingly.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">11 6 3
+2 1 2 2 2 3
+100 100 0 1 2
+60 60 2 3 5
+100 90 0 3 4
+90 100 1 2 0
+90 90 5 1 3
+80 90 1 0 2
+80 80 0 1 2
+80 80 0 1 2
+80 70 1 3 2
+70 80 1 2 3
+100 100 0 2 4
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">0 10
+3
+5 6 7
+2 8
+
+1 4
+</code></pre>
+<hr>
+<p>题目描述：学校录取学生的模拟过程</p>
+</br>
+<p>输入：第一行n，m，k。分别为学生人数，学校数，学生可填报志愿数。第二行m个值，分别表示学校录取的人数。接下来n行，为学生的考试成绩GE，GI，以及填报的k个学校。</p>
+<p>输出：每个学校录取的学生编号，从小到大输出。</p>
+<p>录取规则：成绩排序，总分=（GE+GI）/2，总分高排在前面；当总分相同时，GE成绩高排在前面；当总分和GE都相同时，排名并列。如果学校最后录取的学生有多名排名是一样的，超额也要将他们都录取了。</p>
+</br>
+<p>解题思路：模拟题，很容易就把简单的问题复杂化了。先将学生按照成绩排序，分高的选择权。可以从第一名开始按其意愿选择学校，当他选择的学校没有录取满人时，他就会直接被学校录取，当学校录取满人了，其他成绩比较低的就无法再进入这满了人的学校，只能看其他志愿。</p>
+<p>注意：在学校最后录取的学生成绩/排名不唯一时，怎么把排名相同的全部录取？这需要将学校最后录取的人的分数记录下来，就两个数组记录一下就行了。</p>
+<p>模拟题得多做几道，找找感觉！</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 40000+5;
+int n, m, k, snum[200], ltsum[200], ltge[200];
+bool vis[maxn];
+struct node{
+	int ge, gi, id, sum;
+	vector&lt;int&gt; sc;
+	bool operator &lt;( const node &amp;x )const{
+        if( sum!=x.sum ) return sum &gt; x.sum;
+        return ge &gt; x.ge;
+    }
+};
+vector&lt;int&gt; ans[200];
+vector&lt;node&gt; v;
+//bool cmp(node a, node b){
+//	if(a.sum!=b.sum) return a.sum &gt; b.sum;
+//	else return a.ge &gt; b.ge;
+//}
+int main()
+{
+	int g;
+	memset(vis,true,sizeof(vis));
+	scanf(&quot;%d %d %d&quot;, &amp;n, &amp;m, &amp;k);
+	for(int i=0; i&lt;m; i++) scanf(&quot;%d&quot;, &amp;snum[i]);
+	for(int i=0; i&lt;n; i++){//学生 
+		node t;
+		scanf(&quot;%d %d&quot;, &amp;t.ge, &amp;t.gi);
+		t.id = i; t.sum = t.ge+t.gi;
+		for(int j=0; j&lt;k; j++){
+			scanf(&quot;%d&quot;, &amp;g);
+			t.sc.push_back(g);//学生报志愿 
+		}
+		v.push_back(t);
+	}
+//	sort(v.begin(),v.end(),cmp);
+	sort(v.begin(), v.end());
+	for(int i=0; i&lt;n; i++){
+		node t = v[i];
+		for(int j=0; j&lt;k; j++){
+			int cid = t.sc[j];
+			if(!vis[t.id]) continue;
+			if(ans[cid].size()&lt;snum[cid]){
+				ltsum[cid] = t.sum;
+				ltge[cid] = t.ge;
+				ans[cid].push_back(t.id);
+				vis[t.id] = false;
+			}
+			else if(t.sum==ltsum[cid]&amp;&amp;t.ge==ltge[cid]){
+				ans[cid].push_back(t.id);
+				vis[t.id] = false;
+			}
+		}
+	}
+	for(int i=0; i&lt;m; i++){
+		sort(ans[i].begin(),ans[i].end());
+		for(int j=0; j&lt;ans[i].size(); j++){
+			if(j) printf(&quot; &quot;);
+			printf(&quot;%d&quot;, ans[i][j]);
+		}
+		printf(&quot;\n&quot;);
+	}
+	return 0;
+}
+</code></pre>
 
         </div>
 
-        
-          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/nd40Wpgts/">
-            <span class="flex-auto">Gridea</span>
-          </a>
         
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/markdown-chang-yong-kuai-jie-jian/">
+
+          
+            <div class="next-post">
+              <a href="https://ygytl.github.io/post/1076-forwards-on-weibo-30-fen-ti-jie/">
                 <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  Markdown常用快捷键
+                  1076 Forwards on Weibo (30分)题解
+                  <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
             </div>
-          
-
           
         </div>
 
