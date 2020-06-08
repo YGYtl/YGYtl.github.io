@@ -92,100 +92,123 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1079 Total Sales of Supply Chain (25分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1086 Tree Traversals Again (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-06 / 5 min read
+          2020-06-08 / 5 min read
         </div>
         
         <div class="post-content yue">
-          <p>1079 Total Sales of Supply Chain (25分)</p>
-<p>A supply chain is a network of retailers（零售商）, distributors（经销商）, and suppliers（供应商）-- everyone involved in moving a product from supplier to customer.</p>
-<p>Starting from one root supplier, everyone on the chain buys products from one's supplier in a price <em>P</em> and sell or distribute them in a price that is <em>r</em>% higher than <em>P</em>. Only the retailers will face the customers. It is assumed that each member in the supply chain has exactly one supplier except the root supplier, and there is no supply cycle.</p>
-<p>Now given a supply chain, you are supposed to tell the total sales from all the retailers.</p>
+          <p>1086 Tree Traversals Again (25分)</p>
+<p>An inorder binary tree traversal can be implemented in a non-recursive way with a stack. For example, suppose that when a 6-node binary tree (with the keys numbered from 1 to 6) is traversed, the stack operations are: push(1); push(2); push(3); pop(); pop(); push(4); pop(); pop(); push(5); push(6); pop(); pop(). Then a unique binary tree (shown in Figure 1) can be generated from this sequence of operations. Your task is to give the postorder traversal sequence of this tree.</p>
+<p><img src="https://images.ptausercontent.com/30" alt="img" loading="lazy"><br>
+Figure 1</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains three positive numbers: <em>N</em> (≤105), the total number of the members in the supply chain (and hence their ID's are numbered from 0 to <em>N</em>−1, and the root supplier's ID is 0); <em>P</em>, the unit price given by the root supplier; and <em>r</em>, the percentage rate of price increment for each distributor or retailer. Then <em>N</em> lines follow, each describes a distributor or retailer in the following format:</p>
-<p><em>K**i</em> ID[1] ID[2] ... ID[<em>K**i</em>]</p>
-<p>where in the <em>i</em>-th line, <em>K**i</em> is the total number of distributors or retailers who receive products from supplier <em>i</em>, and is then followed by the ID's of these distributors or retailers. <em>K**j</em> being 0 means that the <em>j</em>-th member is a retailer, then instead the total amount of the product will be given after <em>K**j</em>. All the numbers in a line are separated by a space.</p>
+<p>Each input file contains one test case. For each case, the first line contains a positive integer <em>N</em> (≤30) which is the total number of nodes in a tree (and hence the nodes are numbered from 1 to <em>N</em>). Then 2<em>N</em> lines follow, each describes a stack operation in the format: &quot;Push X&quot; where X is the index of the node being pushed onto the stack; or &quot;Pop&quot; meaning to pop one node from the stack.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the total sales we can expect from all the retailers, accurate up to 1 decimal place. It is guaranteed that the number will not exceed 1010.</p>
+<p>For each test case, print the postorder traversal sequence of the corresponding tree in one line. A solution is guaranteed to exist. All the numbers must be separated by exactly one space, and there must be no extra space at the end of the line.</p>
 <h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">10 1.80 1.00
-3 2 3 5
-1 9
-1 4
-1 7
-0 7
-2 6 1
-1 8
-0 9
-0 4
-0 3
+<pre><code class="language-in">6
+Push 1
+Push 2
+Push 3
+Pop
+Pop
+Push 4
+Pop
+Pop
+Push 5
+Push 6
+Pop
+Pop
 </code></pre>
 <h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">42.4
+<pre><code class="language-out">3 4 2 6 5 1
 </code></pre>
 <hr>
-<p>题目描述：有一条销售链，供应商、经销商、零售商，供应商提供货物给经销商，经销商提供货物给零售商，题目要求出零售商售出的总额是多少。0号索引表示供应商。供应商的售价p，经销商的售价p1 = r%*p，零售商售价p2 = r%*p1。</p>
+<p>题目描述：题目给定一个二叉树的中序遍历，不过，这个中序遍历要用过出栈入栈的方法得到，出栈的顺序就是这棵二叉树的中序遍历，而入栈的顺序就是先序遍历(这个有一丢丢难看出来哈，画画图就知道了)。给出先序和中序遍历，求后序遍历。</p>
 </br>
-<p>输入：第一行三个数，n为节点数，p为商品原价，即供应商的出价，r为售价的增幅。接下来n行（表示0~n-1个结点的情况），分两种情况</p>
-<p>1)第一个值为0，第二个值就表示零售商需要销售商品的数量</p>
-<p>2)第一个值不为0，则第一个值表示第i个结点的子结点个数m，后面接着m个子结点的编号。</p>
-<p>输出：零售商售出的总额，保留一位小数</p>
+<p>输入：第一行n为二叉树的节点数，接下来2*n行出栈入栈操作。</p>
+<p>输出：输出这棵树的后序遍历。每个值间有个空格隔开。</p>
 </br>
-<p>解题思路：典型的bfs题，使用邻接表存树，节约空间。</p>
-<p>注意，题目给的是r，我们计算时要计算r%，所以r*1.0/100。</p>
+<p>解题思路：分别将先序遍历和中序遍历用数组存放。然后通过递归得到后序遍历结果。怎么实现已知先序和中序遍历，就能得到后序遍历呢？主要找根节点，从先序遍历的第一个值，就是树的根结点开始递归。我们用样例来分析。</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>In</td>
+<td>3</td>
+<td>2</td>
+<td>4</td>
+<td>1</td>
+<td>6</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>后序遍历结果：3 4 2 6 5 1</p>
+<p>1）递归一开始，root=0，inl=0，inr=n-1=5，这些传入函数的值分别是根节点在先序遍历Pre中的索引位置，中序遍历的左右索引边界。</p>
+<p>2）递归的退出口是非常重要的，要想好放在哪。这里就是当inl大于inr时，递归结束。</p>
+<p>3）while循环得到的是根节点在中序遍历中的位置，用i来标记。</p>
+<p>4）接着分别找到先序遍历中，当前根节点的左右子结点索引，充当递归的根节点索引。为什么找索引，知道索引，那么值也就很容易得到啦</p>
+<p>5）左子结点直接root+1就行；右子节点需要计算一下，式子为root+(i-inl)+1，i-inl是左子树值的个数，这里需要把他们排除了，再加一，就得到右子节点的索引了。</p>
+<p>6）为什么post_back写在最后面，题目求的是后序遍历嘛。放在while循环后面得到先序遍历，放在两个get_post之间得到中序遍历。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 int n;
-double p, r;
-const int maxn = 200005;
-vector&lt;int&gt; G[maxn];
-map&lt;int,int&gt; lvs_sell;
-struct node{
-	int index;
-	double price;
-};
-void bfs(){
-	node t, tt;
-	t.index = 0; t.price = p;
-	queue&lt;node&gt; q;
-	q.push(t);
-	double ans = 0;
-	while(!q.empty()){
-		t = q.front();
-		q.pop();
-		if(G[t.index].size()==0){
-			ans += lvs_sell[t.index]*t.price;
-		}
-		else{
-			for(int i=0; i&lt;G[t.index].size(); i++){
-				int v = G[t.index][i];
-				tt.index = v;
-				tt.price = r*t.price;
-				q.push(tt);
-			}
-		}
-	}
-	printf(&quot;%.1f&quot;, ans);
+const int maxn = 100;
+int in[maxn], pre[maxn];
+vector&lt;int&gt; post;
+void get_post(int root, int l, int r){
+	if(l&gt;r) return ;
+	int i = l;
+	while(i&lt;=r&amp;&amp;pre[root]!=in[i]) i++;
+	get_post(root+1,l,i-1);
+	get_post(root+i-l+1,i+1,r);
+	post.push_back(pre[root]);
 }
 int main()
 {
-	scanf(&quot;%d %lf %lf&quot;, &amp;n, &amp;p, &amp;r);
-	r = r*1.0/100 + 1;
-	int a, b;
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
-		if(a==0) lvs_sell[i] = b;
+	string str;
+	int c1=0, c2=0, c3=0, k;
+	stack&lt;int&gt; s; 
+	cin &gt;&gt; n;
+	for(int i=0; i&lt;2*n; i++){
+		cin &gt;&gt; str;
+		if(str==&quot;Push&quot;){
+			cin &gt;&gt; k;
+			pre[c1++] = k;
+			s.push(k);
+		}
 		else{
-			G[i].push_back(b);
-			for(int j=1; j&lt;a; j++){
-				scanf(&quot;%d&quot;, &amp;b);
-				G[i].push_back(b);
-			}
+			in[c2++] = s.top();
+			s.pop();
 		}
 	}
-	bfs();
+	get_post(0, 0, n-1);
+	for(int i=0; i&lt;post.size(); i++){
+		if(i) printf(&quot; &quot;);
+		printf(&quot;%d&quot;, post[i]);
+	}
 	return 0;
 }
 </code></pre>
@@ -193,29 +216,16 @@ int main()
         </div>
 
         
-          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
-            <span class="flex-auto">PAT (Advanced Level) Practice</span>
-          </a>
-        
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1081-rational-sum-20-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1081 Rational Sum (20分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1078-hashing-25-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1085-perfect-sequence-25-fen-ti-jie/">
                 <h3 class="post-title">
-                  1078 Hashing (25分)题解
+                  1085 Perfect Sequence (25分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>

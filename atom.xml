@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-07T16:12:42.175Z</updated>
+    <updated>2020-06-08T13:09:25.122Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,128 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1086 Tree Traversals Again (25分)题解]]></title>
+        <id>https://ygytl.github.io/post/1086-tree-traversals-again-25-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1086-tree-traversals-again-25-fen-ti-jie/">
+        </link>
+        <updated>2020-06-08T13:08:50.000Z</updated>
+        <content type="html"><![CDATA[<p>1086 Tree Traversals Again (25分)</p>
+<p>An inorder binary tree traversal can be implemented in a non-recursive way with a stack. For example, suppose that when a 6-node binary tree (with the keys numbered from 1 to 6) is traversed, the stack operations are: push(1); push(2); push(3); pop(); pop(); push(4); pop(); pop(); push(5); push(6); pop(); pop(). Then a unique binary tree (shown in Figure 1) can be generated from this sequence of operations. Your task is to give the postorder traversal sequence of this tree.</p>
+<p><img src="https://images.ptausercontent.com/30" alt="img" loading="lazy"><br>
+Figure 1</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line contains a positive integer <em>N</em> (≤30) which is the total number of nodes in a tree (and hence the nodes are numbered from 1 to <em>N</em>). Then 2<em>N</em> lines follow, each describes a stack operation in the format: &quot;Push X&quot; where X is the index of the node being pushed onto the stack; or &quot;Pop&quot; meaning to pop one node from the stack.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print the postorder traversal sequence of the corresponding tree in one line. A solution is guaranteed to exist. All the numbers must be separated by exactly one space, and there must be no extra space at the end of the line.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">6
+Push 1
+Push 2
+Push 3
+Pop
+Pop
+Push 4
+Pop
+Pop
+Push 5
+Push 6
+Pop
+Pop
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">3 4 2 6 5 1
+</code></pre>
+<hr>
+<p>题目描述：题目给定一个二叉树的中序遍历，不过，这个中序遍历要用过出栈入栈的方法得到，出栈的顺序就是这棵二叉树的中序遍历，而入栈的顺序就是先序遍历(这个有一丢丢难看出来哈，画画图就知道了)。给出先序和中序遍历，求后序遍历。</p>
+</br>
+<p>输入：第一行n为二叉树的节点数，接下来2*n行出栈入栈操作。</p>
+<p>输出：输出这棵树的后序遍历。每个值间有个空格隔开。</p>
+</br>
+<p>解题思路：分别将先序遍历和中序遍历用数组存放。然后通过递归得到后序遍历结果。怎么实现已知先序和中序遍历，就能得到后序遍历呢？主要找根节点，从先序遍历的第一个值，就是树的根结点开始递归。我们用样例来分析。</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>In</td>
+<td>3</td>
+<td>2</td>
+<td>4</td>
+<td>1</td>
+<td>6</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>后序遍历结果：3 4 2 6 5 1</p>
+<p>1）递归一开始，root=0，inl=0，inr=n-1=5，这些传入函数的值分别是根节点在先序遍历Pre中的索引位置，中序遍历的左右索引边界。</p>
+<p>2）递归的退出口是非常重要的，要想好放在哪。这里就是当inl大于inr时，递归结束。</p>
+<p>3）while循环得到的是根节点在中序遍历中的位置，用i来标记。</p>
+<p>4）接着分别找到先序遍历中，当前根节点的左右子结点索引，充当递归的根节点索引。为什么找索引，知道索引，那么值也就很容易得到啦</p>
+<p>5）左子结点直接root+1就行；右子节点需要计算一下，式子为root+(i-inl)+1，i-inl是左子树值的个数，这里需要把他们排除了，再加一，就得到右子节点的索引了。</p>
+<p>6）为什么post_back写在最后面，题目求的是后序遍历嘛。放在while循环后面得到先序遍历，放在两个get_post之间得到中序遍历。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n;
+const int maxn = 100;
+int in[maxn], pre[maxn];
+vector&lt;int&gt; post;
+void get_post(int root, int l, int r){
+	if(l&gt;r) return ;
+	int i = l;
+	while(i&lt;=r&amp;&amp;pre[root]!=in[i]) i++;
+	get_post(root+1,l,i-1);
+	get_post(root+i-l+1,i+1,r);
+	post.push_back(pre[root]);
+}
+int main()
+{
+	string str;
+	int c1=0, c2=0, c3=0, k;
+	stack&lt;int&gt; s; 
+	cin &gt;&gt; n;
+	for(int i=0; i&lt;2*n; i++){
+		cin &gt;&gt; str;
+		if(str==&quot;Push&quot;){
+			cin &gt;&gt; k;
+			pre[c1++] = k;
+			s.push(k);
+		}
+		else{
+			in[c2++] = s.top();
+			s.pop();
+		}
+	}
+	get_post(0, 0, n-1);
+	for(int i=0; i&lt;post.size(); i++){
+		if(i) printf(&quot; &quot;);
+		printf(&quot;%d&quot;, post[i]);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1085 Perfect Sequence (25分)题解]]></title>
         <id>https://ygytl.github.io/post/1085-perfect-sequence-25-fen-ti-jie/</id>
@@ -815,90 +937,6 @@ int main()
 			printf(&quot;%d&quot;, g%n);
 		}
 	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1077 Kuchiguse (20分)题解]]></title>
-        <id>https://ygytl.github.io/post/1077-kuchiguse-20-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1077-kuchiguse-20-fen-ti-jie/">
-        </link>
-        <updated>2020-06-05T14:43:46.000Z</updated>
-        <content type="html"><![CDATA[<p>1077 Kuchiguse (20分)</p>
-<p>The Japanese language is notorious for its sentence ending particles. Personal preference of such particles can be considered as a reflection of the speaker's personality. Such a preference is called &quot;Kuchiguse&quot; and is often exaggerated artistically in Anime and Manga. For example, the artificial sentence ending particle &quot;nyan~&quot; is often used as a stereotype for characters with a cat-like personality:</p>
-<ul>
-<li>Itai nyan~ (It hurts, nyan~)</li>
-<li>Ninjin wa iyada nyan~ (I hate carrots, nyan~)</li>
-</ul>
-<p>Now given a few lines spoken by the same character, can you find her Kuchiguse?</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line is an integer <em>N</em> (2≤<em>N</em>≤100). Following are <em>N</em> file lines of 0~256 (inclusive) characters in length, each representing a character's spoken line. The spoken lines are case sensitive.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the kuchiguse of the character, i.e., the longest common suffix of all <em>N</em> lines. If there is no such suffix, write <code>nai</code>.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">3
-Itai nyan~
-Ninjin wa iyadanyan~
-uhhh nyan~
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">nyan~
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">3
-Itai!
-Ninjinnwaiyada T_T
-T_T
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">nai
-</code></pre>
-<hr>
-<p>题目描述：找到一个人平时说话最常用的结尾语。</p>
-</br>
-<p>输入：第一行n，接下来n行字符串。</p>
-<p>输出：每行共同的后缀字符串。若没有公共字符串后缀，则输出nai。</p>
-</br>
-<p>解题思路：先读入n，然后保存第一串字符串，与之后的n-1串字符串相比较，找到每行中相同的后缀。怎么找呢？比较两个字符串长度，取字符串长度较小的进行for循环，保证字符数组不会越界，两个字符串同时从末尾开始比较。这样就可以得到他们的公共后缀长度啦，当有一组公共后缀长度为0，用flag标记一下，最后输出结果就行。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int main()
-{
-	int n, l, l1, l2, common;
-	bool flag = true;
-	scanf(&quot;%d&quot;, &amp;n);
-	getchar();
-	string s, tmp;
-	for(int i=0; i&lt;n; i++){
-		getline(cin,tmp);
-		if(i==0){
-			s = tmp;
-			l1 = s.length();
-			common = l1;
-			continue;
-		}
-		l2 = tmp.length();
-		l = min(l1,l2);
-		int count = 0;
-		for(int j=1; j&lt;=l; j++){
-			if(tmp[l2-j]==s[l1-j]){
-				count++;
-			}
-			else break;
-		}
-		if(count==0){
-			flag = false;
-		}
-		common = min(common,count);
-	}
-	if(flag){
-		string ans = s.substr(l1-common);
-		cout &lt;&lt; ans &lt;&lt; endl;
-	}
-	else printf(&quot;nai\n&quot;);
 	return 0;
 }
 </code></pre>
