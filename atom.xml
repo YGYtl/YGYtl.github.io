@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-11T15:37:18.012Z</updated>
+    <updated>2020-06-12T15:43:26.245Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,57 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[Crackme.exe脱壳与破解]]></title>
+        <id>https://ygytl.github.io/post/crackmeexe-tuo-ke-yu-po-jie/</id>
+        <link href="https://ygytl.github.io/post/crackmeexe-tuo-ke-yu-po-jie/">
+        </link>
+        <updated>2020-06-12T15:37:49.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-首先使用peid工具对软件进行分析查看是否有壳">1. 首先使用PEid工具对软件进行分析，查看是否有壳</h2>
+<p>答：.pediy区块是外壳程序所加载的部分，所以改程序有壳。</p>
+<figure data-type="image" tabindex="1"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps1.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps2.png" alt="img" loading="lazy"></figure>
+<h2 id="2-若有壳按照所学的脱壳方式进行脱壳">2. 若有壳，按照所学的脱壳方式进行脱壳</h2>
+<h3 id="1查找程序的原始入口oep根据跨段指令寻找oep">(1)查找程序的原始入口OEP，根据跨段指令寻找OEP****</h3>
+<h4 id="1-运行ollydbg调试选项中event将暂停点设置在主模块的入口点-打开crackmeexe程序会停在00408000h处">1) 运行OllyDbg，调试选项中“Event”将暂停点设置在主模块的入口点。打开CRACKME.EXE，程序会停在00408000h处。</h4>
+<figure data-type="image" tabindex="3"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps3.png" alt="img" loading="lazy"></figure>
+<h4 id="2按f8执行到00408001h处再按f7跳转到004080c8h处">2)按F8执行到00408001h处，再按F7跳转到004080C8h处。</h4>
+<figure data-type="image" tabindex="4"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps4.png" alt="img" loading="lazy"></figure>
+<h4 id="3004080c8h一直运行到00408135h处会跳转到00020000h处">3)004080C8h一直运行到00408135h处，会跳转到00020000h处。</h4>
+<figure data-type="image" tabindex="5"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps5.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps6.png" alt="img" loading="lazy"></figure>
+<p>跳转后：</p>
+<figure data-type="image" tabindex="7"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps7.png" alt="img" loading="lazy"></figure>
+<h4 id="4从00020000h执行到000200a5h处000200a5h到000200f0h处是一个循环右键选中000200f2h处按f4跳出循环到000200f2h处">4)从00020000h执行到000200A5h处，000200A5h到000200F0h处是一个循环,右键选中000200F2h处，按F4跳出循环到000200F2h处。</h4>
+<figure data-type="image" tabindex="8"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps8.png" alt="img" loading="lazy"></figure>
+<h4 id="5从000200f2h处执行到00020147h处jmp-short-00020147指令表示00020147h处到00020178h处是一个循环jmp-short-0002010c指令表示0002010ch处到0002017dh处是一个循环跳出这两个循环到0002017fh处">5)从000200F2h处执行到00020147h处，jmp short 00020147指令表示00020147h处到00020178h处是一个循环；jmp short 0002010C指令表示0002010Ch处到0002017Dh处是一个循环；跳出这两个循环，到0002017Fh处。</h4>
+<figure data-type="image" tabindex="9"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps9.png" alt="img" loading="lazy"></figure>
+<h4 id="60002017fh处会跳转到000201f6h处">6)0002017Fh处会跳转到000201F6h处。</h4>
+<figure data-type="image" tabindex="10"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps10.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps11.png" alt="img" loading="lazy"></figure>
+<h4 id="7-从0000201f6h处执行到00020282h处-00020283h处-00020283h处分别可以看到popad-push-401000-retn-至此oep就找到了是401000">7) 从0000201F6h处执行到00020282h处、00020283h处、00020283h处，分别可以看到popad、push 401000、retn。至此，OEP就找到了，是401000。</h4>
+<figure data-type="image" tabindex="12"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps12.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps13.png" alt="img" loading="lazy"></figure>
+<h3 id="2抓取内存映像文件">(2)抓取内存映像文件</h3>
+<h4 id="1运行crackmeexe程序运行lordpe在lordpe的选项中勾选full-dump-header-from-disk在窗口选择crackme点击右键执行修正镜像大小接着执行dump-full完整转存命令即可转去内存数据并保存在文件里-命名为dumpedexe">1)运行CRACKME.EXE程序，运行LordPE，在LordPE的选项中勾选“Full dump header from disk”，在窗口选择CRACKME，点击右键，执行“修正镜像大小”，接着执行“dump full(完整转存)”命令，即可转去内存数据并保存在文件里。命名为dumped.exe。</h4>
+<figure data-type="image" tabindex="14"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps14.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps15.png" alt="img" loading="lazy"></figure>
+<h4 id="2-dumpedexe文件是不可运行的">2) dumped.exe文件是不可运行的</h4>
+<figure data-type="image" tabindex="16"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps16.png" alt="img" loading="lazy"></figure>
+<h3 id="3重建输入表">(3)重建输入表</h3>
+<h4 id="1使用importrec工具进行修复-先运行crackmeexe接着运行importrec">1)使用ImportREC工具进行修复。先运行CRACKME.EXE，接着运行ImportREC。</h4>
+<figure data-type="image" tabindex="17"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps17.png" alt="img" loading="lazy"></figure>
+<h4 id="2在下列表框中选择crackmeexe进程在oep处填入oep的rva值1000单击iat-autosearch按钮让其自动检查iat的偏移和大小-弹出如下对话框">2)在下列表框中选择CRACKME.EXE进程，在OEP处填入OEP的RVA值1000，单击“IAT AutoSearch”按钮，让其自动检查IAT的偏移和大小。弹出如下对话框：</h4>
+<figure data-type="image" tabindex="18"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps18.png" alt="img" loading="lazy"></figure>
+<p>表示输入的OEP发挥作用了。</p>
+<h4 id="3单击get-imports按钮让其分析iat结构得到基本信息">3)单击“Get Imports”按钮，让其分析IAT结构得到基本信息</h4>
+<figure data-type="image" tabindex="19"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps19.png" alt="img" loading="lazy"></figure>
+<h4 id="4单击fix-dump选择刚才抓取的dumpedexe映像文件将自动创建一个dumped_exe文件-这个就是脱壳后的文件了该文件可以正常运行-接着使用peidexe查看脱壳前后的区段表">4)单击“Fix Dump”，选择刚才抓取的dumped.exe映像文件，将自动创建一个dumped_.exe文件。这个就是脱壳后的文件了，该文件可以正常运行。接着使用PEiD.exe查看脱壳前后的区段表。</h4>
+<p>脱壳前：</p>
+<h2 id="3脱壳后再对软件代码进行分析分析出自己姓名所对应的正确的序列号">3.脱壳后再对软件代码进行分析，分析出自己姓名所对应的正确的序列号</h2>
+<h2 id="4写出注册机">4.写出注册机</h2>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1088 Rational Arithmetic (20分)题解]]></title>
         <id>https://ygytl.github.io/post/1088-rational-arithmetic-20-fen-ti-jie/</id>
@@ -951,105 +1002,6 @@ int main()
 	if(a1%b1==0) printf(&quot;%d\n&quot;, a1/b1);
 	else if(a1&gt;b1) printf(&quot;%d %d/%d\n&quot;, a1/b1, a1%b1, b1);
 	else printf(&quot;%d/%d&quot;, a1%b1, b1);
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1079 Total Sales of Supply Chain (25分)题解]]></title>
-        <id>https://ygytl.github.io/post/1079-total-sales-of-supply-chain-25-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1079-total-sales-of-supply-chain-25-fen-ti-jie/">
-        </link>
-        <updated>2020-06-06T03:48:31.000Z</updated>
-        <content type="html"><![CDATA[<p>1079 Total Sales of Supply Chain (25分)</p>
-<p>A supply chain is a network of retailers（零售商）, distributors（经销商）, and suppliers（供应商）-- everyone involved in moving a product from supplier to customer.</p>
-<p>Starting from one root supplier, everyone on the chain buys products from one's supplier in a price <em>P</em> and sell or distribute them in a price that is <em>r</em>% higher than <em>P</em>. Only the retailers will face the customers. It is assumed that each member in the supply chain has exactly one supplier except the root supplier, and there is no supply cycle.</p>
-<p>Now given a supply chain, you are supposed to tell the total sales from all the retailers.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains three positive numbers: <em>N</em> (≤105), the total number of the members in the supply chain (and hence their ID's are numbered from 0 to <em>N</em>−1, and the root supplier's ID is 0); <em>P</em>, the unit price given by the root supplier; and <em>r</em>, the percentage rate of price increment for each distributor or retailer. Then <em>N</em> lines follow, each describes a distributor or retailer in the following format:</p>
-<p><em>K**i</em> ID[1] ID[2] ... ID[<em>K**i</em>]</p>
-<p>where in the <em>i</em>-th line, <em>K**i</em> is the total number of distributors or retailers who receive products from supplier <em>i</em>, and is then followed by the ID's of these distributors or retailers. <em>K**j</em> being 0 means that the <em>j</em>-th member is a retailer, then instead the total amount of the product will be given after <em>K**j</em>. All the numbers in a line are separated by a space.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the total sales we can expect from all the retailers, accurate up to 1 decimal place. It is guaranteed that the number will not exceed 1010.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">10 1.80 1.00
-3 2 3 5
-1 9
-1 4
-1 7
-0 7
-2 6 1
-1 8
-0 9
-0 4
-0 3
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">42.4
-</code></pre>
-<hr>
-<p>题目描述：有一条销售链，供应商、经销商、零售商，供应商提供货物给经销商，经销商提供货物给零售商，题目要求出零售商售出的总额是多少。0号索引表示供应商。供应商的售价p，经销商的售价p1 = r%*p，零售商售价p2 = r%*p1。</p>
-</br>
-<p>输入：第一行三个数，n为节点数，p为商品原价，即供应商的出价，r为售价的增幅。接下来n行（表示0~n-1个结点的情况），分两种情况</p>
-<p>1)第一个值为0，第二个值就表示零售商需要销售商品的数量</p>
-<p>2)第一个值不为0，则第一个值表示第i个结点的子结点个数m，后面接着m个子结点的编号。</p>
-<p>输出：零售商售出的总额，保留一位小数</p>
-</br>
-<p>解题思路：典型的bfs题，使用邻接表存树，节约空间。</p>
-<p>注意，题目给的是r，我们计算时要计算r%，所以r*1.0/100。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n;
-double p, r;
-const int maxn = 200005;
-vector&lt;int&gt; G[maxn];
-map&lt;int,int&gt; lvs_sell;
-struct node{
-	int index;
-	double price;
-};
-void bfs(){
-	node t, tt;
-	t.index = 0; t.price = p;
-	queue&lt;node&gt; q;
-	q.push(t);
-	double ans = 0;
-	while(!q.empty()){
-		t = q.front();
-		q.pop();
-		if(G[t.index].size()==0){
-			ans += lvs_sell[t.index]*t.price;
-		}
-		else{
-			for(int i=0; i&lt;G[t.index].size(); i++){
-				int v = G[t.index][i];
-				tt.index = v;
-				tt.price = r*t.price;
-				q.push(tt);
-			}
-		}
-	}
-	printf(&quot;%.1f&quot;, ans);
-}
-int main()
-{
-	scanf(&quot;%d %lf %lf&quot;, &amp;n, &amp;p, &amp;r);
-	r = r*1.0/100 + 1;
-	int a, b;
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
-		if(a==0) lvs_sell[i] = b;
-		else{
-			G[i].push_back(b);
-			for(int j=1; j&lt;a; j++){
-				scanf(&quot;%d&quot;, &amp;b);
-				G[i].push_back(b);
-			}
-		}
-	}
-	bfs();
 	return 0;
 }
 </code></pre>
