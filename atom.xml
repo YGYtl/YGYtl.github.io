@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-13T16:19:42.287Z</updated>
+    <updated>2020-06-13T16:22:44.837Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -60,9 +60,7 @@
 <figure data-type="image" tabindex="12"><img src="https://ygytl.github.io//post-images/1592064647371.JPG" alt="img" loading="lazy"></figure>
 <figure data-type="image" tabindex="13"><img src="https://ygytl.github.io//post-images/1592064654957.JPG" alt="img" loading="lazy"></figure>
  </br>
-<ol start="2">
-<li>dumped.exe文件是不可运行的</li>
-</ol>
+2) dumped.exe文件是不可运行的
 <figure data-type="image" tabindex="14"><img src="https://ygytl.github.io//post-images/1592064667914.JPG" alt="img" loading="lazy"></figure>
  </br>
 <h5 id="3重建输入表"><em><strong>*(3)重建输入表*</strong></em></h5>
@@ -88,14 +86,10 @@
 <p>2)先在00401226h处设置断点,在注册表填入自定义姓名和序列号。</p>
 <figure data-type="image" tabindex="20"><img src="https://ygytl.github.io//post-images/1592064730216.JPG" alt="img" loading="lazy"></figure>
  </br>
-<ol start="3">
-<li>按F9后，得到下图所示；在00401228h处显示了Name框的内容，在00401233h处显示了序列号Serial框的内容。</li>
-</ol>
+<p>3)按F9后，得到下图所示；在00401228h处显示了Name框的内容，在00401233h处显示了序列号Serial框的内容。</p>
 <p><img src="https://ygytl.github.io//post-images/1592064737550.JPG" alt="img" loading="lazy"><br>
-</br></p>
-<ol start="4">
-<li>接下来分析下图语句，首先是一个用户名的计算函数，然后是一个序列号的计算函数，接着比较两个函数计算的结果是否相等，相等则提示正确。</li>
-</ol>
+</br><br>
+4)接下来分析下图语句，首先是一个用户名的计算函数，然后是一个序列号的计算函数，接着比较两个函数计算的结果是否相等，相等则提示正确。</p>
 <figure data-type="image" tabindex="21"><img src="https://ygytl.github.io//post-images/1592064744857.JPG" alt="img" loading="lazy"></figure>
 <pre><code>00401228h call dumped_.0040137E  //用户名的计算函数
 
@@ -110,9 +104,7 @@
 0040124Ch call dumped_.0040134D  //正确提示
 </code></pre>
  </br>
-<ol start="5">
-<li>用户名算法分析</li>
-</ol>
+ 5)用户名算法分析
 <figure data-type="image" tabindex="22"><img src="https://ygytl.github.io//post-images/1592064753430.JPG" alt="img" loading="lazy"></figure>
 <p>0040137Eh先取出用户名，依次去出名字字符串的单字符，将用户名中的英文单词全部转换为大写。</p>
 <p>0040137Eh mov esi, dword ptr ss:[esp+0x4]  //esi=username</p>
@@ -124,9 +116,7 @@
 <p>接着进入4013C2这个函数，将用户名每一位的ASCII值相加。</p>
 <figure data-type="image" tabindex="24"><img src="https://ygytl.github.io//post-images/1592064770608.JPG" alt="img" loading="lazy"></figure>
  </br>
-<ol start="6">
-<li>序列号算法分析</li>
-</ol>
+<p>6)序列号算法分析</p>
 <figure data-type="image" tabindex="25"><img src="https://ygytl.github.io//post-images/1592064778269.JPG" alt="img" loading="lazy"></figure>
 <p>取出每一位的ASCII值，然后减去0x30，即将字母转化为数字然后用edi乘0xA(0x10)，接着用edi再加上序列号。（edi与0x1234进行异或）</p>
  </br>
