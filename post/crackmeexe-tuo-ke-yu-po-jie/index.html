@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1591976602568">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1592062522229">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1591976602568" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1592062522229" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -33,45 +33,7 @@
             文章目录
           </p>
           <div class="toc-container hidden lg:block">
-            <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#1-%E9%A6%96%E5%85%88%E4%BD%BF%E7%94%A8peid%E5%B7%A5%E5%85%B7%E5%AF%B9%E8%BD%AF%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E6%9C%89%E5%A3%B3">1. 首先使用PEid工具对软件进行分析，查看是否有壳</a></li>
-<li><a href="#2-%E8%8B%A5%E6%9C%89%E5%A3%B3%E6%8C%89%E7%85%A7%E6%89%80%E5%AD%A6%E7%9A%84%E8%84%B1%E5%A3%B3%E6%96%B9%E5%BC%8F%E8%BF%9B%E8%A1%8C%E8%84%B1%E5%A3%B3">2. 若有壳，按照所学的脱壳方式进行脱壳</a>
-<ul>
-<li><a href="#1%E6%9F%A5%E6%89%BE%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%8E%9F%E5%A7%8B%E5%85%A5%E5%8F%A3oep%E6%A0%B9%E6%8D%AE%E8%B7%A8%E6%AE%B5%E6%8C%87%E4%BB%A4%E5%AF%BB%E6%89%BEoep">(1)查找程序的原始入口OEP，根据跨段指令寻找OEP****</a>
-<ul>
-<li><a href="#1-%E8%BF%90%E8%A1%8Collydbg%E8%B0%83%E8%AF%95%E9%80%89%E9%A1%B9%E4%B8%ADevent%E5%B0%86%E6%9A%82%E5%81%9C%E7%82%B9%E8%AE%BE%E7%BD%AE%E5%9C%A8%E4%B8%BB%E6%A8%A1%E5%9D%97%E7%9A%84%E5%85%A5%E5%8F%A3%E7%82%B9-%E6%89%93%E5%BC%80crackmeexe%E7%A8%8B%E5%BA%8F%E4%BC%9A%E5%81%9C%E5%9C%A800408000h%E5%A4%84">1) 运行OllyDbg，调试选项中“Event”将暂停点设置在主模块的入口点。打开CRACKME.EXE，程序会停在00408000h处。</a></li>
-<li><a href="#2%E6%8C%89f8%E6%89%A7%E8%A1%8C%E5%88%B000408001h%E5%A4%84%E5%86%8D%E6%8C%89f7%E8%B7%B3%E8%BD%AC%E5%88%B0004080c8h%E5%A4%84">2)按F8执行到00408001h处，再按F7跳转到004080C8h处。</a></li>
-<li><a href="#3004080c8h%E4%B8%80%E7%9B%B4%E8%BF%90%E8%A1%8C%E5%88%B000408135h%E5%A4%84%E4%BC%9A%E8%B7%B3%E8%BD%AC%E5%88%B000020000h%E5%A4%84">3)004080C8h一直运行到00408135h处，会跳转到00020000h处。</a></li>
-<li><a href="#4%E4%BB%8E00020000h%E6%89%A7%E8%A1%8C%E5%88%B0000200a5h%E5%A4%84000200a5h%E5%88%B0000200f0h%E5%A4%84%E6%98%AF%E4%B8%80%E4%B8%AA%E5%BE%AA%E7%8E%AF%E5%8F%B3%E9%94%AE%E9%80%89%E4%B8%AD000200f2h%E5%A4%84%E6%8C%89f4%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF%E5%88%B0000200f2h%E5%A4%84">4)从00020000h执行到000200A5h处，000200A5h到000200F0h处是一个循环,右键选中000200F2h处，按F4跳出循环到000200F2h处。</a></li>
-<li><a href="#5%E4%BB%8E000200f2h%E5%A4%84%E6%89%A7%E8%A1%8C%E5%88%B000020147h%E5%A4%84jmp-short-00020147%E6%8C%87%E4%BB%A4%E8%A1%A8%E7%A4%BA00020147h%E5%A4%84%E5%88%B000020178h%E5%A4%84%E6%98%AF%E4%B8%80%E4%B8%AA%E5%BE%AA%E7%8E%AFjmp-short-0002010c%E6%8C%87%E4%BB%A4%E8%A1%A8%E7%A4%BA0002010ch%E5%A4%84%E5%88%B00002017dh%E5%A4%84%E6%98%AF%E4%B8%80%E4%B8%AA%E5%BE%AA%E7%8E%AF%E8%B7%B3%E5%87%BA%E8%BF%99%E4%B8%A4%E4%B8%AA%E5%BE%AA%E7%8E%AF%E5%88%B00002017fh%E5%A4%84">5)从000200F2h处执行到00020147h处，jmp short 00020147指令表示00020147h处到00020178h处是一个循环；jmp short 0002010C指令表示0002010Ch处到0002017Dh处是一个循环；跳出这两个循环，到0002017Fh处。</a></li>
-<li><a href="#60002017fh%E5%A4%84%E4%BC%9A%E8%B7%B3%E8%BD%AC%E5%88%B0000201f6h%E5%A4%84">6)0002017Fh处会跳转到000201F6h处。</a></li>
-<li><a href="#7-%E4%BB%8E0000201f6h%E5%A4%84%E6%89%A7%E8%A1%8C%E5%88%B000020282h%E5%A4%84-00020283h%E5%A4%84-00020283h%E5%A4%84%E5%88%86%E5%88%AB%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0popad-push-401000-retn-%E8%87%B3%E6%AD%A4oep%E5%B0%B1%E6%89%BE%E5%88%B0%E4%BA%86%E6%98%AF401000">7) 从0000201F6h处执行到00020282h处、00020283h处、00020283h处，分别可以看到popad、push 401000、retn。至此，OEP就找到了，是401000。</a></li>
-</ul>
-</li>
-<li><a href="#2%E6%8A%93%E5%8F%96%E5%86%85%E5%AD%98%E6%98%A0%E5%83%8F%E6%96%87%E4%BB%B6">(2)抓取内存映像文件</a>
-<ul>
-<li><a href="#1%E8%BF%90%E8%A1%8Ccrackmeexe%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8Clordpe%E5%9C%A8lordpe%E7%9A%84%E9%80%89%E9%A1%B9%E4%B8%AD%E5%8B%BE%E9%80%89full-dump-header-from-disk%E5%9C%A8%E7%AA%97%E5%8F%A3%E9%80%89%E6%8B%A9crackme%E7%82%B9%E5%87%BB%E5%8F%B3%E9%94%AE%E6%89%A7%E8%A1%8C%E4%BF%AE%E6%AD%A3%E9%95%9C%E5%83%8F%E5%A4%A7%E5%B0%8F%E6%8E%A5%E7%9D%80%E6%89%A7%E8%A1%8Cdump-full%E5%AE%8C%E6%95%B4%E8%BD%AC%E5%AD%98%E5%91%BD%E4%BB%A4%E5%8D%B3%E5%8F%AF%E8%BD%AC%E5%8E%BB%E5%86%85%E5%AD%98%E6%95%B0%E6%8D%AE%E5%B9%B6%E4%BF%9D%E5%AD%98%E5%9C%A8%E6%96%87%E4%BB%B6%E9%87%8C-%E5%91%BD%E5%90%8D%E4%B8%BAdumpedexe">1)运行CRACKME.EXE程序，运行LordPE，在LordPE的选项中勾选“Full dump header from disk”，在窗口选择CRACKME，点击右键，执行“修正镜像大小”，接着执行“dump full(完整转存)”命令，即可转去内存数据并保存在文件里。命名为dumped.exe。</a></li>
-<li><a href="#2-dumpedexe%E6%96%87%E4%BB%B6%E6%98%AF%E4%B8%8D%E5%8F%AF%E8%BF%90%E8%A1%8C%E7%9A%84">2) dumped.exe文件是不可运行的</a></li>
-</ul>
-</li>
-<li><a href="#3%E9%87%8D%E5%BB%BA%E8%BE%93%E5%85%A5%E8%A1%A8">(3)重建输入表</a>
-<ul>
-<li><a href="#1%E4%BD%BF%E7%94%A8importrec%E5%B7%A5%E5%85%B7%E8%BF%9B%E8%A1%8C%E4%BF%AE%E5%A4%8D-%E5%85%88%E8%BF%90%E8%A1%8Ccrackmeexe%E6%8E%A5%E7%9D%80%E8%BF%90%E8%A1%8Cimportrec">1)使用ImportREC工具进行修复。先运行CRACKME.EXE，接着运行ImportREC。</a></li>
-<li><a href="#2%E5%9C%A8%E4%B8%8B%E5%88%97%E8%A1%A8%E6%A1%86%E4%B8%AD%E9%80%89%E6%8B%A9crackmeexe%E8%BF%9B%E7%A8%8B%E5%9C%A8oep%E5%A4%84%E5%A1%AB%E5%85%A5oep%E7%9A%84rva%E5%80%BC1000%E5%8D%95%E5%87%BBiat-autosearch%E6%8C%89%E9%92%AE%E8%AE%A9%E5%85%B6%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5iat%E7%9A%84%E5%81%8F%E7%A7%BB%E5%92%8C%E5%A4%A7%E5%B0%8F-%E5%BC%B9%E5%87%BA%E5%A6%82%E4%B8%8B%E5%AF%B9%E8%AF%9D%E6%A1%86">2)在下列表框中选择CRACKME.EXE进程，在OEP处填入OEP的RVA值1000，单击“IAT AutoSearch”按钮，让其自动检查IAT的偏移和大小。弹出如下对话框：</a></li>
-<li><a href="#3%E5%8D%95%E5%87%BBget-imports%E6%8C%89%E9%92%AE%E8%AE%A9%E5%85%B6%E5%88%86%E6%9E%90iat%E7%BB%93%E6%9E%84%E5%BE%97%E5%88%B0%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF">3)单击“Get Imports”按钮，让其分析IAT结构得到基本信息</a></li>
-<li><a href="#4%E5%8D%95%E5%87%BBfix-dump%E9%80%89%E6%8B%A9%E5%88%9A%E6%89%8D%E6%8A%93%E5%8F%96%E7%9A%84dumpedexe%E6%98%A0%E5%83%8F%E6%96%87%E4%BB%B6%E5%B0%86%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAdumped_exe%E6%96%87%E4%BB%B6-%E8%BF%99%E4%B8%AA%E5%B0%B1%E6%98%AF%E8%84%B1%E5%A3%B3%E5%90%8E%E7%9A%84%E6%96%87%E4%BB%B6%E4%BA%86%E8%AF%A5%E6%96%87%E4%BB%B6%E5%8F%AF%E4%BB%A5%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C-%E6%8E%A5%E7%9D%80%E4%BD%BF%E7%94%A8peidexe%E6%9F%A5%E7%9C%8B%E8%84%B1%E5%A3%B3%E5%89%8D%E5%90%8E%E7%9A%84%E5%8C%BA%E6%AE%B5%E8%A1%A8">4)单击“Fix Dump”，选择刚才抓取的dumped.exe映像文件，将自动创建一个dumped_.exe文件。这个就是脱壳后的文件了，该文件可以正常运行。接着使用PEiD.exe查看脱壳前后的区段表。</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#3%E8%84%B1%E5%A3%B3%E5%90%8E%E5%86%8D%E5%AF%B9%E8%BD%AF%E4%BB%B6%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90%E5%88%86%E6%9E%90%E5%87%BA%E8%87%AA%E5%B7%B1%E5%A7%93%E5%90%8D%E6%89%80%E5%AF%B9%E5%BA%94%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%9A%84%E5%BA%8F%E5%88%97%E5%8F%B7">3.脱壳后再对软件代码进行分析，分析出自己姓名所对应的正确的序列号</a></li>
-<li><a href="#4%E5%86%99%E5%87%BA%E6%B3%A8%E5%86%8C%E6%9C%BA">4.写出注册机</a></li>
-</ul>
-</li>
-</ul>
-
+            
           </div>
         </div>
       
@@ -118,53 +80,128 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">Crackme.exe脱壳与破解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-12 / 3 min read
+          2020-06-12 / 5 min read
         </div>
         
         <div class="post-content yue">
-          <h2 id="1-首先使用peid工具对软件进行分析查看是否有壳">1. 首先使用PEid工具对软件进行分析，查看是否有壳</h2>
+          <p><strong>1.</strong> <em><strong>*首先使用PEid工具对软件进行分析，查看是否有壳*</strong></em></p>
 <p>答：.pediy区块是外壳程序所加载的部分，所以改程序有壳。</p>
-<figure data-type="image" tabindex="1"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps1.png" alt="img" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps2.png" alt="img" loading="lazy"></figure>
-<h2 id="2-若有壳按照所学的脱壳方式进行脱壳">2. 若有壳，按照所学的脱壳方式进行脱壳</h2>
-<h3 id="1查找程序的原始入口oep根据跨段指令寻找oep">(1)查找程序的原始入口OEP，根据跨段指令寻找OEP****</h3>
-<h4 id="1-运行ollydbg调试选项中event将暂停点设置在主模块的入口点-打开crackmeexe程序会停在00408000h处">1) 运行OllyDbg，调试选项中“Event”将暂停点设置在主模块的入口点。打开CRACKME.EXE，程序会停在00408000h处。</h4>
-<figure data-type="image" tabindex="3"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps3.png" alt="img" loading="lazy"></figure>
-<h4 id="2按f8执行到00408001h处再按f7跳转到004080c8h处">2)按F8执行到00408001h处，再按F7跳转到004080C8h处。</h4>
-<figure data-type="image" tabindex="4"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps4.png" alt="img" loading="lazy"></figure>
-<h4 id="3004080c8h一直运行到00408135h处会跳转到00020000h处">3)004080C8h一直运行到00408135h处，会跳转到00020000h处。</h4>
-<figure data-type="image" tabindex="5"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps5.png" alt="img" loading="lazy"></figure>
-<figure data-type="image" tabindex="6"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps6.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps1.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps2.png" alt="img" loading="lazy"></figure>
+<p><strong>2.</strong> <em><strong>*若有壳，按照所学的脱壳方式进行脱壳*</strong></em></p>
+<p><em><strong>*(1)查找程序的原始入口OEP，根据跨段指令寻找OEP*</strong></em></p>
+<ol>
+<li>运行OllyDbg，调试选项中“Event”将暂停点设置在主模块的入口点。打开CRACKME.EXE，程序会停在00408000h处。</li>
+</ol>
+<figure data-type="image" tabindex="3"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps3.png" alt="img" loading="lazy"></figure>
+<p>2)按F8执行到00408001h处，再按F7跳转到004080C8h处。</p>
+<figure data-type="image" tabindex="4"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps4.png" alt="img" loading="lazy"></figure>
+<p>3)004080C8h一直运行到00408135h处，会跳转到00020000h处。</p>
+<figure data-type="image" tabindex="5"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps5.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps6.png" alt="img" loading="lazy"></figure>
 <p>跳转后：</p>
-<figure data-type="image" tabindex="7"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps7.png" alt="img" loading="lazy"></figure>
-<h4 id="4从00020000h执行到000200a5h处000200a5h到000200f0h处是一个循环右键选中000200f2h处按f4跳出循环到000200f2h处">4)从00020000h执行到000200A5h处，000200A5h到000200F0h处是一个循环,右键选中000200F2h处，按F4跳出循环到000200F2h处。</h4>
-<figure data-type="image" tabindex="8"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps8.png" alt="img" loading="lazy"></figure>
-<h4 id="5从000200f2h处执行到00020147h处jmp-short-00020147指令表示00020147h处到00020178h处是一个循环jmp-short-0002010c指令表示0002010ch处到0002017dh处是一个循环跳出这两个循环到0002017fh处">5)从000200F2h处执行到00020147h处，jmp short 00020147指令表示00020147h处到00020178h处是一个循环；jmp short 0002010C指令表示0002010Ch处到0002017Dh处是一个循环；跳出这两个循环，到0002017Fh处。</h4>
-<figure data-type="image" tabindex="9"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps9.png" alt="img" loading="lazy"></figure>
-<h4 id="60002017fh处会跳转到000201f6h处">6)0002017Fh处会跳转到000201F6h处。</h4>
-<figure data-type="image" tabindex="10"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps10.png" alt="img" loading="lazy"></figure>
-<figure data-type="image" tabindex="11"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps11.png" alt="img" loading="lazy"></figure>
-<h4 id="7-从0000201f6h处执行到00020282h处-00020283h处-00020283h处分别可以看到popad-push-401000-retn-至此oep就找到了是401000">7) 从0000201F6h处执行到00020282h处、00020283h处、00020283h处，分别可以看到popad、push 401000、retn。至此，OEP就找到了，是401000。</h4>
-<figure data-type="image" tabindex="12"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps12.png" alt="img" loading="lazy"></figure>
-<figure data-type="image" tabindex="13"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps13.png" alt="img" loading="lazy"></figure>
-<h3 id="2抓取内存映像文件">(2)抓取内存映像文件</h3>
-<h4 id="1运行crackmeexe程序运行lordpe在lordpe的选项中勾选full-dump-header-from-disk在窗口选择crackme点击右键执行修正镜像大小接着执行dump-full完整转存命令即可转去内存数据并保存在文件里-命名为dumpedexe">1)运行CRACKME.EXE程序，运行LordPE，在LordPE的选项中勾选“Full dump header from disk”，在窗口选择CRACKME，点击右键，执行“修正镜像大小”，接着执行“dump full(完整转存)”命令，即可转去内存数据并保存在文件里。命名为dumped.exe。</h4>
-<figure data-type="image" tabindex="14"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps14.png" alt="img" loading="lazy"></figure>
-<figure data-type="image" tabindex="15"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps15.png" alt="img" loading="lazy"></figure>
-<h4 id="2-dumpedexe文件是不可运行的">2) dumped.exe文件是不可运行的</h4>
-<figure data-type="image" tabindex="16"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps16.png" alt="img" loading="lazy"></figure>
-<h3 id="3重建输入表">(3)重建输入表</h3>
-<h4 id="1使用importrec工具进行修复-先运行crackmeexe接着运行importrec">1)使用ImportREC工具进行修复。先运行CRACKME.EXE，接着运行ImportREC。</h4>
-<figure data-type="image" tabindex="17"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps17.png" alt="img" loading="lazy"></figure>
-<h4 id="2在下列表框中选择crackmeexe进程在oep处填入oep的rva值1000单击iat-autosearch按钮让其自动检查iat的偏移和大小-弹出如下对话框">2)在下列表框中选择CRACKME.EXE进程，在OEP处填入OEP的RVA值1000，单击“IAT AutoSearch”按钮，让其自动检查IAT的偏移和大小。弹出如下对话框：</h4>
-<figure data-type="image" tabindex="18"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps18.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps7.png" alt="img" loading="lazy"></figure>
+<p>4)从00020000h执行到000200A5h处，000200A5h到000200F0h处是一个循环,右键选中000200F2h处，按F4跳出循环到000200F2h处。</p>
+<figure data-type="image" tabindex="8"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps8.png" alt="img" loading="lazy"></figure>
+<p>5)从000200F2h处执行到00020147h处，jmp short 00020147指令表示00020147h处到00020178h处是一个循环；jmp short 0002010C指令表示0002010Ch处到0002017Dh处是一个循环；跳出这两个循环，到0002017Fh处。</p>
+<figure data-type="image" tabindex="9"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps9.png" alt="img" loading="lazy"></figure>
+<p>6)0002017Fh处会跳转到000201F6h处。</p>
+<figure data-type="image" tabindex="10"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps10.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps11.png" alt="img" loading="lazy"></figure>
+<ol start="7">
+<li>从0000201F6h处执行到00020282h处、00020283h处、00020283h处，分别可以看到popad、push 401000、retn。至此，OEP就找到了，是401000。</li>
+</ol>
+<figure data-type="image" tabindex="12"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps12.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps13.png" alt="img" loading="lazy"></figure>
+<p><em><strong>*(2)抓取内存映像文件*</strong></em></p>
+<p>1)运行CRACKME.EXE程序，运行LordPE，在LordPE的选项中勾选“Full dump header from disk”，在窗口选择CRACKME，点击右键，执行“修正镜像大小”，接着执行“dump full(完整转存)”命令，即可转去内存数据并保存在文件里。命名为dumped.exe。</p>
+<figure data-type="image" tabindex="14"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps14.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps15.png" alt="img" loading="lazy"></figure>
+<ol start="2">
+<li>dumped.exe文件是不可运行的</li>
+</ol>
+<figure data-type="image" tabindex="16"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps16.png" alt="img" loading="lazy"></figure>
+<p><em><strong>*(3)重建输入表*</strong></em></p>
+<p>1)使用ImportREC工具进行修复。先运行CRACKME.EXE，接着运行ImportREC。</p>
+<figure data-type="image" tabindex="17"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps17.png" alt="img" loading="lazy"></figure>
+<p>2)在下列表框中选择CRACKME.EXE进程，在OEP处填入OEP的RVA值1000，单击“IAT AutoSearch”按钮，让其自动检查IAT的偏移和大小。弹出如下对话框：</p>
+<figure data-type="image" tabindex="18"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps18.png" alt="img" loading="lazy"></figure>
 <p>表示输入的OEP发挥作用了。</p>
-<h4 id="3单击get-imports按钮让其分析iat结构得到基本信息">3)单击“Get Imports”按钮，让其分析IAT结构得到基本信息</h4>
-<figure data-type="image" tabindex="19"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml22384%5Cwps19.png" alt="img" loading="lazy"></figure>
-<h4 id="4单击fix-dump选择刚才抓取的dumpedexe映像文件将自动创建一个dumped_exe文件-这个就是脱壳后的文件了该文件可以正常运行-接着使用peidexe查看脱壳前后的区段表">4)单击“Fix Dump”，选择刚才抓取的dumped.exe映像文件，将自动创建一个dumped_.exe文件。这个就是脱壳后的文件了，该文件可以正常运行。接着使用PEiD.exe查看脱壳前后的区段表。</h4>
+<p>3)单击“Get Imports”按钮，让其分析IAT结构得到基本信息</p>
+<figure data-type="image" tabindex="19"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps19.png" alt="img" loading="lazy"></figure>
+<p>4)单击“Fix Dump”，选择刚才抓取的dumped.exe映像文件，将自动创建一个dumped_.exe文件。这个就是脱壳后的文件了，该文件可以正常运行。接着使用PEiD.exe查看脱壳前后的区段表。</p>
 <p>脱壳前：</p>
-<h2 id="3脱壳后再对软件代码进行分析分析出自己姓名所对应的正确的序列号">3.脱壳后再对软件代码进行分析，分析出自己姓名所对应的正确的序列号</h2>
-<h2 id="4写出注册机">4.写出注册机</h2>
+<figure data-type="image" tabindex="20"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps20.png" alt="img" loading="lazy"></figure>
+<p>脱壳后：</p>
+<figure data-type="image" tabindex="21"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps21.png" alt="img" loading="lazy"></figure>
+<p><em><strong>*3.脱壳后再对软件代码进行分析，分析出自己姓名所对应的正确的序列号*</strong></em></p>
+<p>1)打开OllyDbg，选择dumped_.exe进行分析。</p>
+<figure data-type="image" tabindex="22"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps22.png" alt="img" loading="lazy"></figure>
+<p>2)先在00401226h处设置断点,在注册表填入自定义姓名和序列号。</p>
+<figure data-type="image" tabindex="23"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps23.png" alt="img" loading="lazy"></figure>
+<ol start="3">
+<li>按F9后，得到下图所示；在00401220h处显示了Name框的内容，在00401233h处显示了序列号Serial框的内容。</li>
+</ol>
+<figure data-type="image" tabindex="24"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps24.png" alt="img" loading="lazy"></figure>
+<ol start="4">
+<li>接下来分析下图语句，首先是一个用户名的计算函数，然后是一个序列号的计算函数，接着比较两个函数计算的结果是否相等，相等则提示正确。</li>
+</ol>
+<figure data-type="image" tabindex="25"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps25.png" alt="img" loading="lazy"></figure>
+<p>00401228h call dumped_.0040137E  //用户名的计算函数</p>
+<p>00401238h call dumped_.004013D8  //序列号的计算函数</p>
+<p>00401241h cmp eax,ebx  //比较用户名字和序列号计算的结果</p>
+<p>00401243h je short dumped_.0040124C  //相等则提示正确</p>
+<p>00401245h call dumped_.00401362  //错误提示</p>
+<p>0040124Ch call dumped_.0040134D  //正确提示</p>
+<ol start="5">
+<li>用户名算法分析</li>
+</ol>
+<figure data-type="image" tabindex="26"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps26.png" alt="img" loading="lazy"></figure>
+<p>0040137Eh先取出用户名，依次去出名字字符串的单字符，将用户名中的英文单词全部转换为大写。</p>
+<p>0040137Eh mov esi, dword ptr ss:[esp+0x4]  //esi=username</p>
+<p>00401389h cmp a1, 0x41  //比较是否小于A</p>
+<p>0040138Dh cmp a1, 0x5A  //比较是否大于Z</p>
+<p>00401391h Inc esi  //username&gt;&gt;1</p>
+<p>00401394h call dumped_.004013D2  //将小写字母转成大写</p>
+<figure data-type="image" tabindex="27"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps27.png" alt="img" loading="lazy"></figure>
+<p>接着进入4013C2这个函数，将用户名每一位的ASCII值相加。</p>
+<figure data-type="image" tabindex="28"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps28.png" alt="img" loading="lazy"></figure>
+<ol start="6">
+<li>序列号算法分析</li>
+</ol>
+<figure data-type="image" tabindex="29"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps29.png" alt="img" loading="lazy"></figure>
+<p>取出每一位的ASCII值，然后减去0x30，即将字母转化为数字然后用edi乘0xA(0x10)，接着用edi再加上序列号。（edi与0x1234进行异或）</p>
+<p>序列号edi校验：</p>
+<figure data-type="image" tabindex="30"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps30.png" alt="img" loading="lazy"></figure>
+<p>比较edi与ebx是否相等：</p>
+<figure data-type="image" tabindex="31"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps31.png" alt="img" loading="lazy"></figure>
+<p>则Name：YangGuiyu</p>
+<p>Serial：18062</p>
+<p>运行结果如下图：</p>
+<figure data-type="image" tabindex="32"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps32.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="33"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps33.png" alt="img" loading="lazy"></figure>
+<p><em><strong>*4.********写出注册机********代码如下：*</strong></em></p>
+<p>#include&lt;bits/stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>int main()</p>
+<p>{</p>
+<p>​	string username;</p>
+<p>​	printf(&quot;请输入用户名: &quot;);</p>
+<p>​	cin &gt;&gt; username;</p>
+<p>​	int result = 0, l = username.length();</p>
+<p>​	for(int i=0; i&lt;l; i++){</p>
+<p>​		if(username[i]&gt;='a'&amp;&amp;username[i]&lt;='z'){</p>
+<p>​			username[i] = username[i]-'a' + 'A';</p>
+<p>​		}</p>
+<p>​		result += username[i];</p>
+<p>​	}</p>
+<p>​	result ^= 0x5678;</p>
+<p>​	result ^= 0x1234;</p>
+<p>​	printf(&quot;%d\n&quot;, result);</p>
+<p>​	return 0;</p>
+<p>}</p>
+<p>运行结果：</p>
+<figure data-type="image" tabindex="34"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps34.png" alt="img" loading="lazy"></figure>
 
         </div>
 
