@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-13T15:35:25.687Z</updated>
+    <updated>2020-06-13T15:37:19.922Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -107,33 +107,45 @@
 <figure data-type="image" tabindex="30"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps30.png" alt="img" loading="lazy"></figure>
 <p>比较edi与ebx是否相等：</p>
 <figure data-type="image" tabindex="31"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps31.png" alt="img" loading="lazy"></figure>
-<p>则Name：YangGuiyu</p>
-<p>Serial：18062</p>
-<p>运行结果如下图：</p>
-<figure data-type="image" tabindex="32"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps32.png" alt="img" loading="lazy"></figure>
-<figure data-type="image" tabindex="33"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps33.png" alt="img" loading="lazy"></figure>
 <p><em><strong>*4.********写出注册机********代码如下：*</strong></em></p>
-<p>#include&lt;bits/stdc++.h&gt;</p>
-<p>using namespace std;</p>
-<p>int main()</p>
-<p>{</p>
-<p>​	string username;</p>
-<p>​	printf(&quot;请输入用户名: &quot;);</p>
-<p>​	cin &gt;&gt; username;</p>
-<p>​	int result = 0, l = username.length();</p>
-<p>​	for(int i=0; i&lt;l; i++){</p>
-<p>​		if(username[i]&gt;='a'&amp;&amp;username[i]&lt;='z'){</p>
-<p>​			username[i] = username[i]-'a' + 'A';</p>
-<p>​		}</p>
-<p>​		result += username[i];</p>
-<p>​	}</p>
-<p>​	result ^= 0x5678;</p>
-<p>​	result ^= 0x1234;</p>
-<p>​	printf(&quot;%d\n&quot;, result);</p>
-<p>​	return 0;</p>
-<p>}</p>
-<p>运行结果：</p>
-<figure data-type="image" tabindex="34"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps34.png" alt="img" loading="lazy"></figure>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+int main()
+
+{
+
+	string username;
+
+	printf(&quot;请输入用户名: &quot;);
+
+	cin &gt;&gt; username;
+
+	int result = 0, l = username.length();
+
+	for(int i=0; i&lt;l; i++){
+
+		if(username[i]&gt;='a'&amp;&amp;username[i]&lt;='z'){
+
+			username[i] = username[i]-'a' + 'A';
+
+		}
+
+		result += username[i];
+
+	}
+
+	result ^= 0x5678;
+
+	result ^= 0x1234;
+
+	printf(&quot;%d\n&quot;, result);
+
+	return 0;
+
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>

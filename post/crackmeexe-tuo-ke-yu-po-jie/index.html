@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1592062522229">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1592062636606">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1592062522229" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1592062636606" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -175,33 +175,45 @@
 <figure data-type="image" tabindex="30"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps30.png" alt="img" loading="lazy"></figure>
 <p>比较edi与ebx是否相等：</p>
 <figure data-type="image" tabindex="31"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps31.png" alt="img" loading="lazy"></figure>
-<p>则Name：YangGuiyu</p>
-<p>Serial：18062</p>
-<p>运行结果如下图：</p>
-<figure data-type="image" tabindex="32"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps32.png" alt="img" loading="lazy"></figure>
-<figure data-type="image" tabindex="33"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps33.png" alt="img" loading="lazy"></figure>
 <p><em><strong>*4.********写出注册机********代码如下：*</strong></em></p>
-<p>#include&lt;bits/stdc++.h&gt;</p>
-<p>using namespace std;</p>
-<p>int main()</p>
-<p>{</p>
-<p>​	string username;</p>
-<p>​	printf(&quot;请输入用户名: &quot;);</p>
-<p>​	cin &gt;&gt; username;</p>
-<p>​	int result = 0, l = username.length();</p>
-<p>​	for(int i=0; i&lt;l; i++){</p>
-<p>​		if(username[i]&gt;='a'&amp;&amp;username[i]&lt;='z'){</p>
-<p>​			username[i] = username[i]-'a' + 'A';</p>
-<p>​		}</p>
-<p>​		result += username[i];</p>
-<p>​	}</p>
-<p>​	result ^= 0x5678;</p>
-<p>​	result ^= 0x1234;</p>
-<p>​	printf(&quot;%d\n&quot;, result);</p>
-<p>​	return 0;</p>
-<p>}</p>
-<p>运行结果：</p>
-<figure data-type="image" tabindex="34"><img src="file:///C:%5CUsers%5C22892%5CAppData%5CLocal%5CTemp%5Cksohtml18252%5Cwps34.png" alt="img" loading="lazy"></figure>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+int main()
+
+{
+
+	string username;
+
+	printf(&quot;请输入用户名: &quot;);
+
+	cin &gt;&gt; username;
+
+	int result = 0, l = username.length();
+
+	for(int i=0; i&lt;l; i++){
+
+		if(username[i]&gt;='a'&amp;&amp;username[i]&lt;='z'){
+
+			username[i] = username[i]-'a' + 'A';
+
+		}
+
+		result += username[i];
+
+	}
+
+	result ^= 0x5678;
+
+	result ^= 0x1234;
+
+	printf(&quot;%d\n&quot;, result);
+
+	return 0;
+
+}
+</code></pre>
 
         </div>
 
