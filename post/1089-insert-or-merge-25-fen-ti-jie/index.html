@@ -33,21 +33,7 @@
             文章目录
           </p>
           <div class="toc-container hidden lg:block">
-            <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#input-specification">Input Specification:</a></li>
-<li><a href="#output-specification">Output Specification:</a></li>
-<li><a href="#sample-input">Sample Input:</a></li>
-<li><a href="#sample-output">Sample Output:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+            
           </div>
         </div>
       
@@ -92,128 +78,94 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1076 Forwards on Weibo (30分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1089 Insert or Merge (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-06 / 5 min read
+          2020-06-22 / 2 min read
         </div>
         
         <div class="post-content yue">
-          <p>1076 Forwards on Weibo (30分)</p>
-<p>Weibo is known as the Chinese version of Twitter. One user on Weibo may have many followers, and may follow many other users as well. Hence a social network is formed with followers relations. When a user makes a post on Weibo, all his/her followers can view and forward his/her post, which can then be forwarded again by their followers. Now given a social network, you are supposed to calculate the maximum potential amount of forwards for any specific user, assuming that only <em>L</em> levels of indirect followers are counted.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains 2 positive integers: <em>N</em> (≤1000), the number of users; and <em>L</em> (≤6), the number of levels of indirect followers that are counted. Hence it is assumed that all the users are numbered from 1 to <em>N</em>. Then <em>N</em> lines follow, each in the format:</p>
-<pre><code>M[i] user_list[i]
-</code></pre>
-<p>where <code>M[i]</code> (≤100) is the total number of people that <code>user[i]</code> follows; and <code>user_list[i]</code> is a list of the <code>M[i]</code> users that followed by <code>user[i]</code>. It is guaranteed that no one can follow oneself. All the numbers are separated by a space.</p>
-<p>Then finally a positive <em>K</em> is given, followed by <em>K</em> <code>UserID</code>'s for query.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each <code>UserID</code>, you are supposed to print in one line the maximum potential amount of forwards this user can trigger, assuming that everyone who can view the initial post will forward it once, and that only <em>L</em> levels of indirect followers are counted.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">7 3
-3 2 3 4
-0
-2 5 6
-2 3 1
-2 3 4
-1 4
-1 5
-2 2 6
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">4
-5
-</code></pre>
-<hr>
-<p>题目描述：微博吧啦吧啦。。现在！给你一个社会网图，你需要求出最大潜在的转发数时多少，假设只能传到L层关系。</p>
-</br>
-<p>输入：第一行两个正整数N(&lt;=1000)用户数，L(&lt;=6)转发层。接下来有N行，每行代表第i个用户关注的人(i=1~N)，每行格式为M[i] user_list[i]，user_list时用户的编号。最后一行，第一个数K是带查询个数，接下来就是K个值啦。比如样例中最后一行K=2，带查询的第一个值是2。分析下样例，先把图画出来，当2发出一篇微博时，他最大能被转发的次数是多少？显然是4，他能被(1、4、5、6)转发。</p>
-<p>输出：转发的次数</p>
-</br>
-<p>解题思路：要查询那个点，就从哪个点开始广搜遍历就行了。</p>
-<p>注意：很简单的一道BFS题，不知道为什么会出现在30分这里。难道是因为最后一个测试点卡着了？最后一个测试点容易超时。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n, l;
-const int maxn = 1000+5;
-vector&lt;int&gt; G[maxn];
-bool vis[maxn];
-struct node{
-	int index, level;
-	node(){
-		index = level = 0;
-	}
-};
-void query(int start){
-	fill(vis,vis+maxn,false);
-	node t, tt;
-	t.index = start;
-	t.level = 0;
-	queue&lt;node&gt; q;
-	q.push(t);
-	vis[start] = true;
-	int ans = 0;
-	while(!q.empty()){
-		t = q.front(); q.pop();
-		for(int i=0; i&lt;G[t.index].size(); ++i){
-			int u = G[t.index][i];
-			if(!vis[u]&amp;&amp;t.level&lt;l){
-				ans++;
-				vis[u] = true;
-				tt.index = u;
-				tt.level = t.level+1;
-				q.push(tt);
-			}
-		}
-	}
-	printf(&quot;%d\n&quot;, ans);
-}
-int main()
-{
-	int k, g;
-	scanf(&quot;%d %d&quot;, &amp;n, &amp;l);
-	for(int i=1; i&lt;=n; ++i){
-		scanf(&quot;%d&quot;, &amp;k);
-		for(int j=0; j&lt;k; ++j){
-			scanf(&quot;%d&quot;, &amp;g);
-			G[g].push_back(i);
-		}
-	}
-	scanf(&quot;%d&quot;, &amp;k);
-	for(int i=0; i&lt;k; ++i){
-		scanf(&quot;%d&quot;, &amp;g);
-		query(g);
-	}
-	return 0;
-}
-</code></pre>
+          <p>#include&lt;bits/stdc++.h&gt;<br>
+using namespace std;<br>
+vector<int> a, b;<br>
+int n, g;<br>
+int judge(){<br>
+int t;<br>
+t = b[0];<br>
+for(int i=1; i&lt;n; i++){<br>
+if(b[i]&gt;=t){<br>
+g = i;<br>
+t = b[i];<br>
+}<br>
+else break;<br>
+}<br>
+for(int i=g+1; i&lt;n; i++){<br>
+if(a[i]!=b[i]) return 1;//Merge<br>
+}<br>
+return 2;//Insert<br>
+}</p>
+<p>void solve1(){<br>
+printf(&quot;Merge Sort\n&quot;);<br>
+bool f = true;<br>
+int t = 1;<br>
+while(f){<br>
+f = false;<br>
+for(int i=0; i&lt;n; i++){<br>
+if(a[i]!=b[i]){<br>
+f = true;<br>
+break;<br>
+}<br>
+}<br>
+t*=2;<br>
+for(int i=0; i&lt;n; i+=t){<br>
+if(i+t&lt;n) sort(a.begin()+i,a.begin()+i+t);<br>
+else sort(a.begin()+i,a.begin()+n);<br>
+}<br>
+}<br>
+for(int i=0; i&lt;n; i++){<br>
+if(i) printf(&quot; &quot;);<br>
+printf(&quot;%d&quot;, a[i]);<br>
+}<br>
+}</p>
+<p>void solve2(){<br>
+printf(&quot;Insertion Sort\n&quot;);<br>
+sort(b.begin(),b.begin()+g+2);<br>
+for(int i=0; i&lt;n; i++){<br>
+if(i) printf(&quot; &quot;);<br>
+printf(&quot;%d&quot;, b[i]);<br>
+}<br>
+}</p>
+<p>int main()<br>
+{<br>
+int k;<br>
+scanf(&quot;%d&quot;, &amp;n);<br>
+for(int i=0; i&lt;n; i++){<br>
+scanf(&quot;%d&quot;, &amp;k);<br>
+a.push_back(k);<br>
+}<br>
+for(int i=0; i&lt;n; i++){<br>
+scanf(&quot;%d&quot;, &amp;k);<br>
+b.push_back(k);<br>
+}<br>
+g = 0;<br>
+int flag = judge();<br>
+if(flag==2) solve2();<br>
+else solve1();<br>
+return 0;<br>
+}</p>
 
         </div>
 
-        
-          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
-            <span class="flex-auto">PAT (Advanced Level) Practice</span>
-          </a>
         
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1080-graduate-admission-30-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1080 Graduate Admission (30分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1081-rational-sum-20-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/crackmeexe-tuo-ke-yu-po-jie/">
                 <h3 class="post-title">
-                  1081 Rational Sum (20分)题解
+                  Crackme.exe脱壳与破解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-13T16:22:44.837Z</updated>
+    <updated>2020-06-22T14:56:38.361Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,82 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1089 Insert or Merge (25分)题解]]></title>
+        <id>https://ygytl.github.io/post/1089-insert-or-merge-25-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1089-insert-or-merge-25-fen-ti-jie/">
+        </link>
+        <updated>2020-06-22T14:56:10.000Z</updated>
+        <content type="html"><![CDATA[<p>#include&lt;bits/stdc++.h&gt;<br>
+using namespace std;<br>
+vector<int> a, b;<br>
+int n, g;<br>
+int judge(){<br>
+int t;<br>
+t = b[0];<br>
+for(int i=1; i&lt;n; i++){<br>
+if(b[i]&gt;=t){<br>
+g = i;<br>
+t = b[i];<br>
+}<br>
+else break;<br>
+}<br>
+for(int i=g+1; i&lt;n; i++){<br>
+if(a[i]!=b[i]) return 1;//Merge<br>
+}<br>
+return 2;//Insert<br>
+}</p>
+<p>void solve1(){<br>
+printf(&quot;Merge Sort\n&quot;);<br>
+bool f = true;<br>
+int t = 1;<br>
+while(f){<br>
+f = false;<br>
+for(int i=0; i&lt;n; i++){<br>
+if(a[i]!=b[i]){<br>
+f = true;<br>
+break;<br>
+}<br>
+}<br>
+t*=2;<br>
+for(int i=0; i&lt;n; i+=t){<br>
+if(i+t&lt;n) sort(a.begin()+i,a.begin()+i+t);<br>
+else sort(a.begin()+i,a.begin()+n);<br>
+}<br>
+}<br>
+for(int i=0; i&lt;n; i++){<br>
+if(i) printf(&quot; &quot;);<br>
+printf(&quot;%d&quot;, a[i]);<br>
+}<br>
+}</p>
+<p>void solve2(){<br>
+printf(&quot;Insertion Sort\n&quot;);<br>
+sort(b.begin(),b.begin()+g+2);<br>
+for(int i=0; i&lt;n; i++){<br>
+if(i) printf(&quot; &quot;);<br>
+printf(&quot;%d&quot;, b[i]);<br>
+}<br>
+}</p>
+<p>int main()<br>
+{<br>
+int k;<br>
+scanf(&quot;%d&quot;, &amp;n);<br>
+for(int i=0; i&lt;n; i++){<br>
+scanf(&quot;%d&quot;, &amp;k);<br>
+a.push_back(k);<br>
+}<br>
+for(int i=0; i&lt;n; i++){<br>
+scanf(&quot;%d&quot;, &amp;k);<br>
+b.push_back(k);<br>
+}<br>
+g = 0;<br>
+int flag = judge();<br>
+if(flag==2) solve2();<br>
+else solve1();<br>
+return 0;<br>
+}</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Crackme.exe脱壳与破解]]></title>
         <id>https://ygytl.github.io/post/crackmeexe-tuo-ke-yu-po-jie/</id>
@@ -1033,80 +1109,6 @@ int main()
 		scanf(&quot;%d&quot;, &amp;g);
 		query(g);
 	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1081 Rational Sum (20分)题解]]></title>
-        <id>https://ygytl.github.io/post/1081-rational-sum-20-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1081-rational-sum-20-fen-ti-jie/">
-        </link>
-        <updated>2020-06-06T09:12:16.000Z</updated>
-        <content type="html"><![CDATA[<p>1081 Rational Sum (20分)</p>
-<p>Given <em>N</em> rational numbers in the form <code>numerator/denominator</code>, you are supposed to calculate their sum.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. Each case starts with a positive integer <em>N</em> (≤100), followed in the next line <em>N</em> rational numbers <code>a1/b1 a2/b2 ...</code> where all the numerators and denominators are in the range of <strong>long int</strong>. If there is a negative number, then the sign must appear in front of the numerator.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, output the sum in the simplest form <code>integer numerator/denominator</code> where <code>integer</code> is the integer part of the sum, <code>numerator</code> &lt; <code>denominator</code>, and the numerator and the denominator have no common factor. You must output only the fractional part if the integer part is 0.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">5
-2/5 4/15 1/30 -2/60 8/3
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">3 1/3
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">2
-4/3 2/3
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">2
-</code></pre>
-<h3 id="sample-input-3">Sample Input 3:</h3>
-<pre><code class="language-in">3
-1/3 -1/6 1/8
-</code></pre>
-<h3 id="sample-output-3">Sample Output 3:</h3>
-<pre><code class="language-out">7/24
-</code></pre>
-<hr>
-<p>题目描述：分数求和。</p>
-</br>
-<p>输入：第一行n表示分数的个数，第二行n个分数。</p>
-<p>输出：分数之和。输出格式 1）4/3输出1 2/3；2）4 /4 输出 1；3）2/3输出2/3</p>
-</br>
-<p>解题思路：我习惯将程序分块写，这样程序看起来比较直观清晰；将所有分数加起来，可以先记录第一个分数，分子为a1、分母为b1，接着读第二个分数，第二个分数分子为a2，分母为b2，接着就可以将两个分数进行计算了，然后将计算结果分别再存入a1和b1；后面读入的分数都存在a2和b2中，重复上述过程。得到的结果a1和b1按照题目规定输出格式输出。</p>
-<p>两个分数相加的过程：例如2/5和4/15相加，想求出两个分母的最大公因数为5，两个分母同时除于5，分别得到b1=1，b2=3，将分子a1乘与b2，a2乘与b1，则a1=6，a2=4，此时，分数分别为6/1和4/3，让a1=a1+a2=10，b1 = b1*b2*gcd(b1,b2)=15（分母进行通分的过程），这样就能将两分数相加的结果放入a1和b1了，即2/5 + 4 / 15 = 10 / 15。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n, a1, b1, a2, b2;
-int gcd(int a, int b){ return a == 0 ? b : gcd(b % a, a); } 
-void sum(){
-	int g = gcd(b1,b2);
-	b1 /= g;
-	b2 /= g;
-	a1*=b2; a2 *= b1;
-	a1 += a2;
-	b1 *= b2*g;
-}
-int main()
-{
-	scanf(&quot;%d&quot;, &amp;n);
-	for(int i=0; i&lt;n; i++){
-		if(i==0) scanf(&quot;%d/%d&quot;, &amp;a1, &amp;b1);
-		else{
-			scanf(&quot;%d/%d&quot;, &amp;a2, &amp;b2);
-			sum();
-		}
-	}
-	int g = gcd(a1,b1);
-	a1 /= g; b1 /= g;
-	if(a1%b1==0) printf(&quot;%d\n&quot;, a1/b1);
-	else if(a1&gt;b1) printf(&quot;%d %d/%d\n&quot;, a1/b1, a1%b1, b1);
-	else printf(&quot;%d/%d&quot;, a1%b1, b1);
 	return 0;
 }
 </code></pre>
