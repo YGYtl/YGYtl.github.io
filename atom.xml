@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-22T14:56:38.361Z</updated>
+    <updated>2020-06-22T15:24:28.428Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -16,74 +16,124 @@
         <link href="https://ygytl.github.io/post/1089-insert-or-merge-25-fen-ti-jie/">
         </link>
         <updated>2020-06-22T14:56:10.000Z</updated>
-        <content type="html"><![CDATA[<p>#include&lt;bits/stdc++.h&gt;<br>
-using namespace std;<br>
-vector<int> a, b;<br>
-int n, g;<br>
-int judge(){<br>
-int t;<br>
-t = b[0];<br>
-for(int i=1; i&lt;n; i++){<br>
-if(b[i]&gt;=t){<br>
-g = i;<br>
-t = b[i];<br>
-}<br>
-else break;<br>
-}<br>
-for(int i=g+1; i&lt;n; i++){<br>
-if(a[i]!=b[i]) return 1;//Merge<br>
-}<br>
-return 2;//Insert<br>
-}</p>
-<p>void solve1(){<br>
-printf(&quot;Merge Sort\n&quot;);<br>
-bool f = true;<br>
-int t = 1;<br>
-while(f){<br>
-f = false;<br>
-for(int i=0; i&lt;n; i++){<br>
-if(a[i]!=b[i]){<br>
-f = true;<br>
-break;<br>
-}<br>
-}<br>
-t*=2;<br>
-for(int i=0; i&lt;n; i+=t){<br>
-if(i+t&lt;n) sort(a.begin()+i,a.begin()+i+t);<br>
-else sort(a.begin()+i,a.begin()+n);<br>
-}<br>
-}<br>
-for(int i=0; i&lt;n; i++){<br>
-if(i) printf(&quot; &quot;);<br>
-printf(&quot;%d&quot;, a[i]);<br>
-}<br>
-}</p>
-<p>void solve2(){<br>
-printf(&quot;Insertion Sort\n&quot;);<br>
-sort(b.begin(),b.begin()+g+2);<br>
-for(int i=0; i&lt;n; i++){<br>
-if(i) printf(&quot; &quot;);<br>
-printf(&quot;%d&quot;, b[i]);<br>
-}<br>
-}</p>
-<p>int main()<br>
-{<br>
-int k;<br>
-scanf(&quot;%d&quot;, &amp;n);<br>
-for(int i=0; i&lt;n; i++){<br>
-scanf(&quot;%d&quot;, &amp;k);<br>
-a.push_back(k);<br>
-}<br>
-for(int i=0; i&lt;n; i++){<br>
-scanf(&quot;%d&quot;, &amp;k);<br>
-b.push_back(k);<br>
-}<br>
-g = 0;<br>
-int flag = judge();<br>
-if(flag==2) solve2();<br>
-else solve1();<br>
-return 0;<br>
-}</p>
+        <content type="html"><![CDATA[<p>1089 Insert or Merge (25分)</p>
+<p>According to Wikipedia:</p>
+<p><strong>Insertion sort</strong> iterates, consuming one input element each repetition, and growing a sorted output list. Each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there. It repeats until no input elements remain.</p>
+<p><strong>Merge sort</strong> works as follows: Divide the unsorted list into N sublists, each containing 1 element (a list of 1 element is considered sorted). Then repeatedly merge two adjacent sublists to produce new sorted sublists until there is only 1 sublist remaining.</p>
+<p>Now given the initial sequence of integers, together with a sequence which is a result of several iterations of some sorting method, can you tell which sorting method we are using?</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em> (≤100). Then in the next line, <em>N</em> integers are given as the initial sequence. The last line contains the partially sorted sequence of the <em>N</em> numbers. It is assumed that the target sequence is always ascending. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print in the first line either &quot;Insertion Sort&quot; or &quot;Merge Sort&quot; to indicate the method used to obtain the partial result. Then run this method for one more iteration and output in the second line the resuling sequence. It is guaranteed that the answer is unique for each test case. All the numbers in a line must be separated by a space, and there must be no extra space at the end of the line.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">10
+3 1 2 8 7 5 9 4 6 0
+1 2 3 7 8 5 9 4 6 0
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">Insertion Sort
+1 2 3 5 7 8 9 4 6 0
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">10
+3 1 2 8 7 5 9 4 0 6
+1 3 2 8 5 7 4 9 0 6
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">Merge Sort
+1 2 3 8 4 5 7 9 0 6
+</code></pre>
+<hr>
+<p>考察插入排序和归并排序</p>
+<p>输入：第一行数组有n个数，第二行为需要排序的数组，第三行为已部分排好序的数组。</p>
+<p>输出：判断输入的第三行数列是依照哪种排序规则进行排序的，并输出下一步排好序的数列</p>
+<p>注意：测试点4，给出的数组序列可能存在相等元素。</p>
+</br>
+<p>解题思路：首先要知道插入排序和归并排序的排序方法、步骤。</p>
+<p>插入排序：从需要排序的数组索引0开始进行排序。以样例1为例：</p>
+<p>原始数组：3 1 2 8 7 5 9 4 6 0</p>
+<p>1)<strong>3</strong> 1 2 8 7 5 9 4 6 0---对 (索引0) 的元素进行排序</p>
+<p>2)<strong>1</strong> 3 2 8 7 5 9 4 6 0---对 (索引0~1) 的元素进行排序</p>
+<p>3)1 <strong>2</strong> 3 8 7 5 9 4 6 0---对 (索引0~2) 的元素进行排序</p>
+<p>...</p>
+<p>归并排序的思想：</p>
+<p>1)将数组元素两两进行排序</p>
+<p>2)将数组元素44进行排序</p>
+<p>3)将数组元素88进行排序</p>
+<p>若最后一组不够元素，也要将他们进行排序</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+vector&lt;int&gt; a, b;
+int n, g;
+int judge(){
+	int t;
+	t = b[0];
+	for(int i=1; i&lt;n; i++){
+		if(b[i]&gt;=t){
+			g = i;
+			t = b[i];
+		}
+		else break;
+	}
+	for(int i=g+1; i&lt;n; i++){
+		if(a[i]!=b[i]) return 1;//Merge
+	}
+	return 2;//Insert
+}
+
+void solve1(){
+	printf(&quot;Merge Sort\n&quot;);
+	bool f = true;
+	int t = 1;
+	while(f){
+		f = false;
+		for(int i=0; i&lt;n; i++){
+			if(a[i]!=b[i]){
+				f = true;
+				break;
+			}
+		}
+		t*=2;
+		for(int i=0; i&lt;n; i+=t){
+			if(i+t&lt;n) sort(a.begin()+i,a.begin()+i+t);
+			else sort(a.begin()+i,a.begin()+n);
+		}
+	}
+	for(int i=0; i&lt;n; i++){
+		if(i) printf(&quot; &quot;);
+		printf(&quot;%d&quot;, a[i]);
+	}
+}
+
+void solve2(){
+	printf(&quot;Insertion Sort\n&quot;);
+	sort(b.begin(),b.begin()+g+2);
+	for(int i=0; i&lt;n; i++){
+		if(i) printf(&quot; &quot;);
+		printf(&quot;%d&quot;, b[i]);
+	}
+}
+
+int main()
+{
+	int k;
+	scanf(&quot;%d&quot;, &amp;n);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d&quot;, &amp;k);
+		a.push_back(k);
+	}
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d&quot;, &amp;k);
+		b.push_back(k);
+	}
+	g = 0;
+	int flag = judge();
+	if(flag==2) solve2();
+	else solve1();
+	return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
