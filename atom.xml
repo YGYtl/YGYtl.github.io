@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-23T04:30:45.901Z</updated>
+    <updated>2020-06-23T06:37:19.036Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,108 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1093 Count PAT's (25分)题解]]></title>
+        <id>https://ygytl.github.io/post/1093-count-pats-25-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1093-count-pats-25-fen-ti-jie/">
+        </link>
+        <updated>2020-06-23T06:31:10.000Z</updated>
+        <content type="html"><![CDATA[<p>1093 Count PAT's (25分)</p>
+<p>The string <code>APPAPT</code> contains two <code>PAT</code>'s as substrings. The first one is formed by the 2nd, the 4th, and the 6th characters, and the second one is formed by the 3rd, the 4th, and the 6th characters.</p>
+<p>Now given any string, you are supposed to tell the number of <code>PAT</code>'s contained in the string.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, there is only one line giving a string of no more than 105 characters containing only <code>P</code>, <code>A</code>, or <code>T</code>.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print in one line the number of <code>PAT</code>'s contained in the string. Since the result may be a huge number, you only have to output the result moded by 1000000007.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">APPAPT
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">2
+</code></pre>
+<hr>
+<p>题目描述：计算字符串PAT的个数</p>
+<p>解题思路：动态规划的思想。</p>
+<p>分析一个测试用例：APPAPAAT，输出8</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A</th>
+<th>P</th>
+<th>P</th>
+<th>A</th>
+<th>P</th>
+<th>A</th>
+<th>A</th>
+<th>T</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P数组</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td><strong>2</strong></td>
+<td>3</td>
+<td><strong>3</strong></td>
+<td><strong>3</strong></td>
+<td>3</td>
+</tr>
+<tr>
+<td>PA数组</td>
+<td>0</td>
+<td>0</td>
+<td><strong>0</strong></td>
+<td><strong>0+2=2</strong></td>
+<td><strong>2</strong></td>
+<td><strong>2+3=5</strong></td>
+<td><strong>5+3=8</strong></td>
+<td><strong>8</strong></td>
+</tr>
+<tr>
+<td>PAT个数</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><strong>0</strong></td>
+<td><strong>0+8=8</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 1e5+5;
+int p[maxn], pa[maxn];
+int main()
+{
+	int c = 0, tp = 0, tpa = 0, ans = 0;
+	string s;
+	cin &gt;&gt; s;
+	int l = s.length();
+	for(int i=0; i&lt;l; i++){
+		if(s[i]=='P') p[i] = tp++;
+		p[i] = tp;
+		
+		if(s[i]=='A') tpa += p[i];
+		pa[i] = tpa;
+		
+		if(s[i]=='T'){
+			ans += pa[i];
+			ans %= 1000000007;
+		}
+	}
+	printf(&quot;%d&quot;, ans);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1089 Insert or Merge (25分)题解]]></title>
         <id>https://ygytl.github.io/post/1089-insert-or-merge-25-fen-ti-jie/</id>
@@ -999,103 +1101,6 @@ int main()
 			printf(&quot;%d&quot;, ans[i][j]);
 		}
 		printf(&quot;\n&quot;);
-	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1076 Forwards on Weibo (30分)题解]]></title>
-        <id>https://ygytl.github.io/post/1076-forwards-on-weibo-30-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1076-forwards-on-weibo-30-fen-ti-jie/">
-        </link>
-        <updated>2020-06-06T10:01:02.000Z</updated>
-        <content type="html"><![CDATA[<p>1076 Forwards on Weibo (30分)</p>
-<p>Weibo is known as the Chinese version of Twitter. One user on Weibo may have many followers, and may follow many other users as well. Hence a social network is formed with followers relations. When a user makes a post on Weibo, all his/her followers can view and forward his/her post, which can then be forwarded again by their followers. Now given a social network, you are supposed to calculate the maximum potential amount of forwards for any specific user, assuming that only <em>L</em> levels of indirect followers are counted.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains 2 positive integers: <em>N</em> (≤1000), the number of users; and <em>L</em> (≤6), the number of levels of indirect followers that are counted. Hence it is assumed that all the users are numbered from 1 to <em>N</em>. Then <em>N</em> lines follow, each in the format:</p>
-<pre><code>M[i] user_list[i]
-</code></pre>
-<p>where <code>M[i]</code> (≤100) is the total number of people that <code>user[i]</code> follows; and <code>user_list[i]</code> is a list of the <code>M[i]</code> users that followed by <code>user[i]</code>. It is guaranteed that no one can follow oneself. All the numbers are separated by a space.</p>
-<p>Then finally a positive <em>K</em> is given, followed by <em>K</em> <code>UserID</code>'s for query.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each <code>UserID</code>, you are supposed to print in one line the maximum potential amount of forwards this user can trigger, assuming that everyone who can view the initial post will forward it once, and that only <em>L</em> levels of indirect followers are counted.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">7 3
-3 2 3 4
-0
-2 5 6
-2 3 1
-2 3 4
-1 4
-1 5
-2 2 6
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">4
-5
-</code></pre>
-<hr>
-<p>题目描述：微博吧啦吧啦。。现在！给你一个社会网图，你需要求出最大潜在的转发数时多少，假设只能传到L层关系。</p>
-</br>
-<p>输入：第一行两个正整数N(&lt;=1000)用户数，L(&lt;=6)转发层。接下来有N行，每行代表第i个用户关注的人(i=1~N)，每行格式为M[i] user_list[i]，user_list时用户的编号。最后一行，第一个数K是带查询个数，接下来就是K个值啦。比如样例中最后一行K=2，带查询的第一个值是2。分析下样例，先把图画出来，当2发出一篇微博时，他最大能被转发的次数是多少？显然是4，他能被(1、4、5、6)转发。</p>
-<p>输出：转发的次数</p>
-</br>
-<p>解题思路：要查询那个点，就从哪个点开始广搜遍历就行了。</p>
-<p>注意：很简单的一道BFS题，不知道为什么会出现在30分这里。难道是因为最后一个测试点卡着了？最后一个测试点容易超时。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n, l;
-const int maxn = 1000+5;
-vector&lt;int&gt; G[maxn];
-bool vis[maxn];
-struct node{
-	int index, level;
-	node(){
-		index = level = 0;
-	}
-};
-void query(int start){
-	fill(vis,vis+maxn,false);
-	node t, tt;
-	t.index = start;
-	t.level = 0;
-	queue&lt;node&gt; q;
-	q.push(t);
-	vis[start] = true;
-	int ans = 0;
-	while(!q.empty()){
-		t = q.front(); q.pop();
-		for(int i=0; i&lt;G[t.index].size(); ++i){
-			int u = G[t.index][i];
-			if(!vis[u]&amp;&amp;t.level&lt;l){
-				ans++;
-				vis[u] = true;
-				tt.index = u;
-				tt.level = t.level+1;
-				q.push(tt);
-			}
-		}
-	}
-	printf(&quot;%d\n&quot;, ans);
-}
-int main()
-{
-	int k, g;
-	scanf(&quot;%d %d&quot;, &amp;n, &amp;l);
-	for(int i=1; i&lt;=n; ++i){
-		scanf(&quot;%d&quot;, &amp;k);
-		for(int j=0; j&lt;k; ++j){
-			scanf(&quot;%d&quot;, &amp;g);
-			G[g].push_back(i);
-		}
-	}
-	scanf(&quot;%d&quot;, &amp;k);
-	for(int i=0; i&lt;k; ++i){
-		scanf(&quot;%d&quot;, &amp;g);
-		query(g);
 	}
 	return 0;
 }

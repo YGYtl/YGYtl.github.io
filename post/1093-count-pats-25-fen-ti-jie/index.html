@@ -40,10 +40,8 @@
 <ul>
 <li><a href="#input-specification">Input Specification:</a></li>
 <li><a href="#output-specification">Output Specification:</a></li>
-<li><a href="#sample-input-1">Sample Input 1:</a></li>
-<li><a href="#sample-output-1">Sample Output 1:</a></li>
-<li><a href="#sample-input-2">Sample Input 2:</a></li>
-<li><a href="#sample-output-2">Sample Output 2:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
 </ul>
 </li>
 </ul>
@@ -94,127 +92,103 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1089 Insert or Merge (25分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1093 Count PAT&#39;s (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-22 / 5 min read
+          2020-06-23 / 2 min read
         </div>
         
         <div class="post-content yue">
-          <p>1089 Insert or Merge (25分)</p>
-<p>According to Wikipedia:</p>
-<p><strong>Insertion sort</strong> iterates, consuming one input element each repetition, and growing a sorted output list. Each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there. It repeats until no input elements remain.</p>
-<p><strong>Merge sort</strong> works as follows: Divide the unsorted list into N sublists, each containing 1 element (a list of 1 element is considered sorted). Then repeatedly merge two adjacent sublists to produce new sorted sublists until there is only 1 sublist remaining.</p>
-<p>Now given the initial sequence of integers, together with a sequence which is a result of several iterations of some sorting method, can you tell which sorting method we are using?</p>
+          <p>1093 Count PAT's (25分)</p>
+<p>The string <code>APPAPT</code> contains two <code>PAT</code>'s as substrings. The first one is formed by the 2nd, the 4th, and the 6th characters, and the second one is formed by the 3rd, the 4th, and the 6th characters.</p>
+<p>Now given any string, you are supposed to tell the number of <code>PAT</code>'s contained in the string.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em> (≤100). Then in the next line, <em>N</em> integers are given as the initial sequence. The last line contains the partially sorted sequence of the <em>N</em> numbers. It is assumed that the target sequence is always ascending. All the numbers in a line are separated by a space.</p>
+<p>Each input file contains one test case. For each case, there is only one line giving a string of no more than 105 characters containing only <code>P</code>, <code>A</code>, or <code>T</code>.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in the first line either &quot;Insertion Sort&quot; or &quot;Merge Sort&quot; to indicate the method used to obtain the partial result. Then run this method for one more iteration and output in the second line the resuling sequence. It is guaranteed that the answer is unique for each test case. All the numbers in a line must be separated by a space, and there must be no extra space at the end of the line.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">10
-3 1 2 8 7 5 9 4 6 0
-1 2 3 7 8 5 9 4 6 0
+<p>For each test case, print in one line the number of <code>PAT</code>'s contained in the string. Since the result may be a huge number, you only have to output the result moded by 1000000007.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">APPAPT
 </code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">Insertion Sort
-1 2 3 5 7 8 9 4 6 0
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">10
-3 1 2 8 7 5 9 4 0 6
-1 3 2 8 5 7 4 9 0 6
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">Merge Sort
-1 2 3 8 4 5 7 9 0 6
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">2
 </code></pre>
 <hr>
-<p>考察插入排序和归并排序</p>
-<p>输入：第一行数组有n个数，第二行为需要排序的数组，第三行为已部分排好序的数组。</p>
-<p>输出：判断输入的第三行数列是依照哪种排序规则进行排序的，并输出下一步排好序的数列</p>
-<p>注意：测试点4，给出的数组序列可能存在相等元素。</p>
-</br>
-<p>解题思路：首先要知道插入排序和归并排序的排序方法、步骤。</p>
-<p>插入排序：从需要排序的数组索引0开始进行排序。以样例1为例：</p>
-<p>原始数组：3 1 2 8 7 5 9 4 6 0</p>
-<p>1)<strong>3</strong> 1 2 8 7 5 9 4 6 0---对 (索引0) 的元素进行排序</p>
-<p>2)<strong>1</strong> 3 2 8 7 5 9 4 6 0---对 (索引0~1) 的元素进行排序</p>
-<p>3)1 <strong>2</strong> 3 8 7 5 9 4 6 0---对 (索引0~2) 的元素进行排序</p>
-<p>...</p>
-<p>归并排序的思想：</p>
-<p>1)将数组元素两两进行排序</p>
-<p>2)将数组元素44进行排序</p>
-<p>3)将数组元素88进行排序</p>
-<p>若最后一组不够元素，也要将他们进行排序</p>
+<p>题目描述：计算字符串PAT的个数</p>
+<p>解题思路：动态规划的思想。</p>
+<p>分析一个测试用例：APPAPAAT，输出8</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A</th>
+<th>P</th>
+<th>P</th>
+<th>A</th>
+<th>P</th>
+<th>A</th>
+<th>A</th>
+<th>T</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P数组</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td><strong>2</strong></td>
+<td>3</td>
+<td><strong>3</strong></td>
+<td><strong>3</strong></td>
+<td>3</td>
+</tr>
+<tr>
+<td>PA数组</td>
+<td>0</td>
+<td>0</td>
+<td><strong>0</strong></td>
+<td><strong>0+2=2</strong></td>
+<td><strong>2</strong></td>
+<td><strong>2+3=5</strong></td>
+<td><strong>5+3=8</strong></td>
+<td><strong>8</strong></td>
+</tr>
+<tr>
+<td>PAT个数</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><strong>0</strong></td>
+<td><strong>0+8=8</strong></td>
+</tr>
+</tbody>
+</table>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-vector&lt;int&gt; a, b;
-int n, g;
-int judge(){
-	int t;
-	t = b[0];
-	for(int i=1; i&lt;n; i++){
-		if(b[i]&gt;=t){
-			g = i;
-			t = b[i];
-		}
-		else break;
-	}
-	for(int i=g+1; i&lt;n; i++){
-		if(a[i]!=b[i]) return 1;//Merge
-	}
-	return 2;//Insert
-}
-
-void solve1(){
-	printf(&quot;Merge Sort\n&quot;);
-	bool f = true;
-	int t = 1;
-	while(f){
-		f = false;
-		for(int i=0; i&lt;n; i++){
-			if(a[i]!=b[i]){
-				f = true;
-				break;
-			}
-		}
-		t*=2;
-		for(int i=0; i&lt;n; i+=t){
-			if(i+t&lt;n) sort(a.begin()+i,a.begin()+i+t);
-			else sort(a.begin()+i,a.begin()+n);
-		}
-	}
-	for(int i=0; i&lt;n; i++){
-		if(i) printf(&quot; &quot;);
-		printf(&quot;%d&quot;, a[i]);
-	}
-}
-
-void solve2(){
-	printf(&quot;Insertion Sort\n&quot;);
-	sort(b.begin(),b.begin()+g+2);
-	for(int i=0; i&lt;n; i++){
-		if(i) printf(&quot; &quot;);
-		printf(&quot;%d&quot;, b[i]);
-	}
-}
-
+const int maxn = 1e5+5;
+int p[maxn], pa[maxn];
 int main()
 {
-	int k;
-	scanf(&quot;%d&quot;, &amp;n);
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;k);
-		a.push_back(k);
+	int c = 0, tp = 0, tpa = 0, ans = 0;
+	string s;
+	cin &gt;&gt; s;
+	int l = s.length();
+	for(int i=0; i&lt;l; i++){
+		if(s[i]=='P') p[i] = tp++;
+		p[i] = tp;
+		
+		if(s[i]=='A') tpa += p[i];
+		pa[i] = tpa;
+		
+		if(s[i]=='T'){
+			ans += pa[i];
+			ans %= 1000000007;
+		}
 	}
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;k);
-		b.push_back(k);
-	}
-	g = 0;
-	int flag = judge();
-	if(flag==2) solve2();
-	else solve1();
+	printf(&quot;%d&quot;, ans);
 	return 0;
 }
 </code></pre>
@@ -230,21 +204,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1093-count-pats-25-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1093 Count PAT&#39;s (25分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/crackmeexe-tuo-ke-yu-po-jie/">
+              <a href="https://ygytl.github.io/post/1089-insert-or-merge-25-fen-ti-jie/">
                 <h3 class="post-title">
-                  Crackme.exe脱壳与破解
+                  1089 Insert or Merge (25分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
