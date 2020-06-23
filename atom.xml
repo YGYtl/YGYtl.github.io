@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-23T04:27:26.165Z</updated>
+    <updated>2020-06-23T04:30:45.901Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -323,163 +323,101 @@ int main()
 1 2/3 / 0 = Inf
 </code></pre>
 <hr>
+<p>题目意思：求分数的加减乘除</p>
+<p>输出规则：负数需要带括号输出。假分数要以标准格式输出。</p>
+</br>
+<p>解题思路：每个分数的输出格式都是同意的规则，将这个输出搞定就行了。</p>
+<p>注意：数据类型要是long long类型，否则测试点2会报错。</p>
 <hr>
-<pre><code class="language-c++">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cstring&gt;
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-long long a1, b1, a2, b2;
-long long gcd(long long a, long long b)
-{
-    int pos = (b &gt;= 0) ? 1 : 0;
-    a = abs(a);
-    b = abs(b);
-    if(a &lt; b) {
-        swap(a, b);
-    }
-    while(b != 0) {
-        long long c = a % b;
-        a = b;
-        b = c;
-    }
-    return (pos) ? a : -a;
+long long gcd(long long a, long long b){
+	if(a==0) return b;
+	gcd(b%a,a);
 }
-void solve(long long x2, long long y2){
-	long long g = gcd(x2,y2);
-	x2 /= g; y2 /= g;
-	if(x2==0){
-		printf(&quot;0\n&quot;);
+void com(long long x, long long y){
+	long long g, c;
+	bool f = false;
+	g = gcd(abs(x),abs(y));
+	x/=g; y/=g;
+	c = x/y;
+	if(c&lt;0) x *= -1;
+	x %= y;
+	if(c!=0){
+		if(c&lt;0){
+			printf(&quot;(%lld&quot;, c);
+			f = true;
+		}
+		else printf(&quot;%lld&quot;, c);
+	}
+	if(x&lt;0){
+		printf(&quot;(%lld&quot;, x);
+		f = true;
+	}
+	else{
+		if(c==0) printf(&quot;%lld&quot;, x);
+		else if(c!=0&amp;&amp;x!=0) printf(&quot; %lld&quot;, x);
+	}
+	if(x!=0&amp;&amp;y!=1){
+		printf(&quot;/%lld&quot;, y);
+	}
+	if(f) printf(&quot;)&quot;);
+}
+void solve1(long long a1, long long b1, long long a2, long long b2){
+	com(a1,b1); printf(&quot; + &quot;);
+	com(a2,b2); printf(&quot; = &quot;);
+	long long a, b;
+	b = b1*b2;
+	a = a1*b2 + a2*b1;
+	com(a,b);
+}
+void solve2(long long a1, long long b1, long long a2, long long b2){
+	com(a1,b1); printf(&quot; - &quot;);
+	com(a2,b2); printf(&quot; = &quot;);
+	long long a, b;
+	b = b1*b2;
+	a = a1*b2 - a2*b1;
+	com(a,b);
+}
+void solve3(long long a1, long long b1, long long a2, long long b2){
+	com(a1,b1); printf(&quot; * &quot;);
+	com(a2,b2); printf(&quot; = &quot;);
+	if(a1==0||a2==0){
+		printf(&quot;0&quot;);
 		return ;
 	}
-	long long t = 0;
-	if(y2!=0) t = x2 / y2;
-	else return ;
-	if(y2&lt;0) x2 *= -1, y2 *= -1;
-	if(t&amp;&amp;y2){
-		if(t&lt;0){
-			printf(&quot;(&quot;); x2 *= -1;
-		}
-		printf(&quot;%lld&quot;, t);
-		x2 %= y2;
-		if(x2) printf(&quot; %lld/%lld&quot;, x2, y2);
-		if(t&lt;0) printf(&quot;)&quot;);
+	long long a, b;
+	a = a1*a2; b = b1*b2;
+	if(b&lt;0){
+		b*=-1;
+		a*=-1;
 	}
-	else{
-		if(x2&lt;0) printf(&quot;(&quot;);
-		printf(&quot;%lld/%lld&quot;, x2, y2);
-		if(x2&lt;0) printf(&quot;)&quot;);
-	}
-	printf(&quot;\n&quot;);
+	com(a,b);
 }
-void first(int k){
-	long long x1 = a1, y1 = b1, x2 = a2, y2 = b2;
-	long long f1 = 0, f2 = 0;
-	long long g1 = gcd(x1,y1);
-	long long g2 = gcd(x2,y2);
-	x1 /= g1; y1 /= g1;
-	x2 /= g2; y2 /= g2;
-	if(y1&lt;0){
-		y1 *= -1; x1 *= -1;
+void solve4(long long a1, long long b1, long long a2, long long b2){
+	com(a1,b1); printf(&quot; / &quot;);
+	com(a2,b2); printf(&quot; = &quot;);
+	if(a2==0){
+		printf(&quot;Inf&quot;);
+		return ;
 	}
-	if(y2&lt;0){
-		y2 *= -1; x2 *= -1;
+	long long a, b;
+	a = a1*b2; b = b1*a2;
+	if(b&lt;0){
+		b*=-1;
+		a*=-1;
 	}
-	if(x1&lt;0) f1 = 1;
-	if(x2&lt;0) f2 = 1;
-	
-	long long t = 0;
-	t = x1 / y1;
-	if(t&amp;&amp;y1){
-		if(t&lt;0){
-			printf(&quot;(&quot;); x1 *= -1;
-		}
-		printf(&quot;%lld&quot;, t);
-		x1 %= y1;
-		if(x1) printf(&quot; %lld/%lld&quot;, x1, y1);
-		if(t&lt;0) printf(&quot;)&quot;);
-	}
-	else{
-		if(x1==0) printf(&quot;0&quot;);
-		else{
-			if(x1&lt;0) printf(&quot;(&quot;);
-			printf(&quot;%lld/%lld&quot;, x1, y1);
-			if(x1&lt;0) printf(&quot;)&quot;);
-		}
-	}
-	if(k==1) printf(&quot; + &quot;);
-	if(k==2) printf(&quot; - &quot;);
-	if(k==3) printf(&quot; * &quot;);
-	if(k==4) printf(&quot; / &quot;);
-	
-	t = x2 / y2;
-	if(y2&lt;0) x2 *= -1, y2 *= -1;
-	if(t&amp;&amp;y2){
-		if(t&lt;0){
-			printf(&quot;(&quot;); x2 *= -1;
-		}
-		printf(&quot;%lld&quot;, t);
-		x2 %= y2;
-		if(x2) printf(&quot; %lld/%lld&quot;, x2, y2);
-		if(t&lt;0) printf(&quot;)&quot;);
-	}
-	else{
-		if(x2==0) printf(&quot;0&quot;);
-		else{
-			if(x2&lt;0) printf(&quot;(&quot;);
-			printf(&quot;%lld/%lld&quot;, x2, y2);
-			if(x2&lt;0) printf(&quot;)&quot;);
-		}
-		
-	}
-	printf(&quot; = &quot;);
+	com(a,b);
 }
-void solve1(){
-	first(1);
-	long long x1 = a1, y1 = b1, x2 = a2, y2 = b2;
-	long long g = gcd(y1, y2);
-	x1 *= y2/g;
-	x2 *= y1/g;
-	x2 += x1;
-	y2 *= y1;
-	y2 /= g;
-	solve(x2,y2);
-}
-void solve2(){
-	first(2);
-	long long x1 = a1, y1 = b1, x2 = a2, y2 = b2;
-	x2 *= -1;
-	long long g = gcd(y1, y2);
-	x1 *= y2/g;
-	x2 *= y1/g;
-	x2 += x1;
-	y2 *= y1;
-	y2 /= g;
-	solve(x2,y2);
-}
-void solve3(){
-	first(3);
-	long long x1 = a1, y1 = b1, x2 = a2, y2 = b2;
-	x2 *= x1;
-	y2 *= y1;
-	solve(x2,y2);
-}
-void solve4(){
-	first(4);
-	long long x1 = a1, y1 = b1, x2 = a2, y2 = b2;
-	x2 *= y1;
-	y2 *= x1;
-	long long tmp = x2;
-	x2 = y2; y2 = tmp;
-	if(y2==0) printf(&quot;Inf\n&quot;);
-	else solve(x2,y2);
-}
+
 int main()
 {
+	long long a1, b1, a2, b2;
 	scanf(&quot;%lld/%lld %lld/%lld&quot;, &amp;a1, &amp;b1, &amp;a2, &amp;b2);
-	solve1();
-	solve2();
-	solve3();
-	solve4();
+	solve1(a1,b1,a2,b2); printf(&quot;\n&quot;);
+	solve2(a1,b1,a2,b2); printf(&quot;\n&quot;);
+	solve3(a1,b1,a2,b2); printf(&quot;\n&quot;);
+	solve4(a1,b1,a2,b2); printf(&quot;\n&quot;);
 	return 0;
 }
 </code></pre>
