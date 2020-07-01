@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-01T08:24:40.561Z</updated>
+    <updated>2020-07-01T14:32:40.437Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,122 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1155 Heap Paths (30分)题解]]></title>
+        <id>https://ygytl.github.io/post/1155-heap-paths-30-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1155-heap-paths-30-fen-ti-jie/">
+        </link>
+        <updated>2020-07-01T14:31:35.000Z</updated>
+        <content type="html"><![CDATA[<p>1155 Heap Paths (30分)</p>
+<p>In computer science, a <strong>heap</strong> is a specialized tree-based data structure that satisfies the heap property: if P is a parent node of C, then the key (the value) of P is either greater than or equal to (in a max heap) or less than or equal to (in a min heap) the key of C. A common implementation of a heap is the binary heap, in which the tree is a complete binary tree. (Quoted from Wikipedia at https://en.wikipedia.org/wiki/Heap_(data_structure))</p>
+<p>One thing for sure is that all the keys along any path from the root to a leaf in a max/min heap must be in non-increasing/non-decreasing order.</p>
+<p>Your job is to check every path in a given complete binary tree, in order to tell if it is a heap or not.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em> (1&lt;<em>N</em>≤1,000), the number of keys in the tree. Then the next line contains <em>N</em> distinct integer keys (all in the range of <strong>int</strong>), which gives the level order traversal sequence of a complete binary tree.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each given tree, first print all the paths from the root to the leaves. Each path occupies a line, with all the numbers separated by a space, and no extra space at the beginning or the end of the line. The paths must be printed in the following order: for each node in the tree, all the paths in its right subtree must be printed before those in its left subtree.</p>
+<p>Finally print in a line <code>Max Heap</code> if it is a max heap, or <code>Min Heap</code> for a min heap, or <code>Not Heap</code> if it is not a heap at all.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">8
+98 72 86 60 65 12 23 50
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">98 86 23
+98 86 12
+98 72 65
+98 72 60 50
+Max Heap
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">8
+8 38 25 58 52 82 70 60
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">8 25 70
+8 25 82
+8 38 52
+8 38 58 60
+Min Heap
+</code></pre>
+<h3 id="sample-input-3">Sample Input 3:</h3>
+<pre><code class="language-in">8
+10 28 15 12 34 9 8 56
+</code></pre>
+<h3 id="sample-output-3">Sample Output 3:</h3>
+<pre><code class="language-out">10 15 8
+10 15 9
+10 28 34
+10 28 12 56
+Not Heap
+</code></pre>
+<hr>
+<p>题目描述：先理解堆的定义，堆分为最大堆，最小堆。题目给出一组数，有可能是堆或不是。如果是堆，则表示树的层次序列值。堆的构建是在满二叉树的基础上的，所以比较判断是最大堆还是最小堆。</p>
+<p>最大堆：root结点的值大于其左右子结点的值。</p>
+<p>最小堆：root结点的值小于其左右子结点的值。</p>
+</br>
+<p>解题思路：用数组存题目给出的树，一般舍去索引0，从1开始存值，当root索引为index时，左节点索引为index*2，右节点索引为index*2+1。判断v[index]的值是否都大于v[index*2]、v[index*2+1]，如果是就是最大堆；判断v[index]的值是否都小于v[index*2]、v[index*2+1]，如果是则为最小堆。如果都不是最大堆、最小堆，输出Not Heap。</p>
+<p>并且题目要求输出根节点到叶子结点的路径，输出顺序是右大于左。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n;
+vector&lt;int&gt; v, tv, ttv;
+vector&lt; vector&lt;int&gt; &gt; ans;
+int judge(){
+	int f, f1=true, f2=true, l, r;
+	for(int i=1; i&lt;=n; i++){
+		l = i*2; r = i*2+1;
+		if(l&lt;=n){
+			if(f1&amp;&amp;v[i]&lt;v[l]) f1 = false;
+			if(f2&amp;&amp;v[i]&gt;v[l]) f2 = false;
+		}
+		if(r&lt;=n){
+			if(f1&amp;&amp;v[i]&lt;v[r]) f1 = false;
+			if(f2&amp;&amp;v[i]&gt;v[r]) f2 = false;
+		}
+	}
+	if(f1==true&amp;&amp;f2==false) return 1;
+	if(f2==true&amp;&amp;f1==false) return -1;
+	return 0;
+}
+void dfs(int index){
+	int l=index*2, r=index*2+1;
+	tv.push_back(v[index]);
+	if(l&gt;n&amp;&amp;r&gt;n){
+		ans.push_back(tv);
+		return ;
+	}
+	if(r&lt;=n){
+		dfs(r);
+		tv.pop_back();
+	}
+	if(l&lt;=n){
+		dfs(l);
+		tv.pop_back();
+	}
+}
+int main()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	v.resize(n+1);
+	for(int i=1; i&lt;=n; i++) scanf(&quot;%d&quot;, &amp;v[i]);
+	int flag = judge();
+	dfs(1);
+	for(int i=0; i&lt;ans.size(); i++){
+		for(int j=0; j&lt;ans[i].size(); j++){
+			if(j) printf(&quot; &quot;);
+			printf(&quot;%d&quot;, ans[i][j]);
+		}
+		printf(&quot;\n&quot;);
+	}
+	if(flag==0) printf(&quot;Not Heap\n&quot;);
+	else if(flag==1) printf(&quot;Max Heap\n&quot;);
+	else if(flag==-1) printf(&quot;Min Heap\n&quot;);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1105 Spiral Matrix (25分)题解]]></title>
         <id>https://ygytl.github.io/post/1105-spiral-matrix-25-fen-ti-jie/</id>
@@ -941,143 +1057,6 @@ int main()
 	for(int i=0; i&lt;List.size(); i++){
 		cout &lt;&lt; List[i].name &lt;&lt; &quot; &quot; &lt;&lt; List[i].class_name &lt;&lt; endl;
 	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1082 Read Number in Chinese (25分)题解]]></title>
-        <id>https://ygytl.github.io/post/1082-read-number-in-chinese-25-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1082-read-number-in-chinese-25-fen-ti-jie/">
-        </link>
-        <updated>2020-06-07T13:17:11.000Z</updated>
-        <content type="html"><![CDATA[<p>1082 Read Number in Chinese (25分)</p>
-<p>Given an integer with no more than 9 digits, you are supposed to read it in the traditional Chinese way. Output <code>Fu</code> first if it is negative. For example, -123456789 is read as <code>Fu yi Yi er Qian san Bai si Shi wu Wan liu Qian qi Bai ba Shi jiu</code>. Note: zero (<code>ling</code>) must be handled correctly according to the Chinese tradition. For example, 100800 is <code>yi Shi Wan ling ba Bai</code>.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case, which gives an integer with no more than 9 digits.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in a line the Chinese way of reading the number. The characters are separated by a space and there must be no extra space at the end of the line.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">-123456789
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">Fu yi Yi er Qian san Bai si Shi wu Wan liu Qian qi Bai ba Shi jiu
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">100800
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">yi Shi Wan ling ba Bai
-</code></pre>
-<hr>
-<p>题目描述：将数字转化为字母拼音的格式</p>
-</br>
-<p>输入：不超过9 digits的数</p>
-<p>输出：汉字拼音格式</p>
-</br>
-<p>解题思路：把几个坑说下，测试点3是输入0的时候是否输出'ling'。难点是对零的处理，给几个测试数据吧，测试通过基本就行了；这里提供两个写法，细节处理有些许不同。</p>
-<pre><code>9090909
-jiu Bai ling jiu Wan ling jiu Bai ling jiu
-
-100000009
-yi Yi Wan ling jiu
-
-0
-ling
-
-10086
-yi Wan ling ba Shi liu
-
-110110
-yi Shi yi Wan ling yi Bai yi Shi
-</code></pre>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-//方法一
-int main()
-{
-	string s;
-	cin &gt;&gt; s;
-	map&lt;int,string&gt; p;
-	p[0]=&quot;ling&quot;; p[1]=&quot;yi&quot;; p[2]=&quot;er&quot;; p[3]=&quot;san&quot;; p[4]=&quot;si&quot;; p[5]=&quot;wu&quot;;
-	p[6]=&quot;liu&quot;; p[7]=&quot;qi&quot;; p[8]=&quot;ba&quot;; p[9]=&quot;jiu&quot;;
-	if(s[0]=='-'){
-		printf(&quot;Fu &quot;);
-	}
-	else s = &quot;+&quot;+s;
-	string ans=&quot;&quot;;
-	bool flag = false;
-	int l = s.size();
-	for(int i=1; i&lt;l; i++){
-		if(s[i]=='0'){
-			if(l-i==5) ans += &quot; Wan&quot;; 
-			flag = true;
-			continue;
-		}
-		else{
-			if(i!=1) ans += &quot; &quot;;
-			if(flag){
-				ans+= p[0] + &quot; &quot;;
-			}
-			flag = false;
-			if(l-i==1) ans += p[s[i]-'0'];
-			if(l-i==2||l-i==6) ans += p[s[i]-'0'] + &quot; Shi&quot;;
-			if(l-i==3||l-i==7) ans += p[s[i]-'0'] + &quot; Bai&quot;;
-			if(l-i==4||l-i==8) ans += p[s[i]-'0'] + &quot; Qian&quot;;
-			if(l-i==5) ans += p[s[i]-'0'] + &quot; Wan&quot;;
-			if(l-i==9) ans += p[s[i]-'0'] + &quot; Yi&quot;;
-		}
-	}
-	if(s==&quot;+0&quot;||s==&quot;-0&quot;) ans = &quot;ling&quot;;
-	cout &lt;&lt; ans &lt;&lt; endl;
-	return 0;
-}
-</code></pre>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-//方法二
-int main()
-{
-	map&lt;int,string&gt; p;
-	p[0] = &quot;ling&quot;; p[1] = &quot;yi&quot;; p[2] = &quot;er&quot;; p[3] = &quot;san&quot;;
-	p[4] = &quot;si&quot;; p[5] = &quot;wu&quot;; p[6] = &quot;liu&quot;; p[7] = &quot;qi&quot;;
-	p[8] = &quot;ba&quot;; p[9] = &quot;jiu&quot;;
-	string str, ans=&quot;&quot;;
-	cin &gt;&gt; str;
-	int l, s=0;
-	bool flag = false;
-	l = str.length();
-	if(str[0]=='-'){
-		ans += &quot;Fu&quot;;
-		s++; l--; flag = true;
-	}
-	bool f1=false, f2=false, f3=false;
-	for(int i=s; i&lt;str.length(); i++,l--){
-		f1 = false;
-		if(l&gt;=5&amp;&amp;l&lt;=8) f2 = true;
-		if(str[i]=='0') f3 = true;
-		else{
-			f1 = true;
-			if(flag) ans += &quot; &quot;;
-			if(f3) ans += &quot;ling &quot;;
-			ans += p[str[i]-'0'];
-			flag = true;
-			f3 = false;
-		}
-		if(f1){
-			if(l==2||l==6) ans += &quot; Shi&quot;;
-			if(l==3||l==7) ans += &quot; Bai&quot;;
-			if(l==4||l==8) ans += &quot; Qian&quot;;
-			if(l==9) ans += &quot; Yi&quot;;
-		}
-		if(f2&amp;&amp;l==5){
-			ans += &quot; Wan&quot;; f2 = false;
-		}
-	}
-	if(str==&quot;0&quot;) ans = &quot;ling&quot;;
-	cout &lt;&lt; ans &lt;&lt; endl;
 	return 0;
 }
 </code></pre>

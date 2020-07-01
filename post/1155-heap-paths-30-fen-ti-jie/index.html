@@ -38,11 +38,14 @@
 <ul>
 <li>
 <ul>
-<li><a href="#1-%E9%A6%96%E5%85%88%E5%AE%89%E8%A3%85git%E5%B7%A5%E5%85%B7%E8%BF%90%E8%A1%8Cgit-bash%E8%BE%93%E5%85%A5%E6%8C%87%E4%BB%A4%E8%BF%9B%E5%85%A5ssh%E6%96%87%E4%BB%B6%E5%A4%B9%E4%BD%8D%E7%BD%AE%E5%9C%A8%E6%A1%8C%E9%9D%A2">1、首先安装Git工具，运行Git Bash，输入指令进入.ssh文件夹(位置在桌面)</a></li>
-<li><a href="#2-%E5%A6%82%E6%9E%9C%E6%8F%90%E7%A4%BA-no-such-file-or-directory%E4%BD%A0%E5%8F%AF%E4%BB%A5%E6%89%8B%E5%8A%A8%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA-ssh%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8D%B3%E5%8F%AF">2、 如果提示 “ No such file or directory”，你可以手动的创建一个 .ssh文件夹即可</a></li>
-<li><a href="#3-%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E7%9A%84name%E5%92%8Cemailgithub%E7%9A%84name%E5%92%8Cemail">3、 配置全局的name和email，github的name和email</a></li>
-<li><a href="#4-%E7%94%9F%E6%88%90key">4、生成key</a></li>
-<li><a href="#5-%E6%89%93%E5%BC%80id_rsapub%E5%A4%8D%E5%88%B6%E9%87%8C%E9%9D%A2%E7%9A%84%E5%86%85%E5%AE%B9%E6%B7%BB%E5%8A%A0%E5%88%B0%E4%BD%A0github%E5%B0%B1%E8%A1%8C%E4%BA%86">5、 打开id_rsa.pub，复制里面的内容添加到你github就行了</a></li>
+<li><a href="#input-specification">Input Specification:</a></li>
+<li><a href="#output-specification">Output Specification:</a></li>
+<li><a href="#sample-input-1">Sample Input 1:</a></li>
+<li><a href="#sample-output-1">Sample Output 1:</a></li>
+<li><a href="#sample-input-2">Sample Input 2:</a></li>
+<li><a href="#sample-output-2">Sample Output 2:</a></li>
+<li><a href="#sample-input-3">Sample Input 3:</a></li>
+<li><a href="#sample-output-3">Sample Output 3:</a></li>
 </ul>
 </li>
 </ul>
@@ -93,58 +96,138 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">windows系统生成ssh key</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1155 Heap Paths (30分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-05-24 / 1 min read
+          2020-07-01 / 6 min read
         </div>
-        
-          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://ygytl.github.io//post-images/windows-xi-tong-sheng-cheng-ssh-key.jpg" alt="">
         
         <div class="post-content yue">
-          <h3 id="1-首先安装git工具运行git-bash输入指令进入ssh文件夹位置在桌面">1、首先安装Git工具，运行Git Bash，输入指令进入.ssh文件夹(位置在桌面)</h3>
-<pre><code>cd ~/.ssh/
+          <p>1155 Heap Paths (30分)</p>
+<p>In computer science, a <strong>heap</strong> is a specialized tree-based data structure that satisfies the heap property: if P is a parent node of C, then the key (the value) of P is either greater than or equal to (in a max heap) or less than or equal to (in a min heap) the key of C. A common implementation of a heap is the binary heap, in which the tree is a complete binary tree. (Quoted from Wikipedia at https://en.wikipedia.org/wiki/Heap_(data_structure))</p>
+<p>One thing for sure is that all the keys along any path from the root to a leaf in a max/min heap must be in non-increasing/non-decreasing order.</p>
+<p>Your job is to check every path in a given complete binary tree, in order to tell if it is a heap or not.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em> (1&lt;<em>N</em>≤1,000), the number of keys in the tree. Then the next line contains <em>N</em> distinct integer keys (all in the range of <strong>int</strong>), which gives the level order traversal sequence of a complete binary tree.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each given tree, first print all the paths from the root to the leaves. Each path occupies a line, with all the numbers separated by a space, and no extra space at the beginning or the end of the line. The paths must be printed in the following order: for each node in the tree, all the paths in its right subtree must be printed before those in its left subtree.</p>
+<p>Finally print in a line <code>Max Heap</code> if it is a max heap, or <code>Min Heap</code> for a min heap, or <code>Not Heap</code> if it is not a heap at all.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">8
+98 72 86 60 65 12 23 50
 </code></pre>
-<h3 id="2-如果提示-no-such-file-or-directory你可以手动的创建一个-ssh文件夹即可">2、 如果提示 “ No such file or directory”，你可以手动的创建一个 .ssh文件夹即可</h3>
-<pre><code> mkdir ~/.ssh 
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">98 86 23
+98 86 12
+98 72 65
+98 72 60 50
+Max Heap
 </code></pre>
-<h3 id="3-配置全局的name和emailgithub的name和email">3、 配置全局的name和email，github的name和email</h3>
-<pre><code> git config --global user.name &quot;yourname&quot;  
-
- git config --global user.email &quot;youremail@outlook.com&quot; 
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">8
+8 38 25 58 52 82 70 60
 </code></pre>
-<h3 id="4-生成key">4、生成key</h3>
-<pre><code> ssh-keygen -t rsa -C &quot;youremail@outlook.com&quot; 
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">8 25 70
+8 25 82
+8 38 52
+8 38 58 60
+Min Heap
 </code></pre>
-<p>连续按三次回车，这里设置的密码就为空了，并且创建了key。</p>
-<p>最后得到了两个文件：id_rsa和id_rsa.pub</p>
-<h3 id="5-打开id_rsapub复制里面的内容添加到你github就行了">5、 打开id_rsa.pub，复制里面的内容添加到你github就行了</h3>
+<h3 id="sample-input-3">Sample Input 3:</h3>
+<pre><code class="language-in">8
+10 28 15 12 34 9 8 56
+</code></pre>
+<h3 id="sample-output-3">Sample Output 3:</h3>
+<pre><code class="language-out">10 15 8
+10 15 9
+10 28 34
+10 28 12 56
+Not Heap
+</code></pre>
+<hr>
+<p>题目描述：先理解堆的定义，堆分为最大堆，最小堆。题目给出一组数，有可能是堆或不是。如果是堆，则表示树的层次序列值。堆的构建是在满二叉树的基础上的，所以比较判断是最大堆还是最小堆。</p>
+<p>最大堆：root结点的值大于其左右子结点的值。</p>
+<p>最小堆：root结点的值小于其左右子结点的值。</p>
+</br>
+<p>解题思路：用数组存题目给出的树，一般舍去索引0，从1开始存值，当root索引为index时，左节点索引为index*2，右节点索引为index*2+1。判断v[index]的值是否都大于v[index*2]、v[index*2+1]，如果是就是最大堆；判断v[index]的值是否都小于v[index*2]、v[index*2+1]，如果是则为最小堆。如果都不是最大堆、最小堆，输出Not Heap。</p>
+<p>并且题目要求输出根节点到叶子结点的路径，输出顺序是右大于左。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n;
+vector&lt;int&gt; v, tv, ttv;
+vector&lt; vector&lt;int&gt; &gt; ans;
+int judge(){
+	int f, f1=true, f2=true, l, r;
+	for(int i=1; i&lt;=n; i++){
+		l = i*2; r = i*2+1;
+		if(l&lt;=n){
+			if(f1&amp;&amp;v[i]&lt;v[l]) f1 = false;
+			if(f2&amp;&amp;v[i]&gt;v[l]) f2 = false;
+		}
+		if(r&lt;=n){
+			if(f1&amp;&amp;v[i]&lt;v[r]) f1 = false;
+			if(f2&amp;&amp;v[i]&gt;v[r]) f2 = false;
+		}
+	}
+	if(f1==true&amp;&amp;f2==false) return 1;
+	if(f2==true&amp;&amp;f1==false) return -1;
+	return 0;
+}
+void dfs(int index){
+	int l=index*2, r=index*2+1;
+	tv.push_back(v[index]);
+	if(l&gt;n&amp;&amp;r&gt;n){
+		ans.push_back(tv);
+		return ;
+	}
+	if(r&lt;=n){
+		dfs(r);
+		tv.pop_back();
+	}
+	if(l&lt;=n){
+		dfs(l);
+		tv.pop_back();
+	}
+}
+int main()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	v.resize(n+1);
+	for(int i=1; i&lt;=n; i++) scanf(&quot;%d&quot;, &amp;v[i]);
+	int flag = judge();
+	dfs(1);
+	for(int i=0; i&lt;ans.size(); i++){
+		for(int j=0; j&lt;ans[i].size(); j++){
+			if(j) printf(&quot; &quot;);
+			printf(&quot;%d&quot;, ans[i][j]);
+		}
+		printf(&quot;\n&quot;);
+	}
+	if(flag==0) printf(&quot;Not Heap\n&quot;);
+	else if(flag==1) printf(&quot;Max Heap\n&quot;);
+	else if(flag==-1) printf(&quot;Min Heap\n&quot;);
+	return 0;
+}
+</code></pre>
 
         </div>
 
         
-          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/C4gxeQlHl/">
-            <span class="flex-auto">Flask Vue.js全栈开发</span>
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
+            <span class="flex-auto">PAT (Advanced Level) Practice</span>
           </a>
         
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1063-set-similarity-25-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1063 Set Similarity (25分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/flask-vuejs-quan-zhan-kai-fa-di-yi-zhang-chuang-jian-di-yi-ge-flask-restful-api/">
+              <a href="https://ygytl.github.io/post/1105-spiral-matrix-25-fen-ti-jie/">
                 <h3 class="post-title">
-                  Flask+Vue.js开发个人博客 第一章：创建github库与配置Flask
+                  1105 Spiral Matrix (25分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
