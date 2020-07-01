@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-06-23T06:37:19.036Z</updated>
+    <updated>2020-07-01T08:24:40.561Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,105 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1105 Spiral Matrix (25分)题解]]></title>
+        <id>https://ygytl.github.io/post/1105-spiral-matrix-25-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1105-spiral-matrix-25-fen-ti-jie/">
+        </link>
+        <updated>2020-07-01T08:24:12.000Z</updated>
+        <content type="html"><![CDATA[<p>1105 Spiral Matrix (25分)</p>
+<p>This time your job is to fill a sequence of <em>N</em> positive integers into a <strong>spiral matrix</strong> in non-increasing order. A spiral matrix is filled in from the first element at the upper-left corner, then move in a clockwise spiral. The matrix has <em>m</em> rows and <em>n</em> columns, where <em>m</em> and <em>n</em> satisfy the following: <em>m</em>×<em>n</em> must be equal to <em>N</em>; <em>m</em>≥<em>n</em>; and <em>m</em>−<em>n</em> is the minimum of all the possible values.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em>. Then the next line contains <em>N</em> positive integers to be filled into the spiral matrix. All the numbers are no more than 104. The numbers in a line are separated by spaces.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, output the resulting matrix in <em>m</em> lines, each contains <em>n</em> numbers. There must be exactly 1 space between two adjacent numbers, and no extra space at the end of each line.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">12
+37 76 20 98 76 42 53 95 60 81 58 93
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">98 95 93
+42 37 81
+53 20 76
+58 60 76
+</code></pre>
+<hr>
+<p>题目描述：将一组数用二维数组的形式输出(类似漩涡)，m-行，n-列，要求m&gt;=n。</p>
+<p>解题思路：将题目给的数组从大到小排序，然后求出二维数组的行和列，再往里面填值就行了。可以用一个二维数组vis记录哪个空是填了值的，比较方便。(在ccf真题中有一道题与这题类似，难度在第二道题)</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 1e4 + 5;
+int v[maxn];
+vector&lt;vector&lt;int&gt; &gt; G;
+vector&lt;vector&lt;bool&gt; &gt; vis;
+bool cmp(int a, int b){
+	return a &gt; b;
+}
+int main()
+{
+	int n, k, x, y;
+	scanf(&quot;%d&quot;, &amp;n);
+	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;, &amp;v[i]);
+	sort(v, v+n, cmp);
+	x = sqrt(n)+1;
+	for(int i=x; i&gt;=1; i--){
+		if(n%i==0){
+			x = i;
+			break;
+		}
+	}
+	y = min(x,n/x); x = max(x,n/x);
+	if(y==1){
+		for(int i=0; i&lt;n; i++) printf(&quot;%d\n&quot;, v[i]);
+		return 0;
+	}
+	G.resize(x+1); vis.resize(x+1);
+	for(int i=1; i&lt;=x; i++){
+		G[i].resize(y+2);
+		vis[i].resize(y+2);
+		vis[i][0] = false; vis[i][y+1] = false;
+		for(int j=1; j&lt;=y; j++) vis[i][j] = true;
+	}
+	int i = 1, j = 1, c=0;
+	while(vis[i][j]&amp;&amp;c&lt;n){//圈 
+		while(j&lt;=y&amp;&amp;vis[i][j]){
+			G[i][j] = v[c];
+			vis[i][j] = false;
+			c++; j++;
+		}
+		i++; j--;
+		while(i&lt;=x&amp;&amp;vis[i][j]){
+			G[i][j] = v[c];
+			vis[i][j] = false;
+			c++; i++;
+		}
+		i--; j--;
+		while(j&gt;=1&amp;&amp;vis[i][j]){
+			G[i][j] = v[c];
+			vis[i][j] = false;
+			c++; j--;
+		}
+		j++; i--;
+		while(i&gt;=1&amp;&amp;vis[i][j]){
+			G[i][j] = v[c];
+			vis[i][j] = false;
+			c++; i--;
+		}
+		i++; j++;
+	}
+	for(i=1; i&lt;=x; i++){
+		for(j=1; j&lt;=y; j++){
+			if(j!=1) printf(&quot; &quot;);
+			printf(&quot;%d&quot;, G[i][j]);
+		}
+		printf(&quot;\n&quot;);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1093 Count PAT's (25分)题解]]></title>
         <id>https://ygytl.github.io/post/1093-count-pats-25-fen-ti-jie/</id>
@@ -979,129 +1078,6 @@ int main()
 	}
 	if(str==&quot;0&quot;) ans = &quot;ling&quot;;
 	cout &lt;&lt; ans &lt;&lt; endl;
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1080 Graduate Admission (30分)题解]]></title>
-        <id>https://ygytl.github.io/post/1080-graduate-admission-30-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1080-graduate-admission-30-fen-ti-jie/">
-        </link>
-        <updated>2020-06-07T09:14:00.000Z</updated>
-        <content type="html"><![CDATA[<p>1080 Graduate Admission (30分)</p>
-<p>It is said that in 2011, there are about 100 graduate schools ready to proceed over 40,000 applications in Zhejiang Province. It would help a lot if you could write a program to automate the admission procedure.</p>
-<p>Each applicant will have to provide two grades: the national entrance exam grade <em>G**E</em>, and the interview grade <em>G**I</em>. The final grade of an applicant is (<em>G**E</em>+<em>G**I</em>)/2. The admission rules are:</p>
-<ul>
-<li>The applicants are ranked according to their final grades, and will be admitted one by one from the top of the rank list.</li>
-<li>If there is a tied final grade, the applicants will be ranked according to their national entrance exam grade <em>G**E</em>. If still tied, their ranks must be the same.</li>
-<li>Each applicant may have <em>K</em> choices and the admission will be done according to his/her choices: if according to the rank list, it is one's turn to be admitted; and if the quota of one's most preferred shcool is not exceeded, then one will be admitted to this school, or one's other choices will be considered one by one in order. If one gets rejected by all of preferred schools, then this unfortunate applicant will be rejected.</li>
-<li>If there is a tied rank, and if the corresponding applicants are applying to the same school, then that school must admit all the applicants with the same rank, <strong>even if its quota will be exceeded</strong>.</li>
-</ul>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case.</p>
-<p>Each case starts with a line containing three positive integers: <em>N</em> (≤40,000), the total number of applicants; <em>M</em> (≤100), the total number of graduate schools; and <em>K</em> (≤5), the number of choices an applicant may have.</p>
-<p>In the next line, separated by a space, there are <em>M</em> positive integers. The <em>i</em>-th integer is the quota of the <em>i</em>-th graduate school respectively.</p>
-<p>Then <em>N</em> lines follow, each contains 2+<em>K</em> integers separated by a space. The first 2 integers are the applicant's <em>G**E</em> and <em>G**I</em>, respectively. The next <em>K</em> integers represent the preferred schools. For the sake of simplicity, we assume that the schools are numbered from 0 to <em>M</em>−1, and the applicants are numbered from 0 to <em>N</em>−1.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case you should output the admission results for all the graduate schools. The results of each school must occupy a line, which contains the applicants' numbers that school admits. The numbers must be in increasing order and be separated by a space. There must be no extra space at the end of each line. If no applicant is admitted by a school, you must output an empty line correspondingly.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">11 6 3
-2 1 2 2 2 3
-100 100 0 1 2
-60 60 2 3 5
-100 90 0 3 4
-90 100 1 2 0
-90 90 5 1 3
-80 90 1 0 2
-80 80 0 1 2
-80 80 0 1 2
-80 70 1 3 2
-70 80 1 2 3
-100 100 0 2 4
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">0 10
-3
-5 6 7
-2 8
-
-1 4
-</code></pre>
-<hr>
-<p>题目描述：学校录取学生的模拟过程</p>
-</br>
-<p>输入：第一行n，m，k。分别为学生人数，学校数，学生可填报志愿数。第二行m个值，分别表示学校录取的人数。接下来n行，为学生的考试成绩GE，GI，以及填报的k个学校。</p>
-<p>输出：每个学校录取的学生编号，从小到大输出。</p>
-<p>录取规则：成绩排序，总分=（GE+GI）/2，总分高排在前面；当总分相同时，GE成绩高排在前面；当总分和GE都相同时，排名并列。如果学校最后录取的学生有多名排名是一样的，超额也要将他们都录取了。</p>
-</br>
-<p>解题思路：模拟题，很容易就把简单的问题复杂化了。先将学生按照成绩排序，分高的选择权。可以从第一名开始按其意愿选择学校，当他选择的学校没有录取满人时，他就会直接被学校录取，当学校录取满人了，其他成绩比较低的就无法再进入这满了人的学校，只能看其他志愿。</p>
-<p>注意：在学校最后录取的学生成绩/排名不唯一时，怎么把排名相同的全部录取？这需要将学校最后录取的人的分数记录下来，就两个数组记录一下就行了。</p>
-<p>模拟题得多做几道，找找感觉！</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-const int maxn = 40000+5;
-int n, m, k, snum[200], ltsum[200], ltge[200];
-bool vis[maxn];
-struct node{
-	int ge, gi, id, sum;
-	vector&lt;int&gt; sc;
-	bool operator &lt;( const node &amp;x )const{
-        if( sum!=x.sum ) return sum &gt; x.sum;
-        return ge &gt; x.ge;
-    }
-};
-vector&lt;int&gt; ans[200];
-vector&lt;node&gt; v;
-//bool cmp(node a, node b){
-//	if(a.sum!=b.sum) return a.sum &gt; b.sum;
-//	else return a.ge &gt; b.ge;
-//}
-int main()
-{
-	int g;
-	memset(vis,true,sizeof(vis));
-	scanf(&quot;%d %d %d&quot;, &amp;n, &amp;m, &amp;k);
-	for(int i=0; i&lt;m; i++) scanf(&quot;%d&quot;, &amp;snum[i]);
-	for(int i=0; i&lt;n; i++){//学生 
-		node t;
-		scanf(&quot;%d %d&quot;, &amp;t.ge, &amp;t.gi);
-		t.id = i; t.sum = t.ge+t.gi;
-		for(int j=0; j&lt;k; j++){
-			scanf(&quot;%d&quot;, &amp;g);
-			t.sc.push_back(g);//学生报志愿 
-		}
-		v.push_back(t);
-	}
-//	sort(v.begin(),v.end(),cmp);
-	sort(v.begin(), v.end());
-	for(int i=0; i&lt;n; i++){
-		node t = v[i];
-		for(int j=0; j&lt;k; j++){
-			int cid = t.sc[j];
-			if(!vis[t.id]) continue;
-			if(ans[cid].size()&lt;snum[cid]){
-				ltsum[cid] = t.sum;
-				ltge[cid] = t.ge;
-				ans[cid].push_back(t.id);
-				vis[t.id] = false;
-			}
-			else if(t.sum==ltsum[cid]&amp;&amp;t.ge==ltge[cid]){
-				ans[cid].push_back(t.id);
-				vis[t.id] = false;
-			}
-		}
-	}
-	for(int i=0; i&lt;m; i++){
-		sort(ans[i].begin(),ans[i].end());
-		for(int j=0; j&lt;ans[i].size(); j++){
-			if(j) printf(&quot; &quot;);
-			printf(&quot;%d&quot;, ans[i][j]);
-		}
-		printf(&quot;\n&quot;);
-	}
 	return 0;
 }
 </code></pre>
