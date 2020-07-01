@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-01T14:32:40.437Z</updated>
+    <updated>2020-07-01T14:36:17.284Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -59,7 +59,7 @@ Min Heap
 Not Heap
 </code></pre>
 <hr>
-<p>题目描述：先理解堆的定义，堆分为最大堆，最小堆。题目给出一组数，有可能是堆或不是。如果是堆，则表示树的层次序列值。堆的构建是在满二叉树的基础上的，所以比较判断是最大堆还是最小堆。</p>
+<p>题目描述：先理解堆的定义，堆分为最大堆，最小堆。题目给出一组数，有可能是堆或不是。如果是堆，则表示树的层次序列值。堆的构建是在满二叉树的基础上的，所以比较容易判断是最大堆还是最小堆。</p>
 <p>最大堆：root结点的值大于其左右子结点的值。</p>
 <p>最小堆：root结点的值小于其左右子结点的值。</p>
 </br>
