@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-01T14:38:05.487Z</updated>
+    <updated>2020-07-03T10:06:15.182Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,105 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1107 Social Clusters (30分)题解]]></title>
+        <id>https://ygytl.github.io/post/1107-social-clusters-30-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1107-social-clusters-30-fen-ti-jie/">
+        </link>
+        <updated>2020-07-03T10:05:36.000Z</updated>
+        <content type="html"><![CDATA[<p>1107 Social Clusters (30分)</p>
+<p>When register on a social network, you are always asked to specify your hobbies in order to find some potential friends with the same hobbies. A <strong>social cluster</strong> is a set of people who have some of their hobbies in common. You are supposed to find all the clusters.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each test case, the first line contains a positive integer <em>N</em> (≤1000), the total number of people in a social network. Hence the people are numbered from 1 to <em>N</em>. Then <em>N</em> lines follow, each gives the hobby list of a person in the format:</p>
+<p><em>K**i</em>: <em>h**i</em>[1] <em>h**i</em>[2] ... <em>h**i</em>[<em>K**i</em>]</p>
+<p>where <em>K**i</em> (&gt;0) is the number of hobbies, and <em>h**i</em>[<em>j</em>] is the index of the <em>j</em>-th hobby, which is an integer in [1, 1000].</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each case, print in one line the total number of clusters in the network. Then in the second line, print the numbers of people in the clusters in non-increasing order. The numbers must be separated by exactly one space, and there must be no extra space at the end of the line.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">8
+3: 2 7 10
+1: 4
+2: 5 3
+1: 4
+1: 3
+1: 4
+4: 6 8 1 5
+1: 4
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">3
+4 3 1
+</code></pre>
+<hr>
+<p>题目描述：潜在的朋友圈</p>
+<p>输入：第一行n，表示人数；接着n行，每行是第i个人选择的课程数及课程id号。</p>
+<p>输出：第一行输出多少个圈，接着输出按照圈里人数的大小递减输出。</p>
+<p>解题思路：并查集，求出有多少个朋友圈，按照朋友圈的人数从大到小输出每个圈的人数就行了。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, m;
+const int maxn = 2000;
+vector&lt;int&gt; v[maxn];
+int f[maxn], g[maxn];
+set&lt;int&gt; s;
+int find(int x){
+	while(f[x]!=x){
+		x = f[x];
+	}
+	return x;
+}
+void Union(int x, int y){
+	x = find(x);
+	y = find(y);
+	f[x] = y;
+}
+bool cmp(int a, int b){
+	return a &gt; b;
+}
+int main()
+{
+	int k;
+	scanf(&quot;%d&quot;, &amp;n);
+	for(int i=1; i&lt;=n; i++) f[i] = i;
+	for(int i=1; i&lt;=n; i++){
+		scanf(&quot;%d:&quot;, &amp;m);
+		for(int j=0; j&lt;m; j++){
+			scanf(&quot;%d&quot;, &amp;k);
+			v[k].push_back(i);
+			s.insert(k);
+		}
+	}
+	set&lt;int&gt;::iterator it;
+	for(it=s.begin(); it!=s.end(); it++){//课程id 
+		sort(v[*it].begin(),v[*it].end());
+		int x, y;
+		for(int i=0; i&lt;v[*it].size(); i++){
+			if(i==0) x = find(v[*it][i]);
+			else{
+				y = find(v[*it][i]);
+				Union(x,y);
+			}
+		}
+	}
+	map&lt;int,int&gt; p;
+	for(int i=1; i&lt;=n; i++) p[find(i)]++;
+	map&lt;int,int&gt;::iterator it1;
+	int cnt=0; 
+	for(it1=p.begin(); it1!=p.end(); it1++){
+		g[cnt++] = it1-&gt;second;
+	}
+	sort(g,g+cnt,cmp);
+	printf(&quot;%d\n&quot;, cnt);
+	for(int i=0; i&lt;cnt; i++){
+		if(i) printf(&quot; &quot;);
+		printf(&quot;%d&quot;, g[i]);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1155 Heap Paths (30分)题解]]></title>
         <id>https://ygytl.github.io/post/1155-heap-paths-30-fen-ti-jie/</id>
@@ -971,92 +1070,6 @@ int main()
 		else if(ch1==ch2) c++;
 	}
     cout &lt;&lt; endl;
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1083 List Grades (25分)题解]]></title>
-        <id>https://ygytl.github.io/post/1083-list-grades-25-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1083-list-grades-25-fen-ti-jie/">
-        </link>
-        <updated>2020-06-07T14:19:56.000Z</updated>
-        <content type="html"><![CDATA[<p>1083 List Grades (25分)</p>
-<p>Given a list of <em>N</em> student records with name, ID and grade. You are supposed to sort the records with respect to the grade in non-increasing order, and output those student records of which the grades are in a given interval.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. Each case is given in the following format:</p>
-<pre><code>N
-name[1] ID[1] grade[1]
-name[2] ID[2] grade[2]
-... ...
-name[N] ID[N] grade[N]
-grade1 grade2
-</code></pre>
-<p>where <code>name[i]</code> and <code>ID[i]</code> are strings of no more than 10 characters with no space, <code>grade[i]</code> is an integer in [0, 100], <code>grade1</code> and <code>grade2</code> are the boundaries of the grade's interval. It is guaranteed that all the grades are <strong>distinct</strong>.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case you should output the student records of which the grades are in the given interval [<code>grade1</code>, <code>grade2</code>] and are in non-increasing order. Each student record occupies a line with the student's name and ID, separated by one space. If there is no student's grade in that interval, output <code>NONE</code> instead.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">4
-Tom CS000001 59
-Joe Math990112 89
-Mike CS991301 100
-Mary EE990830 95
-60 100
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">Mike CS991301
-Mary EE990830
-Joe Math990112
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">2
-Jean AA980920 60
-Ann CS01 80
-90 95
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">NONE
-</code></pre>
-<hr>
-<p>题目描述：题目给定某些学生的信息，包括姓名、课程号、课程得分，现在给定一个区间的分数，若有学生分数在给定区间内，则输出该学生的姓名及性别。没有则输出NONE。</p>
-</br>
-<p>输入：第一行n表示学生信息个数。接下来n行提供学生信息。</p>
-<p>输出：输出分数在给定区间分数的学生信息，输出时按成绩递减输出，若没有符合的学生，输出NONE。</p>
-</br>
-<p>解题思路：写个cmp函数比较排序一下就行了。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-struct node{
-	string name, class_name;
-	int score;
-};
-vector&lt;node&gt; v, List;
-bool cmp(node a, node b){
-	return a.score &gt; b.score;
-}
-int main()
-{
-	int n, l, r;
-	node t;
-	scanf(&quot;%d&quot;, &amp;n);
-	for(int i=0; i&lt;n; i++){
-		cin &gt;&gt; t.name &gt;&gt; t.class_name &gt;&gt; t.score;
-		v.push_back(t);
-	}
-	scanf(&quot;%d %d&quot;, &amp;l, &amp;r);
-	for(int i=0; i&lt;n; i++){
-		t = v[i];
-		if(t.score &gt;= l &amp;&amp; t.score &lt;= r){
-			List.push_back(t);
-		}
-	}
-	sort(List.begin(),List.end(),cmp);
-	if(List.size()==0) printf(&quot;NONE&quot;);
-	for(int i=0; i&lt;List.size(); i++){
-		cout &lt;&lt; List[i].name &lt;&lt; &quot; &quot; &lt;&lt; List[i].class_name &lt;&lt; endl;
-	}
 	return 0;
 }
 </code></pre>

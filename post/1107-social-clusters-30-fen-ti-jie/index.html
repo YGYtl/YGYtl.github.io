@@ -40,10 +40,8 @@
 <ul>
 <li><a href="#input-specification">Input Specification:</a></li>
 <li><a href="#output-specification">Output Specification:</a></li>
-<li><a href="#sample-input-1">Sample Input 1:</a></li>
-<li><a href="#sample-output-1">Sample Output 1:</a></li>
-<li><a href="#sample-input-2">Sample Input 2:</a></li>
-<li><a href="#sample-output-2">Sample Output 2:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
 </ul>
 </li>
 </ul>
@@ -94,85 +92,100 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1077 Kuchiguse (20分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1107 Social Clusters (30分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-05 / 3 min read
+          2020-07-03 / 4 min read
         </div>
         
         <div class="post-content yue">
-          <p>1077 Kuchiguse (20分)</p>
-<p>The Japanese language is notorious for its sentence ending particles. Personal preference of such particles can be considered as a reflection of the speaker's personality. Such a preference is called &quot;Kuchiguse&quot; and is often exaggerated artistically in Anime and Manga. For example, the artificial sentence ending particle &quot;nyan~&quot; is often used as a stereotype for characters with a cat-like personality:</p>
-<ul>
-<li>Itai nyan~ (It hurts, nyan~)</li>
-<li>Ninjin wa iyada nyan~ (I hate carrots, nyan~)</li>
-</ul>
-<p>Now given a few lines spoken by the same character, can you find her Kuchiguse?</p>
+          <p>1107 Social Clusters (30分)</p>
+<p>When register on a social network, you are always asked to specify your hobbies in order to find some potential friends with the same hobbies. A <strong>social cluster</strong> is a set of people who have some of their hobbies in common. You are supposed to find all the clusters.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line is an integer <em>N</em> (2≤<em>N</em>≤100). Following are <em>N</em> file lines of 0~256 (inclusive) characters in length, each representing a character's spoken line. The spoken lines are case sensitive.</p>
+<p>Each input file contains one test case. For each test case, the first line contains a positive integer <em>N</em> (≤1000), the total number of people in a social network. Hence the people are numbered from 1 to <em>N</em>. Then <em>N</em> lines follow, each gives the hobby list of a person in the format:</p>
+<p><em>K**i</em>: <em>h**i</em>[1] <em>h**i</em>[2] ... <em>h**i</em>[<em>K**i</em>]</p>
+<p>where <em>K**i</em> (&gt;0) is the number of hobbies, and <em>h**i</em>[<em>j</em>] is the index of the <em>j</em>-th hobby, which is an integer in [1, 1000].</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the kuchiguse of the character, i.e., the longest common suffix of all <em>N</em> lines. If there is no such suffix, write <code>nai</code>.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">3
-Itai nyan~
-Ninjin wa iyadanyan~
-uhhh nyan~
+<p>For each case, print in one line the total number of clusters in the network. Then in the second line, print the numbers of people in the clusters in non-increasing order. The numbers must be separated by exactly one space, and there must be no extra space at the end of the line.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">8
+3: 2 7 10
+1: 4
+2: 5 3
+1: 4
+1: 3
+1: 4
+4: 6 8 1 5
+1: 4
 </code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">nyan~
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">3
-Itai!
-Ninjinnwaiyada T_T
-T_T
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">nai
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">3
+4 3 1
 </code></pre>
 <hr>
-<p>题目描述：找到一个人平时说话最常用的结尾语。</p>
-</br>
-<p>输入：第一行n，接下来n行字符串。</p>
-<p>输出：每行共同的后缀字符串。若没有公共字符串后缀，则输出nai。</p>
-</br>
-<p>解题思路：先读入n，然后保存第一串字符串，与之后的n-1串字符串相比较，找到每行中相同的后缀。怎么找呢？比较两个字符串长度，取字符串长度较小的进行for循环，保证字符数组不会越界，两个字符串同时从末尾开始比较。这样就可以得到他们的公共后缀长度啦，当有一组公共后缀长度为0，用flag标记一下，最后输出结果就行。</p>
+<p>题目描述：潜在的朋友圈</p>
+<p>输入：第一行n，表示人数；接着n行，每行是第i个人选择的课程数及课程id号。</p>
+<p>输出：第一行输出多少个圈，接着输出按照圈里人数的大小递减输出。</p>
+<p>解题思路：并查集，求出有多少个朋友圈，按照朋友圈的人数从大到小输出每个圈的人数就行了。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
+int n, m;
+const int maxn = 2000;
+vector&lt;int&gt; v[maxn];
+int f[maxn], g[maxn];
+set&lt;int&gt; s;
+int find(int x){
+	while(f[x]!=x){
+		x = f[x];
+	}
+	return x;
+}
+void Union(int x, int y){
+	x = find(x);
+	y = find(y);
+	f[x] = y;
+}
+bool cmp(int a, int b){
+	return a &gt; b;
+}
 int main()
 {
-	int n, l, l1, l2, common;
-	bool flag = true;
+	int k;
 	scanf(&quot;%d&quot;, &amp;n);
-	getchar();
-	string s, tmp;
-	for(int i=0; i&lt;n; i++){
-		getline(cin,tmp);
-		if(i==0){
-			s = tmp;
-			l1 = s.length();
-			common = l1;
-			continue;
+	for(int i=1; i&lt;=n; i++) f[i] = i;
+	for(int i=1; i&lt;=n; i++){
+		scanf(&quot;%d:&quot;, &amp;m);
+		for(int j=0; j&lt;m; j++){
+			scanf(&quot;%d&quot;, &amp;k);
+			v[k].push_back(i);
+			s.insert(k);
 		}
-		l2 = tmp.length();
-		l = min(l1,l2);
-		int count = 0;
-		for(int j=1; j&lt;=l; j++){
-			if(tmp[l2-j]==s[l1-j]){
-				count++;
+	}
+	set&lt;int&gt;::iterator it;
+	for(it=s.begin(); it!=s.end(); it++){//课程id 
+		sort(v[*it].begin(),v[*it].end());
+		int x, y;
+		for(int i=0; i&lt;v[*it].size(); i++){
+			if(i==0) x = find(v[*it][i]);
+			else{
+				y = find(v[*it][i]);
+				Union(x,y);
 			}
-			else break;
 		}
-		if(count==0){
-			flag = false;
-		}
-		common = min(common,count);
 	}
-	if(flag){
-		string ans = s.substr(l1-common);
-		cout &lt;&lt; ans &lt;&lt; endl;
+	map&lt;int,int&gt; p;
+	for(int i=1; i&lt;=n; i++) p[find(i)]++;
+	map&lt;int,int&gt;::iterator it1;
+	int cnt=0; 
+	for(it1=p.begin(); it1!=p.end(); it1++){
+		g[cnt++] = it1-&gt;second;
 	}
-	else printf(&quot;nai\n&quot;);
+	sort(g,g+cnt,cmp);
+	printf(&quot;%d\n&quot;, cnt);
+	for(int i=0; i&lt;cnt; i++){
+		if(i) printf(&quot; &quot;);
+		printf(&quot;%d&quot;, g[i]);
+	}
 	return 0;
 }
 </code></pre>
@@ -188,21 +201,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1078-hashing-25-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1078 Hashing (25分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1068-find-more-coins-30-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1155-heap-paths-30-fen-ti-jie/">
                 <h3 class="post-title">
-                  1068 Find More Coins (30分)题解
+                  1155 Heap Paths (30分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
