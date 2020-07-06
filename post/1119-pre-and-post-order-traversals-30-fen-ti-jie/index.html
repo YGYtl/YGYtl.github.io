@@ -40,8 +40,10 @@
 <ul>
 <li><a href="#input-specification">Input Specification:</a></li>
 <li><a href="#output-specification">Output Specification:</a></li>
-<li><a href="#sample-input">Sample Input:</a></li>
-<li><a href="#sample-output">Sample Output:</a></li>
+<li><a href="#sample-input-1">Sample Input 1:</a></li>
+<li><a href="#sample-output-1">Sample Output 1:</a></li>
+<li><a href="#sample-input-2">Sample Input 2:</a></li>
+<li><a href="#sample-output-2">Sample Output 2:</a></li>
 </ul>
 </li>
 </ul>
@@ -92,62 +94,119 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1085 Perfect Sequence (25分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1119 Pre- and Post-order Traversals (30分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-08 / 3 min read
+          2020-07-06 / 5 min read
         </div>
         
         <div class="post-content yue">
-          <p>1085 Perfect Sequence (25分)</p>
-<p>Given a sequence of positive integers and another positive integer <em>p</em>. The sequence is said to be a <strong>perfect sequence</strong> if <em>M</em>≤<em>m</em>×<em>p</em> where <em>M</em> and <em>m</em> are the maximum and minimum numbers in the sequence, respectively.</p>
-<p>Now given a sequence and a parameter <em>p</em>, you are supposed to find from the sequence as many numbers as possible to form a perfect subsequence.</p>
+          <p>1119 Pre- and Post-order Traversals (30分)</p>
+<p>Suppose that all the keys in a binary tree are distinct positive integers. A unique binary tree can be determined by a given pair of postorder and inorder traversal sequences, or preorder and inorder traversal sequences. However, if only the postorder and preorder traversal sequences are given, the corresponding tree may no longer be unique.</p>
+<p>Now given a pair of postorder and preorder traversal sequences, you are supposed to output the corresponding inorder traversal sequence of the tree. If the tree is not unique, simply output any one of them.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains two positive integers <em>N</em> and <em>p</em>, where <em>N</em> (≤105) is the number of integers in the sequence, and <em>p</em> (≤109) is the parameter. In the second line there are <em>N</em> positive integers, each is no greater than 109.</p>
+<p>Each input file contains one test case. For each case, the first line gives a positive integer N (≤ 30), the total number of nodes in the binary tree. The second line gives the preorder sequence and the third line gives the postorder sequence. All the numbers in a line are separated by a space.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the maximum number of integers that can be chosen to form a perfect subsequence.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">10 8
-2 3 20 4 5 1 6 7 8 9
+<p>For each test case, first printf in a line <code>Yes</code> if the tree is unique, or <code>No</code> if not. Then print in the next line the inorder traversal sequence of the corresponding binary tree. If the solution is not unique, any answer would do. It is guaranteed that at least one solution exists. All the numbers in a line must be separated by exactly one space, and there must be no extra space at the end of the line.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">7
+1 2 3 4 6 7 5
+2 6 7 4 5 3 1
 </code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">8
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">Yes
+2 1 6 4 7 3 5
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">4
+1 2 3 4
+2 4 3 1
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">No
+2 1 3 4
 </code></pre>
 <hr>
-<p>题目描述：求完美数列，要求数列元素尽可能多。完美数列公式：M&lt;=m*p，M为数列中最大值，m为数列中最小值，p是给定的值。</p>
+<p>题目描述：提供一个二叉树的所有节点值(值为正整数)。唯一的二叉树可以由后序遍历和中序遍历得到，也可以由先序遍历和中序遍历得到。但是，如果只给出先序遍历和后序遍历，得到的二叉树有可能是不唯一的，则他的中序遍历也有可能不唯一。题目给出一对先序遍历和后序遍历数组，求出是否能得到唯一的二叉树，可以则输出Yes，否则输出No。最后一行输出中序遍历，若有多个，输出一个即可。</p>
 </br>
-<p>输入：第一行两个值n，p，分别为数列元素个数，p是给定的值；第二行n个值给出无序的数列。</p>
-<p>输出：完美数列元素的个数。</p>
-</br>
-<p>解题思路：要用long long类型存值，不然测试点5报错。将给定的数列从小到大排序，接着从索引0开始遍历，用二分查找找到每个元素能组成的最大完美子序列长度，进行比较后得出结果。</p>
+<p>解题思路：设置一个flag标志，判断这个二叉树是否唯一。</p>
+<p>用样例分析一下：</p>
+<table>
+<thead>
+<tr>
+<th>index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pre</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>6</td>
+<td>7</td>
+<td>5</td>
+</tr>
+<tr>
+<td>post</td>
+<td>2</td>
+<td>6</td>
+<td>7</td>
+<td>4</td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>prel、prer分别是pre数组的左右索引边界值；postl、postr分别是post数组的左右索引边界值。</p>
+<p>一开始prel=0，prer=6，postl=0，postr=6</p>
+<p>当pre[prel]等于post[postr]，==&gt;pre[0]=1，post[6]=1，一开始就相等了，可以知道，这个值就是根节点的值。题目要求输出中序遍历，输出顺序是左、中(根)、右。当得到中(根)时，不能直接输出，要先求出左，才能将中(根)输出。后续的过程看代码，已加上注释。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-const int maxn = 200000+5;
-long long v[maxn];
-int n, p;
-int search(int g){
-	int l=g, r=n-1, mid;
-	int tx = 0;
-	while(l&lt;=r){
-		mid = (l+r)/2;
-		if(v[mid]&lt;=v[g]*p){
-			tx = max(tx,mid-g+1);
-			l = mid + 1;
-		}
-		else r = mid-1;
+int n;
+vector&lt;int&gt; pre, post, inorder;
+bool flag = true;
+void get_inorder(int prel, int prer, int postl, int postr){
+	if(prel==prer){
+		inorder.push_back(pre[prel]);
+		return ;
 	}
-	return tx;
+	int i=prel, j=postr-1, k;
+	if(pre[prel]==post[postr]){//发现中间结点 
+		while(i&lt;=prer&amp;&amp;j&gt;=0&amp;&amp;pre[i]!=post[j]) i++;//求出右子节点在pre数组的位置
+		k = i-prel-1;//得到左子树的结点个数
+		if(k&gt;0){
+			get_inorder(prel+1,i-1,postl,postl+k-1);//左子树进入递归，相应的数组范围会改变
+		}
+		else flag = false;
+	}
+	inorder.push_back(post[postr]);
+	get_inorder(i,prer,postl+k,postr-1);//右子树进入递归
 }
 int main()
 {
-	int ans=0;
-	scanf(&quot;%d %d&quot;, &amp;n, &amp;p);
-	for(int i=0; i&lt;n; i++) scanf(&quot;%lld&quot;, &amp;v[i]);
-	sort(v,v+n);//小到大 
-	for(int i=0; i&lt;n; i++){
-		ans = max(ans,search(i));
+	scanf(&quot;%d&quot;, &amp;n);
+	pre.resize(n);
+	post.resize(n);
+	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;, &amp;pre[i]);
+	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;, &amp;post[i]);
+	get_inorder(0,n-1,0,n-1);
+	if(flag) printf(&quot;Yes\n&quot;);
+	else printf(&quot;No\n&quot;);
+	for(int i=0; i&lt;inorder.size(); i++){
+		if(i) printf(&quot; &quot;);
+		printf(&quot;%d&quot;, inorder[i]);
 	}
-	printf(&quot;%d&quot;, ans);
+	printf(&quot;\n&quot;);//没有这个就格式错误，0分bug
 	return 0;
 }
 </code></pre>
@@ -163,21 +222,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1086-tree-traversals-again-25-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1086 Tree Traversals Again (25分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1084-broken-keyboard-20-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1115-counting-nodes-in-a-bst-30-fen-ti-jie/">
                 <h3 class="post-title">
-                  1084 Broken Keyboard (20分)题解
+                  1115 Counting Nodes in a BST (30分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
