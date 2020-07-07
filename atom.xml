@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-06T08:32:00.044Z</updated>
+    <updated>2020-07-07T14:24:52.176Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,146 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1123 Is It a Complete AVL Tree (30分)题解]]></title>
+        <id>https://ygytl.github.io/post/1123-is-it-a-complete-avl-tree-30-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1123-is-it-a-complete-avl-tree-30-fen-ti-jie/">
+        </link>
+        <updated>2020-07-07T14:24:07.000Z</updated>
+        <content type="html"><![CDATA[<p>1123 Is It a Complete AVL Tree (30分)</p>
+<p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.</p>
+<figure data-type="image" tabindex="1"><img src="G:%5CYGYtl.github.io%5Cpic%5C1.JPG" alt="" loading="lazy"></figure>
+<p>Now given a sequence of insertions, you are supposed to output the level-order traversal sequence of the resulting AVL tree, and to tell if it is a complete binary tree.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line contains a positive integer N (≤ 20). Then N distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, insert the keys one by one into an initially empty AVL tree. Then first print in a line the level-order traversal sequence of the resulting AVL tree. All the numbers in a line must be separated by a space, and there must be no extra space at the end of the line. Then in the next line, print <code>YES</code> if the tree is complete, or <code>NO</code> if not.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">5
+88 70 61 63 65
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">70 63 88 61 65
+YES
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">8
+88 70 61 96 120 90 65 68
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">88 65 96 61 70 90 120 68
+NO
+</code></pre>
+<hr>
+<p>题目描述：完全平衡二叉树。具体参考1066的题解</p>
+<p>该题需要建树，判断是否能形成完全平衡二叉树，是输出YES，否输出NO。还要输出树的层序遍历。</p>
+</br>
+<p>解题思路：建树，完成左转、右转、左右转、右左转的操作、求结点的高度等，最后利用BFS得到层序遍历。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, k;
+vector&lt;int&gt; level;
+struct node{
+	int num;
+	node *l, *r;
+	node(){
+		l = r = NULL;
+	}
+};
+node *LeftRoute(node *root){
+	node *t;
+	t = root-&gt;r;
+	root-&gt;r = t-&gt;l;
+	t-&gt;l = root;
+	return t;
+}
+node *RightRoute(node *root){
+	node *t;
+	t = root-&gt;l;
+	root-&gt;l = t-&gt;r;
+	t-&gt;r = root;
+	return t;
+}
+node *LeftRightRoute(node *root){
+	root-&gt;l = LeftRoute(root-&gt;l);
+	root = RightRoute(root);
+	return root;
+}
+node *RightLeftRoute(node *root){
+	root-&gt;r = RightRoute(root-&gt;r);
+	root = LeftRoute(root);
+	return root;
+}
+int height(node *root){
+	if(root==NULL) return 1;
+	return max(height(root-&gt;l),height(root-&gt;r))+1;
+}
+node *Insert(node *root, int k){
+	if(root==NULL){
+		root = new node();
+		root-&gt;num = k;
+		root-&gt;l = root-&gt;r = NULL;
+	}
+	else if(k&gt;=root-&gt;num){
+		root-&gt;r = Insert(root-&gt;r,k);
+		if(abs(height(root-&gt;r)-height(root-&gt;l))&gt;=2){
+			root = k&gt;=root-&gt;r-&gt;num ? LeftRoute(root) : RightLeftRoute(root);
+		}
+	}
+	else{
+		root-&gt;l = Insert(root-&gt;l,k);
+		if(abs(height(root-&gt;l)-height(root-&gt;r))&gt;=2){
+			root = k&lt;=root-&gt;l-&gt;num ? RightRoute(root) : LeftRightRoute(root);
+		}
+	}
+	return root;
+}
+void bfs(node *root){
+	pair&lt;node *, int&gt; t, tt;
+	queue&lt;pair&lt;node *, int&gt; &gt; q;
+	t.first = root; t.second = 1;
+	q.push(t);
+	bool flag = true;
+	int cnt = 1;
+	while(!q.empty()){
+		t = q.front(); q.pop();
+		if(cnt!=t.second) flag = false;
+		cnt++;
+		level.push_back(t.first-&gt;num);
+		if(t.first-&gt;l!=NULL){
+			tt.first = t.first-&gt;l;
+			tt.second = t.second*2;
+			q.push(tt);
+		}
+		if(t.first-&gt;r!=NULL){
+			tt.first = t.first-&gt;r;
+			tt.second = t.second*2+1;
+			q.push(tt);
+		} 
+	}
+	for(int i=0; i&lt;level.size(); i++){
+		if(i) printf(&quot; &quot;);
+		printf(&quot;%d&quot;, level[i]);
+	}
+	printf(&quot;\n&quot;);
+	if(flag) printf(&quot;YES\n&quot;);
+	else printf(&quot;NO\n&quot;);
+}
+int main()
+{
+	node *tree = NULL;
+	scanf(&quot;%d&quot;, &amp;n);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d&quot;, &amp;k);
+		tree = Insert(tree,k);
+	}
+	bfs(tree);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1119 Pre- and Post-order Traversals (30分)题解]]></title>
         <id>https://ygytl.github.io/post/1119-pre-and-post-order-traversals-30-fen-ti-jie/</id>
@@ -1137,137 +1277,6 @@ int main()
 
 	return 0;
 
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1088 Rational Arithmetic (20分)题解]]></title>
-        <id>https://ygytl.github.io/post/1088-rational-arithmetic-20-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1088-rational-arithmetic-20-fen-ti-jie/">
-        </link>
-        <updated>2020-06-11T15:33:26.000Z</updated>
-        <content type="html"><![CDATA[<p>1088 Rational Arithmetic (20分)</p>
-<p>For two rational numbers, your task is to implement the basic arithmetics, that is, to calculate their sum, difference, product and quotient.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case, which gives in one line the two rational numbers in the format <code>a1/b1 a2/b2</code>. The numerators and the denominators are all in the range of long int. If there is a negative sign, it must appear only in front of the numerator. The denominators are guaranteed to be non-zero numbers.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in 4 lines the sum, difference, product and quotient of the two rational numbers, respectively. The format of each line is <code>number1 operator number2 = result</code>. Notice that all the rational numbers must be in their simplest form <code>k a/b</code>, where <code>k</code> is the integer part, and <code>a/b</code> is the simplest fraction part. If the number is negative, it must be included in a pair of parentheses. If the denominator in the division is zero, output <code>Inf</code> as the result. It is guaranteed that all the output integers are in the range of <strong>long int</strong>.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">2/3 -4/2
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">2/3 + (-2) = (-1 1/3)
-2/3 - (-2) = 2 2/3
-2/3 * (-2) = (-1 1/3)
-2/3 / (-2) = (-1/3)
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">5/3 0/6
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">1 2/3 + 0 = 1 2/3
-1 2/3 - 0 = 1 2/3
-1 2/3 * 0 = 0
-1 2/3 / 0 = Inf
-</code></pre>
-<hr>
-<p>题目意思：求分数的加减乘除</p>
-<p>输出规则：负数需要带括号输出。假分数要以标准格式输出。</p>
-</br>
-<p>解题思路：每个分数的输出格式都是同意的规则，将这个输出搞定就行了。</p>
-<p>注意：数据类型要是long long类型，否则测试点2会报错。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-long long gcd(long long a, long long b){
-	if(a==0) return b;
-	gcd(b%a,a);
-}
-void com(long long x, long long y){
-	long long g, c;
-	bool f = false;
-	g = gcd(abs(x),abs(y));
-	x/=g; y/=g;
-	c = x/y;
-	if(c&lt;0) x *= -1;
-	x %= y;
-	if(c!=0){
-		if(c&lt;0){
-			printf(&quot;(%lld&quot;, c);
-			f = true;
-		}
-		else printf(&quot;%lld&quot;, c);
-	}
-	if(x&lt;0){
-		printf(&quot;(%lld&quot;, x);
-		f = true;
-	}
-	else{
-		if(c==0) printf(&quot;%lld&quot;, x);
-		else if(c!=0&amp;&amp;x!=0) printf(&quot; %lld&quot;, x);
-	}
-	if(x!=0&amp;&amp;y!=1){
-		printf(&quot;/%lld&quot;, y);
-	}
-	if(f) printf(&quot;)&quot;);
-}
-void solve1(long long a1, long long b1, long long a2, long long b2){
-	com(a1,b1); printf(&quot; + &quot;);
-	com(a2,b2); printf(&quot; = &quot;);
-	long long a, b;
-	b = b1*b2;
-	a = a1*b2 + a2*b1;
-	com(a,b);
-}
-void solve2(long long a1, long long b1, long long a2, long long b2){
-	com(a1,b1); printf(&quot; - &quot;);
-	com(a2,b2); printf(&quot; = &quot;);
-	long long a, b;
-	b = b1*b2;
-	a = a1*b2 - a2*b1;
-	com(a,b);
-}
-void solve3(long long a1, long long b1, long long a2, long long b2){
-	com(a1,b1); printf(&quot; * &quot;);
-	com(a2,b2); printf(&quot; = &quot;);
-	if(a1==0||a2==0){
-		printf(&quot;0&quot;);
-		return ;
-	}
-	long long a, b;
-	a = a1*a2; b = b1*b2;
-	if(b&lt;0){
-		b*=-1;
-		a*=-1;
-	}
-	com(a,b);
-}
-void solve4(long long a1, long long b1, long long a2, long long b2){
-	com(a1,b1); printf(&quot; / &quot;);
-	com(a2,b2); printf(&quot; = &quot;);
-	if(a2==0){
-		printf(&quot;Inf&quot;);
-		return ;
-	}
-	long long a, b;
-	a = a1*b2; b = b1*a2;
-	if(b&lt;0){
-		b*=-1;
-		a*=-1;
-	}
-	com(a,b);
-}
-
-int main()
-{
-	long long a1, b1, a2, b2;
-	scanf(&quot;%lld/%lld %lld/%lld&quot;, &amp;a1, &amp;b1, &amp;a2, &amp;b2);
-	solve1(a1,b1,a2,b2); printf(&quot;\n&quot;);
-	solve2(a1,b1,a2,b2); printf(&quot;\n&quot;);
-	solve3(a1,b1,a2,b2); printf(&quot;\n&quot;);
-	solve4(a1,b1,a2,b2); printf(&quot;\n&quot;);
-	return 0;
 }
 </code></pre>
 ]]></content>
