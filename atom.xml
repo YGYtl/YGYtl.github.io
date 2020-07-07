@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-07T14:25:54.604Z</updated>
+    <updated>2020-07-07T14:28:09.945Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -18,7 +18,7 @@
         <updated>2020-07-07T14:24:07.000Z</updated>
         <content type="html"><![CDATA[<p>1123 Is It a Complete AVL Tree (30分)</p>
 <p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.</p>
-<figure data-type="image" tabindex="1"><img src="G:%5CYGYtl.github.io%5Cpic%5C1.JPG" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1594132084359.JPG" alt="" loading="lazy"></figure>
 <p>Now given a sequence of insertions, you are supposed to output the level-order traversal sequence of the resulting AVL tree, and to tell if it is a complete binary tree.</p>
 <h3 id="input-specification">Input Specification:</h3>
 <p>Each input file contains one test case. For each case, the first line contains a positive integer N (≤ 20). Then N distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
