@@ -36,7 +36,14 @@
             <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性👇</a></li>
+<li>
+<ul>
+<li><a href="#input-specification">Input Specification:</a></li>
+<li><a href="#output-specification">Output Specification:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -85,57 +92,94 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">Hello Gridea</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1127 ZigZagging on a Tree (30分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2018-12-12 / 2 min read
+          2020-07-08 / 4 min read
         </div>
-        
-          <img class="post-feature-image rounded-lg mx-auto my-4" src="https://ygytl.github.io//post-images/hello-gridea.png" alt="">
         
         <div class="post-content yue">
-          <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+          <p>1127 ZigZagging on a Tree (30分)</p>
+<p>Suppose that all the keys in a binary tree are distinct positive integers. A unique binary tree can be determined by a given pair of postorder and inorder traversal sequences. And it is a simple standard routine to print the numbers in level-order. However, if you think the problem is too simple, then you are too naive. This time you are supposed to print the numbers in &quot;zigzagging order&quot; -- that is, starting from the root, print the numbers level-by-level, alternating between left to right and right to left. For example, for the following tree you must output: 1 11 5 8 17 12 20 15.</p>
+<figure data-type="image" tabindex="1"><img src="https://images.ptausercontent.com/337cbfb0-a7b2-4500-9664-318e9ffc870e.jpg" alt="zigzag.jpg" loading="lazy"></figure>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line gives a positive integer N (≤30), the total number of nodes in the binary tree. The second line gives the inorder sequence and the third line gives the postorder sequence. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print the zigzagging sequence of the tree in a line. All the numbers in a line must be separated by exactly one space, and there must be no extra space at the end of the line.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">8
+12 11 20 17 1 15 8 5
+12 20 17 11 15 8 5 1
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">1 11 5 8 17 12 20 15
+</code></pre>
+<hr>
+<p>题目描述：已知中序遍历和后序遍历可以得到唯一的二叉树；已知中序遍历和先序遍历，可以得到唯一的二叉树。现在题目给出中序和后序遍历，需要求出层序遍历的结果。但是这个层序遍历需要按照Z字行输出。</p>
+</br>
+<p>解题思路：不需要建树，递归就能得到层序遍历的结果。1086题解解释了已知先序遍历和中序遍历，求后序遍历的结果，思路与这题差不多，可以参考。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, cnt;
+const int maxn = 1e4+5;
+vector&lt;int&gt; inorder, post;
+vector&lt;int&gt; level[maxn];
+void get_level(int root, int inl, int inr, int index){
+	if(inl&gt;inr) return ;
+	int i = inl;
+	cnt = index;
+	level[index].push_back(post[root]);
+	while(i&lt;=inr&amp;&amp;inorder[i]!=post[root]) i++;
+	get_level(root-(inr-i+1),inl,i-1,index+1);
+	get_level(root-1,i+1,inr,index+1);
+}
+int main()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	inorder.resize(n);
+	post.resize(n);
+	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;, &amp;inorder[i]);
+	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;, &amp;post[i]);
+	get_level(n-1,0,n-1,1);
+	for(int i=1; i&lt;=cnt; i++){
+		if(i%2==0){
+			for(int j=0; j&lt;level[i].size(); j++){
+				if(i!=1) printf(&quot; &quot;);
+				printf(&quot;%d&quot;, level[i][j]);
+			}
+		}
+		else{
+			for(int j=level[i].size()-1; j&gt;=0; j--){
+				if(i!=1) printf(&quot; &quot;);
+				printf(&quot;%d&quot;, level[i][j]);
+			}
+		}
+	}
+	return 0;
+}
+</code></pre>
 
         </div>
 
         
-          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/nd40Wpgts/">
-            <span class="flex-auto">Gridea</span>
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
+            <span class="flex-auto">PAT (Advanced Level) Practice</span>
           </a>
         
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/markdown-chang-yong-kuai-jie-jian/">
+
+          
+            <div class="next-post">
+              <a href="https://ygytl.github.io/post/1123-is-it-a-complete-avl-tree-30-fen-ti-jie/">
                 <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  Markdown常用快捷键
+                  1123 Is It a Complete AVL Tree (30分)题解
+                  <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
             </div>
-          
-
           
         </div>
 
