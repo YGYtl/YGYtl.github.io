@@ -40,8 +40,10 @@
 <ul>
 <li><a href="#input-specification">Input Specification:</a></li>
 <li><a href="#output-specification">Output Specification:</a></li>
-<li><a href="#sample-input">Sample Input:</a></li>
-<li><a href="#sample-output">Sample Output:</a></li>
+<li><a href="#sample-input-1">Sample Input 1:</a></li>
+<li><a href="#sample-output-1">Sample Output 1:</a></li>
+<li><a href="#sample-input-2">Sample Input 2:</a></li>
+<li><a href="#sample-output-2">Sample Output 2:</a></li>
 </ul>
 </li>
 </ul>
@@ -92,89 +94,176 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1065 A+B and C (64bit) (20分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1130 Infix Expression (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-05-29 / 3 min read
+          2020-07-09 / 5 min read
         </div>
         
         <div class="post-content yue">
-          <p>1065 A+B and C (64bit) (20分)</p>
-<p>Given three integers <em>A</em>, <em>B</em> and <em>C</em> in [−2<sup>63</sup>,2<sup>63</sup>], you are supposed to tell whether <em>A</em>+<em>B</em>&gt;<em>C</em>.</p>
+          <p>1130 Infix Expression (25分)</p>
+<p>Given a syntax tree (binary), you are supposed to output the corresponding infix expression, with parentheses reflecting the precedences of the operators.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>The first line of the input gives the positive number of test cases, <em>T</em> (≤10). Then <em>T</em> test cases follow, each consists of a single line containing three integers <em>A</em>, <em>B</em> and <em>C</em>, separated by single spaces.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, output in one line <code>Case #X: true</code> if <em>A</em>+<em>B</em>&gt;<em>C</em>, or <code>Case #X: false</code> otherwise, where <em>X</em> is the case number (starting from 1).</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">3
-1 2 3
-2 3 4
-9223372036854775807 -9223372036854775808 0
+<p>Each input file contains one test case. For each case, the first line gives a positive integer N (≤ 20) which is the total number of nodes in the syntax tree. Then N lines follow, each gives the information of a node (the <em>i</em>-th line corresponds to the <em>i</em>-th node) in the format:</p>
+<pre><code>data left_child right_child
 </code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">Case #1: false
-Case #2: true
-Case #3: false
+<p>where <code>data</code> is a string of no more than 10 characters, <code>left_child</code> and <code>right_child</code> are the indices of this node's left and right children, respectively. The nodes are indexed from 1 to N. The NULL link is represented by −1. The figures 1 and 2 correspond to the samples 1 and 2, respectively.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://images.ptausercontent.com/4d1c4a98-33cc-45ff-820f-c548845681ba.JPG" alt="infix1.JPG" loading="lazy"></th>
+<th style="text-align:center"><img src="https://images.ptausercontent.com/b5a3c36e-91ad-494a-8853-b46e1e8b60cc.JPG" alt="infix2.JPG" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Figure 1</td>
+<td style="text-align:center">Figure 2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each case, print in a line the infix expression, with parentheses reflecting the precedences of the operators. Note that there must be no extra parentheses for the final expression, as is shown by the samples. There must be no space between any symbols.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">8
+* 8 7
+a -1 -1
+* 4 1
++ 2 5
+b -1 -1
+d -1 -1
+- -1 6
+c -1 -1
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">(a+b)*(c*(-d))
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">8
+2.35 -1 -1
+* 6 1
+- -1 4
+% 7 8
++ 2 3
+a -1 -1
+str -1 -1
+871 -1 -1
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">(a*2.35)+(-(str%871))
 </code></pre>
 <hr>
-<p>题目描述：A+B&gt;C，真返回true，假返回false</p>
-<p>解题思路：一看就是大数据处理，long double类型杠，或者对数据处理一下</p>
-<p>注：a&gt;&gt;1 与 a/2有区别，(a&amp;1) 与 a%2有区别，a+b==c 与 (g=a+b),g==c有区别</p>
+<p>题目描述：二叉树，以算式格式输出。</p>
+<p>输入：第一行n为节点数，接下来n行，表示第i个结点的值、左右节点编号。</p>
+<p>输出：算式格式输出。</p>
+</br>
+<p>解题方法：题目没有给出根节点的编号，所以需要先求出根节点编号；得到树的中序遍历，之后得到算式还难吗？</p>
 <hr>
 <p>方法一：</p>
-<pre><code class="language-C++">#include&lt;bits/stdc++.h&gt;
-using namespace std ;
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n;
+const int maxn = 100;
+string ans=&quot;&quot;;
+struct node{
+	string ch;
+	int l, r;
+};
+vector&lt;node&gt; tree(maxn);
+bool vis[maxn];
+void bfs(int index){
+	queue&lt;int&gt; q;
+	q.push(index);
+	while(!q.empty()){
+		int u = q.front(); q.pop();
+		vis[u] = true;
+		node t = tree[u];
+		if(t.l!=-1) q.push(t.l);
+		if(t.r!=-1) q.push(t.r);
+	}
+}
+void get_inorder(int index, int g){
+	if(index==-1) return ;
+	node t = tree[index];
+	if(tree[index].r!=-1&amp;&amp;g&gt;1) ans += &quot;(&quot;;
+	get_inorder(t.l,g+1);
+	ans += t.ch;
+	get_inorder(t.r,g+1);
+	if(tree[index].r!=-1&amp;&amp;g&gt;1) ans += &quot;)&quot;;
+}
 int main()
 {
-    int n;
-    scanf(&quot;%d&quot;, &amp;n);
-    for( int i=1; i&lt;=n; i++){
-        long double a, b, c;
-        scanf(&quot;%Lf %Lf %Lf&quot;, &amp;a, &amp;b, &amp;c);
-        printf(&quot;Case #%d: &quot;, i);
-        if(a+b&gt;c) printf(&quot;yes\n&quot;);
-        else printf(&quot;false\n&quot;);
-    }
-    return 0 ;
+	scanf(&quot;%d&quot;, &amp;n);
+	int root;
+	for(int i=1; i&lt;=n; i++){
+		getchar();
+		node t;
+		cin &gt;&gt; t.ch &gt;&gt; t.l &gt;&gt; t.r;
+		tree[i] = t;
+	}
+	for(int i=1; i&lt;=n; i++){
+		memset(vis,false,sizeof(vis));
+		bfs(i);
+		bool flag = true;
+		for(int j=1; j&lt;=n; j++){
+			if(vis[j]==false){
+				flag = false;
+				break;
+			}
+		}
+		if(flag){
+			root = i;
+			break;
+		}
+	}
+	get_inorder(root,1);
+	cout &lt;&lt; ans &lt;&lt; endl;
+	return 0;
 }
 </code></pre>
 <p>方法二：</p>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
+int n;
+const int maxn = 100;
+string ans=&quot;&quot;;
+struct node{
+	string ch;
+	int l, r;
+};
+vector&lt;node&gt; tree(maxn);
+bool vis[maxn];
+void get_inorder(int index, int g){
+	if(index==-1) return ;
+	node t = tree[index];
+	if(tree[index].r!=-1&amp;&amp;g&gt;1) ans += &quot;(&quot;;
+	get_inorder(t.l,g+1);
+	ans += t.ch;
+	get_inorder(t.r,g+1);
+	if(tree[index].r!=-1&amp;&amp;g&gt;1) ans += &quot;)&quot;;
+}
 int main()
 {
-	long long a, b, c;
-	int n;
 	scanf(&quot;%d&quot;, &amp;n);
+	int root;
+	memset(vis,false,sizeof(vis));
 	for(int i=1; i&lt;=n; i++){
-		scanf(&quot;%lld %lld %lld&quot;, &amp;a, &amp;b, &amp;c);
-		long long ta, tb, tc;
-		ta = a&gt;&gt;1;
-		tb = b&gt;&gt;1;
-		tc = c&gt;&gt;1;
-		printf(&quot;Case #%d: &quot;, i);
-		if(ta+tb&gt;tc){
-			printf(&quot;true\n&quot;);
-		}
-		else if(ta+tb==tc&amp;&amp;((a&amp;1)+(b&amp;1)&gt;(c&amp;1))){
-			printf(&quot;true\n&quot;);
-		}
-		else printf(&quot;false\n&quot;);
+		getchar();
+		node t;
+		cin &gt;&gt; t.ch &gt;&gt; t.l &gt;&gt; t.r;
+		tree[i] = t;
+		if(t.l!=-1) vis[t.l] = true;
+		if(t.r!=-1) vis[t.r] = true;
 	}
+	for(int i=1; i&lt;=n; i++){
+		if(vis[i]==false){
+			root = i;
+			break;
+		}
+	}
+	get_inorder(root,1);
+	cout &lt;&lt; ans &lt;&lt; endl;
 	return 0;
 }
-</code></pre>
-<p>方法三：</p>
-<pre><code class="language-python">n = int(input())
-for i in range(1,n+1):
-    g = input().split()
-    a = int(g[0])
-    b = int(g[1])
-    c = int(g[2])
-    if a+b &gt; c:
-        print('Case #{}: true'.format(i))
-    else:
-        print('Case #{}: false'.format(i))
-
 </code></pre>
 
         </div>
@@ -188,21 +277,12 @@ for i in range(1,n+1):
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1067-sort-with-swap0-i-25-fen/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1067 Sort with Swap(0, i) (25分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/linux-chang-yong-ming-ling/">
+              <a href="https://ygytl.github.io/post/1129-recommendation-system-25-fen-ti-jie/">
                 <h3 class="post-title">
-                  linux常用命令
+                  1129 Recommendation System (25分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>

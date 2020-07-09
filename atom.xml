@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-09T12:32:08.383Z</updated>
+    <updated>2020-07-09T14:07:00.238Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,179 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1130 Infix Expression (25分)题解]]></title>
+        <id>https://ygytl.github.io/post/1130-infix-expression-25-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1130-infix-expression-25-fen-ti-jie/">
+        </link>
+        <updated>2020-07-09T14:06:17.000Z</updated>
+        <content type="html"><![CDATA[<p>1130 Infix Expression (25分)</p>
+<p>Given a syntax tree (binary), you are supposed to output the corresponding infix expression, with parentheses reflecting the precedences of the operators.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line gives a positive integer N (≤ 20) which is the total number of nodes in the syntax tree. Then N lines follow, each gives the information of a node (the <em>i</em>-th line corresponds to the <em>i</em>-th node) in the format:</p>
+<pre><code>data left_child right_child
+</code></pre>
+<p>where <code>data</code> is a string of no more than 10 characters, <code>left_child</code> and <code>right_child</code> are the indices of this node's left and right children, respectively. The nodes are indexed from 1 to N. The NULL link is represented by −1. The figures 1 and 2 correspond to the samples 1 and 2, respectively.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://images.ptausercontent.com/4d1c4a98-33cc-45ff-820f-c548845681ba.JPG" alt="infix1.JPG" loading="lazy"></th>
+<th style="text-align:center"><img src="https://images.ptausercontent.com/b5a3c36e-91ad-494a-8853-b46e1e8b60cc.JPG" alt="infix2.JPG" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Figure 1</td>
+<td style="text-align:center">Figure 2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each case, print in a line the infix expression, with parentheses reflecting the precedences of the operators. Note that there must be no extra parentheses for the final expression, as is shown by the samples. There must be no space between any symbols.</p>
+<h3 id="sample-input-1">Sample Input 1:</h3>
+<pre><code class="language-in">8
+* 8 7
+a -1 -1
+* 4 1
++ 2 5
+b -1 -1
+d -1 -1
+- -1 6
+c -1 -1
+</code></pre>
+<h3 id="sample-output-1">Sample Output 1:</h3>
+<pre><code class="language-out">(a+b)*(c*(-d))
+</code></pre>
+<h3 id="sample-input-2">Sample Input 2:</h3>
+<pre><code class="language-in">8
+2.35 -1 -1
+* 6 1
+- -1 4
+% 7 8
++ 2 3
+a -1 -1
+str -1 -1
+871 -1 -1
+</code></pre>
+<h3 id="sample-output-2">Sample Output 2:</h3>
+<pre><code class="language-out">(a*2.35)+(-(str%871))
+</code></pre>
+<hr>
+<p>题目描述：二叉树，以算式格式输出。</p>
+<p>输入：第一行n为节点数，接下来n行，表示第i个结点的值、左右节点编号。</p>
+<p>输出：算式格式输出。</p>
+</br>
+<p>解题方法：题目没有给出根节点的编号，所以需要先求出根节点编号；得到树的中序遍历，之后得到算式还难吗？</p>
+<hr>
+<p>方法一：</p>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n;
+const int maxn = 100;
+string ans=&quot;&quot;;
+struct node{
+	string ch;
+	int l, r;
+};
+vector&lt;node&gt; tree(maxn);
+bool vis[maxn];
+void bfs(int index){
+	queue&lt;int&gt; q;
+	q.push(index);
+	while(!q.empty()){
+		int u = q.front(); q.pop();
+		vis[u] = true;
+		node t = tree[u];
+		if(t.l!=-1) q.push(t.l);
+		if(t.r!=-1) q.push(t.r);
+	}
+}
+void get_inorder(int index, int g){
+	if(index==-1) return ;
+	node t = tree[index];
+	if(tree[index].r!=-1&amp;&amp;g&gt;1) ans += &quot;(&quot;;
+	get_inorder(t.l,g+1);
+	ans += t.ch;
+	get_inorder(t.r,g+1);
+	if(tree[index].r!=-1&amp;&amp;g&gt;1) ans += &quot;)&quot;;
+}
+int main()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	int root;
+	for(int i=1; i&lt;=n; i++){
+		getchar();
+		node t;
+		cin &gt;&gt; t.ch &gt;&gt; t.l &gt;&gt; t.r;
+		tree[i] = t;
+	}
+	for(int i=1; i&lt;=n; i++){
+		memset(vis,false,sizeof(vis));
+		bfs(i);
+		bool flag = true;
+		for(int j=1; j&lt;=n; j++){
+			if(vis[j]==false){
+				flag = false;
+				break;
+			}
+		}
+		if(flag){
+			root = i;
+			break;
+		}
+	}
+	get_inorder(root,1);
+	cout &lt;&lt; ans &lt;&lt; endl;
+	return 0;
+}
+</code></pre>
+<p>方法二：</p>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n;
+const int maxn = 100;
+string ans=&quot;&quot;;
+struct node{
+	string ch;
+	int l, r;
+};
+vector&lt;node&gt; tree(maxn);
+bool vis[maxn];
+void get_inorder(int index, int g){
+	if(index==-1) return ;
+	node t = tree[index];
+	if(tree[index].r!=-1&amp;&amp;g&gt;1) ans += &quot;(&quot;;
+	get_inorder(t.l,g+1);
+	ans += t.ch;
+	get_inorder(t.r,g+1);
+	if(tree[index].r!=-1&amp;&amp;g&gt;1) ans += &quot;)&quot;;
+}
+int main()
+{
+	scanf(&quot;%d&quot;, &amp;n);
+	int root;
+	memset(vis,false,sizeof(vis));
+	for(int i=1; i&lt;=n; i++){
+		getchar();
+		node t;
+		cin &gt;&gt; t.ch &gt;&gt; t.l &gt;&gt; t.r;
+		tree[i] = t;
+		if(t.l!=-1) vis[t.l] = true;
+		if(t.r!=-1) vis[t.r] = true;
+	}
+	for(int i=1; i&lt;=n; i++){
+		if(vis[i]==false){
+			root = i;
+			break;
+		}
+	}
+	get_inorder(root,1);
+	cout &lt;&lt; ans &lt;&lt; endl;
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1129 Recommendation System (25分)题解]]></title>
         <id>https://ygytl.github.io/post/1129-recommendation-system-25-fen-ti-jie/</id>
@@ -1047,108 +1220,6 @@ int main()
 		}
 		printf(&quot;\n&quot;);
 	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1093 Count PAT's (25分)题解]]></title>
-        <id>https://ygytl.github.io/post/1093-count-pats-25-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1093-count-pats-25-fen-ti-jie/">
-        </link>
-        <updated>2020-06-23T06:31:10.000Z</updated>
-        <content type="html"><![CDATA[<p>1093 Count PAT's (25分)</p>
-<p>The string <code>APPAPT</code> contains two <code>PAT</code>'s as substrings. The first one is formed by the 2nd, the 4th, and the 6th characters, and the second one is formed by the 3rd, the 4th, and the 6th characters.</p>
-<p>Now given any string, you are supposed to tell the number of <code>PAT</code>'s contained in the string.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, there is only one line giving a string of no more than 105 characters containing only <code>P</code>, <code>A</code>, or <code>T</code>.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the number of <code>PAT</code>'s contained in the string. Since the result may be a huge number, you only have to output the result moded by 1000000007.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">APPAPT
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">2
-</code></pre>
-<hr>
-<p>题目描述：计算字符串PAT的个数</p>
-<p>解题思路：动态规划的思想。</p>
-<p>分析一个测试用例：APPAPAAT，输出8</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>A</th>
-<th>P</th>
-<th>P</th>
-<th>A</th>
-<th>P</th>
-<th>A</th>
-<th>A</th>
-<th>T</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>P数组</td>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-<td><strong>2</strong></td>
-<td>3</td>
-<td><strong>3</strong></td>
-<td><strong>3</strong></td>
-<td>3</td>
-</tr>
-<tr>
-<td>PA数组</td>
-<td>0</td>
-<td>0</td>
-<td><strong>0</strong></td>
-<td><strong>0+2=2</strong></td>
-<td><strong>2</strong></td>
-<td><strong>2+3=5</strong></td>
-<td><strong>5+3=8</strong></td>
-<td><strong>8</strong></td>
-</tr>
-<tr>
-<td>PAT个数</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td><strong>0</strong></td>
-<td><strong>0+8=8</strong></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-const int maxn = 1e5+5;
-int p[maxn], pa[maxn];
-int main()
-{
-	int c = 0, tp = 0, tpa = 0, ans = 0;
-	string s;
-	cin &gt;&gt; s;
-	int l = s.length();
-	for(int i=0; i&lt;l; i++){
-		if(s[i]=='P') p[i] = tp++;
-		p[i] = tp;
-		
-		if(s[i]=='A') tpa += p[i];
-		pa[i] = tpa;
-		
-		if(s[i]=='T'){
-			ans += pa[i];
-			ans %= 1000000007;
-		}
-	}
-	printf(&quot;%d&quot;, ans);
 	return 0;
 }
 </code></pre>
