@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-08T14:15:13.021Z</updated>
+    <updated>2020-07-09T12:32:08.383Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,93 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1129 Recommendation System (25分)题解]]></title>
+        <id>https://ygytl.github.io/post/1129-recommendation-system-25-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1129-recommendation-system-25-fen-ti-jie/">
+        </link>
+        <updated>2020-07-09T12:31:41.000Z</updated>
+        <content type="html"><![CDATA[<p>1129 Recommendation System (25分)</p>
+<p>Recommendation system predicts the preference that a user would give to an item. Now you are asked to program a very simple recommendation system that rates the user's preference by the number of times that an item has been accessed by this user.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each test case, the first line contains two positive integers: N (≤ 50,000), the total number of queries, and K (≤ 10), the maximum number of recommendations the system must show to the user. Then given in the second line are the indices of items that the user is accessing -- for the sake of simplicity, all the items are indexed from 1 to N. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each case, process the queries one by one. Output the recommendations for each query in a line in the format:</p>
+<pre><code>query: rec[1] rec[2] ... rec[K]
+</code></pre>
+<p>where <code>query</code> is the item that the user is accessing, and <code>rec[i]</code> (<code>i</code>=1, ... K) is the <code>i</code>-th item that the system recommends to the user. The first K items that have been accessed most frequently are supposed to be recommended in non-increasing order of their frequencies. If there is a tie, the items will be ordered by their indices in increasing order.</p>
+<p>Note: there is no output for the first item since it is impossible to give any recommendation at the time. It is guaranteed to have the output for at least one query.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">12 3
+3 5 7 5 5 3 2 1 8 3 8 12
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">5: 3
+7: 3 5
+5: 3 5 7
+5: 5 3 7
+3: 5 3 7
+2: 5 3 7
+1: 5 3 2
+8: 5 3 1
+3: 5 3 1
+8: 3 5 1
+12: 3 5 8
+</code></pre>
+<hr>
+<p>题目描述：更新推荐系统。</p>
+<p>输入描述：第一行n为推荐数，m为最多推荐个数。第二行有m个值，为每次推荐的编号。</p>
+<p>输出描述：输出此次推荐编号之前的排序，例如样例，第一个推荐编号为3，第二个推荐编号为5，应该从5开始输出它前面最优的推荐。</p>
+<p>系统推荐排序规则：推荐次数多的排在前面，若推荐次数相同，则按编号从小到大排序。</p>
+</br>
+<p>测试点3、4容易超时，要找准遍历目标。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, m, k;
+map&lt;int,int&gt; p, pid;
+struct node{
+	int num, cnt = 0;
+};
+vector&lt;node&gt; G;
+bool cmp(node a, node b){
+	if(a.cnt!=b.cnt) return a.cnt &gt; b.cnt;//降序 
+	else return a.num &lt; b.num;//升序 
+}
+int main()
+{
+	map&lt;int,int&gt;::iterator it;
+	scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d&quot;, &amp;k);
+		pid[k] = i;
+		node t;
+		if(i){
+			printf(&quot;%d:&quot;, k);
+			for(int j=0; j&lt;m&amp;&amp;j&lt;G.size(); j++){
+				printf(&quot; %d&quot;, G[j].num);
+			}
+			printf(&quot;\n&quot;);
+		}
+		p[k]++;
+		t.num = k; t.cnt = p[k];
+		bool flag = true;
+		for(int j=0; j&lt;G.size(); j++){
+			if(G[j].num==k){
+				G[j].cnt = t.cnt;
+				flag = false;
+				break;
+			}
+		}
+		if(flag) G.push_back(t);
+		sort(G.begin(),G.end(),cmp);
+		if(G.size()&gt;m) G.pop_back();
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1127 ZigZagging on a Tree (30分)题解]]></title>
         <id>https://ygytl.github.io/post/1127-zigzagging-on-a-tree-30-fen-ti-jie/</id>
@@ -1062,132 +1149,6 @@ int main()
 		}
 	}
 	printf(&quot;%d&quot;, ans);
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1089 Insert or Merge (25分)题解]]></title>
-        <id>https://ygytl.github.io/post/1089-insert-or-merge-25-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1089-insert-or-merge-25-fen-ti-jie/">
-        </link>
-        <updated>2020-06-22T14:56:10.000Z</updated>
-        <content type="html"><![CDATA[<p>1089 Insert or Merge (25分)</p>
-<p>According to Wikipedia:</p>
-<p><strong>Insertion sort</strong> iterates, consuming one input element each repetition, and growing a sorted output list. Each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there. It repeats until no input elements remain.</p>
-<p><strong>Merge sort</strong> works as follows: Divide the unsorted list into N sublists, each containing 1 element (a list of 1 element is considered sorted). Then repeatedly merge two adjacent sublists to produce new sorted sublists until there is only 1 sublist remaining.</p>
-<p>Now given the initial sequence of integers, together with a sequence which is a result of several iterations of some sorting method, can you tell which sorting method we are using?</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em> (≤100). Then in the next line, <em>N</em> integers are given as the initial sequence. The last line contains the partially sorted sequence of the <em>N</em> numbers. It is assumed that the target sequence is always ascending. All the numbers in a line are separated by a space.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in the first line either &quot;Insertion Sort&quot; or &quot;Merge Sort&quot; to indicate the method used to obtain the partial result. Then run this method for one more iteration and output in the second line the resuling sequence. It is guaranteed that the answer is unique for each test case. All the numbers in a line must be separated by a space, and there must be no extra space at the end of the line.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">10
-3 1 2 8 7 5 9 4 6 0
-1 2 3 7 8 5 9 4 6 0
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">Insertion Sort
-1 2 3 5 7 8 9 4 6 0
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">10
-3 1 2 8 7 5 9 4 0 6
-1 3 2 8 5 7 4 9 0 6
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">Merge Sort
-1 2 3 8 4 5 7 9 0 6
-</code></pre>
-<hr>
-<p>考察插入排序和归并排序</p>
-<p>输入：第一行数组有n个数，第二行为需要排序的数组，第三行为已部分排好序的数组。</p>
-<p>输出：判断输入的第三行数列是依照哪种排序规则进行排序的，并输出下一步排好序的数列</p>
-<p>注意：测试点4，给出的数组序列可能存在相等元素。</p>
-</br>
-<p>解题思路：首先要知道插入排序和归并排序的排序方法、步骤。</p>
-<p>插入排序：从需要排序的数组索引0开始进行排序。以样例1为例：</p>
-<p>原始数组：3 1 2 8 7 5 9 4 6 0</p>
-<p>1)<strong>3</strong> 1 2 8 7 5 9 4 6 0---对 (索引0) 的元素进行排序</p>
-<p>2)<strong>1</strong> 3 2 8 7 5 9 4 6 0---对 (索引0~1) 的元素进行排序</p>
-<p>3)1 <strong>2</strong> 3 8 7 5 9 4 6 0---对 (索引0~2) 的元素进行排序</p>
-<p>...</p>
-<p>归并排序的思想：</p>
-<p>1)将数组元素两两进行排序</p>
-<p>2)将数组元素44进行排序</p>
-<p>3)将数组元素88进行排序</p>
-<p>若最后一组不够元素，也要将他们进行排序</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-vector&lt;int&gt; a, b;
-int n, g;
-int judge(){
-	int t;
-	t = b[0];
-	for(int i=1; i&lt;n; i++){
-		if(b[i]&gt;=t){
-			g = i;
-			t = b[i];
-		}
-		else break;
-	}
-	for(int i=g+1; i&lt;n; i++){
-		if(a[i]!=b[i]) return 1;//Merge
-	}
-	return 2;//Insert
-}
-
-void solve1(){
-	printf(&quot;Merge Sort\n&quot;);
-	bool f = true;
-	int t = 1;
-	while(f){
-		f = false;
-		for(int i=0; i&lt;n; i++){
-			if(a[i]!=b[i]){
-				f = true;
-				break;
-			}
-		}
-		t*=2;
-		for(int i=0; i&lt;n; i+=t){
-			if(i+t&lt;n) sort(a.begin()+i,a.begin()+i+t);
-			else sort(a.begin()+i,a.begin()+n);
-		}
-	}
-	for(int i=0; i&lt;n; i++){
-		if(i) printf(&quot; &quot;);
-		printf(&quot;%d&quot;, a[i]);
-	}
-}
-
-void solve2(){
-	printf(&quot;Insertion Sort\n&quot;);
-	sort(b.begin(),b.begin()+g+2);
-	for(int i=0; i&lt;n; i++){
-		if(i) printf(&quot; &quot;);
-		printf(&quot;%d&quot;, b[i]);
-	}
-}
-
-int main()
-{
-	int k;
-	scanf(&quot;%d&quot;, &amp;n);
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;k);
-		a.push_back(k);
-	}
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;k);
-		b.push_back(k);
-	}
-	g = 0;
-	int flag = judge();
-	if(flag==2) solve2();
-	else solve1();
 	return 0;
 }
 </code></pre>

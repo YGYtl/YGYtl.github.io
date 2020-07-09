@@ -30,34 +30,24 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            Grace's blog
+            文章目录
           </p>
-          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
-            
-              
-                <a href="https://github.com/YGYtl" target="_blank" class="mr-4 text-xl text-gray-400 font-light hover:text-gray-900">
-                  <i class="ri-github-line"></i>
-                </a>
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#input-specification">Input Specification:</a></li>
+<li><a href="#output-specification">Output Specification:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
           </div>
         </div>
       
@@ -101,35 +91,144 @@
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
-        <h2 class="text-lg text-gray-700 mb-8">
-          <i class="ri-bookmark-line"></i> Gridea
-        </h2>
-        
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
-    
-      <a href="https://ygytl.github.io/post/hello-gridea/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://ygytl.github.io//post-images/hello-gridea.png'">
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">1129 Recommendation System (25分)题解</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-07-09 / 4 min read
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/hello-gridea/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">Hello Gridea</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
-        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+        
+        <div class="post-content yue">
+          <p>1129 Recommendation System (25分)</p>
+<p>Recommendation system predicts the preference that a user would give to an item. Now you are asked to program a very simple recommendation system that rates the user's preference by the number of times that an item has been accessed by this user.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each test case, the first line contains two positive integers: N (≤ 50,000), the total number of queries, and K (≤ 10), the maximum number of recommendations the system must show to the user. Then given in the second line are the indices of items that the user is accessing -- for the sake of simplicity, all the items are indexed from 1 to N. All the numbers in a line are separated by a space.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each case, process the queries one by one. Output the recommendations for each query in a line in the format:</p>
+<pre><code>query: rec[1] rec[2] ... rec[K]
+</code></pre>
+<p>where <code>query</code> is the item that the user is accessing, and <code>rec[i]</code> (<code>i</code>=1, ... K) is the <code>i</code>-th item that the system recommends to the user. The first K items that have been accessed most frequently are supposed to be recommended in non-increasing order of their frequencies. If there is a tie, the items will be ordered by their indices in increasing order.</p>
+<p>Note: there is no output for the first item since it is impossible to give any recommendation at the time. It is guaranteed to have the output for at least one query.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">12 3
+3 5 7 5 5 3 2 1 8 3 8 12
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">5: 3
+7: 3 5
+5: 3 5 7
+5: 5 3 7
+3: 5 3 7
+2: 5 3 7
+1: 5 3 2
+8: 5 3 1
+3: 5 3 1
+8: 3 5 1
+12: 3 5 8
+</code></pre>
+<hr>
+<p>题目描述：更新推荐系统。</p>
+<p>输入描述：第一行n为推荐数，m为最多推荐个数。第二行有m个值，为每次推荐的编号。</p>
+<p>输出描述：输出此次推荐编号之前的排序，例如样例，第一个推荐编号为3，第二个推荐编号为5，应该从5开始输出它前面最优的推荐。</p>
+<p>系统推荐排序规则：推荐次数多的排在前面，若推荐次数相同，则按编号从小到大排序。</p>
+</br>
+<p>测试点3、4容易超时，要找准遍历目标。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, m, k;
+map&lt;int,int&gt; p, pid;
+struct node{
+	int num, cnt = 0;
+};
+vector&lt;node&gt; G;
+bool cmp(node a, node b){
+	if(a.cnt!=b.cnt) return a.cnt &gt; b.cnt;//降序 
+	else return a.num &lt; b.num;//升序 
+}
+int main()
+{
+	map&lt;int,int&gt;::iterator it;
+	scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d&quot;, &amp;k);
+		pid[k] = i;
+		node t;
+		if(i){
+			printf(&quot;%d:&quot;, k);
+			for(int j=0; j&lt;m&amp;&amp;j&lt;G.size(); j++){
+				printf(&quot; %d&quot;, G[j].num);
+			}
+			printf(&quot;\n&quot;);
+		}
+		p[k]++;
+		t.num = k; t.cnt = p[k];
+		bool flag = true;
+		for(int j=0; j&lt;G.size(); j++){
+			if(G[j].num==k){
+				G[j].cnt = t.cnt;
+				flag = false;
+				break;
+			}
+		}
+		if(flag) G.push_back(t);
+		sort(G.begin(),G.end(),cmp);
+		if(G.size()&gt;m) G.pop_back();
+	}
+	return 0;
+}
+</code></pre>
 
-      </div>
-      <div class="text-gray-400 text-sm font-light">2018-12-12 / 2 min read</div>
-    </div>
-  </section>
+        </div>
 
-        <div class="pagination-container animated fadeIn">
-  
-  
-</div>
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
+            <span class="flex-auto">PAT (Advanced Level) Practice</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://ygytl.github.io/post/1127-zigzagging-on-a-tree-30-fen-ti-jie/">
+                <h3 class="post-title">
+                  1127 ZigZagging on a Tree (30分)题解
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '651ee788996886a0c8a2',
+    clientSecret: '53231792a985805dbea714f6d780b970e1d3c139',
+    repo: 'ygytl.github.io',
+    owner: 'YGYtl',
+    admin: ['YGYtl'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
 
       </div>
     </div>
