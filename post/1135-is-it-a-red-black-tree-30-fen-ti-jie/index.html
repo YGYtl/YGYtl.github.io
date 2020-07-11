@@ -92,156 +92,136 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1075 PAT Judge (25分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">1135 Is It A Red-Black Tree (30分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-03 / 7 min read
+          2020-07-11 / 5 min read
         </div>
         
         <div class="post-content yue">
-          <p>1075 PAT Judge (25分)</p>
-<p>The ranklist of PAT is generated from the status list, which shows the scores of the submissions. This time you are supposed to generate the ranklist for PAT.</p>
+          <p>1135 Is It A Red-Black Tree (30分)</p>
+<p>There is a kind of balanced binary search tree named <strong>red-black tree</strong> in the data structure. It has the following 5 properties:</p>
+<ul>
+<li>(1) Every node is either red or black.</li>
+<li>(2) The root is black.</li>
+<li>(3) Every leaf (NULL) is black.</li>
+<li>(4) If a node is red, then both its children are black.</li>
+<li>(5) For each node, all simple paths from the node to descendant leaves contain the same number of black nodes.</li>
+</ul>
+<p>For example, the tree in Figure 1 is a red-black tree, while the ones in Figure 2 and 3 are not.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://images.ptausercontent.com/eff80bd4-c833-4818-9786-81680d1b304a.jpg" alt="rbf1.jpg" loading="lazy"></th>
+<th style="text-align:center"><img src="https://images.ptausercontent.com/b11184df-eaab-451c-b7d4-7fc1dc82b028.jpg" alt="rbf2.jpg" loading="lazy"></th>
+<th style="text-align:center"><img src="https://images.ptausercontent.com/625c532b-22fc-47b9-80ea-0537cf00d922.jpg" alt="rbf3.jpg" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Figure 1</td>
+<td style="text-align:center">Figure 2</td>
+<td style="text-align:center">Figure 3</td>
+</tr>
+</tbody>
+</table>
+<p>For each given binary search tree, you are supposed to tell if it is a legal red-black tree.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains 3 positive integers, <em>N</em> (≤10<sup>4</sup>), the total number of users, <em>K</em> (≤5), the total number of problems, and <em>M</em> (≤10<sup>5</sup>), the total number of submissions. It is then assumed that the user id's are 5-digit numbers from 00001 to <em>N</em>, and the problem id's are from 1 to <em>K</em>. The next line contains <em>K</em> positive integers <code>p[i]</code> (<code>i</code>=1, ..., <em>K</em>), where <code>p[i]</code> corresponds to the full mark of the i-th problem. Then <em>M</em> lines follow, each gives the information of a submission in the following format:</p>
-<pre><code>user_id problem_id partial_score_obtained
-</code></pre>
-<p>where <code>partial_score_obtained</code> is either −1 if the submission cannot even pass the compiler, or is an integer in the range [0, <code>p[problem_id]</code>]. All the numbers in a line are separated by a space.</p>
+<p>Each input file contains several test cases. The first line gives a positive integer K (≤30) which is the total number of cases. For each case, the first line gives a positive integer N (≤30), the total number of nodes in the binary tree. The second line gives the preorder traversal sequence of the tree. While all the keys in a tree are positive integers, we use negative signs to represent red nodes. All the numbers in a line are separated by a space. The sample input cases correspond to the trees shown in Figure 1, 2 and 3.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, you are supposed to output the ranklist in the following format:</p>
-<pre><code>rank user_id total_score s[1] ... s[K]
-</code></pre>
-<p>where <code>rank</code> is calculated according to the <code>total_score</code>, and all the users with the same <code>total_score</code> obtain the same <code>rank</code>; and <code>s[i]</code> is the partial score obtained for the <code>i</code>-th problem. If a user has never submitted a solution for a problem, then &quot;-&quot; must be printed at the corresponding position. If a user has submitted several solutions to solve one problem, then the highest score will be counted.</p>
-<p>The ranklist must be printed in non-decreasing order of the ranks. For those who have the same rank, users must be sorted in nonincreasing order according to the number of perfectly solved problems. And if there is still a tie, then they must be printed in increasing order of their id's. For those who has never submitted any solution that can pass the compiler, or has never submitted any solution, they must NOT be shown on the ranklist. It is guaranteed that at least one user can be shown on the ranklist.</p>
+<p>For each test case, print in a line &quot;Yes&quot; if the given tree is a red-black tree, or &quot;No&quot; if not.</p>
 <h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">7 4 20
-20 25 25 30
-00002 2 12
-00007 4 17
-00005 1 19
-00007 2 25
-00005 1 20
-00002 2 2
-00005 1 15
-00001 1 18
-00004 3 25
-00002 2 25
-00005 3 22
-00006 4 -1
-00001 2 18
-00002 1 20
-00004 1 15
-00002 4 18
-00001 3 4
-00001 4 2
-00005 2 -1
-00004 2 0
+<pre><code class="language-in">3
+9
+7 -2 1 5 -4 -11 8 14 -15
+9
+11 -2 1 -7 5 -4 8 14 -15
+8
+10 -7 5 -6 8 15 -11 17
 </code></pre>
 <h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">1 00002 63 20 25 - 18
-2 00005 42 20 0 22 -
-2 00007 42 - 25 - 17
-2 00001 42 18 18 4 2
-5 00004 40 15 0 25 -
+<pre><code class="language-out">Yes
+No
+No
 </code></pre>
 <hr>
-<p>题目描述：PAT的成绩排序，排序规则（总分递增排序；总分相同，完美解答题目数多者优先；前两者都相同时，id递增排序）</p>
+<p>题目描述：红黑树是一个二叉搜索树，根节点的值大于左子结点，根节点的值小于或等于右子节点的值。红黑树的特点如下：</p>
+<p>1)每一个结点由红色或黑色组成</p>
+<p>2)根节点为黑色</p>
+<p>3)每个叶子节点(NULL)都为黑色</p>
+<p>4)如果节点为红色，那他的两个子结点必须为黑色</p>
+<p>5)根节点到每个子结点的路径中，黑色子结点的个数都要相同</p>
+<p>输入：第一行k为测试用例数，往下有k组；每组第一行n为结点总数，每组第二行有n个数，表示需要插入的结点的值，正整数为黑色，负整数为红色。</p>
+<p>输出：输出是否能构成红黑树，是为Yes，否为No。</p>
 </br>
-<p>输入：第一行三个参数。n为参赛人数，k为总题数，M为参赛者答题情况数。下列m行，每行三个参数，分别为参赛者id，题号，答题所得分数</p>
-<p>输出：输出有分数的参赛者参赛的排名、id、总分、各题得分。</p>
-</br>
-<p>解题思路：emmmm后续再长篇大论解释，现在先写一些注意事项</p>
-<p>注意：</p>
-<p>测试点2：编译未通过者得分为-1，不计入得分，编译通过者，但是得分为0，成绩记为0。有一参赛者1，他所有题目都编译未通过，他得分岁为0，但不将他计入排名。有一参赛者2，他只编译通过了1道题，但这道题成绩为0，而且他的其他题都编译未通过，那他与参赛者1是不同的，他是可以计入排名的。</p>
-<p>测试点4：有些人，某道题已经提交过并且为满分了，他又去提交了一次，那么，他这第二次提交的满分记录，不计入完美答题数中。</p>
+<p>解题思路：先构建一个红黑树，将题目给定的值依序插入就能将二叉搜索树构建出来，我是通过递归的方法构建的。树构建完成后，用BFS遍历每个结点，检查是否符合红黑树的特性。</p>
+<p>注意：题目给出的结点值都不是叶子结点，叶子节点没有值为NULL，这是个坑，没注意到测试点2、3就会错。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-int n, k, m;
-const int maxn = 1e5+1;
-int score[maxn];
+int n, m, cnt;
+bool flag;
 struct node{
-	int id;
-	int b[6];//记录每道题的分数 
-	int all_score;
-	int TG;
-	int perfit_count;//记录完美答题个数 
+	int num;
+	node *l, *r;
 	node(){
-		TG = all_score = 0;
-		perfit_count = 0;
-		memset(b,-1,sizeof(b));
+		l = r = NULL;
 	}
 };
-map&lt;int,node&gt; p;
-map&lt;int,int&gt; vis;
-vector&lt;node&gt; v;
-bool cmp(node a, node b){
-	if(a.all_score!=b.all_score) return a.all_score &gt; b.all_score;
-	else if(a.perfit_count!=b.perfit_count) return a.perfit_count &gt; b.perfit_count;
-	else return a.id &lt; b.id;
+node *Insert(node *root, int k){
+	if(root==NULL){
+		root = new node();
+		root-&gt;num = k;
+		root-&gt;l = root-&gt;r = NULL;
+	}
+	else if(abs(k)&gt;=abs(root-&gt;num)){
+		root-&gt;r = Insert(root-&gt;r,k);
+	}
+	else root-&gt;l = Insert(root-&gt;l,k);
+	return root;
+}
+void bfs(node *root){
+	pair&lt;node*,int&gt; t, tt;
+	node *troot;
+	queue&lt;pair&lt;node*,int&gt;&gt; q;
+	t.first = root; t.second = 0;
+	q.push(t);
+	while(!q.empty()&amp;&amp;flag){
+		t = q.front(); q.pop();
+		troot = t.first;
+		if(troot==NULL){
+			t.second++;
+			if(cnt==-1) cnt = t.second;
+			if(cnt!=t.second) flag = false;
+			continue;
+		}
+		if(troot-&gt;num&gt;0) t.second++;
+		
+		if(troot-&gt;l!=NULL&amp;&amp;troot-&gt;num&lt;0&amp;&amp;troot-&gt;l-&gt;num&lt;0) flag = false;
+		tt.first = troot-&gt;l; tt.second = t.second;
+		q.push(tt);
+		
+		if(troot-&gt;r!=NULL&amp;&amp;troot-&gt;num&lt;0&amp;&amp;troot-&gt;r-&gt;num&lt;0) flag = false;
+		tt.first = troot-&gt;r; tt.second = t.second;
+		q.push(tt);
+	}
 }
 int main()
 {
-	int A, B, C;
-	scanf(&quot;%d %d %d&quot;, &amp;n, &amp;k, &amp;m);
-	for(int i=1; i&lt;=k; i++) scanf(&quot;%d&quot;, &amp;score[i]);
-	for(int i=0; i&lt;m; i++){
-		scanf(&quot;%d %d %d&quot;, &amp;A, &amp;B, &amp;C);
-		if(vis[A]==0){//没有记录过，把他添加到map中 
-			node t;
-			if(C==-1) C=0;
-			else t.TG = 1;
-			t.id = A;
-			t.all_score = C;
-			t.b[B] = C;
-			if(C==score[B]){//标记B题已经满分 
-				t.perfit_count++;
-			}
-			vis[A] = 1;
-			p[A] = t;
+	int k;
+	scanf(&quot;%d&quot;, &amp;n);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d&quot;, &amp;m);
+		node *tree = NULL;
+		for(int j=0; j&lt;m; j++){
+			scanf(&quot;%d&quot;, &amp;k);
+			tree = Insert(tree,k);
 		}
-		else{//该学生之前已经答过题了 
-			node t;
-			t = p[A];
-			if(C==-1) C=0;
-			else t.TG = 1;
-			if(t.b[B]==-1){//第B道题没有回答过 
-				t.b[B] = C;
-				t.all_score += C;
-				if(C==score[B]){//标记B题已经满分 
-					t.perfit_count++;
-				}
-			}
-			else if(C&gt;t.b[B]){
-				t.all_score -= t.b[B];
-				t.all_score += C;
-				t.b[B] = C;
-				if(C==score[B]){//标记B题已经满分 
-					t.perfit_count++;
-				}
-			}
-			p[A] = t;
-		}
-	}
-	map&lt;int,node&gt;::iterator it;
-	node t;
-	for(it=p.begin(); it!=p.end(); it++){
-		t = it-&gt;second;
-		if(t.TG) v.push_back(t);
-	}
-	sort(v.begin(),v.end(),cmp);
-	int rank = 1, tscore=0;
-	for(int i=0; i&lt;v.size(); i++){
-		t = v[i];
-		if(i==0) tscore = t.all_score;
-		if(t.all_score!=tscore){
-			rank = i+1;
-			tscore = t.all_score;
-		}
-		printf(&quot;%d %05d %d&quot;, rank, t.id, t.all_score);
-		for(int j=1; j&lt;=k; j++){
-			if(t.b[j]==-1) printf(&quot; -&quot;);
-			else printf(&quot; %d&quot;, t.b[j]);
-		}
-		printf(&quot;\n&quot;);
+		flag = true;
+		cnt = -1;
+		if(tree-&gt;num&lt;0) flag = false;
+		else bfs(tree);
+		if(flag) printf(&quot;Yes\n&quot;);
+		else printf(&quot;No\n&quot;);
 	}
 	return 0;
 }
@@ -258,21 +238,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1068-find-more-coins-30-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1068 Find More Coins (30分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1070-mooncake-25-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1130-infix-expression-25-fen-ti-jie/">
                 <h3 class="post-title">
-                  1070 Mooncake (25分)题解
+                  1130 Infix Expression (25分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>

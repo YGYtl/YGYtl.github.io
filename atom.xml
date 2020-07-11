@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-09T14:07:00.238Z</updated>
+    <updated>2020-07-11T08:28:45.434Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,142 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[1135 Is It A Red-Black Tree (30分)题解]]></title>
+        <id>https://ygytl.github.io/post/1135-is-it-a-red-black-tree-30-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/1135-is-it-a-red-black-tree-30-fen-ti-jie/">
+        </link>
+        <updated>2020-07-11T08:28:20.000Z</updated>
+        <content type="html"><![CDATA[<p>1135 Is It A Red-Black Tree (30分)</p>
+<p>There is a kind of balanced binary search tree named <strong>red-black tree</strong> in the data structure. It has the following 5 properties:</p>
+<ul>
+<li>(1) Every node is either red or black.</li>
+<li>(2) The root is black.</li>
+<li>(3) Every leaf (NULL) is black.</li>
+<li>(4) If a node is red, then both its children are black.</li>
+<li>(5) For each node, all simple paths from the node to descendant leaves contain the same number of black nodes.</li>
+</ul>
+<p>For example, the tree in Figure 1 is a red-black tree, while the ones in Figure 2 and 3 are not.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://images.ptausercontent.com/eff80bd4-c833-4818-9786-81680d1b304a.jpg" alt="rbf1.jpg" loading="lazy"></th>
+<th style="text-align:center"><img src="https://images.ptausercontent.com/b11184df-eaab-451c-b7d4-7fc1dc82b028.jpg" alt="rbf2.jpg" loading="lazy"></th>
+<th style="text-align:center"><img src="https://images.ptausercontent.com/625c532b-22fc-47b9-80ea-0537cf00d922.jpg" alt="rbf3.jpg" loading="lazy"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Figure 1</td>
+<td style="text-align:center">Figure 2</td>
+<td style="text-align:center">Figure 3</td>
+</tr>
+</tbody>
+</table>
+<p>For each given binary search tree, you are supposed to tell if it is a legal red-black tree.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains several test cases. The first line gives a positive integer K (≤30) which is the total number of cases. For each case, the first line gives a positive integer N (≤30), the total number of nodes in the binary tree. The second line gives the preorder traversal sequence of the tree. While all the keys in a tree are positive integers, we use negative signs to represent red nodes. All the numbers in a line are separated by a space. The sample input cases correspond to the trees shown in Figure 1, 2 and 3.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each test case, print in a line &quot;Yes&quot; if the given tree is a red-black tree, or &quot;No&quot; if not.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">3
+9
+7 -2 1 5 -4 -11 8 14 -15
+9
+11 -2 1 -7 5 -4 8 14 -15
+8
+10 -7 5 -6 8 15 -11 17
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">Yes
+No
+No
+</code></pre>
+<hr>
+<p>题目描述：红黑树是一个二叉搜索树，根节点的值大于左子结点，根节点的值小于或等于右子节点的值。红黑树的特点如下：</p>
+<p>1)每一个结点由红色或黑色组成</p>
+<p>2)根节点为黑色</p>
+<p>3)每个叶子节点(NULL)都为黑色</p>
+<p>4)如果节点为红色，那他的两个子结点必须为黑色</p>
+<p>5)根节点到每个子结点的路径中，黑色子结点的个数都要相同</p>
+<p>输入：第一行k为测试用例数，往下有k组；每组第一行n为结点总数，每组第二行有n个数，表示需要插入的结点的值，正整数为黑色，负整数为红色。</p>
+<p>输出：输出是否能构成红黑树，是为Yes，否为No。</p>
+</br>
+<p>解题思路：先构建一个红黑树，将题目给定的值依序插入就能将二叉搜索树构建出来，我是通过递归的方法构建的。树构建完成后，用BFS遍历每个结点，检查是否符合红黑树的特性。</p>
+<p>注意：题目给出的结点值都不是叶子结点，叶子节点没有值为NULL，这是个坑，没注意到测试点2、3就会错。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, m, cnt;
+bool flag;
+struct node{
+	int num;
+	node *l, *r;
+	node(){
+		l = r = NULL;
+	}
+};
+node *Insert(node *root, int k){
+	if(root==NULL){
+		root = new node();
+		root-&gt;num = k;
+		root-&gt;l = root-&gt;r = NULL;
+	}
+	else if(abs(k)&gt;=abs(root-&gt;num)){
+		root-&gt;r = Insert(root-&gt;r,k);
+	}
+	else root-&gt;l = Insert(root-&gt;l,k);
+	return root;
+}
+void bfs(node *root){
+	pair&lt;node*,int&gt; t, tt;
+	node *troot;
+	queue&lt;pair&lt;node*,int&gt;&gt; q;
+	t.first = root; t.second = 0;
+	q.push(t);
+	while(!q.empty()&amp;&amp;flag){
+		t = q.front(); q.pop();
+		troot = t.first;
+		if(troot==NULL){
+			t.second++;
+			if(cnt==-1) cnt = t.second;
+			if(cnt!=t.second) flag = false;
+			continue;
+		}
+		if(troot-&gt;num&gt;0) t.second++;
+		
+		if(troot-&gt;l!=NULL&amp;&amp;troot-&gt;num&lt;0&amp;&amp;troot-&gt;l-&gt;num&lt;0) flag = false;
+		tt.first = troot-&gt;l; tt.second = t.second;
+		q.push(tt);
+		
+		if(troot-&gt;r!=NULL&amp;&amp;troot-&gt;num&lt;0&amp;&amp;troot-&gt;r-&gt;num&lt;0) flag = false;
+		tt.first = troot-&gt;r; tt.second = t.second;
+		q.push(tt);
+	}
+}
+int main()
+{
+	int k;
+	scanf(&quot;%d&quot;, &amp;n);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d&quot;, &amp;m);
+		node *tree = NULL;
+		for(int j=0; j&lt;m; j++){
+			scanf(&quot;%d&quot;, &amp;k);
+			tree = Insert(tree,k);
+		}
+		flag = true;
+		cnt = -1;
+		if(tree-&gt;num&lt;0) flag = false;
+		else bfs(tree);
+		if(flag) printf(&quot;Yes\n&quot;);
+		else printf(&quot;No\n&quot;);
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1130 Infix Expression (25分)题解]]></title>
         <id>https://ygytl.github.io/post/1130-infix-expression-25-fen-ti-jie/</id>
@@ -1121,105 +1257,6 @@ int main()
 	if(flag==0) printf(&quot;Not Heap\n&quot;);
 	else if(flag==1) printf(&quot;Max Heap\n&quot;);
 	else if(flag==-1) printf(&quot;Min Heap\n&quot;);
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1105 Spiral Matrix (25分)题解]]></title>
-        <id>https://ygytl.github.io/post/1105-spiral-matrix-25-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1105-spiral-matrix-25-fen-ti-jie/">
-        </link>
-        <updated>2020-07-01T08:24:12.000Z</updated>
-        <content type="html"><![CDATA[<p>1105 Spiral Matrix (25分)</p>
-<p>This time your job is to fill a sequence of <em>N</em> positive integers into a <strong>spiral matrix</strong> in non-increasing order. A spiral matrix is filled in from the first element at the upper-left corner, then move in a clockwise spiral. The matrix has <em>m</em> rows and <em>n</em> columns, where <em>m</em> and <em>n</em> satisfy the following: <em>m</em>×<em>n</em> must be equal to <em>N</em>; <em>m</em>≥<em>n</em>; and <em>m</em>−<em>n</em> is the minimum of all the possible values.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em>. Then the next line contains <em>N</em> positive integers to be filled into the spiral matrix. All the numbers are no more than 104. The numbers in a line are separated by spaces.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, output the resulting matrix in <em>m</em> lines, each contains <em>n</em> numbers. There must be exactly 1 space between two adjacent numbers, and no extra space at the end of each line.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">12
-37 76 20 98 76 42 53 95 60 81 58 93
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">98 95 93
-42 37 81
-53 20 76
-58 60 76
-</code></pre>
-<hr>
-<p>题目描述：将一组数用二维数组的形式输出(类似漩涡)，m-行，n-列，要求m&gt;=n。</p>
-<p>解题思路：将题目给的数组从大到小排序，然后求出二维数组的行和列，再往里面填值就行了。可以用一个二维数组vis记录哪个空是填了值的，比较方便。(在ccf真题中有一道题与这题类似，难度在第二道题)</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-const int maxn = 1e4 + 5;
-int v[maxn];
-vector&lt;vector&lt;int&gt; &gt; G;
-vector&lt;vector&lt;bool&gt; &gt; vis;
-bool cmp(int a, int b){
-	return a &gt; b;
-}
-int main()
-{
-	int n, k, x, y;
-	scanf(&quot;%d&quot;, &amp;n);
-	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;, &amp;v[i]);
-	sort(v, v+n, cmp);
-	x = sqrt(n)+1;
-	for(int i=x; i&gt;=1; i--){
-		if(n%i==0){
-			x = i;
-			break;
-		}
-	}
-	y = min(x,n/x); x = max(x,n/x);
-	if(y==1){
-		for(int i=0; i&lt;n; i++) printf(&quot;%d\n&quot;, v[i]);
-		return 0;
-	}
-	G.resize(x+1); vis.resize(x+1);
-	for(int i=1; i&lt;=x; i++){
-		G[i].resize(y+2);
-		vis[i].resize(y+2);
-		vis[i][0] = false; vis[i][y+1] = false;
-		for(int j=1; j&lt;=y; j++) vis[i][j] = true;
-	}
-	int i = 1, j = 1, c=0;
-	while(vis[i][j]&amp;&amp;c&lt;n){//圈 
-		while(j&lt;=y&amp;&amp;vis[i][j]){
-			G[i][j] = v[c];
-			vis[i][j] = false;
-			c++; j++;
-		}
-		i++; j--;
-		while(i&lt;=x&amp;&amp;vis[i][j]){
-			G[i][j] = v[c];
-			vis[i][j] = false;
-			c++; i++;
-		}
-		i--; j--;
-		while(j&gt;=1&amp;&amp;vis[i][j]){
-			G[i][j] = v[c];
-			vis[i][j] = false;
-			c++; j--;
-		}
-		j++; i--;
-		while(i&gt;=1&amp;&amp;vis[i][j]){
-			G[i][j] = v[c];
-			vis[i][j] = false;
-			c++; i--;
-		}
-		i++; j++;
-	}
-	for(i=1; i&lt;=x; i++){
-		for(j=1; j&lt;=y; j++){
-			if(j!=1) printf(&quot; &quot;);
-			printf(&quot;%d&quot;, G[i][j]);
-		}
-		printf(&quot;\n&quot;);
-	}
 	return 0;
 }
 </code></pre>
