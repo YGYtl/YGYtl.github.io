@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-20T13:39:36.624Z</updated>
+    <updated>2020-07-20T13:46:20.951Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,88 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[7-2 Block Reversing (25分)题解]]></title>
+        <id>https://ygytl.github.io/post/7-2-block-reversing-25-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/7-2-block-reversing-25-fen-ti-jie/">
+        </link>
+        <updated>2020-07-20T13:45:56.000Z</updated>
+        <content type="html"><![CDATA[<p>7-2 Block Reversing (25分)</p>
+<p>Given a singly linked list <em>L</em>. Let us consider every <em>K</em> nodes as a <strong>block</strong> (if there are less than <em>K</em> nodes at the end of the list, the rest of the nodes are still considered as a block). Your job is to reverse all the blocks in <em>L</em>. For example, given <em>L</em> as 1→2→3→4→5→6→7→8 and <em>K</em> as 3, your output must be 7→8→4→5→6→1→2→3.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line contains the address of the first node, a positive <em>N</em> (≤105) which is the total number of nodes, and a positive <em>K</em> (≤<em>N</em>) which is the size of a block. The address of a node is a 5-digit nonnegative integer, and NULL is represented by −1.</p>
+<p>Then <em>N</em> lines follow, each describes a node in the format:</p>
+<pre><code>Address Data Next
+</code></pre>
+<p>where <code>Address</code> is the position of the node, <code>Data</code> is an integer, and <code>Next</code> is the position of the next node.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each case, output the resulting ordered linked list. Each node occupies a line, and is printed in the same format as in the input.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">00100 8 3
+71120 7 88666
+00000 4 99999
+00100 1 12309
+68237 6 71120
+33218 3 00000
+99999 5 68237
+88666 8 -1
+12309 2 33218
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">71120 7 88666
+88666 8 00000
+00000 4 99999
+99999 5 68237
+68237 6 00100
+00100 1 12309
+12309 2 33218
+33218 3 -1
+</code></pre>
+<hr>
+<p>题目描述：反转链表</p>
+<p>输入：第一行head、n、k分别表示链表的头结点起始地址，n个结点，每k个结点为一组反转。</p>
+<p>输出：输出反转后的链表。</p>
+</br>
+<p>常规题，先将链表串联起来，算出有多少组，从索引最大的一组开始链接，就能将链表反转了。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 1e5+5;
+struct node{
+	int head, num, next;
+}l1[maxn];
+vector&lt;node&gt; v1, v2;
+int main()
+{
+	int head, n, k;
+	node t;
+	scanf(&quot;%d %d %d&quot;, &amp;head, &amp;n, &amp;k);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d %d %d&quot;, &amp;t.head, &amp;t.num, &amp;t.next);
+		l1[t.head] = t;
+	}
+	while(head!=-1){
+		t = l1[head];
+		v1.push_back(t);
+		head = t.next;
+	}
+	int cnt = v1.size()/k;
+	while(cnt&gt;=0){
+		for(int j=0; j&lt;k&amp;&amp;cnt*k+j&lt;v1.size(); j++){
+			v2.push_back(v1[cnt*k+j]);
+		}
+		cnt--;
+	}
+	for(int i=0; i&lt;v2.size()-1; i++){
+		t = v2[i];
+		printf(&quot;%05d %d %05d\n&quot;, t.head, t.num, v2[i+1].head);
+	}
+	printf(&quot;%05d %d -1\n&quot;, v2[v2.size()-1].head, v2[v2.size()-1].num);
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[7-1 Good in C (20分)题解]]></title>
         <id>https://ygytl.github.io/post/7-1-good-in-c-20-fen-ti-jie/</id>
@@ -1312,105 +1394,6 @@ int main()
 			printf(&quot;%d&quot;, s2.top());
 			s2.pop(); c++;
 		} 
-	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1107 Social Clusters (30分)题解]]></title>
-        <id>https://ygytl.github.io/post/1107-social-clusters-30-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1107-social-clusters-30-fen-ti-jie/">
-        </link>
-        <updated>2020-07-03T10:05:36.000Z</updated>
-        <content type="html"><![CDATA[<p>1107 Social Clusters (30分)</p>
-<p>When register on a social network, you are always asked to specify your hobbies in order to find some potential friends with the same hobbies. A <strong>social cluster</strong> is a set of people who have some of their hobbies in common. You are supposed to find all the clusters.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each test case, the first line contains a positive integer <em>N</em> (≤1000), the total number of people in a social network. Hence the people are numbered from 1 to <em>N</em>. Then <em>N</em> lines follow, each gives the hobby list of a person in the format:</p>
-<p><em>K**i</em>: <em>h**i</em>[1] <em>h**i</em>[2] ... <em>h**i</em>[<em>K**i</em>]</p>
-<p>where <em>K**i</em> (&gt;0) is the number of hobbies, and <em>h**i</em>[<em>j</em>] is the index of the <em>j</em>-th hobby, which is an integer in [1, 1000].</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each case, print in one line the total number of clusters in the network. Then in the second line, print the numbers of people in the clusters in non-increasing order. The numbers must be separated by exactly one space, and there must be no extra space at the end of the line.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">8
-3: 2 7 10
-1: 4
-2: 5 3
-1: 4
-1: 3
-1: 4
-4: 6 8 1 5
-1: 4
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">3
-4 3 1
-</code></pre>
-<hr>
-<p>题目描述：潜在的朋友圈</p>
-<p>输入：第一行n，表示人数；接着n行，每行是第i个人选择的课程数及课程id号。</p>
-<p>输出：第一行输出多少个圈，接着输出按照圈里人数的大小递减输出。</p>
-<p>解题思路：并查集，求出有多少个朋友圈，按照朋友圈的人数从大到小输出每个圈的人数就行了。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n, m;
-const int maxn = 2000;
-vector&lt;int&gt; v[maxn];
-int f[maxn], g[maxn];
-set&lt;int&gt; s;
-int find(int x){
-	while(f[x]!=x){
-		x = f[x];
-	}
-	return x;
-}
-void Union(int x, int y){
-	x = find(x);
-	y = find(y);
-	f[x] = y;
-}
-bool cmp(int a, int b){
-	return a &gt; b;
-}
-int main()
-{
-	int k;
-	scanf(&quot;%d&quot;, &amp;n);
-	for(int i=1; i&lt;=n; i++) f[i] = i;
-	for(int i=1; i&lt;=n; i++){
-		scanf(&quot;%d:&quot;, &amp;m);
-		for(int j=0; j&lt;m; j++){
-			scanf(&quot;%d&quot;, &amp;k);
-			v[k].push_back(i);
-			s.insert(k);
-		}
-	}
-	set&lt;int&gt;::iterator it;
-	for(it=s.begin(); it!=s.end(); it++){//课程id 
-		sort(v[*it].begin(),v[*it].end());
-		int x, y;
-		for(int i=0; i&lt;v[*it].size(); i++){
-			if(i==0) x = find(v[*it][i]);
-			else{
-				y = find(v[*it][i]);
-				Union(x,y);
-			}
-		}
-	}
-	map&lt;int,int&gt; p;
-	for(int i=1; i&lt;=n; i++) p[find(i)]++;
-	map&lt;int,int&gt;::iterator it1;
-	int cnt=0; 
-	for(it1=p.begin(); it1!=p.end(); it1++){
-		g[cnt++] = it1-&gt;second;
-	}
-	sort(g,g+cnt,cmp);
-	printf(&quot;%d\n&quot;, cnt);
-	for(int i=0; i&lt;cnt; i++){
-		if(i) printf(&quot; &quot;);
-		printf(&quot;%d&quot;, g[i]);
 	}
 	return 0;
 }

@@ -30,34 +30,24 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            Grace's blog
+            文章目录
           </p>
-          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
-            
-              
-                <a href="https://github.com/YGYtl" target="_blank" class="mr-4 text-xl text-gray-400 font-light hover:text-gray-900">
-                  <i class="ri-github-line"></i>
-                </a>
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
+          <div class="toc-container hidden lg:block">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#input-specification">Input Specification:</a></li>
+<li><a href="#output-specification">Output Specification:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
           </div>
         </div>
       
@@ -101,33 +91,139 @@
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
-        <h2 class="text-lg text-gray-700 mb-8">
-          <i class="ri-bookmark-line"></i> Markdown
-        </h2>
-        
-  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
-    
-      <a href="https://ygytl.github.io/post/markdown-chang-yong-kuai-jie-jian/" class="feature-image-wrapper bg-gray-100 rounded-lg flex-shrink-0 mr-8 w-full h-56 h-32 md:w-56 md:h-40">
-        <div class="post-feature-image lazy w-full h-56 h-32 md:w-56 md:h-40" data-bg="'https://ygytl.github.io//post-images/markdown-chang-yong-kuai-jie-jian.jpg'">
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
+        <h1 class="text-3xl font-bold lg:mt-16">7-2 Block Reversing (25分)题解</h1>
+        <div class="text-sm text-gray-700 lg:my-8">
+          2020-07-20 / 3 min read
         </div>
-      </a>
-    
-    <div class="content">
-      <a href="https://ygytl.github.io/post/markdown-chang-yong-kuai-jie-jian/">
-        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">Markdown常用快捷键</h2>
-      </a>
-      <div class="post-abstract text-gray-700 font-light my-4">
         
-      </div>
-      <div class="text-gray-400 text-sm font-light">2020-05-24 / 2 min read</div>
-    </div>
-  </section>
+        <div class="post-content yue">
+          <p>7-2 Block Reversing (25分)</p>
+<p>Given a singly linked list <em>L</em>. Let us consider every <em>K</em> nodes as a <strong>block</strong> (if there are less than <em>K</em> nodes at the end of the list, the rest of the nodes are still considered as a block). Your job is to reverse all the blocks in <em>L</em>. For example, given <em>L</em> as 1→2→3→4→5→6→7→8 and <em>K</em> as 3, your output must be 7→8→4→5→6→1→2→3.</p>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first line contains the address of the first node, a positive <em>N</em> (≤105) which is the total number of nodes, and a positive <em>K</em> (≤<em>N</em>) which is the size of a block. The address of a node is a 5-digit nonnegative integer, and NULL is represented by −1.</p>
+<p>Then <em>N</em> lines follow, each describes a node in the format:</p>
+<pre><code>Address Data Next
+</code></pre>
+<p>where <code>Address</code> is the position of the node, <code>Data</code> is an integer, and <code>Next</code> is the position of the next node.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each case, output the resulting ordered linked list. Each node occupies a line, and is printed in the same format as in the input.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">00100 8 3
+71120 7 88666
+00000 4 99999
+00100 1 12309
+68237 6 71120
+33218 3 00000
+99999 5 68237
+88666 8 -1
+12309 2 33218
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">71120 7 88666
+88666 8 00000
+00000 4 99999
+99999 5 68237
+68237 6 00100
+00100 1 12309
+12309 2 33218
+33218 3 -1
+</code></pre>
+<hr>
+<p>题目描述：反转链表</p>
+<p>输入：第一行head、n、k分别表示链表的头结点起始地址，n个结点，每k个结点为一组反转。</p>
+<p>输出：输出反转后的链表。</p>
+</br>
+<p>常规题，先将链表串联起来，算出有多少组，从索引最大的一组开始链接，就能将链表反转了。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int maxn = 1e5+5;
+struct node{
+	int head, num, next;
+}l1[maxn];
+vector&lt;node&gt; v1, v2;
+int main()
+{
+	int head, n, k;
+	node t;
+	scanf(&quot;%d %d %d&quot;, &amp;head, &amp;n, &amp;k);
+	for(int i=0; i&lt;n; i++){
+		scanf(&quot;%d %d %d&quot;, &amp;t.head, &amp;t.num, &amp;t.next);
+		l1[t.head] = t;
+	}
+	while(head!=-1){
+		t = l1[head];
+		v1.push_back(t);
+		head = t.next;
+	}
+	int cnt = v1.size()/k;
+	while(cnt&gt;=0){
+		for(int j=0; j&lt;k&amp;&amp;cnt*k+j&lt;v1.size(); j++){
+			v2.push_back(v1[cnt*k+j]);
+		}
+		cnt--;
+	}
+	for(int i=0; i&lt;v2.size()-1; i++){
+		t = v2[i];
+		printf(&quot;%05d %d %05d\n&quot;, t.head, t.num, v2[i+1].head);
+	}
+	printf(&quot;%05d %d -1\n&quot;, v2[v2.size()-1].head, v2[v2.size()-1].num);
+	return 0;
+}
+</code></pre>
 
-        <div class="pagination-container animated fadeIn">
-  
-  
-</div>
+        </div>
+
+        
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
+            <span class="flex-auto">PAT (Advanced Level) Practice</span>
+          </a>
+        
+
+
+        <div class="flex justify-between py-8">
+          
+
+          
+            <div class="next-post">
+              <a href="https://ygytl.github.io/post/7-1-good-in-c-20-fen-ti-jie/">
+                <h3 class="post-title">
+                  7-1 Good in C (20分)题解
+                  <i class="ri-arrow-right-line"></i>
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '651ee788996886a0c8a2',
+    clientSecret: '53231792a985805dbea714f6d780b970e1d3c139',
+    repo: 'ygytl.github.io',
+    owner: 'YGYtl',
+    admin: ['YGYtl'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
 
       </div>
     </div>
