@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-11T08:28:45.434Z</updated>
+    <updated>2020-07-20T13:39:36.624Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,277 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[7-1 Good in C (20分)题解]]></title>
+        <id>https://ygytl.github.io/post/7-1-good-in-c-20-fen-ti-jie/</id>
+        <link href="https://ygytl.github.io/post/7-1-good-in-c-20-fen-ti-jie/">
+        </link>
+        <updated>2020-07-20T13:39:04.000Z</updated>
+        <content type="html"><![CDATA[<p>7-1 Good in C (20分)</p>
+<p>When your interviewer asks you to write &quot;Hello World&quot; using C, can you do as the following figure shows?</p>
+<figure data-type="image" tabindex="1"><img src="https://images.ptausercontent.com/ba3b8678-061d-4fc6-a87e-ce08e1434410.jpg" alt="HWC.jpg" loading="lazy"></figure>
+<h3 id="input-specification">Input Specification:</h3>
+<p>Each input file contains one test case. For each case, the first part gives the 26 capital English letters A-Z, each in a 7×5 matrix of <code>C</code>'s and <code>.</code>'s. Then a sentence is given in a line, ended by a return. The sentence is formed by several words (no more than 10 continuous capital English letters each), and the words are separated by any characters other than capital English letters.</p>
+<p>It is guaranteed that there is at least one word given.</p>
+<h3 id="output-specification">Output Specification:</h3>
+<p>For each word, print the matrix form of each of its letters in a line, and the letters must be separated by exactly one column of space. There must be no extra space at the beginning or the end of the word.</p>
+<p>Between two adjacent words, there must be a single empty line to separate them. There must be no extra line at the beginning or the end of the output.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">..C..
+.C.C.
+C...C
+CCCCC
+C...C
+C...C
+C...C
+CCCC.
+C...C
+C...C
+CCCC.
+C...C
+C...C
+CCCC.
+.CCC.
+C...C
+C....
+C....
+C....
+C...C
+.CCC.
+CCCC.
+C...C
+C...C
+C...C
+C...C
+C...C
+CCCC.
+CCCCC
+C....
+C....
+CCCC.
+C....
+C....
+CCCCC
+CCCCC
+C....
+C....
+CCCC.
+C....
+C....
+C....
+CCCC.
+C...C
+C....
+C.CCC
+C...C
+C...C
+CCCC.
+C...C
+C...C
+C...C
+CCCCC
+C...C
+C...C
+C...C
+CCCCC
+..C..
+..C..
+..C..
+..C..
+..C..
+CCCCC
+CCCCC
+....C
+....C
+....C
+....C
+C...C
+.CCC.
+C...C
+C..C.
+C.C..
+CC...
+C.C..
+C..C.
+C...C
+C....
+C....
+C....
+C....
+C....
+C....
+CCCCC
+C...C
+C...C
+CC.CC
+C.C.C
+C...C
+C...C
+C...C
+C...C
+C...C
+CC..C
+C.C.C
+C..CC
+C...C
+C...C
+.CCC.
+C...C
+C...C
+C...C
+C...C
+C...C
+.CCC.
+CCCC.
+C...C
+C...C
+CCCC.
+C....
+C....
+C....
+.CCC.
+C...C
+C...C
+C...C
+C.C.C
+C..CC
+.CCC.
+CCCC.
+C...C
+CCCC.
+CC...
+C.C..
+C..C.
+C...C
+.CCC.
+C...C
+C....
+.CCC.
+....C
+C...C
+.CCC.
+CCCCC
+..C..
+..C..
+..C..
+..C..
+..C..
+..C..
+C...C
+C...C
+C...C
+C...C
+C...C
+C...C
+.CCC.
+C...C
+C...C
+C...C
+C...C
+C...C
+.C.C.
+..C..
+C...C
+C...C
+C...C
+C.C.C
+CC.CC
+C...C
+C...C
+C...C
+C...C
+.C.C.
+..C..
+.C.C.
+C...C
+C...C
+C...C
+C...C
+.C.C.
+..C..
+..C..
+..C..
+..C..
+CCCCC
+....C
+...C.
+..C..
+.C...
+C....
+CCCCC
+HELLO~WORLD!
+</code></pre>
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">C...C CCCCC C.... C.... .CCC.
+C...C C.... C.... C.... C...C
+C...C C.... C.... C.... C...C
+CCCCC CCCC. C.... C.... C...C
+C...C C.... C.... C.... C...C
+C...C C.... C.... C.... C...C
+C...C CCCCC CCCCC CCCCC .CCC.
+
+C...C .CCC. CCCC. C.... CCCC.
+C...C C...C C...C C.... C...C
+C...C C...C CCCC. C.... C...C
+C.C.C C...C CC... C.... C...C
+CC.CC C...C C.C.. C.... C...C
+C...C C...C C..C. C.... C...C
+C...C .CCC. C...C CCCCC CCCC.
+</code></pre>
+<hr>
+<p>题目描述：</p>
+<p>输入：前面26*7行给出A-Z的字母输出格式，每7行为一个字母；最后一行是需要按格式输出的字符串。单词由不是A~Z的字符分隔。</p>
+<p>输出：每个单词占7行，单词的字母中间用一个空格隔开。输出严格按照规定，最后一行不需输出空行。</p>
+</br>
+<p>解题思路：先将每个字母的输出格式存入字符数组，以便查找。在使用getline()接收需要分割的字符串----这点严重警告，否则测试点1、2、3会显示错误，如果不用getline接收，当遇到空格字符串就不能完整接收。需要算好在哪里空行！不能多不能少，太严格了。。</p>
+<hr>
+<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+string str[200];
+string s;
+int main()
+{
+	for(int i=0; i&lt;182; i++) cin &gt;&gt; str[i];
+	getchar();
+	getline(cin,s);
+	string t = &quot;&quot;;
+	bool flag = false;
+	for(int i=0; i&lt;s.length(); i++){
+		if(s[i]&gt;'Z'||s[i]&lt;'A'){
+			if(t.length()&gt;0){
+				if(flag==true) cout &lt;&lt; endl;
+				for(int o2=0; o2&lt;7; o2++){
+					for(int o1=0; o1&lt;t.length(); o1++){
+						int k = t[o1]-'A';
+						if(o1) cout &lt;&lt; &quot; &quot;;
+						cout &lt;&lt; str[k*7+o2];
+					}
+					cout &lt;&lt; endl;
+				}
+				t = &quot;&quot;;
+				flag = true;
+			}
+		}
+		else{
+			t += s[i];
+		}
+	}
+	if(t.length()!=0){
+		if(flag==true) cout &lt;&lt; endl;
+		for(int o2=0; o2&lt;7; o2++){
+			for(int o1=0; o1&lt;t.length(); o1++){
+				int k = t[o1]-'A';
+				if(o1) cout &lt;&lt; &quot; &quot;;
+				cout &lt;&lt; str[k*7+o2];
+			}
+			cout &lt;&lt; endl;
+		}
+	}
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1135 Is It A Red-Black Tree (30分)题解]]></title>
         <id>https://ygytl.github.io/post/1135-is-it-a-red-black-tree-30-fen-ti-jie/</id>
@@ -1141,122 +1412,6 @@ int main()
 		if(i) printf(&quot; &quot;);
 		printf(&quot;%d&quot;, g[i]);
 	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1155 Heap Paths (30分)题解]]></title>
-        <id>https://ygytl.github.io/post/1155-heap-paths-30-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1155-heap-paths-30-fen-ti-jie/">
-        </link>
-        <updated>2020-07-01T14:31:35.000Z</updated>
-        <content type="html"><![CDATA[<p>1155 Heap Paths (30分)</p>
-<p>In computer science, a <strong>heap</strong> is a specialized tree-based data structure that satisfies the heap property: if P is a parent node of C, then the key (the value) of P is either greater than or equal to (in a max heap) or less than or equal to (in a min heap) the key of C. A common implementation of a heap is the binary heap, in which the tree is a complete binary tree. (Quoted from Wikipedia at https://en.wikipedia.org/wiki/Heap_(data_structure))</p>
-<p>One thing for sure is that all the keys along any path from the root to a leaf in a max/min heap must be in non-increasing/non-decreasing order.</p>
-<p>Your job is to check every path in a given complete binary tree, in order to tell if it is a heap or not.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em> (1&lt;<em>N</em>≤1,000), the number of keys in the tree. Then the next line contains <em>N</em> distinct integer keys (all in the range of <strong>int</strong>), which gives the level order traversal sequence of a complete binary tree.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each given tree, first print all the paths from the root to the leaves. Each path occupies a line, with all the numbers separated by a space, and no extra space at the beginning or the end of the line. The paths must be printed in the following order: for each node in the tree, all the paths in its right subtree must be printed before those in its left subtree.</p>
-<p>Finally print in a line <code>Max Heap</code> if it is a max heap, or <code>Min Heap</code> for a min heap, or <code>Not Heap</code> if it is not a heap at all.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">8
-98 72 86 60 65 12 23 50
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">98 86 23
-98 86 12
-98 72 65
-98 72 60 50
-Max Heap
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">8
-8 38 25 58 52 82 70 60
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">8 25 70
-8 25 82
-8 38 52
-8 38 58 60
-Min Heap
-</code></pre>
-<h3 id="sample-input-3">Sample Input 3:</h3>
-<pre><code class="language-in">8
-10 28 15 12 34 9 8 56
-</code></pre>
-<h3 id="sample-output-3">Sample Output 3:</h3>
-<pre><code class="language-out">10 15 8
-10 15 9
-10 28 34
-10 28 12 56
-Not Heap
-</code></pre>
-<hr>
-<p>题目描述：先理解堆的定义，堆分为最大堆，最小堆。题目给出一组数，有可能是堆或不是。如果是堆，则表示树的层次序列值。堆的构建是在满二叉树的基础上的，所以比较容易判断是最大堆还是最小堆。</p>
-<p>最大堆：root结点的值大于其左右子结点的值。</p>
-<p>最小堆：root结点的值小于其左右子结点的值。</p>
-</br>
-<p>解题思路：用数组存题目给出的树，一般舍去索引0，从1开始存值，当root索引为index时，左节点索引为index*2，右节点索引为index*2+1。判断v[index]的值是否都大于v[index*2]、v[index*2+1]，如果是就是最大堆；判断v[index]的值是否都小于v[index*2]、v[index*2+1]，如果是则为最小堆。如果都不是最大堆、最小堆，输出Not Heap。</p>
-<p>并且题目要求输出根节点到叶子结点的路径，输出顺序是右大于左。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n;
-vector&lt;int&gt; v, tv, ttv;
-vector&lt; vector&lt;int&gt; &gt; ans;
-int judge(){
-	int f1=true, f2=true, l, r;
-	for(int i=1; i&lt;=n; i++){
-		l = i*2; r = i*2+1;
-		if(l&lt;=n){
-			if(f1&amp;&amp;v[i]&lt;v[l]) f1 = false;
-			if(f2&amp;&amp;v[i]&gt;v[l]) f2 = false;
-		}
-		if(r&lt;=n){
-			if(f1&amp;&amp;v[i]&lt;v[r]) f1 = false;
-			if(f2&amp;&amp;v[i]&gt;v[r]) f2 = false;
-		}
-	}
-	if(f1==true&amp;&amp;f2==false) return 1;
-	if(f2==true&amp;&amp;f1==false) return -1;
-	return 0;
-}
-void dfs(int index){
-	int l=index*2, r=index*2+1;
-	tv.push_back(v[index]);
-	if(l&gt;n&amp;&amp;r&gt;n){
-		ans.push_back(tv);
-		return ;
-	}
-	if(r&lt;=n){
-		dfs(r);
-		tv.pop_back();
-	}
-	if(l&lt;=n){
-		dfs(l);
-		tv.pop_back();
-	}
-}
-int main()
-{
-	scanf(&quot;%d&quot;, &amp;n);
-	v.resize(n+1);
-	for(int i=1; i&lt;=n; i++) scanf(&quot;%d&quot;, &amp;v[i]);
-	int flag = judge();
-	dfs(1);
-	for(int i=0; i&lt;ans.size(); i++){
-		for(int j=0; j&lt;ans[i].size(); j++){
-			if(j) printf(&quot; &quot;);
-			printf(&quot;%d&quot;, ans[i][j]);
-		}
-		printf(&quot;\n&quot;);
-	}
-	if(flag==0) printf(&quot;Not Heap\n&quot;);
-	else if(flag==1) printf(&quot;Max Heap\n&quot;);
-	else if(flag==-1) printf(&quot;Min Heap\n&quot;);
 	return 0;
 }
 </code></pre>

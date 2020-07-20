@@ -40,10 +40,8 @@
 <ul>
 <li><a href="#input-specification">Input Specification:</a></li>
 <li><a href="#output-specification">Output Specification:</a></li>
-<li><a href="#sample-input-1">Sample Input 1:</a></li>
-<li><a href="#sample-output-1">Sample Output 1:</a></li>
-<li><a href="#sample-input-2">Sample Input 2:</a></li>
-<li><a href="#sample-output-2">Sample Output 2:</a></li>
+<li><a href="#sample-input">Sample Input:</a></li>
+<li><a href="#sample-output">Sample Output:</a></li>
 </ul>
 </li>
 </ul>
@@ -94,141 +92,272 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1123 Is It a Complete AVL Tree (30分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">7-1 Good in C (20分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-07-07 / 5 min read
+          2020-07-20 / 6 min read
         </div>
         
         <div class="post-content yue">
-          <p>1123 Is It a Complete AVL Tree (30分)</p>
-<p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.</p>
-<figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1594132084359.JPG" alt="" loading="lazy"></figure>
-<p>Now given a sequence of insertions, you are supposed to output the level-order traversal sequence of the resulting AVL tree, and to tell if it is a complete binary tree.</p>
+          <p>7-1 Good in C (20分)</p>
+<p>When your interviewer asks you to write &quot;Hello World&quot; using C, can you do as the following figure shows?</p>
+<figure data-type="image" tabindex="1"><img src="https://images.ptausercontent.com/ba3b8678-061d-4fc6-a87e-ce08e1434410.jpg" alt="HWC.jpg" loading="lazy"></figure>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains a positive integer N (≤ 20). Then N distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
+<p>Each input file contains one test case. For each case, the first part gives the 26 capital English letters A-Z, each in a 7×5 matrix of <code>C</code>'s and <code>.</code>'s. Then a sentence is given in a line, ended by a return. The sentence is formed by several words (no more than 10 continuous capital English letters each), and the words are separated by any characters other than capital English letters.</p>
+<p>It is guaranteed that there is at least one word given.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, insert the keys one by one into an initially empty AVL tree. Then first print in a line the level-order traversal sequence of the resulting AVL tree. All the numbers in a line must be separated by a space, and there must be no extra space at the end of the line. Then in the next line, print <code>YES</code> if the tree is complete, or <code>NO</code> if not.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">5
-88 70 61 63 65
+<p>For each word, print the matrix form of each of its letters in a line, and the letters must be separated by exactly one column of space. There must be no extra space at the beginning or the end of the word.</p>
+<p>Between two adjacent words, there must be a single empty line to separate them. There must be no extra line at the beginning or the end of the output.</p>
+<h3 id="sample-input">Sample Input:</h3>
+<pre><code class="language-in">..C..
+.C.C.
+C...C
+CCCCC
+C...C
+C...C
+C...C
+CCCC.
+C...C
+C...C
+CCCC.
+C...C
+C...C
+CCCC.
+.CCC.
+C...C
+C....
+C....
+C....
+C...C
+.CCC.
+CCCC.
+C...C
+C...C
+C...C
+C...C
+C...C
+CCCC.
+CCCCC
+C....
+C....
+CCCC.
+C....
+C....
+CCCCC
+CCCCC
+C....
+C....
+CCCC.
+C....
+C....
+C....
+CCCC.
+C...C
+C....
+C.CCC
+C...C
+C...C
+CCCC.
+C...C
+C...C
+C...C
+CCCCC
+C...C
+C...C
+C...C
+CCCCC
+..C..
+..C..
+..C..
+..C..
+..C..
+CCCCC
+CCCCC
+....C
+....C
+....C
+....C
+C...C
+.CCC.
+C...C
+C..C.
+C.C..
+CC...
+C.C..
+C..C.
+C...C
+C....
+C....
+C....
+C....
+C....
+C....
+CCCCC
+C...C
+C...C
+CC.CC
+C.C.C
+C...C
+C...C
+C...C
+C...C
+C...C
+CC..C
+C.C.C
+C..CC
+C...C
+C...C
+.CCC.
+C...C
+C...C
+C...C
+C...C
+C...C
+.CCC.
+CCCC.
+C...C
+C...C
+CCCC.
+C....
+C....
+C....
+.CCC.
+C...C
+C...C
+C...C
+C.C.C
+C..CC
+.CCC.
+CCCC.
+C...C
+CCCC.
+CC...
+C.C..
+C..C.
+C...C
+.CCC.
+C...C
+C....
+.CCC.
+....C
+C...C
+.CCC.
+CCCCC
+..C..
+..C..
+..C..
+..C..
+..C..
+..C..
+C...C
+C...C
+C...C
+C...C
+C...C
+C...C
+.CCC.
+C...C
+C...C
+C...C
+C...C
+C...C
+.C.C.
+..C..
+C...C
+C...C
+C...C
+C.C.C
+CC.CC
+C...C
+C...C
+C...C
+C...C
+.C.C.
+..C..
+.C.C.
+C...C
+C...C
+C...C
+C...C
+.C.C.
+..C..
+..C..
+..C..
+..C..
+CCCCC
+....C
+...C.
+..C..
+.C...
+C....
+CCCCC
+HELLO~WORLD!
 </code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">70 63 88 61 65
-YES
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">8
-88 70 61 96 120 90 65 68
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">88 65 96 61 70 90 120 68
-NO
+<h3 id="sample-output">Sample Output:</h3>
+<pre><code class="language-out">C...C CCCCC C.... C.... .CCC.
+C...C C.... C.... C.... C...C
+C...C C.... C.... C.... C...C
+CCCCC CCCC. C.... C.... C...C
+C...C C.... C.... C.... C...C
+C...C C.... C.... C.... C...C
+C...C CCCCC CCCCC CCCCC .CCC.
+
+C...C .CCC. CCCC. C.... CCCC.
+C...C C...C C...C C.... C...C
+C...C C...C CCCC. C.... C...C
+C.C.C C...C CC... C.... C...C
+CC.CC C...C C.C.. C.... C...C
+C...C C...C C..C. C.... C...C
+C...C .CCC. C...C CCCCC CCCC.
 </code></pre>
 <hr>
-<p>题目描述：完全平衡二叉树。具体参考1066的题解</p>
-<p>该题需要建树，判断是否能形成完全平衡二叉树，是输出YES，否输出NO。还要输出树的层序遍历。</p>
+<p>题目描述：</p>
+<p>输入：前面26*7行给出A-Z的字母输出格式，每7行为一个字母；最后一行是需要按格式输出的字符串。单词由不是A~Z的字符分隔。</p>
+<p>输出：每个单词占7行，单词的字母中间用一个空格隔开。输出严格按照规定，最后一行不需输出空行。</p>
 </br>
-<p>解题思路：建树，完成左转、右转、左右转、右左转的操作、求结点的高度等，最后利用BFS得到层序遍历。</p>
+<p>解题思路：先将每个字母的输出格式存入字符数组，以便查找。在使用getline()接收需要分割的字符串----这点严重警告，否则测试点1、2、3会显示错误，如果不用getline接收，当遇到空格字符串就不能完整接收。需要算好在哪里空行！不能多不能少，太严格了。。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
 using namespace std;
-int n, k;
-vector&lt;int&gt; level;
-struct node{
-	int num;
-	node *l, *r;
-	node(){
-		l = r = NULL;
-	}
-};
-node *LeftRoute(node *root){
-	node *t;
-	t = root-&gt;r;
-	root-&gt;r = t-&gt;l;
-	t-&gt;l = root;
-	return t;
-}
-node *RightRoute(node *root){
-	node *t;
-	t = root-&gt;l;
-	root-&gt;l = t-&gt;r;
-	t-&gt;r = root;
-	return t;
-}
-node *LeftRightRoute(node *root){
-	root-&gt;l = LeftRoute(root-&gt;l);
-	root = RightRoute(root);
-	return root;
-}
-node *RightLeftRoute(node *root){
-	root-&gt;r = RightRoute(root-&gt;r);
-	root = LeftRoute(root);
-	return root;
-}
-int height(node *root){
-	if(root==NULL) return 1;
-	return max(height(root-&gt;l),height(root-&gt;r))+1;
-}
-node *Insert(node *root, int k){
-	if(root==NULL){
-		root = new node();
-		root-&gt;num = k;
-		root-&gt;l = root-&gt;r = NULL;
-	}
-	else if(k&gt;=root-&gt;num){
-		root-&gt;r = Insert(root-&gt;r,k);
-		if(abs(height(root-&gt;r)-height(root-&gt;l))&gt;=2){
-			root = k&gt;=root-&gt;r-&gt;num ? LeftRoute(root) : RightLeftRoute(root);
-		}
-	}
-	else{
-		root-&gt;l = Insert(root-&gt;l,k);
-		if(abs(height(root-&gt;l)-height(root-&gt;r))&gt;=2){
-			root = k&lt;=root-&gt;l-&gt;num ? RightRoute(root) : LeftRightRoute(root);
-		}
-	}
-	return root;
-}
-void bfs(node *root){
-	pair&lt;node *, int&gt; t, tt;
-	queue&lt;pair&lt;node *, int&gt; &gt; q;
-	t.first = root; t.second = 1;
-	q.push(t);
-	bool flag = true;
-	int cnt = 1;
-	while(!q.empty()){
-		t = q.front(); q.pop();
-		if(cnt!=t.second) flag = false;
-		cnt++;
-		level.push_back(t.first-&gt;num);
-		if(t.first-&gt;l!=NULL){
-			tt.first = t.first-&gt;l;
-			tt.second = t.second*2;
-			q.push(tt);
-		}
-		if(t.first-&gt;r!=NULL){
-			tt.first = t.first-&gt;r;
-			tt.second = t.second*2+1;
-			q.push(tt);
-		} 
-	}
-	for(int i=0; i&lt;level.size(); i++){
-		if(i) printf(&quot; &quot;);
-		printf(&quot;%d&quot;, level[i]);
-	}
-	printf(&quot;\n&quot;);
-	if(flag) printf(&quot;YES\n&quot;);
-	else printf(&quot;NO\n&quot;);
-}
+string str[200];
+string s;
 int main()
 {
-	node *tree = NULL;
-	scanf(&quot;%d&quot;, &amp;n);
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;k);
-		tree = Insert(tree,k);
+	for(int i=0; i&lt;182; i++) cin &gt;&gt; str[i];
+	getchar();
+	getline(cin,s);
+	string t = &quot;&quot;;
+	bool flag = false;
+	for(int i=0; i&lt;s.length(); i++){
+		if(s[i]&gt;'Z'||s[i]&lt;'A'){
+			if(t.length()&gt;0){
+				if(flag==true) cout &lt;&lt; endl;
+				for(int o2=0; o2&lt;7; o2++){
+					for(int o1=0; o1&lt;t.length(); o1++){
+						int k = t[o1]-'A';
+						if(o1) cout &lt;&lt; &quot; &quot;;
+						cout &lt;&lt; str[k*7+o2];
+					}
+					cout &lt;&lt; endl;
+				}
+				t = &quot;&quot;;
+				flag = true;
+			}
+		}
+		else{
+			t += s[i];
+		}
 	}
-	bfs(tree);
+	if(t.length()!=0){
+		if(flag==true) cout &lt;&lt; endl;
+		for(int o2=0; o2&lt;7; o2++){
+			for(int o1=0; o1&lt;t.length(); o1++){
+				int k = t[o1]-'A';
+				if(o1) cout &lt;&lt; &quot; &quot;;
+				cout &lt;&lt; str[k*7+o2];
+			}
+			cout &lt;&lt; endl;
+		}
+	}
 	return 0;
 }
 </code></pre>
@@ -244,21 +373,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1127-zigzagging-on-a-tree-30-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1127 ZigZagging on a Tree (30分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1119-pre-and-post-order-traversals-30-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/1135-is-it-a-red-black-tree-30-fen-ti-jie/">
                 <h3 class="post-title">
-                  1119 Pre- and Post-order Traversals (30分)题解
+                  1135 Is It A Red-Black Tree (30分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>

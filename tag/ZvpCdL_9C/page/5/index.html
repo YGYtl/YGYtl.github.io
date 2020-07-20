@@ -30,24 +30,34 @@
       
         <div class="animated fadeInLeft" style="animation-delay: 0.4s">
           <p class="my-4 text-gray-600 font-light hidden lg:block">
-            文章目录
+            Grace's blog
           </p>
-          <div class="toc-container hidden lg:block">
-            <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#input-specification">Input Specification:</a></li>
-<li><a href="#output-specification">Output Specification:</a></li>
-<li><a href="#sample-input">Sample Input:</a></li>
-<li><a href="#sample-output">Sample Output:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+          <div class="animated fadeInLeft social-container hidden lg:block" style="animation-delay: 0.6s">
+            
+              
+                <a href="https://github.com/YGYtl" target="_blank" class="mr-4 text-xl text-gray-400 font-light hover:text-gray-900">
+                  <i class="ri-github-line"></i>
+                </a>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
           </div>
         </div>
       
@@ -91,119 +101,30 @@
 </div>
 <div class="mask" onclick="closeMenu()">
 </div>
-      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1084 Broken Keyboard (20分)题解</h1>
-        <div class="text-sm text-gray-700 lg:my-8">
-          2020-06-07 / 3 min read
-        </div>
+      <div class="content-wrapper py-32 lg:p-8 lg:w-3/4">
+        <h2 class="text-lg text-gray-700 mb-8">
+          <i class="ri-bookmark-line"></i> PAT (Advanced Level) Practice
+        </h2>
         
-        <div class="post-content yue">
-          <p>1084 Broken Keyboard (20分)</p>
-<p>On a broken keyboard, some of the keys are worn out. So when you type some sentences, the characters corresponding to those keys will not appear on screen.</p>
-<p>Now given a string that you are supposed to type, and the string that you actually type out, please list those keys which are for sure worn out.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the 1st line contains the original string, and the 2nd line contains the typed-out string. Each string contains no more than 80 characters which are either English letters [A-Z] (case insensitive), digital numbers [0-9], or <code>_</code> (representing the space). It is guaranteed that both strings are non-empty.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, print in one line the keys that are worn out, in the order of being detected. The English letters must be capitalized. Each worn out key must be printed once only. It is guaranteed that there is at least one worn out key.</p>
-<h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">7_This_is_a_test
-_hs_s_a_es
-</code></pre>
-<h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">7TI
-</code></pre>
-<hr>
-<p>题目描述：在一个坏掉的键盘上，有些键是损坏的，我们通过输入一串字符串，来找到那些坏掉的键。</p>
-</br>
-<p>输入：第一行一串字符串，若键盘没有坏，他应该像第一行的字符串这样完整的显示在电脑屏幕上。第二行也是字符串，他是坏掉的键盘输入后，显示在电脑上的效果。</p>
-<p>输出：坏掉的键值，若是拼音，则输出他的大写形式。</p>
-</br>
-<p>解题思路：两个字符串同时从索引0开始扫描，对比一下两个字符串，结果就出来了。哦，因为题目要求输出字母大写的形式，若字符串中出现小写字母，要转换处理一下再输出。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int main()
-{
-	string s1, s2;
-	getline(cin,s1);
-	getline(cin,s2);
-	int c = 0;
-	map&lt;char,bool&gt; p;
-	for(int i=0; i&lt;s1.length(); i++){
-		char ch1=s1[i], ch2=s2[c];
-		if(s1[i]&gt;='a'&amp;&amp;s1[i]&lt;='z') ch1 = s1[i]-'a'+'A';
-		if(s2[c]&gt;='a'&amp;&amp;s2[c]&lt;='z') ch2 = s2[c]-'a'+'A'; 
-		if(ch1!=ch2&amp;&amp;p[ch1]==false){
-			cout &lt;&lt; ch1;
-			p[ch1] = true;
-		}
-		else if(ch1==ch2) c++;
-	}
-    cout &lt;&lt; endl;
-	return 0;
-}
-</code></pre>
-
-        </div>
-
+  <section class="post-item md:flex pb-12 animated fadeIn" :style="{ 'animation-delay': `${0 * 0.2}s` }">
+    
+    <div class="content">
+      <a href="https://ygytl.github.io/post/1063-set-similarity-25-fen-ti-jie/">
+        <h2 class="post-title text-xl font-extrabold mt-5 md:mt-0">1063 Set Similarity (25分)题解</h2>
+      </a>
+      <div class="post-abstract text-gray-700 font-light my-4">
         
-          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
-            <span class="flex-auto">PAT (Advanced Level) Practice</span>
-          </a>
-        
+      </div>
+      <div class="text-gray-400 text-sm font-light">2020-05-25 / 3 min read</div>
+    </div>
+  </section>
 
-
-        <div class="flex justify-between py-8">
-          
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1085-perfect-sequence-25-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1085 Perfect Sequence (25分)题解
-                </h3>
-              </a>
-            </div>
-          
-
-          
-            <div class="next-post">
-              <a href="https://ygytl.github.io/post/1083-list-grades-25-fen-ti-jie/">
-                <h3 class="post-title">
-                  1083 List Grades (25分)题解
-                  <i class="ri-arrow-right-line"></i>
-                </h3>
-              </a>
-            </div>
-          
-        </div>
-
-        
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: '651ee788996886a0c8a2',
-    clientSecret: '53231792a985805dbea714f6d780b970e1d3c139',
-    repo: 'ygytl.github.io',
-    owner: 'YGYtl',
-    admin: ['YGYtl'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-          
-
-          
-        
+        <div class="pagination-container animated fadeIn">
+  
+    <a href="https://ygytl.github.io/tag/ZvpCdL_9C/page/4/" class="page-btn"><i class="ri-arrow-left-line"></i> 上一页</a>
+  
+  
+</div>
 
       </div>
     </div>
