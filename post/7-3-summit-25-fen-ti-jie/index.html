@@ -92,105 +92,135 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1115 Counting Nodes in a BST (30分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">7-3 Summit (25分)题解</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-07-05 / 4 min read
+          2020-07-20 / 6 min read
         </div>
         
         <div class="post-content yue">
-          <p>1115 Counting Nodes in a BST (30分)</p>
-<p>A Binary Search Tree (BST) is recursively defined as a binary tree which has the following properties:</p>
-<ul>
-<li>The left subtree of a node contains only nodes with keys less than or equal to the node's key.</li>
-<li>The right subtree of a node contains only nodes with keys greater than the node's key.</li>
-<li>Both the left and right subtrees must also be binary search trees.</li>
-</ul>
-<p>Insert a sequence of numbers into an initially empty binary search tree. Then you are supposed to count the total number of nodes in the lowest 2 levels of the resulting tree.</p>
+          <p>7-3 Summit (25分)</p>
+<p>A <strong>summit</strong> (峰会) is a meeting of heads of state or government. Arranging the rest areas for the summit is not a simple job. The ideal arrangement of one area is to invite those heads so that everyone is a direct friend of everyone.</p>
+<p>Now given a set of tentative arrangements, your job is to tell the organizers whether or not each area is all set.</p>
 <h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em> (≤1000) which is the size of the input sequence. Then given in the next line are the <em>N</em> integers in [−1000,1000] which are supposed to be inserted into an initially empty binary search tree.</p>
+<p>Each input file contains one test case. For each case, the first line gives two positive integers N (≤ 200), the number of heads in the summit, and M, the number of friendship relations. Then M lines follow, each gives a pair of indices of the heads who are friends to each other. The heads are indexed from 1 to N.</p>
+<p>Then there is another positive integer K (≤ 100), and K lines of tentative arrangement of rest areas follow, each first gives a positive number L (≤ N), then followed by a sequence of L distinct indices of the heads. All the numbers in a line are separated by a space.</p>
 <h3 id="output-specification">Output Specification:</h3>
-<p>For each case, print in one line the numbers of nodes in the lowest 2 levels of the resulting tree in the format:</p>
-<pre><code>n1 + n2 = n
-</code></pre>
-<p>where <code>n1</code> is the number of nodes in the lowest level, <code>n2</code> is that of the level above, and <code>n</code> is the sum.</p>
+<p>For each of the K areas, print in a line your advice in the following format:</p>
+<ul>
+<li>if in this area everyone is a direct friend of everyone, and no friend is missing (that is, no one else is a direct friend of everyone in this area), print <code>Area X is OK.</code>.</li>
+<li>if in this area everyone is a direct friend of everyone, yet there are some other heads who may also be invited without breaking the ideal arrangement, print <code>Area X may invite more people, such as H.</code> where <code>H</code> is the smallest index of the head who may be invited.</li>
+<li>if in this area the arrangement is not an ideal one, then print <code>Area X needs help.</code> so the host can provide some special service to help the heads get to know each other.</li>
+</ul>
+<p>Here <code>X</code> is the index of an area, starting from 1 to <code>K</code>.</p>
 <h3 id="sample-input">Sample Input:</h3>
-<pre><code class="language-in">9
-25 30 42 16 20 20 35 -5 28
+<pre><code class="language-in">8 10
+5 6
+7 8
+6 4
+3 6
+4 5
+2 3
+8 2
+2 7
+5 3
+3 4
+6
+4 5 4 3 6
+3 2 8 7
+2 2 3
+1 1
+2 4 6
+3 3 2 1
 </code></pre>
 <h3 id="sample-output">Sample Output:</h3>
-<pre><code class="language-out">2 + 4 = 6
+<pre><code class="language-out">Area 1 is OK.
+Area 2 is OK.
+Area 3 is OK.
+Area 4 is OK.
+Area 5 may invite more people, such as 3.
+Area 6 needs help.
 </code></pre>
 <hr>
-<p>题目描述：二叉搜索树的特点有：</p>
-<p>1）左子结点的值小于或等于根节点的值</p>
-<p>2）右子结点的值大于根节点的值</p>
-<p>3）所有左子树和右子树都是一个二叉搜索树</p>
-<p>现在给出一组数，插入二叉搜索树中，求倒数第一层、倒数第二层的结点数，n1和n2，最后输出n1+n2。</p>
+<p>题目描述：安排峰会的休息地是一个不简单的活，每个安排的休息地中，需要所有的人都彼此认识。</p>
+<p>输入：第一行n，m分别表示有n个人参加峰会，m对好友关系。接下来m行，分别表示这两个人是好友关系。</p>
+<p>接下来有一个k值，表示需要查询的休息地个数。往下的k行，第一个值表示该休息地有L个人，接着同一行有L个数。</p>
+<p>输出：</p>
+<p>1)如果查询的休息地中，有任意两个人不是相互认识的，则输出格式为Area X needs help.，其中X表示第几次查询的编号；</p>
+<p>2)如果查询的休息地中，任意两个人都相互认识，并且能够再找出一个人，这人加入进来后，彼此仍旧相互认识，则输出Area X may invite more people, such as other-id.其中X表示第几次查询的编号;若这样的人有多个，输出编号最小一个即可；</p>
+<p>3)如果查询的休息地中，任意两个人都相互认识，并且无法再加入其他人。则输出Area X is OK.，其中X表示第几次查询的编号。</p>
 </br>
-<p>解题思路：利用结构体建一棵二叉搜索树，再利用bfs将树的每一层结点分别存入vector数组中，很快就能得到结果了。写程序要有意识的将程序分块，不能将所有代码都写在主程序。</p>
+<p>解题思路：不需要存图，但需要保存好友关系，方便查询。</p>
 <hr>
 <pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
+#include&lt;map&gt;
 using namespace std;
-int n, k;
-const int maxn = 1e4+5;
-vector&lt;int&gt; v[maxn];
-struct node{
-	int num;
-	node *l, *r;
-	node(){
-		l = r = NULL;
-	}
-};
-node* build(node *tree, int x){
-	if(tree==NULL){
-		tree = new node();
-		tree-&gt;num = x;
-		tree-&gt;l = tree-&gt;r = NULL;
-	}
-	else if(tree-&gt;num&lt;x){
-		tree-&gt;r = build(tree-&gt;r,x);
-	}
-	else tree-&gt;l = build(tree-&gt;l,x);
-	return tree;
-}
-
-void bfs(node *tree){
-	int cnt = 0;
-	queue&lt;pair&lt;node*,int&gt; &gt; q;
-	pair&lt;node*,int&gt; t, tt;
-	t.first = tree;
-	t.second = 0;
-	q.push(t);
-	while(!q.empty()){
-		t = q.front(); q.pop();
-		cnt = t.second;
-		v[t.second].push_back(t.first-&gt;num);
-		if(t.first-&gt;l!=NULL){
-			tt.first = t.first-&gt;l;
-			tt.second = t.second+1;
-			q.push(tt);
-		}
-		if(t.first-&gt;r!=NULL){
-			tt.first = t.first-&gt;r;
-			tt.second = t.second+1;
-			q.push(tt);
+#define ll long long
+int n, m;
+vector&lt;int&gt; v;
+unordered_map&lt;int,unordered_map&lt;int,int&gt; &gt; p;
+void solve(int index)
+{
+	bool vis[400];
+	memset(vis,false,sizeof(vis));
+	int l = v.size();
+	bool f1 = true;
+	for(int i=0; i&lt;l&amp;&amp;f1; i++){
+		vis[i] = true;
+		for(int j=i+1; j&lt;l; j++){
+			if(p[v[i]][v[j]]==0){
+				f1 = false;
+				break;
+			}
 		}
 	}
-	int n1 = v[cnt].size(), n2 = v[cnt-1].size();
-	printf(&quot;%d + %d = %d\n&quot;, n1, n2, n1+n2);
+	if(f1==false){
+		printf(&quot;Area %d needs help.\n&quot;, index);
+		return ;
+	}
+	int ans;
+	for(int i=1; i&lt;=n&amp;&amp;f1; i++){
+		if(vis[i]==false){
+			f1 = false;
+			for(int j=0; j&lt;l; j++){
+				if(p[i][v[j]]==0){
+					f1 = true;
+					break;
+				}
+			}
+			if(f1==false){
+				ans = i;
+			}
+		}
+	}
+	if(f1==false){
+		printf(&quot;Area %d may invite more people, such as %d.\n&quot;, index, ans);
+	}
+	else{
+		printf(&quot;Area %d is OK.\n&quot;, index);
+	}
 }
-
 int main()
 {
-	node *tree = NULL;
-	scanf(&quot;%d&quot;, &amp;n);
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;k);
-		tree = build(tree,k);
+	int a, b;
+	scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+	for(int i=0; i&lt;m; i++){
+		scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
+		p[a][b] = p[b][a] = 1;
 	}
-	bfs(tree);
+	int k;
+	scanf(&quot;%d&quot;, &amp;k);
+	for(int i=0; i&lt;k; i++){
+		scanf(&quot;%d&quot;, &amp;m);
+		for(int j=0; j&lt;m; j++){
+			scanf(&quot;%d&quot;, &amp;a);
+			v.push_back(a);
+		}
+		solve(i+1);
+		v.clear();
+	}
 	return 0;
 }
+
 </code></pre>
 
         </div>
@@ -204,21 +234,12 @@ int main()
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1119-pre-and-post-order-traversals-30-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1119 Pre- and Post-order Traversals (30分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1111-online-map-30-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/7-2-block-reversing-25-fen-ti-jie/">
                 <h3 class="post-title">
-                  1111 Online Map (30分)题解
+                  7-2 Block Reversing (25分)题解
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
