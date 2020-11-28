@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-07-20T14:19:07.839Z</updated>
+    <updated>2020-11-28T18:40:31.128Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[Mybatis]]></title>
+        <id>https://ygytl.github.io/post/mybatis/</id>
+        <link href="https://ygytl.github.io/post/mybatis/">
+        </link>
+        <updated>2020-11-28T18:28:16.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1606588816653.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[PAT（甲级）2019年冬仿真卷 7-4 Cartesian Tree (30分)题解]]></title>
         <id>https://ygytl.github.io/post/7-4-cartesian-tree-30-fen-ti-jie/</id>
@@ -1221,124 +1230,6 @@ int main()
 		tree = Insert(tree,k);
 	}
 	bfs(tree);
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1119 Pre- and Post-order Traversals (30分)题解]]></title>
-        <id>https://ygytl.github.io/post/1119-pre-and-post-order-traversals-30-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1119-pre-and-post-order-traversals-30-fen-ti-jie/">
-        </link>
-        <updated>2020-07-06T08:31:34.000Z</updated>
-        <content type="html"><![CDATA[<p>1119 Pre- and Post-order Traversals (30分)</p>
-<p>Suppose that all the keys in a binary tree are distinct positive integers. A unique binary tree can be determined by a given pair of postorder and inorder traversal sequences, or preorder and inorder traversal sequences. However, if only the postorder and preorder traversal sequences are given, the corresponding tree may no longer be unique.</p>
-<p>Now given a pair of postorder and preorder traversal sequences, you are supposed to output the corresponding inorder traversal sequence of the tree. If the tree is not unique, simply output any one of them.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line gives a positive integer N (≤ 30), the total number of nodes in the binary tree. The second line gives the preorder sequence and the third line gives the postorder sequence. All the numbers in a line are separated by a space.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, first printf in a line <code>Yes</code> if the tree is unique, or <code>No</code> if not. Then print in the next line the inorder traversal sequence of the corresponding binary tree. If the solution is not unique, any answer would do. It is guaranteed that at least one solution exists. All the numbers in a line must be separated by exactly one space, and there must be no extra space at the end of the line.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">7
-1 2 3 4 6 7 5
-2 6 7 4 5 3 1
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">Yes
-2 1 6 4 7 3 5
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">4
-1 2 3 4
-2 4 3 1
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">No
-2 1 3 4
-</code></pre>
-<hr>
-<p>题目描述：提供一个二叉树的所有节点值(值为正整数)。唯一的二叉树可以由后序遍历和中序遍历得到，也可以由先序遍历和中序遍历得到。但是，如果只给出先序遍历和后序遍历，得到的二叉树有可能是不唯一的，则他的中序遍历也有可能不唯一。题目给出一对先序遍历和后序遍历数组，求出是否能得到唯一的二叉树，可以则输出Yes，否则输出No。最后一行输出中序遍历，若有多个，输出一个即可。</p>
-</br>
-<p>解题思路：设置一个flag标志，判断这个二叉树是否唯一。</p>
-<p>用样例分析一下：</p>
-<table>
-<thead>
-<tr>
-<th>index</th>
-<th>0</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>pre</td>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>6</td>
-<td>7</td>
-<td>5</td>
-</tr>
-<tr>
-<td>post</td>
-<td>2</td>
-<td>6</td>
-<td>7</td>
-<td>4</td>
-<td>5</td>
-<td>3</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>prel、prer分别是pre数组的左右索引边界值；postl、postr分别是post数组的左右索引边界值。</p>
-<p>一开始prel=0，prer=6，postl=0，postr=6</p>
-<p>当pre[prel]等于post[postr]，==&gt;pre[0]=1，post[6]=1，一开始就相等了，可以知道，这个值就是根节点的值。题目要求输出中序遍历，输出顺序是左、中(根)、右。当得到中(根)时，不能直接输出，要先求出左，才能将中(根)输出。后续的过程看代码，已加上注释。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n;
-vector&lt;int&gt; pre, post, inorder;
-bool flag = true;
-void get_inorder(int prel, int prer, int postl, int postr){
-	if(prel==prer){
-		inorder.push_back(pre[prel]);
-		return ;
-	}
-	int i=prel, j=postr-1, k;
-	if(pre[prel]==post[postr]){//发现中间结点 
-		while(i&lt;=prer&amp;&amp;j&gt;=0&amp;&amp;pre[i]!=post[j]) i++;//求出右子节点在pre数组的位置
-		k = i-prel-1;//得到左子树的结点个数
-		if(k&gt;0){
-			get_inorder(prel+1,i-1,postl,postl+k-1);//左子树进入递归，相应的数组范围会改变
-		}
-		else flag = false;
-	}
-	inorder.push_back(post[postr]);
-	get_inorder(i,prer,postl+k,postr-1);//右子树进入递归
-}
-int main()
-{
-	scanf(&quot;%d&quot;, &amp;n);
-	pre.resize(n);
-	post.resize(n);
-	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;, &amp;pre[i]);
-	for(int i=0; i&lt;n; i++) scanf(&quot;%d&quot;, &amp;post[i]);
-	get_inorder(0,n-1,0,n-1);
-	if(flag) printf(&quot;Yes\n&quot;);
-	else printf(&quot;No\n&quot;);
-	for(int i=0; i&lt;inorder.size(); i++){
-		if(i) printf(&quot; &quot;);
-		printf(&quot;%d&quot;, inorder[i]);
-	}
-	printf(&quot;\n&quot;);//没有这个就格式错误，0分bug
 	return 0;
 }
 </code></pre>
