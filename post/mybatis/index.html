@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Grace</title>
 <meta name="description" content="Grace's blog" />
-<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1606590243371">
+<link rel="shortcut icon" href="https://ygytl.github.io//favicon.ico?v=1606590882566">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
@@ -23,7 +23,7 @@
       <div class="flex lg:block p-4 lg:px-0 items-center fixed lg:static lg:block top-0 right-0 left-0 bg-white z-50">
         <i class="ri-menu-2-line lg:mt-4 text-2xl cursor-pointer animated fadeIn" onclick="openMenu()"></i>
         <a href="https://ygytl.github.io/">
-          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1606590243371" alt="">
+          <img class="animated fadeInLeft avatar rounded-lg mx-4 lg:mt-32 lg:mx-0 mt-0 lg:w-24 lg:h-24 w-12 w-12" src="https://ygytl.github.io//images/avatar.png?v=1606590882566" alt="">
         </a>
         <h1 class="animated fadeInLeft lg:text-4xl font-extrabold lg:mt-8 mt-0 text-xl" style="animation-delay: 0.2s">Grace</h1>
       </div>
@@ -33,7 +33,18 @@
             文章目录
           </p>
           <div class="toc-container hidden lg:block">
-            
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#mybatis%E6%A1%86%E6%9E%B6%E4%B8%80%E4%B8%AA%E6%A1%86%E6%9E%B6%E6%97%A9%E6%9C%9F%E5%8F%AB%E5%81%9Aibatis-mybatis-sql-mapper-framework-for-javasql-%E6%98%A0%E5%B0%84%E6%A1%86%E6%9E%B6">mybatis框架：一个框架，早期叫做ibatis。MyBatis SQL Mapper Framework for Java（sql 映射框架）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
           </div>
         </div>
       
@@ -80,11 +91,18 @@
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
         <h1 class="text-3xl font-bold lg:mt-16">Mybatis</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-11-29 / 0 min read
+          2020-11-29 / 1 min read
         </div>
         
         <div class="post-content yue">
-          <figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1606588816653.png" alt="" loading="lazy"></figure>
+          <h3 id="mybatis框架一个框架早期叫做ibatis-mybatis-sql-mapper-framework-for-javasql-映射框架">mybatis框架：一个框架，早期叫做ibatis。MyBatis SQL Mapper Framework for Java（sql 映射框架）</h3>
+<ol>
+<li>sql mapper：sql映射<br>
+    可以把数据库表中的一行数据  映射为 一个java对象<br>
+    （一行数据可以看作是一个java对象。操作这个对象，就相当于操作表中的数据）</li>
+<li>data Access Objects(DAOs)：数据访问，对数据库执行增删改查<br>
+<img src="https://ygytl.github.io//post-images/1606588816653.png" alt="" loading="lazy"></li>
+</ol>
 
         </div>
 

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-11-28T19:04:07.838Z</updated>
+    <updated>2020-11-28T19:14:48.696Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -16,7 +16,14 @@
         <link href="https://ygytl.github.io/post/mybatis/">
         </link>
         <updated>2020-11-28T18:28:16.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1606588816653.png" alt="" loading="lazy"></figure>
+        <content type="html"><![CDATA[<h3 id="mybatis框架一个框架早期叫做ibatis-mybatis-sql-mapper-framework-for-javasql-映射框架">mybatis框架：一个框架，早期叫做ibatis。MyBatis SQL Mapper Framework for Java（sql 映射框架）</h3>
+<ol>
+<li>sql mapper：sql映射<br>
+    可以把数据库表中的一行数据  映射为 一个java对象<br>
+    （一行数据可以看作是一个java对象。操作这个对象，就相当于操作表中的数据）</li>
+<li>data Access Objects(DAOs)：数据访问，对数据库执行增删改查<br>
+<img src="https://ygytl.github.io//post-images/1606588816653.png" alt="" loading="lazy"></li>
+</ol>
 ]]></content>
     </entry>
     <entry>
