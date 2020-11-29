@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-11-29T07:09:50.898Z</updated>
+    <updated>2020-11-29T10:35:30.134Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -57,8 +57,9 @@ src/test/java 目录中创建类</p>
     可以把数据库表中的一行数据  映射为 一个java对象<br>
     （一行数据可以看作是一个java对象。操作这个对象，就相当于操作表中的数据）</li>
 <li>data Access Objects(DAOs)：数据访问，对数据库执行增删改查<br>
-<img src="https://ygytl.github.io//post-images/1606588816653.png" alt="" loading="lazy"></li>
+<img src="https://ygytl.github.io//post-images/1606644582537.png" alt="" loading="lazy"></li>
 </ol>
+<p>思维导图文件下载链接：https://github.com/YGYtl/SSM_Learning</p>
 ]]></content>
     </entry>
     <entry>
