@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ygytl.github.io/</id>
     <title>Grace</title>
-    <updated>2020-11-28T19:22:48.997Z</updated>
+    <updated>2020-11-29T06:45:27.928Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ygytl.github.io/"/>
     <link rel="self" href="https://ygytl.github.io/atom.xml"/>
@@ -10,6 +10,41 @@
     <logo>https://ygytl.github.io/images/avatar.png</logo>
     <icon>https://ygytl.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Grace</rights>
+    <entry>
+        <title type="html"><![CDATA[Maven项目中加入junit依赖]]></title>
+        <id>https://ygytl.github.io/post/maven-xiang-mu-zhong-jia-ru-junit-yi-lai/</id>
+        <link href="https://ygytl.github.io/post/maven-xiang-mu-zhong-jia-ru-junit-yi-lai/">
+        </link>
+        <updated>2020-11-29T06:38:23.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="junit单元测试一个工具类库做测试方法使用的">junit：单元测试，一个工具类库，做测试方法使用的。</h3>
+<p>  单元：指定的是方法，一个类中有很多方法，一个方法称为单元</p>
+<p>使用单元测试需要以下步骤</p>
+<ol>
+<li>需要加入junit依赖</li>
+</ol>
+<pre><code>    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.11&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+</code></pre>
+<ol start="2">
+<li>
+<p>创建测试作用的类：叫做测试类<br>
+src/test/java 目录中创建类</p>
+</li>
+<li>
+<p>创建测试方法<br>
+1)public方法<br>
+2)没有返回值void<br>
+3)方法名自定义，建议名称是test+你要测试方法名称<br>
+4)方法没有参数<br>
+5)方法的上面加入@Test，这样的方法是可以单独执行的，不用使用main方法</p>
+</li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Mybatis]]></title>
         <id>https://ygytl.github.io/post/mybatis/</id>
@@ -1097,146 +1132,6 @@ int main()
 			}
 		}
 	}
-	return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1123 Is It a Complete AVL Tree (30分)题解]]></title>
-        <id>https://ygytl.github.io/post/1123-is-it-a-complete-avl-tree-30-fen-ti-jie/</id>
-        <link href="https://ygytl.github.io/post/1123-is-it-a-complete-avl-tree-30-fen-ti-jie/">
-        </link>
-        <updated>2020-07-07T14:24:07.000Z</updated>
-        <content type="html"><![CDATA[<p>1123 Is It a Complete AVL Tree (30分)</p>
-<p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.</p>
-<figure data-type="image" tabindex="1"><img src="https://ygytl.github.io//post-images/1594132084359.JPG" alt="" loading="lazy"></figure>
-<p>Now given a sequence of insertions, you are supposed to output the level-order traversal sequence of the resulting AVL tree, and to tell if it is a complete binary tree.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line contains a positive integer N (≤ 20). Then N distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each test case, insert the keys one by one into an initially empty AVL tree. Then first print in a line the level-order traversal sequence of the resulting AVL tree. All the numbers in a line must be separated by a space, and there must be no extra space at the end of the line. Then in the next line, print <code>YES</code> if the tree is complete, or <code>NO</code> if not.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">5
-88 70 61 63 65
-</code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">70 63 88 61 65
-YES
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">8
-88 70 61 96 120 90 65 68
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">88 65 96 61 70 90 120 68
-NO
-</code></pre>
-<hr>
-<p>题目描述：完全平衡二叉树。具体参考1066的题解</p>
-<p>该题需要建树，判断是否能形成完全平衡二叉树，是输出YES，否输出NO。还要输出树的层序遍历。</p>
-</br>
-<p>解题思路：建树，完成左转、右转、左右转、右左转的操作、求结点的高度等，最后利用BFS得到层序遍历。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n, k;
-vector&lt;int&gt; level;
-struct node{
-	int num;
-	node *l, *r;
-	node(){
-		l = r = NULL;
-	}
-};
-node *LeftRoute(node *root){
-	node *t;
-	t = root-&gt;r;
-	root-&gt;r = t-&gt;l;
-	t-&gt;l = root;
-	return t;
-}
-node *RightRoute(node *root){
-	node *t;
-	t = root-&gt;l;
-	root-&gt;l = t-&gt;r;
-	t-&gt;r = root;
-	return t;
-}
-node *LeftRightRoute(node *root){
-	root-&gt;l = LeftRoute(root-&gt;l);
-	root = RightRoute(root);
-	return root;
-}
-node *RightLeftRoute(node *root){
-	root-&gt;r = RightRoute(root-&gt;r);
-	root = LeftRoute(root);
-	return root;
-}
-int height(node *root){
-	if(root==NULL) return 1;
-	return max(height(root-&gt;l),height(root-&gt;r))+1;
-}
-node *Insert(node *root, int k){
-	if(root==NULL){
-		root = new node();
-		root-&gt;num = k;
-		root-&gt;l = root-&gt;r = NULL;
-	}
-	else if(k&gt;=root-&gt;num){
-		root-&gt;r = Insert(root-&gt;r,k);
-		if(abs(height(root-&gt;r)-height(root-&gt;l))&gt;=2){
-			root = k&gt;=root-&gt;r-&gt;num ? LeftRoute(root) : RightLeftRoute(root);
-		}
-	}
-	else{
-		root-&gt;l = Insert(root-&gt;l,k);
-		if(abs(height(root-&gt;l)-height(root-&gt;r))&gt;=2){
-			root = k&lt;=root-&gt;l-&gt;num ? RightRoute(root) : LeftRightRoute(root);
-		}
-	}
-	return root;
-}
-void bfs(node *root){
-	pair&lt;node *, int&gt; t, tt;
-	queue&lt;pair&lt;node *, int&gt; &gt; q;
-	t.first = root; t.second = 1;
-	q.push(t);
-	bool flag = true;
-	int cnt = 1;
-	while(!q.empty()){
-		t = q.front(); q.pop();
-		if(cnt!=t.second) flag = false;
-		cnt++;
-		level.push_back(t.first-&gt;num);
-		if(t.first-&gt;l!=NULL){
-			tt.first = t.first-&gt;l;
-			tt.second = t.second*2;
-			q.push(tt);
-		}
-		if(t.first-&gt;r!=NULL){
-			tt.first = t.first-&gt;r;
-			tt.second = t.second*2+1;
-			q.push(tt);
-		} 
-	}
-	for(int i=0; i&lt;level.size(); i++){
-		if(i) printf(&quot; &quot;);
-		printf(&quot;%d&quot;, level[i]);
-	}
-	printf(&quot;\n&quot;);
-	if(flag) printf(&quot;YES\n&quot;);
-	else printf(&quot;NO\n&quot;);
-}
-int main()
-{
-	node *tree = NULL;
-	scanf(&quot;%d&quot;, &amp;n);
-	for(int i=0; i&lt;n; i++){
-		scanf(&quot;%d&quot;, &amp;k);
-		tree = Insert(tree,k);
-	}
-	bfs(tree);
 	return 0;
 }
 </code></pre>

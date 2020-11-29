@@ -38,14 +38,7 @@
 <ul>
 <li>
 <ul>
-<li><a href="#input-specification">Input Specification:</a></li>
-<li><a href="#output-specification">Output Specification:</a></li>
-<li><a href="#sample-input-1">Sample Input 1:</a></li>
-<li><a href="#sample-output-1">Sample Output 1:</a></li>
-<li><a href="#sample-input-2">Sample Input 2:</a></li>
-<li><a href="#sample-output-2">Sample Output 2:</a></li>
-<li><a href="#sample-input-3">Sample Input 3:</a></li>
-<li><a href="#sample-output-3">Sample Output 3:</a></li>
+<li><a href="#junit%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%AA%E5%B7%A5%E5%85%B7%E7%B1%BB%E5%BA%93%E5%81%9A%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8%E7%9A%84">junit：单元测试，一个工具类库，做测试方法使用的。</a></li>
 </ul>
 </li>
 </ul>
@@ -96,147 +89,57 @@
 <div class="mask" onclick="closeMenu()">
 </div>
       <div class="content-wrapper py-32 lg:p-8 lg:w-3/4 post-detail animated fadeIn">
-        <h1 class="text-3xl font-bold lg:mt-16">1155 Heap Paths (30分)题解</h1>
+        <h1 class="text-3xl font-bold lg:mt-16">Maven项目中加入junit依赖</h1>
         <div class="text-sm text-gray-700 lg:my-8">
-          2020-07-01 / 6 min read
+          2020-11-29 / 1 min read
         </div>
         
         <div class="post-content yue">
-          <p>1155 Heap Paths (30分)</p>
-<p>In computer science, a <strong>heap</strong> is a specialized tree-based data structure that satisfies the heap property: if P is a parent node of C, then the key (the value) of P is either greater than or equal to (in a max heap) or less than or equal to (in a min heap) the key of C. A common implementation of a heap is the binary heap, in which the tree is a complete binary tree. (Quoted from Wikipedia at https://en.wikipedia.org/wiki/Heap_(data_structure))</p>
-<p>One thing for sure is that all the keys along any path from the root to a leaf in a max/min heap must be in non-increasing/non-decreasing order.</p>
-<p>Your job is to check every path in a given complete binary tree, in order to tell if it is a heap or not.</p>
-<h3 id="input-specification">Input Specification:</h3>
-<p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em> (1&lt;<em>N</em>≤1,000), the number of keys in the tree. Then the next line contains <em>N</em> distinct integer keys (all in the range of <strong>int</strong>), which gives the level order traversal sequence of a complete binary tree.</p>
-<h3 id="output-specification">Output Specification:</h3>
-<p>For each given tree, first print all the paths from the root to the leaves. Each path occupies a line, with all the numbers separated by a space, and no extra space at the beginning or the end of the line. The paths must be printed in the following order: for each node in the tree, all the paths in its right subtree must be printed before those in its left subtree.</p>
-<p>Finally print in a line <code>Max Heap</code> if it is a max heap, or <code>Min Heap</code> for a min heap, or <code>Not Heap</code> if it is not a heap at all.</p>
-<h3 id="sample-input-1">Sample Input 1:</h3>
-<pre><code class="language-in">8
-98 72 86 60 65 12 23 50
+          <h3 id="junit单元测试一个工具类库做测试方法使用的">junit：单元测试，一个工具类库，做测试方法使用的。</h3>
+<p>  单元：指定的是方法，一个类中有很多方法，一个方法称为单元</p>
+<p>使用单元测试需要以下步骤</p>
+<ol>
+<li>需要加入junit依赖</li>
+</ol>
+<pre><code>    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.11&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
 </code></pre>
-<h3 id="sample-output-1">Sample Output 1:</h3>
-<pre><code class="language-out">98 86 23
-98 86 12
-98 72 65
-98 72 60 50
-Max Heap
-</code></pre>
-<h3 id="sample-input-2">Sample Input 2:</h3>
-<pre><code class="language-in">8
-8 38 25 58 52 82 70 60
-</code></pre>
-<h3 id="sample-output-2">Sample Output 2:</h3>
-<pre><code class="language-out">8 25 70
-8 25 82
-8 38 52
-8 38 58 60
-Min Heap
-</code></pre>
-<h3 id="sample-input-3">Sample Input 3:</h3>
-<pre><code class="language-in">8
-10 28 15 12 34 9 8 56
-</code></pre>
-<h3 id="sample-output-3">Sample Output 3:</h3>
-<pre><code class="language-out">10 15 8
-10 15 9
-10 28 34
-10 28 12 56
-Not Heap
-</code></pre>
-<hr>
-<p>题目描述：先理解堆的定义，堆分为最大堆，最小堆。题目给出一组数，有可能是堆或不是。如果是堆，则表示树的层次序列值。堆的构建是在满二叉树的基础上的，所以比较容易判断是最大堆还是最小堆。</p>
-<p>最大堆：root结点的值大于其左右子结点的值。</p>
-<p>最小堆：root结点的值小于其左右子结点的值。</p>
-</br>
-<p>解题思路：用数组存题目给出的树，一般舍去索引0，从1开始存值，当root索引为index时，左节点索引为index*2，右节点索引为index*2+1。判断v[index]的值是否都大于v[index*2]、v[index*2+1]，如果是就是最大堆；判断v[index]的值是否都小于v[index*2]、v[index*2+1]，如果是则为最小堆。如果都不是最大堆、最小堆，输出Not Heap。</p>
-<p>并且题目要求输出根节点到叶子结点的路径，输出顺序是右大于左。</p>
-<hr>
-<pre><code class="language-c++">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-int n;
-vector&lt;int&gt; v, tv, ttv;
-vector&lt; vector&lt;int&gt; &gt; ans;
-int judge(){
-	int f1=true, f2=true, l, r;
-	for(int i=1; i&lt;=n; i++){
-		l = i*2; r = i*2+1;
-		if(l&lt;=n){
-			if(f1&amp;&amp;v[i]&lt;v[l]) f1 = false;
-			if(f2&amp;&amp;v[i]&gt;v[l]) f2 = false;
-		}
-		if(r&lt;=n){
-			if(f1&amp;&amp;v[i]&lt;v[r]) f1 = false;
-			if(f2&amp;&amp;v[i]&gt;v[r]) f2 = false;
-		}
-	}
-	if(f1==true&amp;&amp;f2==false) return 1;
-	if(f2==true&amp;&amp;f1==false) return -1;
-	return 0;
-}
-void dfs(int index){
-	int l=index*2, r=index*2+1;
-	tv.push_back(v[index]);
-	if(l&gt;n&amp;&amp;r&gt;n){
-		ans.push_back(tv);
-		return ;
-	}
-	if(r&lt;=n){
-		dfs(r);
-		tv.pop_back();
-	}
-	if(l&lt;=n){
-		dfs(l);
-		tv.pop_back();
-	}
-}
-int main()
-{
-	scanf(&quot;%d&quot;, &amp;n);
-	v.resize(n+1);
-	for(int i=1; i&lt;=n; i++) scanf(&quot;%d&quot;, &amp;v[i]);
-	int flag = judge();
-	dfs(1);
-	for(int i=0; i&lt;ans.size(); i++){
-		for(int j=0; j&lt;ans[i].size(); j++){
-			if(j) printf(&quot; &quot;);
-			printf(&quot;%d&quot;, ans[i][j]);
-		}
-		printf(&quot;\n&quot;);
-	}
-	if(flag==0) printf(&quot;Not Heap\n&quot;);
-	else if(flag==1) printf(&quot;Max Heap\n&quot;);
-	else if(flag==-1) printf(&quot;Min Heap\n&quot;);
-	return 0;
-}
-</code></pre>
+<ol start="2">
+<li>
+<p>创建测试作用的类：叫做测试类<br>
+src/test/java 目录中创建类</p>
+</li>
+<li>
+<p>创建测试方法<br>
+1)public方法<br>
+2)没有返回值void<br>
+3)方法名自定义，建议名称是test+你要测试方法名称<br>
+4)方法没有参数<br>
+5)方法的上面加入@Test，这样的方法是可以单独执行的，不用使用main方法</p>
+</li>
+</ol>
 
         </div>
 
         
-          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/ZvpCdL_9C/">
-            <span class="flex-auto">PAT (Advanced Level) Practice</span>
+          <a class="animated fadeInUp p-2 items-center text-sm text-gray-700 border hover:bg-gray-300 leading-none rounded-full flex lg:inline-flex m-4 " href="https://ygytl.github.io/tag/FSVB-sSP6/">
+            <span class="flex-auto">SSM框架</span>
           </a>
         
 
 
         <div class="flex justify-between py-8">
           
-            <div class="prev-post">
-              <a href="https://ygytl.github.io/post/1107-social-clusters-30-fen-ti-jie/">
-                <h3 class="post-title">
-                  <i class="ri-arrow-left-line"></i>
-                  1107 Social Clusters (30分)题解
-                </h3>
-              </a>
-            </div>
-          
 
           
             <div class="next-post">
-              <a href="https://ygytl.github.io/post/1105-spiral-matrix-25-fen-ti-jie/">
+              <a href="https://ygytl.github.io/post/mybatis/">
                 <h3 class="post-title">
-                  1105 Spiral Matrix (25分)题解
+                  Mybatis
                   <i class="ri-arrow-right-line"></i>
                 </h3>
               </a>
